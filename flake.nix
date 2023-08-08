@@ -29,7 +29,7 @@
         ];
       };
     };
-    homeConfigurations."cblkjs@CBLKJSNixLap" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."cblkjs@lap" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
       modules = [

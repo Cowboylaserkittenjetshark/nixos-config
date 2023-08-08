@@ -16,7 +16,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=root" ];
+      options = [ "subvol=root" "compress=zstd" ];
     };
 
   boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/1e3e1d9f-7e0b-4ce4-91f7-ef6805a95b1e";
@@ -24,60 +24,49 @@
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=home" "compress=zstd" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
     };
 
   fileSystems."/opt" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=opt" ];
+      options = [ "subvol=opt" "compress=zstd" ];
     };
 
   fileSystems."/root" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=root_user_home" ];
+      options = [ "subvol=root_user_home" "compress=zstd" ];
     };
 
   fileSystems."/usr/local" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=usr_local" ];
+      options = [ "subvol=usr_local" "compress=zstd" ];
     };
 
   fileSystems."/var" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=var" ];
+      options = [ "subvol=var" "compress=zstd" ];
     };
 
   fileSystems."/swap" =
     { device = "/dev/disk/by-uuid/3435301b-c07b-43c1-aa1b-3a53bf566fda";
       fsType = "btrfs";
-      options = [ "subvol=swap" ];
+      options = [ "subvol=swap" "noatime" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/0098-7637";
       fsType = "vfat";
     };
-
-  fileSystems = {
-    "/".options = [ "compress=zstd" ];    
-    "/home".options = [ "compress=zstd" ];    
-    "/root".options = [ "compress=zstd" ];    
-    "/var".options = [ "compress=zstd" ];    
-    "/opt".options = [ "compress=zstd" ];    
-    "/usr/local".options = [ "compress=zstd" ];    
-    "/nix".options = [ "compress=zstd" "noatime" ];    
-    "/swap".options = [ "noatime" ];    
-  };
 
   swapDevices = [ { device = "/swap/swapfile"; } ];
 
