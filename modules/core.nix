@@ -11,7 +11,7 @@
   };
 
   # Optimize storage
-  nix.settings = { 
+  nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
   };

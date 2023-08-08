@@ -2,7 +2,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/core.nix
     ];
@@ -12,10 +13,10 @@
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-  
+
   networking = {
     hostName = "lap"; # Define your hostname.
-    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+    networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
 
   # Set your time zone.

@@ -1,11 +1,12 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, home-manager, ... }:
 {
-  imports = [
-    ./hyprland
+  modules = [
+    home-manager.nixosModules.home-manager
   ];
 
-  home = {
-    username = "cblkjs";
-    homeDirectory = "/home/cblkjs";
-  }
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.cblkjs = import ./users/cblkjs;
+  # Optionally, use home-manager.extraSpecialArgs to pass
+  # arguments to home.nix
 }

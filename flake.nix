@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland/261c3307f70d14e5bbc7d4113b4ee6dac9e4b627";
+    hyprland.url = "github:hyprwm/Hyprland/12cb109137ee7debbd08545848248f1489567e0c";
     helix.url = "github:helix-editor/helix";
   };
 
@@ -18,25 +18,18 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/lap
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.cblkjs = import ./users/cblkjs/home.nix;
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
+          ./home
         ];
       };
     };
-    homeConfigurations."cblkjs@lap" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    # homeConfigurations."cblkjs@lap" = home-manager.lib.homeManagerConfiguration {
+    #   pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
-      modules = [
-        hyprland.homeManagerModules.default
-        { wayland.windowManager.hyprland.enable = true; }
-      ];
-    };
+    #   modules = [
+    #     hyprland.homeManagerModules.default
+    #     { wayland.windowManager.hyprland.enable = true; }
+    #   ];
+    # };
   };
 
   nixConfig = {
