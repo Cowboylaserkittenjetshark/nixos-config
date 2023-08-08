@@ -13,11 +13,11 @@
 
   outputs = inputs @ { self, nixpkgs, home-manager, hyprland, ... }: {
     nixosConfigurations = {
-      CBLKJSNixLap = nixpkgs.lib.nixosSystem {
+      lap = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./hosts/lap
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -34,14 +34,14 @@
 
       modules = [
         hyprland.homeManagerModules.default
-        {wayland.windowManager.hyprland.enable = true;}
+        { wayland.windowManager.hyprland.enable = true; }
       ];
     };
   };
 
   nixConfig = {
     extra-substituters = [
-      "https://helix.cahix.org"
+      "https://helix.cachix.org"
       "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [

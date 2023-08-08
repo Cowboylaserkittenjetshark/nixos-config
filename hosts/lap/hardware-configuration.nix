@@ -68,7 +68,18 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
+  fileSystems = {
+    "/".options = [ "compress=zstd" ];    
+    "/home".options = [ "compress=zstd" ];    
+    "/root".options = [ "compress=zstd" ];    
+    "/var".options = [ "compress=zstd" ];    
+    "/opt".options = [ "compress=zstd" ];    
+    "/usr/local".options = [ "compress=zstd" ];    
+    "/nix".options = [ "compress=zstd" "noatime" ];    
+    "/swap".options = [ "noatime" ];    
+  };
+
+  swapDevices = [ { device = "/swap/swapfile"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
