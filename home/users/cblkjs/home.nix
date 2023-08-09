@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, inputs,  ... }:
 {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -23,6 +22,7 @@
 
   home.packages = [
     pkgs.htop
+    pkgs.tofi
   ];
 
   programs.emacs = {
@@ -39,8 +39,17 @@
     enableSshSupport = true;
   };
 
-  wayland.windowManager.hyprland.enable = true;
+  # programs.hyprland = {
+  #   enable = true;
+  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  # };
+  home.file.".config/hypr/themes".source = "${inputs.catppuccin-hyprland}/themes";
+  wayland.windowManager.hyprland = { 
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
   wayland.windowManager.hyprland.extraConfig = ''
+    source = ./themes/mocha.conf
     monitor=,preferred,auto,auto
     
     general {

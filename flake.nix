@@ -9,27 +9,29 @@
     };
     hyprland.url = "github:hyprwm/Hyprland/12cb109137ee7debbd08545848248f1489567e0c";
     helix.url = "github:helix-editor/helix";
+    catppuccin-hyprland = {
+      url = "github:catppuccin/hyprland";
+      flake = false;
+    };
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, hyprland, ... }: {
     nixosConfigurations = {
       lap = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           ./hosts/lap
-          ./home
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.cblkjs = import ./home/users/cblkjs/home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+          }
         ];
       };
     };
-    # homeConfigurations."cblkjs@lap" = home-manager.lib.homeManagerConfiguration {
-    #   pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-    #   modules = [
-    #     hyprland.homeManagerModules.default
-    #     { wayland.windowManager.hyprland.enable = true; }
-    #   ];
-    # };
   };
 
   nixConfig = {
