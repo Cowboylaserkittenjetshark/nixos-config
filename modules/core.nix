@@ -15,4 +15,13 @@
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
   };
+
+  security = {
+    # allow wayland lockers to unlock the screen
+    pam.services.swaylock.text = "auth include login";
+
+    # userland niceness
+    rtkit.enable = true;
+  };
+
 }

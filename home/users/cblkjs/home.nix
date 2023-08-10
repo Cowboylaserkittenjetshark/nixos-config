@@ -1,5 +1,5 @@
-{ config, pkgs, inputs,  ... }:
-{
+{ config, pkgs, inputs, ... }:
+rec {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -20,18 +20,14 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = [
-    pkgs.htop
-    pkgs.tofi
+  home.packages = with pkgs; [
+    htop
+    tofi
+    eww-wayland
+    swaylock-effects
+    swayidle
+    swaybg
   ];
-
-  programs.emacs = {
-    enable = true;
-    extraPackages = epkgs: [
-      epkgs.nix-mode
-      epkgs.magit
-    ];
-  };
 
   services.gpg-agent = {
     enable = true;
@@ -39,17 +35,13 @@
     enableSshSupport = true;
   };
 
-  # programs.hyprland = {
-  #   enable = true;
-  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  # };
-  home.file.".config/hypr/themes".source = "${inputs.catppuccin-hyprland}/themes";
-  wayland.windowManager.hyprland = { 
+  wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
+
   wayland.windowManager.hyprland.extraConfig = ''
-    source = ./themes/mocha.conf
+    ${ builtins.readFile ((inputs.catppuccin-hyprland) + "/themes/mocha.conf") }
     monitor=,preferred,auto,auto
     
     general {
@@ -130,5 +122,9 @@
       bind=SUPER,right,movefocus,r
       bind=SUPER,up,movefocus,u
       bind=SUPER,down,movefocus,d
+
+      exec = eww open bar
+      exec-once=swayidle -w timeout 90 'swaylock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --fade-in 0 --grace 0'
+      exec-once=swaybg -i ${ home.homeDirectory }/.config/laptopWP
   '';
 }

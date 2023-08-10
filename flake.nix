@@ -3,12 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland/12cb109137ee7debbd08545848248f1489567e0c";
+    hyprland.url = "github:hyprwm/Hyprland";
+
     helix.url = "github:helix-editor/helix";
+
     catppuccin-hyprland = {
       url = "github:catppuccin/hyprland";
       flake = false;
