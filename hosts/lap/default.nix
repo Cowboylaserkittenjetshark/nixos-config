@@ -33,16 +33,6 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  users.users.cblkjs = {
-    initialPassword = "password";
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      firefox
-      foot
-    ];
-  };
-
   environment.systemPackages = with pkgs; [
     vim
     git

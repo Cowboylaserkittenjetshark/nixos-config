@@ -25,13 +25,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/lap
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.cblkjs = import ./home/users/cblkjs/home.nix;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-          }
+          ./users/cblkjs
         ];
       };
     };
