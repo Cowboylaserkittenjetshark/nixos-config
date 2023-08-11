@@ -16,6 +16,8 @@
       url = "github:catppuccin/hyprland";
       flake = false;
     };
+
+    catppuccin-foot.url = "github:Cowboylaserkittenjetshark/catppuccin-foot-nix";
   };
 
   outputs = inputs @ { self, nixpkgs, home-manager, hyprland, ... }: {

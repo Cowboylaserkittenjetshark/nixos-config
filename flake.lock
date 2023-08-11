@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "catppuccin-foot": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1691720447,
+        "narHash": "sha256-eGcXrXii9oQiVZO1Iv2uYjh9BjY4L6EBJ7ZybUNzaY4=",
+        "owner": "Cowboylaserkittenjetshark",
+        "repo": "catppuccin-foot-nix",
+        "rev": "e78abec85058d3e9bd180f974e2ddbefcffdd469",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Cowboylaserkittenjetshark",
+        "repo": "catppuccin-foot-nix",
+        "type": "github"
+      }
+    },
     "catppuccin-hyprland": {
       "flake": false,
       "locked": {
@@ -84,7 +102,7 @@
       "inputs": {
         "crane": "crane",
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -124,7 +142,7 @@
     "hyprland": {
       "inputs": {
         "hyprland-protocols": "hyprland-protocols",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "wlroots": "wlroots",
         "xdph": "xdph"
       },
@@ -165,6 +183,20 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1691683125,
+        "narHash": "sha256-FMU62G57HDbJwU+9V3q7I0mBaQYTYQdtPNlJt2t5/A4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4d2389b927696ef8da4ef76b03f2d306faf87929",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1690272529,
         "narHash": "sha256-MakzcKXEdv/I4qJUtq/k/eG+rVmyOZLnYNC2w1mB59Y=",
         "owner": "nixos",
@@ -179,7 +211,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1690179384,
         "narHash": "sha256-+arbgqFTAtoeKtepW9wCnA0njCOyoiDFyl0Q0SBSOtE=",
@@ -195,7 +227,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1691368598,
         "narHash": "sha256-ia7li22keBBbj02tEdqjVeLtc7ZlSBuhUk+7XTUFr14=",
@@ -213,11 +245,12 @@
     },
     "root": {
       "inputs": {
+        "catppuccin-foot": "catppuccin-foot",
         "catppuccin-hyprland": "catppuccin-hyprland",
         "helix": "helix",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       }
     },
     "rust-overlay": {

@@ -27,7 +27,19 @@ rec {
     swaylock-effects
     swayidle
     swaybg
+    meslo-lgs-nf # For p10k
   ];
+
+  fonts.fontconfig.enable = true;
+
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "MesloLGS NF:size=11";
+      };
+    } // inputs.catppuccin-foot.flavors.mocha;
+  };
 
   services.gpg-agent = {
     enable = true;
@@ -127,4 +139,29 @@ rec {
       exec-once=swayidle -w timeout 90 'swaylock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --fade-in 0 --grace 0'
       exec-once=swaybg -i ${ home.homeDirectory }/.config/laptopWP
   '';
+
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    dotDir = ".config/zsh";
+    shellAliases = {
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch";
+    };
+    history = {
+      size = 10000;
+      expireDuplicatesFirst = true;
+      path = "${config.xdg.dataHome}/zsh/history";
+    };
+    initExtra = ''
+      # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+      # Initialization code that may require console input (password prompts, [y/n]
+      # confirmations, etc.) must go above this block; everything else may go below.
+      if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+        source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+      fi
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    '';
+  };
 }

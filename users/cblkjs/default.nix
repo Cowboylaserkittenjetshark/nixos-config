@@ -1,4 +1,4 @@
-{inputs, pkgs, ...}: {
+{ inputs, pkgs, ... }: {
   imports = [
     ../../modules/zsh.nix
     inputs.home-manager.nixosModules.home-manager
