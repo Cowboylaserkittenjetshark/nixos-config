@@ -4,6 +4,7 @@ rec {
     ./modules/foot.nix
     ./modules/zsh.nix
     ./modules/hyprland.nix
+    ./modules/tofi.nix
   ];
 
   # Home Manager needs a bit of information about you and the
