@@ -3,6 +3,9 @@ let
   font = "${pkgs.meslo-lgs-nf}/share/fonts/truetype/MesloLGS NF Bold.ttf";
 in
 {
+  config.home.packages = [
+    pkgs.tofi  
+  ];
   config.home.file."${config.home.homeDirectory}/.config/tofi/config".text = ''
     	font = "${font}"
     	font-size = 24

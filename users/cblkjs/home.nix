@@ -30,9 +30,7 @@ rec {
 
   home.packages = with pkgs; [
     htop
-    tofi
     eww-wayland
-    swaylock-effects
     swayidle
     swaybg
     meslo-lgs-nf # For p10k
