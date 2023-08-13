@@ -8,7 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     hyprland.url = "github:hyprwm/Hyprland";
+
+    eww = {
+      url = "github:elkowar/eww";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     helix.url = "github:helix-editor/helix";
 

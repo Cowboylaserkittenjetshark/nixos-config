@@ -40,7 +40,7 @@ rec {
 
   home.packages = with pkgs; [
     htop
-    eww-wayland
+    inputs.eww.packages.${pkgs.system}.eww-wayland
     swayidle
     swaybg
     meslo-lgs-nf # For p10k
