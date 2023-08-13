@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, ... }:
-rec {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: rec {
   imports = [
     ./modules/foot.nix
     ./modules/zsh.nix

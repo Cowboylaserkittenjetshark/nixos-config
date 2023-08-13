@@ -1,4 +1,9 @@
-{ lib, stdenvNoCC, fetchFromGitHub, ... }:
+{
+  lib,
+  stdenvNoCC,
+  fetchFromGitHub,
+  ...
+}:
 stdenvNoCC.mkDerivation {
   pname = "catppuccin-plymouth";
   version = "unstable-2023-6-28";
@@ -30,7 +35,7 @@ stdenvNoCC.mkDerivation {
     description = "Soothing pastel theme for Plymouth";
     homepage = "https://github.com/catppuccin/plymouth";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ fufexan cowboylaserkittenjetshark ];
+    maintainers = with lib.maintainers; [fufexan cowboylaserkittenjetshark];
     platforms = lib.platforms.linux;
   };
 }

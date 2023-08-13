@@ -1,4 +1,8 @@
-{ lib, stdenvNoCC, fetchFromGitHub }:
+{
+  lib,
+  stdenvNoCC,
+  fetchFromGitHub,
+}:
 stdenvNoCC.mkDerivation rec {
   pname = "sddm-catppuccin-theme";
   version = "unstable-2023-08-08";
@@ -18,7 +22,7 @@ stdenvNoCC.mkDerivation rec {
     description = "Soothing pastel theme for SDDM";
     homepage = "https://github.com/catppuccin/sddm";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [ cowboylaserkittenjetshark ];
+    maintainers = with lib.maintainers; [cowboylaserkittenjetshark];
     platforms = lib.platforms.linux;
   };
 }

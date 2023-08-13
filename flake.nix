@@ -26,11 +26,18 @@
     catppuccin-foot.url = "github:Cowboylaserkittenjetshark/catppuccin-foot-nix";
   };
 
-  outputs = inputs @ { self, nixpkgs, home-manager, hyprland, ... }: {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    hyprland,
+    ...
+  }: {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     nixosConfigurations = {
       lap = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {inherit inputs;};
         modules = [
           ./hosts/lap
           ./users/cblkjs
