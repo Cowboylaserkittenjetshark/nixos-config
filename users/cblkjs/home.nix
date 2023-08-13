@@ -4,6 +4,7 @@ rec {
     ./modules/foot.nix
     ./modules/zsh.nix
     ./modules/hyprland.nix
+    ./modules/swaylock.nix
     ./modules/tofi.nix
   ];
 
