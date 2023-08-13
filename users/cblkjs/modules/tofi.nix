@@ -4,7 +4,7 @@ let
 in
 {
   config.home.packages = [
-    pkgs.tofi  
+    pkgs.tofi
   ];
   config.home.file."${config.home.homeDirectory}/.config/tofi/config".text = ''
     	font = "${font}"

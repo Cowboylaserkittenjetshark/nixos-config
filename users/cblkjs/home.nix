@@ -32,6 +32,11 @@ rec {
     enable = true;
     homedir = "${config.xdg.dataHome}/gnupg";
   };
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 1800;
+    enableSshSupport = true;
+  };
 
   home.packages = with pkgs; [
     htop
@@ -42,10 +47,4 @@ rec {
   ];
 
   fonts.fontconfig.enable = true;
-
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-  };
 }

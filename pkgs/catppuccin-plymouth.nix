@@ -30,7 +30,7 @@ stdenvNoCC.mkDerivation {
     description = "Soothing pastel theme for Plymouth";
     homepage = "https://github.com/catppuccin/plymouth";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [fufexan cowboylaserkittenjetshark];
+    maintainers = with lib.maintainers; [ fufexan cowboylaserkittenjetshark ];
     platforms = lib.platforms.linux;
   };
 }
