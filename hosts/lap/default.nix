@@ -6,6 +6,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/core.nix
+      ../../modules/sddm.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -21,13 +22,6 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
 
   # Enable sound.
   sound.enable = true;
