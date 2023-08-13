@@ -1,5 +1,5 @@
-{ lib, stdenv, fetchFromGitHub }:
-  stdenv.mkDerivation rec {
+{ lib, stdenvNoCC, fetchFromGitHub }:
+  stdenvNoCC.mkDerivation rec {
     pname = "sddm-catppuccin-theme";
     version = "unstable-2023-08-08";
     dontConfigure = true;
