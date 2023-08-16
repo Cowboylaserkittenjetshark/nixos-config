@@ -39,8 +39,6 @@
     inputs.helix.packages."${pkgs.system}".helix
   ];
 
-  services.xserver.gdk-pixbuf.modulePackages = [pkgs.librsvg]; # Needed for eww svg support
-
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;

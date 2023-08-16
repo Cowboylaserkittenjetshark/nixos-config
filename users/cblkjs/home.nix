@@ -44,7 +44,7 @@
 
   home.packages = with pkgs; [
     htop
-    inputs.eww.packages.${pkgs.system}.eww-wayland
+    eww-wayland
     swayidle
     swaybg
     meslo-lgs-nf # For p10k
