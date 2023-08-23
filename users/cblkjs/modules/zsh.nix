@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   programs.zsh = {
@@ -27,9 +28,7 @@
     initExtra = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-      ${
-        if config.programs.nnn.enable
-        then ''
+      ${ lib.optionalString config.programs.nnn.enable ''
           n ()
           {
             # Block nesting of nnn in subshells
@@ -61,7 +60,6 @@
             }
           }
         ''
-        else ""
       }
     '';
   };
