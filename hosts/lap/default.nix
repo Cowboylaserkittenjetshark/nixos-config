@@ -28,9 +28,7 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  services.pipewire.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
