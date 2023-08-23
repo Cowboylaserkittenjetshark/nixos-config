@@ -43,6 +43,8 @@
     enableSshSupport = true;
   };
 
+  programs.nnn.enable = true;
+
   home.packages = with pkgs; [
     htop
     eww-wayland
