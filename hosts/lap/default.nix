@@ -14,10 +14,14 @@
     # ../../modules/plymouth.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    # Enable systemd in phase 1. Used for unlocking root partition with FIDO2
+    initrd.systemd.enable = true;
+    # Use the systemd-boot EFI boot loader.
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
 
   networking = {
