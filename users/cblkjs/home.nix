@@ -33,6 +33,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  services.mako.enable = true;
   programs.gpg = {
     enable = true;
     homedir = "${config.xdg.dataHome}/gnupg";
