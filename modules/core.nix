@@ -27,4 +27,6 @@
     # userland niceness
     rtkit.enable = true;
   };
+
+  nixpkgs.config.allowUnfree = true;
 }
