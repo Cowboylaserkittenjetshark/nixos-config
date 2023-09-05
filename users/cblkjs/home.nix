@@ -52,6 +52,12 @@
     swayidle
     swaybg
     meslo-lgs-nf # For p10k
+    obsidian
+    bitwarden
+    chromium
+    thunderbird
+    exa
+    bat
   ];
 
   fonts.fontconfig.enable = true;
