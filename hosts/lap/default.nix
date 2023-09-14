@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../modules/core.nix
     ../../modules/sddm.nix
+    ../../modules/pam_u2f.nix
     # I currently am not satisified with plymouth in Nix
     # https://github.com/NixOS/nixpkgs/issues/26722
     # ../../modules/plymouth.nix
