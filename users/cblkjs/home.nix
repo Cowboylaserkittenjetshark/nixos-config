@@ -56,7 +56,7 @@
     bitwarden
     chromium
     thunderbird
-    exa
+    eza
     bat
   ];
 
