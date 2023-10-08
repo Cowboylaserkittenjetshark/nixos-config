@@ -58,6 +58,9 @@
     thunderbird
     eza
     bat
+    okular
+    pandoc
+    p7zip
   ];
 
   fonts.fontconfig.enable = true;
