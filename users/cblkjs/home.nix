@@ -11,6 +11,7 @@
     ./modules/swaylock.nix
     ./modules/tofi.nix
     ./modules/syncthing.nix
+    ./modules/helix.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -61,6 +62,7 @@
     okular
     pandoc
     p7zip
+    ncspot
   ];
 
   fonts.fontconfig.enable = true;
