@@ -13,6 +13,7 @@
     ../../modules/printing.nix
     ../../modules/steam.nix
     ../../modules/tailscale/client.nix
+    ../../modules/wayland/hyprland.nix
     # I currently am not satisified with plymouth in Nix
     # https://github.com/NixOS/nixpkgs/issues/26722
     # ../../modules/plymouth.nix
@@ -55,12 +56,6 @@
     wget
     inputs.helix.packages."${pkgs.system}".helix
   ];
-
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
