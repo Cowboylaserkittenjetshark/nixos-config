@@ -29,4 +29,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages =
+    lib.optional ((lib.throwIfNot (lib.strings.versionAtLeast "1.4.16" pkgs.obsidian.version) "Obsidian updated, remove work-around") true) "electron-25.9.0";
 }
