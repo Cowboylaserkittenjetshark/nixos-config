@@ -34,6 +34,7 @@
     input {
       touchpad {
         disable_while_typing = false
+        scroll_factor = 0.25
       }
     }
 
