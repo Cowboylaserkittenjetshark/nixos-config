@@ -12,6 +12,7 @@
     ./modules/tofi.nix
     ./modules/syncthing.nix
     ./modules/helix.nix
+    ./modules/direnv.nix
   ];
 
   # Home Manager needs a bit of information about you and the
