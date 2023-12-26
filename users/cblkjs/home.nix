@@ -13,6 +13,7 @@
     ./modules/syncthing.nix
     ./modules/helix.nix
     ./modules/direnv.nix
+    ./modules/git.nix
   ];
 
   # Home Manager needs a bit of information about you and the
