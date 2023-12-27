@@ -1,0 +1,216 @@
+;; =====================
+;; === Windows START ===
+;; =====================
+(defwindow bar
+  :monitor 0
+  :exclusive true
+  :stacking "bg"
+  :geometry (geometry
+              :width "100%"
+              :height "0px"
+              :anchor "top center")
+  (box
+    :class "bar"
+    (left_bar_layout)
+    (center_bar_layout)
+    (right_bar_layout)))
+;;
+;; ===================
+;; === Windows END ===
+;; ===================
+;; =======================
+;; === Variables START ===
+;; =======================
+(deflisten workspaces
+  :initial '{}'
+  './scripts/workspaces.sh')
+
+(defpoll date
+  :interval  "1s"
+  :initial "12:00"
+  `date +%r`)
+
+(defpoll updates
+  :initial ""
+  :interval "5m"
+  "./scripts/updates-pacman-aurhelper.sh &")
+
+(defpoll current_volume
+  :initial 40
+  :interval "10s"
+  "pactl get-sink-volume @DEFAULT_SINK@ | awk '{print substr($5, 1, length($5)-1)}'")
+
+(defvar monitor 0)
+(defvar volume_bar_visible false)
+(defvar sink "@DEFAULT_SINK@")
+;; ---------
+;; - Icons -
+;; ---------
+(defvar disk_icon "./images/harddisk.svg")
+(defvar volume_icon "./images/volume-high.svg")
+(defvar cpu_icon "./images/memory.svg")
+(defvar memory_icon "./images/chip.svg")
+(defvar battery_charging_icon "./images/battery-charging.svg")
+(defvar battery_discharging_icon "./images/battery.svg")
+;; --------------
+;; - Formatting -
+;; --------------
+(defvar icon_size 15)
+(defvar internal_spacing 10)
+;;
+;; =====================
+;; === Variables END ===
+;; =====================
+;; =====================
+;; === Widgets START ===
+;; =====================
+;; ----------
+;; - Layout -
+;; ----------
+(defwidget left_bar_layout []
+  (box
+    :class "left"
+    :halign "start"
+    :space-evenly false
+    :spacing internal_spacing
+    (workspaces
+      :json workspaces)
+    (updates)))
+
+(defwidget center_bar_layout []
+  (box
+    :class "center"
+    :halign "center"
+    (date)))
+
+(defwidget right_bar_layout []
+  (box
+    :class "right"
+    :halign "end"
+    :space-evenly false
+    :spacing internal_spacing
+    (system_resources)
+    (volume)))
+;; --------------
+;; - Workspaces -
+;; --------------
+(defwidget workspaces [json]
+  (eventbox
+    :onscroll "./scripts/workspaceScroll.sh {}"
+    (box
+      :orientation "h"
+      :class "workspaces"
+      (for WORKSPACE in {json.workspaces}
+           (button
+             :class {WORKSPACE.id == json?.monitors[monitor]?.activeWorkspace?.id ? "active" : "occupied"}
+             :onclick "hyprctl dispatch workspace ${WORKSPACE.id}" {WORKSPACE.name})))))
+ 
+   
+;;
+;; --------------------
+;; - System Resources -
+;; --------------------
+(defwidget system_resources []
+  (box
+    :space-evenly false
+    :spacing internal_spacing
+    (cpu_utilization)
+    (memory_utilization)
+    (disk_utilization)
+    (battery_status)))
+
+(defwidget cpu_utilization []
+  (circular-progress
+    :value {EWW_CPU.avg}
+    :start-at 37.5
+    :clockwise true
+    :thickness 4
+    :class "cpu"
+    (image
+      :class "cpu_icon"
+      :path cpu_icon
+      :image-width icon_size)))
+
+(defwidget memory_utilization []
+  (circular-progress
+    :value {EWW_RAM.used_mem_perc}
+    :start-at 37.5
+    :clockwise true
+    :thickness 4
+    :class "memory"
+    (image
+      :class "memory_icon"
+      :path memory_icon
+      :image-width icon_size)))
+
+(defwidget disk_utilization []
+  (circular-progress
+    :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+    :start-at 37.5
+    :clockwise true
+    :thickness 4
+    :class "disk"
+    (image
+      :class "disk_icon"
+      :path disk_icon
+      :image-width icon_size)))
+
+(defwidget battery_status []
+  (circular-progress
+    :value {EWW_BATTERY?.total_avg}
+    :visible {EWW_BATTERY == "" ? false : true}
+    :start-at 37.5
+    :clockwise true
+    :thickness 4
+    :class "battery"
+    (image
+      :class "battery-icon"
+      :path {EWW_BATTERY["BAT0"]?.status == "Charging" ? battery_charging_icon : battery_discharging_icon}
+      :image-width icon_size)))
+;;
+;; --------------
+;; - Controlers -
+;; --------------
+(defwidget volume []
+  (box
+    (eventbox
+      :onhover "eww update volume_bar_visible=true"
+      :onhoverlost "eww update volume_bar_visible=false"
+      (box
+        :space-evenly false
+        (revealer
+          :reveal volume_bar_visible
+          :transition "slideleft"
+          :duration "500ms"
+          (scale
+            :class "volume-bar"
+            :value current_volume
+            :min 0
+            :max 101
+            :onchange "pactl set-sink-volume ${sink} {}%"
+            :orientation "h"
+            :flipped true))
+        (image
+          :class "volume-icon"
+          :path volume_icon
+          :image-width icon_size)))))
+;; ---------------
+;; - Information -
+;; ---------------
+(defwidget date []
+  (label
+    :class "date"
+    :text date))
+
+(defwidget updates []
+  (box
+    :class "updates"
+    :visible {updates != ""}
+    (label
+      :text updates)))
+;;
+;; ===================
+;; === Widgets END ===
+;; ===================
+;;
+;; Author: Cowboylaserkittenjetshark

@@ -1,0 +1,6 @@
+(defwindow background :stacking "fg" :focusable "false" :screen 0 
+	    :geometry (geometry :x 0 :y 0 :width "1920px" :height "1080px")
+					(bg))
+(defwidget bg [] 
+	(box :class "bg")
+)

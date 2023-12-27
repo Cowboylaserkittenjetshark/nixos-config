@@ -1,0 +1,175 @@
+* {
+  all: unset;
+}
+
+// Colors
+$background: #1e1e2e;
+$foreground: #EBDBB2;
+$sep: #DDB6F2;
+$white: #F5E0DC;
+$black: #161320;
+$red: #f38ba8;
+$maroon: #eba0ac;
+$pink: #f5c2e7;
+$purple: #B4BEFE;
+$mauve: #cba6f7;
+$blue: #8aadf4;
+$cyan: #7dc4e4;
+$teal: #94D2E5;
+$green: #A6E3A1;
+$lime: #C9CBFF;
+$yellow: #f9e2af;
+$amber: #F8BD96;
+$peach: #fab387;
+$brown: #AC8476;
+$indigo: #6C77BB;
+$gray: #9E9E9E;
+$blue-gray: #6D8895;
+$mantle: #181825;
+$text: #CDD6F4;
+$overlay0: #6c7086;
+$overlay2: #9399b2;
+// Padding
+$background-bar-padding: 1px;
+$subbar-padding-sides: 5px;
+$subbar-padding-tob-bottom: 2px;
+$widget-padding: 5px;
+$icon-padding: 7px;
+// Shaping
+$subbar-border-radius: 7px;
+
+scale trough {
+  all: unset;
+  background-color: $mantle;
+  border-radius: 50px;
+  min-height: 10px;
+  min-width: 100px;
+  margin: 0 20px 0 20px;
+}
+scale trough highlight {
+  all: unset;
+  background-color: $overlay2;
+  border-radius: 10px;
+}
+
+window {
+  background: $background;
+  color: $foreground;
+  font-family: "MesloLGS NF";
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 10px;
+
+  & > * {
+    margin: 3px;
+  }
+}
+
+// System resource widgets
+.memory {
+  color: $yellow;
+  .memory_icon {
+    padding: $icon-padding;
+  }
+}
+
+.cpu {
+  color:  $maroon;
+  .cpu_icon {
+    padding: $icon-padding;
+  }
+}
+
+.disk {
+  color: $mauve;
+  .disk_icon {
+    padding: $icon-padding;
+  }
+}
+.battery {
+  color: $green;
+  .battery-icon {
+    padding: $icon-padding;
+  }
+}
+// Information
+.updates {
+  color: $text;
+}
+
+// Labels
+.volume-bar {
+  color: $teal;
+  .volume-icon {
+    padding: $icon-padding;
+  }
+}
+
+// Rewrite start
+.bar {
+  padding: $background-bar-padding;
+  padding-bottom: 0px;
+  background-color: unset;
+  .left {
+    background-color: $background;
+    border-radius: $subbar-border-radius;
+    padding-top: $subbar-padding-tob-bottom;
+    padding-bottom: $subbar-padding-tob-bottom;
+    padding-left: $subbar-padding-sides;
+    padding-right: $subbar-padding-sides;
+  }
+  .center {
+    background-color: $background;
+    border-radius: $subbar-border-radius;
+    padding-top: $subbar-padding-tob-bottom;
+    padding-bottom: $subbar-padding-tob-bottom;
+    padding-left: $subbar-padding-sides;
+    padding-right: $subbar-padding-sides;
+  }
+  .right {
+    background-color: $background;
+    border-radius: $subbar-border-radius;
+    padding-top: $subbar-padding-tob-bottom;
+    padding-bottom: $subbar-padding-tob-bottom;
+    padding-left: $subbar-padding-sides;
+    padding-right: $subbar-padding-sides;
+  }
+}
+
+.workspaces {
+  margin-left: 2px;
+  margin-right: 2px;
+  button {
+    background: none;
+    margin: 3px;
+    padding-left: 1px;
+    &.occupied {
+      color:  $pink;
+      font-size: 1.01rem;
+    }
+    &.empty {
+      color: $text;
+      font-size: 1.01rem;
+    }
+    /*&.inactive {
+      color: #888974;
+    }*/
+    &.active {
+      font-size: 1.01rem;
+      color: $purple;
+    }
+  }
+}
+
+.date {
+  background-color: $background;
+  color: $text;
+}
+box * {
+  transition: all 1s;
+}
+// .system-resources {
+//   background-color: ;
+//   padding-left: $widget-padding;
+//   padding-right: $widget-padding;
+// }

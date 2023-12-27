@@ -51,7 +51,7 @@
 
   home.packages = with pkgs; [
     htop
-    eww-wayland
+    # eww-wayland
     swayidle
     swaybg
     meslo-lgs-nf # For p10k
