@@ -27,7 +27,7 @@
     '';
     initExtra = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-      ${ builtins.readFile ./p10k.zsh }
+      ${builtins.readFile ./p10k.zsh}
       ${
         lib.optionalString config.programs.nnn.enable ''
           n ()
