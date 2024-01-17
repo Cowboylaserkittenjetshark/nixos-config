@@ -57,7 +57,9 @@
       preserve_split=true
     }
     
-    disable_hyprland_logo	= true
+    misc {
+      disable_hyprland_logo	= true
+    }
 
     $mod = SUPER
 
