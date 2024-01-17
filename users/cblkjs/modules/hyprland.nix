@@ -56,6 +56,8 @@
       pseudotile=1 # enable pseudotiling on dwindle
       preserve_split=true
     }
+    
+    disable_hyprland_logo	= true
 
     $mod = SUPER
 
