@@ -5,15 +5,15 @@
   ...
 }: rec {
   imports = [
-    ./modules/foot.nix
-    ./modules/shell/zsh
-    ./modules/hyprland.nix
-    ./modules/swaylock.nix
-    ./modules/tofi.nix
-    ./modules/syncthing.nix
-    ./modules/helix.nix
-    ./modules/direnv.nix
-    ./modules/git.nix
+    ./homeManagerModules/foot.nix
+    ./homeManagerModules/shell/zsh
+    ./homeManagerModules/hyprland.nix
+    ./homeManagerModules/swaylock.nix
+    ./homeManagerModules/tofi.nix
+    ./homeManagerModules/syncthing.nix
+    ./homeManagerModules/helix.nix
+    ../common/homeManagerModules/direnv.nix
+    ./homeManagerModules/git.nix
   ];
 
   # Home Manager needs a bit of information about you and the

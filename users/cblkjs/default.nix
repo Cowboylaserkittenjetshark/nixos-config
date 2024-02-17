@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ../../modules/zsh.nix
+    ../common/modules/zsh.nix
     inputs.home-manager.nixosModules.home-manager
   ];
   home-manager.useGlobalPkgs = true;
