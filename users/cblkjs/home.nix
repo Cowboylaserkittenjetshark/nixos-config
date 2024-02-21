@@ -7,7 +7,7 @@
   imports = [
     ./homeManagerModules/foot.nix
     ./homeManagerModules/shell/zsh
-    ./homeManagerModules/hyprland.nix
+    ./homeManagerModules/hypr
     ./homeManagerModules/swaylock.nix
     ./homeManagerModules/tofi.nix
     ./homeManagerModules/syncthing.nix

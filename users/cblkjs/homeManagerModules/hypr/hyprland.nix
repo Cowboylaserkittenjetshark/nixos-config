@@ -4,7 +4,9 @@
   pkgs,
   ...
 }: {
-  imports = [./eww];
+  imports = [
+    ../eww
+  ];
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -56,7 +58,7 @@
       pseudotile=1 # enable pseudotiling on dwindle
       preserve_split=true
     }
-    
+
     misc {
       disable_hyprland_logo	= true
     }
