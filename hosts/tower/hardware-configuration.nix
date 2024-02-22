@@ -60,11 +60,17 @@
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  networking.interfaces.enp34s0.ipv4.addresses = [{
-    address = "192.168.86.198";
-    prefixLength = 24;
-  }];
+  # networking.useDHCP = lib.mkDefault true;
+  networking = {
+    interfaces.enp34s0.ipv4.addresses = [
+      {
+        address = "192.168.86.198";
+        prefixLength = 24;
+      }
+    ];
+    defaultGateway = "192.168.86.1";
+    nameservers = ["1.1.1.1"];
+  };
   # networking.interfaces.enp34s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
