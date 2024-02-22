@@ -102,7 +102,6 @@
     bind=SUPER,down,movefocus,d
 
     exec = eww open bar
-    exec-once=swayidle -w timeout 90 'swaylock' timeout 300 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --fade-in 0 --grace 0'
     exec-once=swaybg -i ${config.home.homeDirectory}/.config/laptopWP
   '';
 }
