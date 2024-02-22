@@ -41,11 +41,6 @@
     enable = true;
     homedir = "${config.xdg.dataHome}/gnupg";
   };
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-  };
 
   programs.nnn.enable = true;
 
