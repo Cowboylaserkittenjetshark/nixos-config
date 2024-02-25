@@ -14,6 +14,7 @@
     ../../modules/steam.nix
     ../../modules/tailscale/client.nix
     ../../modules/wayland/hyprland.nix
+    ../../modules/gnupg.nix
     # I currently am not satisified with plymouth in Nix
     # https://github.com/NixOS/nixpkgs/issues/26722
     # ../../modules/plymouth.nix
