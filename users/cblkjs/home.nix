@@ -8,7 +8,6 @@
     ./homeManagerModules/foot.nix
     ./homeManagerModules/shell/zsh
     ./homeManagerModules/hypr
-    ./homeManagerModules/swaylock.nix
     ./homeManagerModules/tofi.nix
     ./homeManagerModules/syncthing.nix
     ./homeManagerModules/helix.nix
