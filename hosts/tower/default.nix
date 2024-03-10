@@ -8,7 +8,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/core.nix
-    ../../modules/sddm.nix
+    # SDDM coredumps currently
+    # ../../modules/sddm.nix
     ../../modules/pam_u2f.nix
     ../../modules/printing.nix
     ../../modules/steam.nix
