@@ -20,6 +20,8 @@
     # https://github.com/NixOS/nixpkgs/issues/26722
     # ../../modules/plymouth.nix
     ../../modules/tailscale/server.nix
+    # Using ancient gpu :/
+    ../../modules/bonaire.nix
   ];
 
   boot = {
