@@ -13,6 +13,7 @@
     ./homeManagerModules/helix.nix
     ../common/homeManagerModules/direnv.nix
     ./homeManagerModules/git.nix
+    ./homeManagerModules/gtk.nix
   ];
 
   # Home Manager needs a bit of information about you and the
