@@ -21,6 +21,7 @@
     ../../modules/tailscale/server.nix
     # Using ancient gpu :/
     ../../modules/bonaire.nix
+    ../../modules/networking/networkd.nix
   ];
 
   boot = {
@@ -35,7 +36,6 @@
 
   networking = {
     hostName = "tower"; # Define your hostname.
-    networkmanager.enable = true; # Easiest to use and most distros use this by default.
   };
 
   # Set your time zone.
