@@ -3,7 +3,7 @@
     enable = true;
   };
 
-  shellAliases = {y = "yazi";};
+  home.shellAliases = {y = "yazi";};
 
   xdg.configFile = {
     "yazi/theme.toml".source = "${inputs.catppuccin-yazi}/themes/mocha.toml";

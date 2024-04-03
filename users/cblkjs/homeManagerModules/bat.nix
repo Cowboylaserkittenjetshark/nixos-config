@@ -24,5 +24,5 @@
         })
       );
   };
-  shellAliases = {cat = "bat";};
+  home.shellAliases = {cat = "bat";};
 }
