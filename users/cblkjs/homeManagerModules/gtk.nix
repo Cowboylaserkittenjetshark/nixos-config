@@ -8,9 +8,9 @@
     theme = {
       name = "Catppuccin-Mocha-Compact-Lavender-Dark";
       package = pkgs.catppuccin-gtk.override {
-        accents = [ "lavender" ];
+        accents = ["lavender"];
         size = "compact";
-        tweaks = [ "rimless" ];
+        tweaks = ["rimless"];
         variant = "mocha";
       };
     };

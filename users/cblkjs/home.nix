@@ -13,8 +13,10 @@
     ./homeManagerModules/helix.nix
     ../common/homeManagerModules/direnv.nix
     ./homeManagerModules/git.nix
-    # Borked upstream
-    # ./homeManagerModules/gtk.nix
+    ./homeManagerModules/gtk.nix
+    ./homeManagerModules/zoxide.nix
+    ./homeManagerModules/yazi.nix
+    ./homeManagerModules/bat.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -56,7 +58,6 @@
     chromium
     thunderbird
     eza
-    bat
     okular
     pandoc
     p7zip

@@ -4,7 +4,6 @@
     # ./caddy.nix
     ./containers/mosquitto.nix
     ./containers/homeassistant.nix
-    
   ];
 
   options = {};

@@ -3,9 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    
+
     flake-parts.url = "github:hercules-ci/flake-parts";
-    
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,12 +20,12 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     hyprlock = {
       url = "github:hyprwm/hyprlock";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     hypridle = {
       url = "github:hyprwm/hypridle";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,19 +45,29 @@
     };
 
     catppuccin-foot.url = "github:Cowboylaserkittenjetshark/catppuccin-foot-nix";
+
+    catppuccin-yazi = {
+      url = "github:catppuccin/yazi";
+      flake = false;
+    };
+
+    catppuccin-bat = {
+      url = "github:catppuccin/bat";
+      flake = false;
+    };
   };
 
   outputs = inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        # To import a flake module
-        # 1. Add foo to inputs
-        # 2. Add foo as a parameter to the outputs function
-        # 3. Add here: foo.flakeModule
         ./hosts
       ];
-      systems = [ "x86_64-linux"];
-      perSystem = { config, pkgs, ... }: {
+      systems = ["x86_64-linux"];
+      perSystem = {
+        config,
+        pkgs,
+        ...
+      }: {
         formatter = pkgs.alejandra;
       };
       flake = {
