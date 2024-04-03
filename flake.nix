@@ -45,6 +45,11 @@
     };
 
     catppuccin-foot.url = "github:Cowboylaserkittenjetshark/catppuccin-foot-nix";
+
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
