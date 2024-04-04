@@ -6,7 +6,7 @@
 }: {
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     dotDir = ".config/zsh";
     shellAliases = {
       ll = "ls -l";
