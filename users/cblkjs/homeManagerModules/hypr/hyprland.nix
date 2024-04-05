@@ -47,11 +47,12 @@
       bezier=linear,0,0,1,1
       bezier=bounce,1,1.6,0.1,0.85
 
-      animation=windows,1,5,bounce,popin
-      animation=fade,1,3,bounce
+      animation=windows,1,5,overshot,popin 80%
+      animation=fade,1,3,overshot
       animation=workspaces,1,6,overshot,slide
-      animation=border,1,2,linear
-      animation=borderangle,1,40,linear,loop
+      animation=border,1,2,overshot
+      animation=borderangle,1,40,default,loop
+      animation=layers,1,5,overshot,slide
     }
 
     dwindle {
@@ -100,6 +101,9 @@
     bind=SUPER,right,movefocus,r
     bind=SUPER,up,movefocus,u
     bind=SUPER,down,movefocus,d
+
+    layerrule = blur, notifications
+    layerrule = ignorezero, notifications
 
     exec = eww open bar
     exec-once=swaybg -i ${config.home.homeDirectory}/.config/laptopWP

@@ -17,6 +17,7 @@
     ./homeManagerModules/zoxide.nix
     ./homeManagerModules/yazi.nix
     ./homeManagerModules/bat.nix
+    ./homeManagerModules/mako.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -39,7 +40,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  services.mako.enable = true;
   programs.gpg = {
     enable = true;
     homedir = "${config.xdg.dataHome}/gnupg";
