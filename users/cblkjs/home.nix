@@ -18,6 +18,7 @@
     ./homeManagerModules/yazi.nix
     ./homeManagerModules/bat.nix
     ./homeManagerModules/mako.nix
+    ./homeManagerModules/avatar.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -36,6 +37,7 @@
     # changes in each release.
     stateVersion = "23.05";
   };
+  avatar = ./meow.png;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

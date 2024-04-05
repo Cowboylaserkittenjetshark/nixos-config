@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
   imports = [
@@ -84,6 +85,20 @@
         };
         halign = "right";
         valign = "top";
+      }
+    ];
+    images = [
+      {
+        monitor = "";
+        path = config.avatar;
+        size = 100;
+        border_color = "\$${accent}";
+        position = {
+          x = 0;
+          y = 75;
+        };
+        halign = "center";
+        valign = "center";
       }
     ];
   };
