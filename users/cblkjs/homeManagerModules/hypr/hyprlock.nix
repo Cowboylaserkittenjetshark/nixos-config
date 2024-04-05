@@ -7,13 +7,24 @@
     inputs.hyprlock.homeManagerModules.hyprlock
   ];
 
-  programs.hyprlock = {
+  programs.hyprlock = let
+    accent = "green";
+  in {
     enable = true;
+    sources = [ "${inputs.catppuccin-hyprland}/themes/mocha.conf" ];
 
+    general = {
+      disable_loading_bar = true;
+      hide_cursor = true;
+      grace = 3;
+    };
+    
     backgrounds = [
       {
+        monitor = "";
         path = "";
-        color = "rgb(30, 30, 46)";
+        blur_passes = 0;
+        color = "$base";
       }
     ];
 
@@ -22,23 +33,26 @@
         monitor = "";
         size = {
           width = 300;
-          height = 40;
+          height = 60;
         };
-        outline_thickness = 3;
-
-        outer_color = "rgb(69, 71, 90)";
-        inner_color = "rgb(49, 50, 68)";
-        font_color = "rgb(205, 214, 244)";
-
-        fade_on_empty = true;
-        placeholder_text = "<i>Input Password...</i>";
+        outline_thickness = 4;
+        dots_size = 0.2;
+        dots_spacing = 0.2;
+        dots_center = true;
+        outer_color = "\$${accent}";
+        inner_color = "$surface0";
+        font_color = "$text";
+        fade_on_empty = false;
+        placeholder_text = ''<span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##''$${accent}Alpha">$USER</span></span>'';
         hide_input = false;
-
+        check_color = "\$${accent}";
+        fail_color = "$red";
+        fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
+        capslock_color = "$yellow";
         position = {
           x = 0;
-          y = -30;
+          y = -35;
         };
-
         halign = "center";
         valign = "center";
       }
@@ -47,16 +61,29 @@
     labels = [
       {
         monitor = "";
-        text = "$TIME";
-        color = "rgba(200, 200, 200, 1.0)";
-        font_size = 50;
+        text = ''cmd[update:30000] echo "$(date +"%R")"'';
+        color = "$text";
+        font_size = 90;
         font_family = "MesloLGS NF";
         position = {
-          x = 0;
-          y = 30;
+          x = -30;
+          y = 0;
         };
-        halign = "center";
-        valign = "center";
+        halign = "right";
+        valign = "top";
+      }
+      {
+        monitor = "";
+        text = ''cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"'';
+        color = "$text";
+        font_size = 25;
+        font_family = "$font";
+        position = {
+          x = -30;
+          y = -150;
+        };
+        halign = "right";
+        valign = "top";
       }
     ];
   };
