@@ -1,5 +1,6 @@
 {
   config,
+  osConfig,
   inputs,
   pkgs,
   ...
@@ -106,6 +107,6 @@
     layerrule = ignorezero, notifications
 
     exec = eww open bar
-    exec-once=swaybg -i ${config.home.homeDirectory}/.config/laptopWP
+    exec-once=swaybg -i ${osConfig.desktopAssets.wallpaper}
   '';
 }

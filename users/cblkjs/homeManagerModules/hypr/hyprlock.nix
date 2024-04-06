@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   config,
+  osConfig,
   ...
 }: {
   imports = [
@@ -23,8 +24,9 @@
     backgrounds = [
       {
         monitor = "";
-        path = "";
-        blur_passes = 0;
+        path = "${osConfig.desktopAssets.lockscreen}";
+        blur_passes = 1;
+        blur_size = 3;
         color = "$base";
       }
     ];

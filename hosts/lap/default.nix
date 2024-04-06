@@ -18,6 +18,7 @@
     # I currently am not satisified with plymouth in Nix
     # https://github.com/NixOS/nixpkgs/issues/26722
     # ../../modules/plymouth.nix
+    ../../modules/desktopAssets.nix
   ];
 
   boot = {
@@ -57,6 +58,11 @@
     wget
     inputs.helix.packages."${pkgs.system}".helix
   ];
+
+  desktopAssets = {
+    wallpaper = ./T420ExplodedWP.png;
+    lockscreen = ./T420ExplodedWP.png;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
