@@ -19,6 +19,7 @@
     ./homeManagerModules/bat.nix
     ./homeManagerModules/mako.nix
     ./homeManagerModules/avatar.nix
+    ./homeManagerModules/ags
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -51,7 +52,6 @@
 
   home.packages = with pkgs; [
     htop
-    # eww-wayland
     swayidle
     swaybg
     meslo-lgs-nf # For p10k

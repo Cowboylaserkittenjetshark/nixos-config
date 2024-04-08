@@ -19,6 +19,7 @@
     # https://github.com/NixOS/nixpkgs/issues/26722
     # ../../modules/plymouth.nix
     ../../modules/desktopAssets.nix
+    ../../modules/power.nix
   ];
 
   boot = {

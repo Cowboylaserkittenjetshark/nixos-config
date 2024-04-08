@@ -5,10 +5,6 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ../eww
-  ];
-
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -106,7 +102,6 @@
     layerrule = blur, notifications
     layerrule = ignorezero, notifications
 
-    exec = eww open bar
     exec-once=swaybg -i ${osConfig.desktopAssets.wallpaper}
   '';
 }

@@ -14,6 +14,10 @@
         variant = "mocha";
       };
     };
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
   };
 
   xdg.configFile = {
