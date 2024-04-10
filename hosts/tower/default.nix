@@ -13,7 +13,7 @@
     ../../modules/printing.nix
     ../../modules/steam.nix
     ../../modules/ssh/server.nix
-    ../../modules/homelab/default.nix
+    # ../../modules/homelab/default.nix
     ../../modules/gnupg.nix
     # I currently am not satisified with plymouth in Nix
     # https://github.com/NixOS/nixpkgs/issues/26722
