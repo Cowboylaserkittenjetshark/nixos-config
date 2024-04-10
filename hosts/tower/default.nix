@@ -21,7 +21,6 @@
     ../../modules/tailscale/server.nix
     # Using ancient gpu :/
     ../../modules/bonaire.nix
-    ../../modules/networking/networkd.nix
   ];
 
   boot = {
@@ -34,10 +33,19 @@
     };
   };
 
-  networking = {
-    hostName = "tower"; # Define your hostname.
+  networking.hostName = "tower";
+  systemd.network = {
+    enable = true;
+    networks."20-wired" = {
+      matchConfig.Name = "enp34s0";
+      networkConfig = {
+        Address = "192.168.86.198/24";
+        Gateway = "192.168.86.1";
+        DNS = "1.1.1.1";
+      };
+    };
   };
-
+  
   # Set your time zone.
   time.timeZone = "America/New_York";
 
