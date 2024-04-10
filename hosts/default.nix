@@ -1,6 +1,5 @@
 {inputs, ...}: {
   flake.nixosConfigurations = let
-    # Def stuff
     inherit (inputs.nixpkgs.lib) nixosSystem;
     specialArgs = {inherit inputs;};
   in {

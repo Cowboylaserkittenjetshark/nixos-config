@@ -17,7 +17,7 @@
   # };
   services.caddy = {
     enable = true;
-    virtualHosts."cblkjs.com".extraConfig = ''
+    virtualHosts.":80".extraConfig = ''
       respond "Hello, world :)"
     '';
   };
