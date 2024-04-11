@@ -25,6 +25,7 @@
     ../../modules/power.nix
     ../../modules/wayland/hyprland.nix
     ../../modules/nix
+    ../../modules/docker-compose.nix
   ];
 
   networking.hostName = "tower";
