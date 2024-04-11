@@ -61,8 +61,8 @@
   ];
 
   desktopAssets = {
-    wallpaper = ./T420ExplodedWP.png;
-    lockscreen = ./T420ExplodedWP.png;
+    wallpaper = ../amusementpark.png;
+    lockscreen = ../amusementpark.png;
   };
 
   # This value determines the NixOS release from which the default

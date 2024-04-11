@@ -74,8 +74,8 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   desktopAssets = {
-    wallpaper = ./amusementpark.png;
-    lockscreen = ./amusementpark.png;
+    wallpaper = ../amusementpark.png;
+    lockscreen = ../amusementpark.png;
   };
 
   # This value determines the NixOS release from which the default
