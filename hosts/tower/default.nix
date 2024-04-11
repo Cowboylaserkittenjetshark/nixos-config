@@ -24,6 +24,7 @@
     ../../modules/desktopAssets.nix
     ../../modules/power.nix
     ../../modules/wayland/hyprland.nix
+    ../../modules/builders.nix
   ];
 
   networking.hostName = "tower";
