@@ -35,6 +35,7 @@
   services.blueman.enable = true;
 
   services.tlp.enable = true;
+  services.thermald.enable = true;
 
   desktopAssets = {
     wallpaper = ../amusementpark.png;
