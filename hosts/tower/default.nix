@@ -21,6 +21,8 @@
     ../../modules/tailscale/server.nix
     # Using ancient gpu :/
     ../../modules/bonaire.nix
+    ../../modules/desktopAssets.nix
+    ../../modules/power.nix
   ];
 
   boot = {
@@ -70,6 +72,11 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  desktopAssets = {
+    wallpaper = ./amusementpark.png;
+    lockscreen = ./amusementpark.png;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
