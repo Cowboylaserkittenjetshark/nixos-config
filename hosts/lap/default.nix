@@ -20,7 +20,7 @@
     # ../../modules/plymouth.nix
     ../../modules/desktopAssets.nix
     ../../modules/power.nix
-    ../../modules/builders.nix
+    ../../modules/nix
   ];
 
   networking = {
