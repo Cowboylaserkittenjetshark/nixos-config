@@ -55,8 +55,7 @@
     swayidle
     swaybg
     meslo-lgs-nf # For p10k
-    obsidian
-    bitwarden
+    bitwarden-cli
     chromium
     thunderbird
     eza
