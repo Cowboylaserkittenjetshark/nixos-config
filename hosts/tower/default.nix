@@ -23,6 +23,7 @@
     ../../modules/bonaire.nix
     ../../modules/desktopAssets.nix
     ../../modules/power.nix
+    ../../modules/wayland/hyprland.nix
   ];
 
   networking.hostName = "tower";
