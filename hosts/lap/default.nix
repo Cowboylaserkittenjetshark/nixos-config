@@ -30,7 +30,6 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
@@ -41,16 +40,6 @@
     wallpaper = ../amusementpark.png;
     lockscreen = ../amusementpark.png;
   };
-
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "tower";
-        
-      }
-    ];
-  }
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

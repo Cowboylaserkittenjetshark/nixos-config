@@ -25,7 +25,6 @@
     ../../modules/power.nix
   ];
 
-
   networking.hostName = "tower";
   systemd.network = {
     enable = true;
