@@ -22,16 +22,6 @@
     ../../modules/power.nix
   ];
 
-  boot = {
-    # Enable systemd in phase 1. Used for unlocking root partition with FIDO2
-    initrd.systemd.enable = true;
-    # Use the systemd-boot EFI boot loader.
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-  };
-
   networking = {
     hostName = "lap"; # Define your hostname.
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -40,30 +30,26 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-  };
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
   services.tlp.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    inputs.helix.packages."${pkgs.system}".helix
-  ];
-
   desktopAssets = {
     wallpaper = ../amusementpark.png;
     lockscreen = ../amusementpark.png;
   };
+
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [
+      {
+        hostName = "tower";
+        
+      }
+    ];
+  }
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

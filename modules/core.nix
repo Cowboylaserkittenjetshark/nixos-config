@@ -3,9 +3,34 @@
   pkgs,
   ...
 }: {
-  # Limit the number of generations to keep
-  boot.loader.systemd-boot.configurationLimit = 10;
-  # boot.loader.grub.configurationLimit = 10;
+  boot = {
+    # Enable systemd in phase 1. Used for unlocking root partition with FIDO2/TPM
+    initrd.systemd.enable = true;
+    # Use the systemd-boot EFI boot loader.
+    loader = {
+      systemd-boot = {
+        enable = true;
+        # Limit the number of generations to keep
+        configurationLimit = 10;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
+  };
+
+  programs.hyprland = {
+    enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Perform garbage collection weekly to maintain low disk usage
   nix.gc = {
@@ -21,14 +46,17 @@
   };
 
   security = {
-    # allow wayland lockers to unlock the screen
+    # Allow wayland lockers to unlock the screen
     pam.services.hyprlock.text = "auth include login";
 
-    # userland niceness
+    # Userland niceness
     rtkit.enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages =
-    lib.optional ((lib.throwIfNot (lib.strings.versionAtLeast "1.5.3" pkgs.obsidian.version) "Obsidian updated, remove work-around") true) "electron-25.9.0";
+
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+  ];
 }

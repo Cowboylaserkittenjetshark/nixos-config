@@ -25,15 +25,6 @@
     ../../modules/power.nix
   ];
 
-  boot = {
-    # Enable systemd in phase 1. Used for unlocking root partition with FIDO2/TPM
-    initrd.systemd.enable = true;
-    # Use the systemd-boot EFI boot loader.
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-  };
 
   networking.hostName = "tower";
   systemd.network = {
@@ -50,28 +41,6 @@
   
   # Set your time zone.
   time.timeZone = "America/New_York";
-
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-    wget
-    inputs.helix.packages."${pkgs.system}".helix
-  ];
-
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   desktopAssets = {
     wallpaper = ../amusementpark.png;
