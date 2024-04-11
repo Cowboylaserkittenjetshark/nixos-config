@@ -89,15 +89,16 @@
     bind=SUPER,W,killactive,
     bind=SUPERALT,M,exit,
     bind=SUPERALT,R,exec,hyprctl reload
+    bind=SUPERALT,L,exec,hyprlock --immediate
     bind=SUPER,V,togglefloating,
     bind=SUPER,P,pseudo,
     bind=SUPER,M,fullscreen,1
     bind=SUPER,F,fullscreen,2
 
-    bind=SUPER,left,movefocus,l
-    bind=SUPER,right,movefocus,r
-    bind=SUPER,up,movefocus,u
-    bind=SUPER,down,movefocus,d
+    bind=SUPER,h,movefocus,l
+    bind=SUPER,l,movefocus,r
+    bind=SUPER,k,movefocus,u
+    bind=SUPER,j,movefocus,d
 
     layerrule = blur, notifications
     layerrule = ignorezero, notifications
