@@ -7,6 +7,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t420
     ../../modules/core.nix
     ../../modules/sddm.nix
     ../../modules/pam_u2f.nix
