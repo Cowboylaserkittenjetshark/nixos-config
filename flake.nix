@@ -57,6 +57,11 @@
     };
     
     ags.url = "github:Aylur/ags";
+
+    custom-caddy = {
+      url = "github:Cowboylaserkittenjetshark/nixcaddy/my-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   # virtualisation.oci-containers.containers.caddy = {
   #   image = "docker.io/library/caddy:latest";
   #   ports = [
@@ -17,9 +17,19 @@
   # };
   services.caddy = {
     enable = true;
+    package = inputs.custom-caddy.packages.${pkgs.system}.default;
     virtualHosts."cblkjs.com".extraConfig = ''
       respond "Hello, world :)"
+      tls {
+      	dns cloudflare pLaCEholDertoKen
+      }
+    '';
+    extraConfig = ''
     '';
   };
   networking.firewall.allowedTCPPorts = [80 443];
+  # containers.caddy = {
+  #   autoStart = true;
+  #   privateNetwork = true;
+  # };
 }

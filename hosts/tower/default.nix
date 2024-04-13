@@ -13,7 +13,6 @@
     ../../modules/printing.nix
     ../../modules/steam.nix
     ../../modules/ssh/server.nix
-    # ../../modules/homelab/default.nix
     ../../modules/gnupg.nix
     # I currently am not satisified with plymouth in Nix
     # https://github.com/NixOS/nixpkgs/issues/26722
@@ -25,10 +24,35 @@
     ../../modules/power.nix
     ../../modules/wayland/hyprland.nix
     ../../modules/nix
-    ../../modules/docker-compose.nix
+    # ../../modules/docker-compose.nix
+    ../../modules/homelab/default.nix
   ];
 
-  networking.hostName = "tower";
+  networking = {
+    hostName = "tower";
+    useNetworkd = true;
+    nftables.enable = true;
+    firewall = {
+      enable = true;
+    };
+  };
+
+  services.cloudflared = {
+    enable = true;
+    tunnels.container-stack = {
+      credentialsFile = "/etc/cloudflared/container-stack.json";
+      default = "http_status:404";
+      ingress = {
+        "cblkjs.com".service = "https://127.0.0.1";
+        "*.cblkjs.com".service = "https://127.0.0.1";
+      };
+      originRequest = {
+        originServerName = "cblkjs.com";
+        httpHostHeader = "cblkjs.com";
+      };
+    };
+  };
+  
   systemd.network = {
     enable = true;
     networks."20-wired" = {
