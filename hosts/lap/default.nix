@@ -16,13 +16,12 @@
     ../../modules/tailscale/client.nix
     ../../modules/wayland/hyprland.nix
     ../../modules/gnupg.nix
-    # I currently am not satisified with plymouth in Nix
-    # https://github.com/NixOS/nixpkgs/issues/26722
-    # ../../modules/plymouth.nix
     ../../modules/desktopAssets.nix
     ../../modules/power.nix
     ../../modules/nix
   ];
+
+  boot.initrd.kernelModules = [ "i915" ];
 
   networking = {
     hostName = "lap"; # Define your hostname.
