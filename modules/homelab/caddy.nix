@@ -1,4 +1,4 @@
-{pkgs, inputs, ...}: {
+{pkgs, inputs, config, ...}: {
   # virtualisation.oci-containers.containers.caddy = {
   #   image = "docker.io/library/caddy:latest";
   #   ports = [
@@ -20,14 +20,18 @@
     package = inputs.custom-caddy.packages.${pkgs.system}.default;
     virtualHosts."cblkjs.com".extraConfig = ''
       respond "Hello, world :)"
-      tls {
-      	dns cloudflare pLaCEholDertoKen
-      }
+      import ${ config.age.secrets.cloudflare-tunnel-api-token.path }
     '';
     extraConfig = ''
     '';
   };
   networking.firewall.allowedTCPPorts = [80 443];
+  age.secrets.cloudflare-tunnel-api-token = {
+    file = ../../secrets/cloudflare-tunnel-api-token.age;
+    mode = "400";
+    owner = "caddy";
+    group = "caddy";
+  };
   # containers.caddy = {
   #   autoStart = true;
   #   privateNetwork = true;

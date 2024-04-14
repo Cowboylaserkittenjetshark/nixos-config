@@ -26,6 +26,7 @@
     ../../modules/nix
     # ../../modules/docker-compose.nix
     ../../modules/homelab/default.nix
+    ../../modules/agenix.nix
   ];
 
   networking = {
