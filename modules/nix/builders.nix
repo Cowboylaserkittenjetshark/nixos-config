@@ -26,8 +26,8 @@ in {
   };
 
   users.users.builder = lib.mkIf (builtins.elem config.networking.hostName (map (machine: machine.hostName) machines)) {
-    isSystemUser = true;
-    createHome = false;
+    isNormalUser = true;
+    createHome = true;
     homeMode = "500";
     openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/4MwGjm7Q46gtQqjgnlKAN6fo4ORC/C1s4WG3NguV3 root@lap"];
   };
