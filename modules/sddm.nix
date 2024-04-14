@@ -6,12 +6,9 @@
   environment.systemPackages = with pkgs; [
     (pkgs.callPackage ../pkgs/catppuccin-sddm.nix {})
   ];
-  services.xserver = {
+  services.displayManager.sddm = {
     enable = true;
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "catppuccin-mocha";
-    };
+    wayland.enable = true;
+    theme = "catppuccin-mocha";
   };
 }
