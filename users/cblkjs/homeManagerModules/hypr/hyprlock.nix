@@ -13,14 +13,14 @@
     accent = "green";
   in {
     enable = true;
-    sources = [ "${inputs.catppuccin-hyprland}/themes/mocha.conf" ];
+    sources = ["${inputs.catppuccin-hyprland}/themes/mocha.conf"];
 
     general = {
       disable_loading_bar = true;
       hide_cursor = true;
       grace = 3;
     };
-    
+
     backgrounds = [
       {
         monitor = "";

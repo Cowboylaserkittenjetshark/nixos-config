@@ -1,4 +1,9 @@
-{pkgs, inputs, config, ...}: {
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}: {
   # virtualisation.oci-containers.containers.caddy = {
   #   image = "docker.io/library/caddy:latest";
   #   ports = [
@@ -20,7 +25,7 @@
     package = inputs.custom-caddy.packages.${pkgs.system}.default;
     virtualHosts."cblkjs.com".extraConfig = ''
       respond "Hello, world :)"
-      import ${ config.age.secrets.cloudflare-tunnel-api-token.path }
+      import ${config.age.secrets.cloudflare-tunnel-api-token.path}
     '';
     extraConfig = ''
     '';

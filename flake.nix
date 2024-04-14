@@ -55,7 +55,7 @@
       url = "github:catppuccin/bat";
       flake = false;
     };
-    
+
     ags.url = "github:Aylur/ags";
 
     custom-caddy = {

@@ -1,8 +1,11 @@
-{ options, config, lib, pkgs, ... }:
-
-with lib;
-
 {
+  options,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; {
   options.avatar = mkOption {
     type = types.path;
     defaultText = "~/.face";

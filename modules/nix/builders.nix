@@ -1,4 +1,8 @@
-{ lib, config, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   machines = [
     {
       hostName = "tower";
@@ -6,11 +10,11 @@
       protocol = "ssh-ng";
       sshUser = "builder";
       sshKey = "/etc/ssh/id_ed25519_builder";
-    
+
       maxJobs = 4;
       # Arbitrary measure of speed; Priority
       speedFactor = 2;
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
     }
   ];
 in {
@@ -23,6 +27,6 @@ in {
     isNormalUser = true;
     createHome = true;
     homeMode = "500";
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/4MwGjm7Q46gtQqjgnlKAN6fo4ORC/C1s4WG3NguV3 root@lap" ];
+    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/4MwGjm7Q46gtQqjgnlKAN6fo4ORC/C1s4WG3NguV3 root@lap"];
   };
 }

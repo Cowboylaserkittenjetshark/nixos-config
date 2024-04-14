@@ -1,4 +1,5 @@
-{lib, ...}: with lib; {
+{lib, ...}:
+with lib; {
   options.desktopAssets = {
     wallpaper = mkOption {
       type = types.path;

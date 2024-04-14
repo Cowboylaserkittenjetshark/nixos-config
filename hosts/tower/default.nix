@@ -35,8 +35,8 @@
     nftables.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22000 ];
-      allowedUDPPorts = [ 22000 21027 ];
+      allowedTCPPorts = [22000];
+      allowedUDPPorts = [22000 21027];
     };
   };
 
@@ -55,7 +55,7 @@
       };
     };
   };
-  
+
   systemd.network = {
     enable = true;
     networks."20-wired" = {
@@ -67,7 +67,7 @@
       };
     };
   };
-  
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
