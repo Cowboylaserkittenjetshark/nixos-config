@@ -3,32 +3,37 @@
   inputs,
   config,
   ...
-}: {
-  # virtualisation.oci-containers.containers.caddy = {
-  #   image = "docker.io/library/caddy:latest";
-  #   ports = [
-  #     "80:80"
-  #     "443:443"
-  #     "443:443/udp"
-  #   ];
-  #   volumes = [
-  #     "${caddy_config}:/etc/caddy/Caddyfile"
-  #     "caddy_data:/data"
-  #     "caddy_config:/config"
-  #   ];
-  #   extraOptions = [
-  #     "--network=podman,proxied" # Can add multiple networks
-  #   ];
-  # };
+}: let
+  domain = "cblkjs.com";
+in {
   services.caddy = {
     enable = true;
     package = inputs.custom-caddy.packages.${pkgs.system}.default;
-    virtualHosts."cblkjs.com".extraConfig = ''
-      respond "Hello, world :)"
-      import ${config.age.secrets.cloudflare-tunnel-api-token.path}
+    globalConfig = ''
+      servers {
+        trusted_proxies cloudflare
+        trusted_proxies static 127.0.0.1
+      }
     '';
     extraConfig = ''
+      (cloudflare-dns) {
+        import ${config.age.secrets.cloudflare-tunnel-api-token.path}
+      }
     '';
+    virtualHosts = {
+      "*.${domain}".extraConfig = ''
+        import cloudflare-dns
+        redir https://${domain}{uri} permanent
+      '';
+      "vw.${domain}".extraConfig = ''
+        import cloudflare-dns
+        reverse_proxy 127.0.0.1:8080
+      '';
+      "${domain}".extraConfig = ''
+        import cloudflare-dns
+        respond "Hello, world :)"
+      '';
+    };
   };
   networking.firewall.allowedTCPPorts = [80 443];
   age.secrets.cloudflare-tunnel-api-token = {
@@ -37,8 +42,4 @@
     owner = "caddy";
     group = "caddy";
   };
-  # containers.caddy = {
-  #   autoStart = true;
-  #   privateNetwork = true;
-  # };
 }

@@ -51,7 +51,6 @@
       };
       originRequest = {
         originServerName = "cblkjs.com";
-        httpHostHeader = "cblkjs.com";
       };
     };
   };

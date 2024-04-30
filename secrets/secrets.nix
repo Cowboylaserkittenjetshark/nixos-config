@@ -8,4 +8,6 @@ let
   systems = [tower];
 in {
   "cloudflare-tunnel-api-token.age".publicKeys = [cblkjs tower];
+  "vaultwarden-env.age".publicKeys = [cblkjs tower];
+  "nextcloud-admin-pass.age".publicKeys = [cblkjs tower];
 }
