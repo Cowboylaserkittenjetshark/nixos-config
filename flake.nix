@@ -57,7 +57,7 @@
     };
 
     ags.url = "github:Aylur/ags";
-    
+
     custom-caddy = {
       url = "github:Cowboylaserkittenjetshark/nixcaddy/my-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,7 +68,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 

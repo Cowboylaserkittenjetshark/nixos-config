@@ -1,4 +1,8 @@
-{pkgs, config, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
 in {
   virtualisation.oci-containers.containers.vaultwarden = {
     image = "ghcr.io/dani-garcia/vaultwarden:latest-alpine";
@@ -16,5 +20,4 @@ in {
     # owner = "caddy";
     # group = "caddy";
   };
-  
 }

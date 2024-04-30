@@ -21,7 +21,7 @@
     ../../modules/nix
   ];
 
-  boot.initrd.kernelModules = [ "i915" ];
+  boot.initrd.kernelModules = ["i915"];
 
   networking = {
     hostName = "lap"; # Define your hostname.
