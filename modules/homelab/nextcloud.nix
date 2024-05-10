@@ -85,7 +85,7 @@
   # * End nginx disable *
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud28;
+    package = pkgs.nextcloud29;
     hostName = "nc.cblkjs.com";
     config = {
       adminuser = "admin";
