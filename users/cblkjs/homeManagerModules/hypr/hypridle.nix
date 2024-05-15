@@ -5,8 +5,7 @@
   inputs,
   ...
 }: let
-  # hyprlock = lib.getExe config.programs.hyprlock.package;
-  hyprlock = lib.getExe inputs.hyprlock.packages.${pkgs.system}.hyprlock;
+  hyprlock = lib.getExe config.programs.hyprlock.package;
   hyprctl = inputs.hyprland.packages.${pkgs.system}.hyprland + "/bin/hyprctl";
 in {
   services.hypridle = {
