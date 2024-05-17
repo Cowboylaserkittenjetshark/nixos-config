@@ -59,6 +59,8 @@
 
     misc {
       disable_hyprland_logo	= true
+      enable_swallow = true
+      swallow_regex = ^(foot)$
     }
 
     $mod = SUPER
