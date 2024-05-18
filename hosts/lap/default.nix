@@ -24,62 +24,38 @@
   boot.initrd.kernelModules = ["i915"];
 
   networking = {
-    hostName = "lap"; # Define your hostname.
-    nameservers = ["127.0.0.1" "::1"];
-    networkmanager = {
-      wifi = {
-        backend = "iwd";
-        powersave = true;
-      };
+    hostName = "lap";
+    useNetworkd = true;
+    nftables.enable = true;
+    firewall.enable = true;
+    wireless.iwd = {
       enable = true;
-      dns = "none";
+      settings = {
+        IPv6.Enabled = true;
+        Settings.AutoConnect = true;
+      };
+    };
+    nameservers = [
+      "9.9.9.9#dns.quad9.net"
+      "149.112.112.112#dns.quad9.net"
+    ];
+  };
+
+  systemd.network = {
+    enable = true;
+    networks."20-wireless" = {
+      matchConfig.Name = "wlan0";
+      networkConfig = {
+        DHCP = "yes";
+        IgnoreCarrierLoss = "3s";
+      };
     };
   };
 
-  services.stubby = {
+  services.resolved = {
     enable = true;
-    settings =
-      pkgs.stubby.passthru.settingsExample
-      // {
-        listen_addresses = [
-          "127.0.0.1@53000"
-          "0::1@53000"
-        ];
-        upstream_recursive_servers = [
-          {
-            address_data = "9.9.9.9";
-            tls_auth_name = "dns.quad9.net";
-            tls_pubkey_pinset = [
-              {
-                digest = "sha256";
-                value = "/SlsviBkb05Y/8XiKF9+CZsgCtrqPQk5bh47o0R3/Cg=";
-              }
-            ];
-          }
-          {
-            address_data = "149.112.112.112";
-            tls_auth_name = "dns.quad9.net";
-            tls_pubkey_pinset = [
-              {
-                digest = "sha256";
-                value = "/SlsviBkb05Y/8XiKF9+CZsgCtrqPQk5bh47o0R3/Cg=";
-              }
-            ];
-          }
-        ];
-      };
-  };
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      no-resolv = true;
-      proxy-dnssec = true;
-      server = [
-        "127.0.0.1#53000"
-        "::1#53000"
-      ];
-      listen-address = "::1,127.0.0.1";
-    };
+    dnsovertls = "true";
+    dnssec = "true";
   };
 
   # Set your time zone.
