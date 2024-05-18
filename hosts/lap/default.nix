@@ -25,7 +25,61 @@
 
   networking = {
     hostName = "lap"; # Define your hostname.
-    networkmanager.enable = true; # Easiest to use and most distros use this by default.
+    nameservers = ["127.0.0.1" "::1"];
+    networkmanager = {
+      wifi = {
+        backend = "iwd";
+        powersave = true;
+      };
+      enable = true;
+      dns = "none";
+    };
+  };
+
+  services.stubby = {
+    enable = true;
+    settings =
+      pkgs.stubby.passthru.settingsExample
+      // {
+        listen_addresses = [
+          "127.0.0.1@53000"
+          "0::1@53000"
+        ];
+        upstream_recursive_servers = [
+          {
+            address_data = "9.9.9.9";
+            tls_auth_name = "dns.quad9.net";
+            tls_pubkey_pinset = [
+              {
+                digest = "sha256";
+                value = "/SlsviBkb05Y/8XiKF9+CZsgCtrqPQk5bh47o0R3/Cg=";
+              }
+            ];
+          }
+          {
+            address_data = "149.112.112.112";
+            tls_auth_name = "dns.quad9.net";
+            tls_pubkey_pinset = [
+              {
+                digest = "sha256";
+                value = "/SlsviBkb05Y/8XiKF9+CZsgCtrqPQk5bh47o0R3/Cg=";
+              }
+            ];
+          }
+        ];
+      };
+  };
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      no-resolv = true;
+      proxy-dnssec = true;
+      server = [
+        "127.0.0.1#53000"
+        "::1#53000"
+      ];
+      listen-address = "::1,127.0.0.1";
+    };
   };
 
   # Set your time zone.
