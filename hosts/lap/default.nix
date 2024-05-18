@@ -49,6 +49,8 @@
         DHCP = "yes";
         IgnoreCarrierLoss = "3s";
       };
+      dhcpV4Config.UseDNS = false;
+      dhcpV6Config.UseDNS = false;
     };
   };
 
