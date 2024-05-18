@@ -38,6 +38,10 @@
       allowedTCPPorts = [22000];
       allowedUDPPorts = [22000 21027];
     };
+    nameservers = [
+      "9.9.9.9#dns.quad9.net"
+      "149.112.112.112#dns.quad9.net"
+    ];
   };
 
   services.cloudflared = {
@@ -65,6 +69,12 @@
         DNS = "1.1.1.1";
       };
     };
+  };
+
+  services.resolved = {
+    enable = true;
+    dnsovertls = "true";
+    dnssec = "true";
   };
 
   # Set your time zone.
