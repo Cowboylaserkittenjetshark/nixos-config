@@ -17,8 +17,7 @@
     ../../modules/wayland/hyprland.nix
     ../../modules/gnupg.nix
     ../../modules/desktopAssets.nix
-    ../../modules/power.nix
-    ../../modules/nix
+    ../../modules/network/vpns.nix
   ];
 
   boot.initrd.kernelModules = ["i915"];

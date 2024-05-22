@@ -3,6 +3,11 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./nix
+    ./agenix.nix
+    ./power.nix
+  ];
   boot = {
     # Enable systemd in phase 1. Used for unlocking root partition with FIDO2/TPM
     initrd.systemd.enable = true;

@@ -21,12 +21,8 @@
     # Using ancient gpu :/
     ../../modules/bonaire.nix
     ../../modules/desktopAssets.nix
-    ../../modules/power.nix
     ../../modules/wayland/hyprland.nix
-    ../../modules/nix
-    # ../../modules/docker-compose.nix
     ../../modules/homelab/default.nix
-    ../../modules/agenix.nix
     ../../modules/network/vpns.nix
   ];
 
