@@ -5,9 +5,12 @@ let
 
   # System pub keys
   tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINv/CXWoX9CAUMQVvAP2h6zXg+afjXcIQfQoSeb2YShU";
-  systems = [tower];
+  lap = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3s7N+BxkhCjisPLy7G0TsOvNEl9FwuiMIjj0ECPf2H";
+  systems = [tower lap];
 in {
   "cloudflare-tunnel-api-token.age".publicKeys = [cblkjs tower];
   "vaultwarden-env.age".publicKeys = [cblkjs tower];
   "nextcloud-admin-pass.age".publicKeys = [cblkjs tower];
+  "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-Atlanta-Mountain-auth.age".publicKeys = [cblkjs] ++ systems;
 }

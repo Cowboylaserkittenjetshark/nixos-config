@@ -27,6 +27,7 @@
     # ../../modules/docker-compose.nix
     ../../modules/homelab/default.nix
     ../../modules/agenix.nix
+    ../../modules/network/vpns.nix
   ];
 
   networking = {
