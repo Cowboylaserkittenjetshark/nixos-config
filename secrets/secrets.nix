@@ -13,4 +13,6 @@ in {
   "nextcloud-admin-pass.age".publicKeys = [cblkjs tower];
   "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-Atlanta-Mountain-auth.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-WashingtonDC-Precedent-conf.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-WashingtonDC-Precedent-auth.age".publicKeys = [cblkjs] ++ systems;
 }
