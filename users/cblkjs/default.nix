@@ -13,7 +13,7 @@
   home-manager.extraSpecialArgs = {inherit inputs;};
 
   users.users.cblkjs = {
-    initialPassword = "password";
+    hashedPasswordFile = "/persist/secrets/cblkjs-passwd";
     shell = pkgs.zsh;
     isNormalUser = true;
     extraGroups = ["wheel"];
