@@ -1,4 +1,4 @@
-{inputs, ...}: 
+{...}: 
 let
   commonSubvolMountOptions = [
     "compress=zstd"
@@ -6,7 +6,6 @@ let
   ];
 in
 {
-  imports = [inputs.disko.nixosModules.disko];
   disko.devices = {
     disk = {
       main = {

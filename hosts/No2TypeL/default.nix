@@ -14,6 +14,8 @@
     ../../modules/desktopAssets.nix
     ../../modules/network/vpns.nix
     ../../modules/impermanence
+    inputs.disko.nixosModules.disko
+    ./disk-config.nix
   ];
 
   impermanence.enable = true;
