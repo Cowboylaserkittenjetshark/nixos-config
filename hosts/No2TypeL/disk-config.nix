@@ -11,7 +11,7 @@ in
     disk = {
       main = {
         type = "disk";
-        device = "/dev/nvme0n1"; # Replace with UUID
+        device = "/dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b478ba668";
         content = {
           type = "gpt";
           partitions = {
