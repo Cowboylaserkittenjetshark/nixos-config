@@ -50,6 +50,10 @@ in
                       mountpoint = "/var";
                       mountOptions = commonSubvolMountOptions;
                     };
+                    "/persist" = {
+                      mountpoint = "/persist";
+                      mountOptions = commonSubvolMountOptions;
+                    };
                     "/swap" = {
                       mountpoint = "/.swapvol";
                       swap.swapfile.size = "48G";

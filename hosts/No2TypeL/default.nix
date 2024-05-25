@@ -2,7 +2,7 @@
   impports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    inputs.nixos-hardware.nixosModules.framework-13-7040-amd;
+    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ../../modules/core.nix
     ../../modules/sddm.nix
     ../../modules/pam_u2f.nix
@@ -69,4 +69,5 @@
     wallpaper = ../amusementpark.png;
     lockscreen = ../amusementpark.png;
   };
+  system.stateVersion = "23.11";
 }
