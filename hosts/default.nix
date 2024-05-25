@@ -17,5 +17,12 @@
         ../users/cblkjs
       ];
     };
+    No2TypeL = nixosSystem {
+      inherit specialArgs;
+      modules = [
+        ./No2TypeL
+        ../users/cblkjs
+      ];
+    };
   };
 }

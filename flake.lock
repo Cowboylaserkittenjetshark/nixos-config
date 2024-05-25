@@ -175,6 +175,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716431128,
+        "narHash": "sha256-t3T8HlX3udO6f4ilLcN+j5eC3m2gqsouzSGiriKK6vk=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "7ffc4354dfeb37c8c725ae1465f04a9b45ec8606",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "eww": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -600,6 +620,7 @@
         "catppuccin-hyprland": "catppuccin-hyprland",
         "catppuccin-yazi": "catppuccin-yazi",
         "custom-caddy": "custom-caddy",
+        "disko": "disko",
         "eww": "eww",
         "flake-parts": "flake-parts",
         "helix": "helix",
