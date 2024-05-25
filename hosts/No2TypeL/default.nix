@@ -18,7 +18,11 @@
     ./disk-config.nix
   ];
 
-  impermanence.enable = true;
+  impermanence = {
+    enable = true;
+    persistPath = config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
+    cryptDeviceName = config.disko.devices.disk.main.content.partitions.luks.content.name;
+  };
 
   networking = {
     hostName = "No2TypeL";
@@ -61,8 +65,6 @@
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
-  #services.thermald.enable = true;
 
   desktopAssets = {
     wallpaper = ../amusementpark.png;

@@ -54,7 +54,7 @@ in
         "/etc/ssh/ssh_host_ed25519_key.pub"
       ];
     };
-
+    boot.initrd.systemd.emergencyAccess = false; # Set to true for debuging initrd
     boot.initrd.systemd.services.rollback = {
       description = "Reset subvolumes for impermanence";
       wantedBy = [
@@ -71,7 +71,7 @@ in
       serviceConfig.Type = "oneshot";
       script = ''
         mkdir /btrfs_tmp
-        mount ${config.fileSystems."/".device} /btrfs_tmp
+        mount /dev/mapper/${cfg.cryptDeviceName} /btrfs_tmp
         if [[ -e /btrfs_tmp/root ]]; then
             mkdir -p /btrfs_tmp/old_roots
             timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
