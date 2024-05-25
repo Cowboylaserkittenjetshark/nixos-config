@@ -1,5 +1,5 @@
 {inputs, config, pkgs, ...}: {
-  impports = [
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
@@ -62,8 +62,7 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  services.tlp.enable = true;
-  services.thermald.enable = true;
+  #services.thermald.enable = true;
 
   desktopAssets = {
     wallpaper = ../amusementpark.png;

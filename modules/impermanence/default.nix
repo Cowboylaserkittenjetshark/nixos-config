@@ -2,7 +2,7 @@
 # - LUKS FDE
 # - btrfs
 #
-{inputs, lib, ...}: 
+{inputs, config, lib, ...}: 
 
 with lib;
 
