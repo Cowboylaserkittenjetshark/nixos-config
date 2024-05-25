@@ -6,7 +6,8 @@ let
   # System pub keys
   tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINv/CXWoX9CAUMQVvAP2h6zXg+afjXcIQfQoSeb2YShU";
   lap = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3s7N+BxkhCjisPLy7G0TsOvNEl9FwuiMIjj0ECPf2H";
-  systems = [tower lap];
+  No2TypeL = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdFDjufx08HAlP1r3F8mBuO2wD96h5QVpeBGNwTOol8";
+  systems = [tower lap No2TypeL];
 in {
   "cloudflare-tunnel-api-token.age".publicKeys = [cblkjs tower];
   "vaultwarden-env.age".publicKeys = [cblkjs tower];
