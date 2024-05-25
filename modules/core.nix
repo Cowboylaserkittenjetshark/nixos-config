@@ -8,6 +8,7 @@
     ./agenix.nix
     ./power.nix
   ];
+  users.mutableUsers = false;
   boot = {
     # Enable systemd in phase 1. Used for unlocking root partition with FIDO2/TPM
     initrd.systemd.enable = true;
