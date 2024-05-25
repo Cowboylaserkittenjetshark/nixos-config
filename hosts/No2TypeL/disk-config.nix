@@ -39,15 +39,15 @@ in
                       mountOptions = commonSubvolMountOptions;
                     };
                     "/home" = {
-                      mountPoint = "/home";
+                      mountpoint = "/home";
                       mountOptions = commonSubvolMountOptions;
                     };
                     "/nix" = {
-                      mountPoint = "/nix";
+                      mountpoint = "/nix";
                       mountOptions = commonSubvolMountOptions;
                     };
                     "/var" = {
-                      mountPoint = "/var";
+                      mountpoint = "/var";
                       mountOptions = commonSubvolMountOptions;
                     };
                     "/swap" = {
