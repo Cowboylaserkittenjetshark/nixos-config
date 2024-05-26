@@ -102,6 +102,12 @@
     bind=SUPER,k,movefocus,u
     bind=SUPER,j,movefocus,d
 
+    bind=SUPER, bracketleft, focusmonitor, l
+    bind=SUPER, bracketright, focusmonitor, r
+    bind=SUPER SHIFT, bracketleft, movecurrentworkspacetomonitor, l
+    bind=SUPER SHIFT, bracketright, movecurrentworkspacetomonitor, r
+    
+
     layerrule = blur, notifications
     layerrule = ignorezero, notifications
 
