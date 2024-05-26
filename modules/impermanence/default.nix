@@ -40,6 +40,7 @@ in
       hideMounts = true;
       directories = [
         "/etc/nixos"
+        "/etc/secureboot"
         # "/var/log"
         # "/var/lib/bluetooth"
         # "/var/lib/nixos"

@@ -1,4 +1,4 @@
-{inputs, config, pkgs, ...}: {
+{inputs, config, pkgs, lib, ...}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -16,7 +16,14 @@
     ../../modules/impermanence
     inputs.disko.nixosModules.disko
     ./disk-config.nix
+    inputs.lanzaboote.nixosModules.lanzaboote
   ];
+
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/etc/secureboot";
+  };
 
   services.fwupd.enable = true;
 
