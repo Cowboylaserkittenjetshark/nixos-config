@@ -6,8 +6,8 @@
   environment.systemPackages = [
     (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
-      font = "Noto Sans";
-      fontSize = "9";
+      font = "MesloLGS NF";
+      fontSize = "12";
       background = "${config.desktopAssets.wallpaper}";
       loginBackground = true;
     })
