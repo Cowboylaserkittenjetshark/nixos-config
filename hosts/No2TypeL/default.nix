@@ -18,12 +18,6 @@
     ./disk-config.nix
   ];
 
-  boot.kernelParams = ["reboot=acpi" "acpi=force"];
-  boot.extraModprobeConfig = ''
-    # Fixes brightness keys
-    blacklist hid_sensor_hub
-  '';
-
   services.fwupd.enable = true;
 
   impermanence = {
