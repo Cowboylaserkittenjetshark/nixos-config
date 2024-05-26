@@ -17,6 +17,7 @@
     inputs.disko.nixosModules.disko
     ./disk-config.nix
     inputs.lanzaboote.nixosModules.lanzaboote
+    ../../modules/fprint.nix
   ];
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
