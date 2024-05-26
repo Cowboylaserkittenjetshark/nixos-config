@@ -18,6 +18,8 @@
     ./disk-config.nix
   ];
 
+  services.fwupd.enable = true;
+
   impermanence = {
     enable = true;
     persistPath = config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
