@@ -1,6 +1,5 @@
 {inputs, config, pkgs, lib, ...}: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ../../modules/core.nix
@@ -79,7 +78,6 @@
     dnsovertls = "false";
   };
 
-  # Set your time zone.
   time.timeZone = "America/New_York";
 
   hardware.bluetooth.enable = true;
@@ -89,5 +87,6 @@
     wallpaper = ../amusementpark.png;
     lockscreen = ../amusementpark.png;
   };
+
   system.stateVersion = "23.11";
 }
