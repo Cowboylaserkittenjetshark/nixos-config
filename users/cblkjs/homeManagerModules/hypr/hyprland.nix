@@ -106,7 +106,10 @@
     bind=SUPER, bracketright, focusmonitor, r
     bind=SUPER SHIFT, bracketleft, movecurrentworkspacetomonitor, l
     bind=SUPER SHIFT, bracketright, movecurrentworkspacetomonitor, r
-    
+
+    binde=,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+
+    binde=,XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-
+    bind=,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
     layerrule = blur, notifications
     layerrule = ignorezero, notifications
