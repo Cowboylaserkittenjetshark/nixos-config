@@ -22,13 +22,12 @@ My NixOS configs
    mkdir /mnt/persist/secrets
    mkpasswd >> /mnt/persist/secrets/user-passwd
    ```
-8. Install
+8. Install:
    ``` shell
-   # May need --impure? Really shouldn't though
    nixos-install --root /mnt --flake /path/to/this/repo#hostname
    ```
 7. Reboot
-## Post install
+## Post Install
 ### Yubikey
 1. Import GPG key: `gpg --recv <key-id>`
 2. Import resident ssh key stubs
@@ -41,6 +40,25 @@ My NixOS configs
    mv id_ed25519_sk_rk.pub id_ed25519_sk.pub
    ```
 3. Generate local keys for pam-u2f. See the [Arch Wiki](https://wiki.archlinux.org/title/Universal_2nd_Factor#Adding_a_key)
+### Full Disk Encryption
+Enroll any extra devices to unlock the disk (Security key, TPM)
+``` shell
+# To enroll a security key
+sudo systemd-cryptenroll --fido2-device=auto <device-path>
+
+# To enroll TPM
+## Use --unlock-{tpm2, fido2}-device when no password is enrolled
+sudo systemd-cryptenroll --tpm2-device=auto --tpm2-with-pin=yes --unlock-fido2-device=auto <device-path>
+
+# Wipe plain passwords
+## List enrolled tokens
+sudo systemd-cryptenroll <device-path>
+sudo systemd-cryptenroll --unlock-{tpm2, fido2}-device --wipe-slot=<password-slot-id>
+```
+### Enable Secure Boot
+[Lanzaboote](https://github.com/nix-community/lanzaboote) is well documented and easy to set up.
+### Syncthing
+The Syncthing web UI is accesible at 127.0.0.1:8384
 
 ## Credits/Resources
 Those hosted on github can be found in my [nix stars list](https://github.com/stars/Cowboylaserkittenjetshark/lists/nix).
