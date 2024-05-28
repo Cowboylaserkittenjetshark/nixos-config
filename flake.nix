@@ -27,8 +27,6 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    helix.url = "github:helix-editor/helix";
-
     catppuccin-hyprland = {
       url = "github:catppuccin/hyprland";
       flake = false;
