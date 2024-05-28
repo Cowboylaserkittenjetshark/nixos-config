@@ -1,11 +1,9 @@
-{...}: 
-let
+{...}: let
   commonSubvolMountOptions = [
     "compress=zstd"
     "noatime"
   ];
-in
-{
+in {
   disko.devices = {
     disk = {
       main = {
@@ -34,7 +32,7 @@ in
                   type = "btrfs";
                   extraArgs = ["--force"];
                   subvolumes = {
-                    "/root" =  {
+                    "/root" = {
                       mountpoint = "/";
                       mountOptions = commonSubvolMountOptions;
                     };

@@ -3,8 +3,8 @@
   security.pam = {
     services = {
       login.fprintAuth = true;
-      swaylock.fprintAuth= true;
-      sddm.fprintAuth= true;
+      swaylock.fprintAuth = true;
+      sddm.fprintAuth = true;
       sudo.fprintAuth = true;
     };
   };

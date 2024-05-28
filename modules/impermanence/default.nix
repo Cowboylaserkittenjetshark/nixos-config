@@ -2,14 +2,15 @@
 # - LUKS FDE
 # - btrfs
 #
-{inputs, config, lib, ...}: 
-
-with lib;
-
-let
-  cfg = config.impermanence;
-in
 {
+  inputs,
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.impermanence;
+in {
   imports = [inputs.impermanence.nixosModules.impermanence];
   options = {
     impermanence = {

@@ -13,8 +13,8 @@
     })
     (pkgs.where-is-my-sddm-theme.override {
       themeConfig.General = {
-      background = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-      backgroundMode = "none";
+        background = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+        backgroundMode = "none";
       };
     })
   ];
