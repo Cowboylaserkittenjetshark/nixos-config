@@ -8,21 +8,12 @@
   imports = [
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    ../../modules/core.nix
-    ../../modules/sddm.nix
-    ../../modules/pam_u2f.nix
-    ../../modules/printing.nix
-    ../../modules/steam.nix
-    ../../modules/tailscale/client.nix
-    ../../modules/wayland/hyprland.nix
-    ../../modules/gnupg.nix
-    ../../modules/desktopAssets.nix
+    ../../modules/desktop.nix
     ../../modules/network/vpns.nix
-    ../../modules/impermanence
+    ../../modules/network/tailscale/client.nix
     inputs.disko.nixosModules.disko
     ./disk-config.nix
     inputs.lanzaboote.nixosModules.lanzaboote
-    ../../modules/fprint.nix
   ];
 
   programs.light.enable = true;

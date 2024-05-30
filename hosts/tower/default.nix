@@ -5,25 +5,14 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules/core.nix
-    ../../modules/sddm.nix
-    ../../modules/pam_u2f.nix
-    ../../modules/printing.nix
-    ../../modules/steam.nix
-    ../../modules/ssh/server.nix
-    ../../modules/gnupg.nix
-    # I currently am not satisified with plymouth in Nix
-    # https://github.com/NixOS/nixpkgs/issues/26722
-    # ../../modules/plymouth.nix
-    ../../modules/tailscale/server.nix
+    ../../modules/desktop.nix
+    ../../modules/server.nix
     # Using ancient gpu :/
     ../../modules/bonaire.nix
-    ../../modules/desktopAssets.nix
-    ../../modules/wayland/hyprland.nix
     ../../modules/homelab/default.nix
     ../../modules/network/vpns.nix
+    ../../modules/network/tailscale/server.nix
   ];
 
   networking = {
