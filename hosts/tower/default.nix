@@ -9,7 +9,7 @@
     ../../modules/desktop.nix
     ../../modules/server.nix
     # Using ancient gpu :/
-    ../../modules/bonaire.nix
+    ../../modules/hardware/bonaire.nix
     ../../modules/homelab/default.nix
     ../../modules/network/vpns.nix
     ../../modules/network/tailscale/server.nix
