@@ -10,6 +10,7 @@
       protocol = "ssh-ng";
       sshUser = "builder";
       sshKey = "/etc/ssh/id_ed25519_builder";
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU52L0NYV29YOUNBVU1RVnZBUDJoNnpYZythZmpYY0lRZlFvU2ViMllTaFUgcm9vdEB0b3dlcgo=";
 
       maxJobs = 4;
       # Arbitrary measure of speed; Priority
