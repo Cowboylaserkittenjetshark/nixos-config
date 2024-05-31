@@ -51,19 +51,16 @@
   };
 
   programs.nnn.enable = true;
+  programs.ncspot.enable = true;
+  programs.eza.enable = true;
+  programs.thunderbird.enable = true;
+  programs.btop.enable = true;
+  programs.rbw.enable = true;
 
   home.packages = with pkgs; [
-    htop
-    swayidle
-    swaybg
-    meslo-lgs-nf # For p10k
     bitwarden-cli
-    thunderbird
-    eza
     okular
-    pandoc
     p7zip
-    ncspot
   ];
 
   fonts.fontconfig.enable = true;

@@ -116,4 +116,5 @@
 
     exec-once=swaybg -i ${osConfig.desktopAssets.wallpaper}
   '';
+  home.packages = [pkgs.swaybg];
 }

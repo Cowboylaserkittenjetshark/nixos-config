@@ -66,4 +66,6 @@
       }
     '';
   };
+
+  home.packages = [pkgs.meslo-lgs-nf # For p10k];
 }
