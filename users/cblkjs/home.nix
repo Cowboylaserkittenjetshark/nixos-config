@@ -20,7 +20,8 @@
     ./homeManagerModules/mako.nix
     ./homeManagerModules/avatar.nix
     ./homeManagerModules/ags
-    ./homeManagerModules/chromium.nix
+    ./homeManagerModules/programs/chromium.nix
+    ./homeManagerModules/programs/rbw.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -53,12 +54,9 @@
   programs.nnn.enable = true;
   programs.ncspot.enable = true;
   programs.eza.enable = true;
-  programs.thunderbird.enable = true;
   programs.btop.enable = true;
-  programs.rbw.enable = true;
 
   home.packages = with pkgs; [
-    bitwarden-cli
     okular
     p7zip
   ];
