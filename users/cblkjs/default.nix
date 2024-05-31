@@ -5,6 +5,7 @@
 }: {
   imports = [
     ../common/modules/zsh.nix
+    ./modules/services/syncthing.nix
     inputs.home-manager.nixosModules.home-manager
   ];
   home-manager.useGlobalPkgs = true;

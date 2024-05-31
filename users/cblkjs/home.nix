@@ -9,7 +9,6 @@
     ./homeManagerModules/shell/zsh
     ./homeManagerModules/hypr
     ./homeManagerModules/tofi.nix
-    ./homeManagerModules/syncthing.nix
     ./homeManagerModules/helix.nix
     ../common/homeManagerModules/direnv.nix
     ./homeManagerModules/git.nix
