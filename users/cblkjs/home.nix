@@ -20,6 +20,7 @@
     ./homeManagerModules/mako.nix
     ./homeManagerModules/avatar.nix
     ./homeManagerModules/ags
+    ./homeManagerModules/chromium.nix
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -38,6 +39,7 @@
     # changes in each release.
     stateVersion = "23.05";
   };
+
   avatar = ./meow.png;
 
   # Let Home Manager install and manage itself.
@@ -56,7 +58,6 @@
     swaybg
     meslo-lgs-nf # For p10k
     bitwarden-cli
-    chromium
     thunderbird
     eza
     okular
