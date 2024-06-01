@@ -14,6 +14,7 @@
     inputs.disko.nixosModules.disko
     ./disk-config.nix
     inputs.lanzaboote.nixosModules.lanzaboote
+    ../../modules/programs/plymouth.nix
   ];
 
   programs.light.enable = true;

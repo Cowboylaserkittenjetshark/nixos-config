@@ -11,8 +11,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "catppuccin";
     repo = "plymouth";
-    rev = "27efc6c2a99f70086f40c2df4e28c34e762a42c4";
-    hash = "sha256-e3vDwFodxsQAZd2Rm5wGHoqT8D1l18YExA9Dl3o1204=";
+    rev = "e13c348a0f47772303b2da1e9396027d8cda160d";
+    hash = "sha256-6DliqhRncvdPuKzL9LJec3PJWmK/jo9BrrML7g6YcH0=";
   };
 
   dontConfigure = true;
