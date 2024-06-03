@@ -8,10 +8,17 @@ let
   lap = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3s7N+BxkhCjisPLy7G0TsOvNEl9FwuiMIjj0ECPf2H";
   No2TypeL = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdFDjufx08HAlP1r3F8mBuO2wD96h5QVpeBGNwTOol8";
   systems = [tower lap No2TypeL];
+  homelab = [cblkjs tower];
 in {
-  "cloudflare-tunnel-api-token.age".publicKeys = [cblkjs tower];
-  "vaultwarden-env.age".publicKeys = [cblkjs tower];
-  "nextcloud-admin-pass.age".publicKeys = [cblkjs tower];
+  # Homelab module
+  "cloudflare-tunnel-api-token.age".publicKeys = homelab;
+  "vaultwarden-env.age".publicKeys = homelab;
+  "nextcloud-admin-pass.age".publicKeys = homelab;
+  "restic/env.age".publicKeys = homelab;
+  "restic/repo.age".publicKeys = homelab;
+  "restic/password.age".publicKeys = homelab;
+  
+  # VPN configs
   "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-Atlanta-Mountain-auth.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-WashingtonDC-Precedent-conf.age".publicKeys = [cblkjs] ++ systems;

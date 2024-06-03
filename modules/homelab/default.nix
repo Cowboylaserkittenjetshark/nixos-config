@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./caddy.nix
-    ./containers/vaultwarden.nix
+    ./vaultwarden.nix
     ./nextcloud.nix
     # ./containers/mosquitto.nix
     # ./containers/homeassistant.nix
