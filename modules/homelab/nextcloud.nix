@@ -14,7 +14,6 @@
   services.caddy.virtualHosts.${config.services.nextcloud.hostName}.extraConfig = ''
      # Adapted from https://caddy.community/t/caddy-v2-configuration-nextcloud-docker-php-fpm-with-rules-from-htaccess/20662
 
-     import cloudflare-dns
      # Nextcloud static files reside here
      # root * ${config.services.nextcloud.package}
      root * ${config.services.nginx.virtualHosts.${config.services.nextcloud.hostName}.root}

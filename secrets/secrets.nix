@@ -11,7 +11,7 @@ let
   homelab = [cblkjs tower];
 in {
   # Homelab module
-  "cloudflare-tunnel-api-token.age".publicKeys = homelab;
+  "caddy-cloudflare-dns.age".publicKeys = homelab;
   "vaultwarden-env.age".publicKeys = homelab;
   "nextcloud-admin-pass.age".publicKeys = homelab;
   "restic/env.age".publicKeys = homelab;
