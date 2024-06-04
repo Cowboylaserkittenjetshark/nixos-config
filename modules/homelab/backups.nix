@@ -1,4 +1,8 @@
-{config, pkgs, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   vw_data_dir = config.services.vaultwarden.config.DATA_FOLDER;
   nc_home_dir = config.services.nextcloud.home;
   db_backup_dir = "/var/backup";
