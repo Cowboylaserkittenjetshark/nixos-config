@@ -42,7 +42,7 @@ in {
       fi
 
       mkdir --parents ${db_backup_dir}/vaultwarden
-      ${pkgs.sqlite}/bin/sqlite3 "${vw_data_dir}"/db.sqlite3 ".backup '${db_backup_dir}/vaultwarden/db.sqlite3'"
+      ${pkgs.sqlite}/bin/sqlite3 "${vw_data_dir}"/db.sqlite3 "VACUUM INTO '${db_backup_dir}/vaultwarden/db.sqlite3'"
 
       # Nextcloud
       if [[ ! -f "${nc_home_dir}"/data/nextcloud.db ]]; then
@@ -52,7 +52,7 @@ in {
 
       ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --on
       mkdir --parents ${db_backup_dir}/nextcloud
-      ${pkgs.sqlite}/bin/sqlite3 "${nc_home_dir}"/data/nextcloud.db ".backup '${db_backup_dir}/nextcloud/nextcloud.db'"
+      ${pkgs.sqlite}/bin/sqlite3 "${nc_home_dir}"/data/nextcloud.db "VACUUM INTO '${db_backup_dir}/nextcloud/nextcloud.db'"
     '';
 
     backupCleanupCommand = ''
