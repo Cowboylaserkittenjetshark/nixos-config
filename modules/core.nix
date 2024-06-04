@@ -16,7 +16,7 @@
     # Silent boot
     initrd.verbose = false;
     consoleLogLevel = 0;
-    kernelParams = [ "quiet" "udev.log_level=3" ];
+    kernelParams = ["quiet" "udev.log_level=3"];
     # Use latest kernel
     kernelPackages = pkgs.linuxPackages_latest;
     # Enable systemd in phase 1. Used for unlocking root partition with FIDO2/TPM

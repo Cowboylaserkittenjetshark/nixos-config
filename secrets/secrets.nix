@@ -17,7 +17,7 @@ in {
   "restic/env.age".publicKeys = homelab;
   "restic/repo.age".publicKeys = homelab;
   "restic/password.age".publicKeys = homelab;
-  
+
   # VPN configs
   "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-Atlanta-Mountain-auth.age".publicKeys = [cblkjs] ++ systems;
