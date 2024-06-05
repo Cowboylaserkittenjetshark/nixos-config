@@ -5,6 +5,7 @@
   ...
 }: rec {
   imports = [
+    ./homeManagerModules/catppuccin.nix
     ./homeManagerModules/foot.nix
     ./homeManagerModules/shell/zsh
     ./homeManagerModules/hypr

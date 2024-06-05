@@ -11,7 +11,6 @@
   };
 
   wayland.windowManager.hyprland.extraConfig = ''
-    ${builtins.readFile ((inputs.catppuccin-hyprland) + "/themes/mocha.conf")}
     monitor=,preferred,auto,auto
 
     general {

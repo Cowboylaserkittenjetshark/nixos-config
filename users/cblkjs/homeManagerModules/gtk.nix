@@ -3,22 +3,7 @@
   config,
   ...
 }: {
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Catppuccin-Mocha-Compact-Lavender-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        accents = ["lavender"];
-        size = "compact";
-        tweaks = ["rimless"];
-        variant = "mocha";
-      };
-    };
-    iconTheme = {
-      name = "Adwaita";
-      package = pkgs.gnome.adwaita-icon-theme;
-    };
-  };
+  gtk.enable = true;
 
   xdg.configFile = {
     "gtk-4.0/assets".source = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0/assets";
