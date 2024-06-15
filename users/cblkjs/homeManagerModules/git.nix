@@ -4,8 +4,9 @@
     userName = "Cowboylaserkittenjetshark";
     userEmail = "82691052+Cowboylaserkittenjetshark@users.noreply.github.com";
     signing = {
-      key = "9c7f55754a8589a7";
+      key = "~/.ssh/id_ed25519_sk.pub";
       signByDefault = true;
     };
+    iniContent.gpg.format = "ssh";
   };
 }
