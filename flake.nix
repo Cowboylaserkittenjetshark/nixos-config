@@ -32,18 +32,6 @@
       flake = false;
     };
 
-    catppuccin-foot.url = "github:Cowboylaserkittenjetshark/catppuccin-foot-nix";
-
-    catppuccin-yazi = {
-      url = "github:catppuccin/yazi";
-      flake = false;
-    };
-
-    catppuccin-bat = {
-      url = "github:catppuccin/bat";
-      flake = false;
-    };
-
     ags.url = "github:Aylur/ags";
 
     custom-caddy = {
