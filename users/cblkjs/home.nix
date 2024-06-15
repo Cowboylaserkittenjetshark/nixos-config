@@ -15,7 +15,6 @@
     ./homeManagerModules/git.nix
     ./homeManagerModules/gtk.nix
     ./homeManagerModules/zoxide.nix
-    ./homeManagerModules/yazi.nix
     ./homeManagerModules/bat.nix
     ./homeManagerModules/mako.nix
     ./homeManagerModules/avatar.nix
