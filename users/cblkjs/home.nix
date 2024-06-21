@@ -13,7 +13,6 @@
     ./homeManagerModules/helix.nix
     ../common/homeManagerModules/direnv.nix
     ./homeManagerModules/git.nix
-    ./homeManagerModules/gtk.nix
     ./homeManagerModules/zoxide.nix
     ./homeManagerModules/bat.nix
     ./homeManagerModules/mako.nix
