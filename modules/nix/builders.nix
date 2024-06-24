@@ -20,7 +20,7 @@
   ];
 in {
   nix = {
-    distributedBuilds = true;
+    distributedBuilds = false;
     buildMachines = lib.filter (machine: machine.hostName != config.networking.hostName) machines;
     settings.trusted-users = ["builder"];
     settings.builders-use-substitutes = true;
