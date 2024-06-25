@@ -1,0 +1,6 @@
+{...}: {
+  imports = [
+    ./nix
+    ./catppuccin.nix
+  ];
+}

@@ -60,6 +60,11 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
