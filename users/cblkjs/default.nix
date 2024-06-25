@@ -6,12 +6,8 @@
   imports = [
     ../common/modules/zsh.nix
     ./modules/services/syncthing.nix
-    inputs.home-manager.nixosModules.home-manager
+    ./modules/home-manager.nix
   ];
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.cblkjs = import ./home.nix;
-  home-manager.extraSpecialArgs = {inherit inputs;};
 
   users.users.cblkjs = {
     hashedPasswordFile = "/persist/secrets/cblkjs-passwd";
