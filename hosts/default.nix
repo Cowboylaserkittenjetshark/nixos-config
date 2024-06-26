@@ -1,5 +1,5 @@
 {
-  flake,
+  config,
   inputs,
   ...
 }: let
@@ -34,12 +34,12 @@ in {
 
     nixOnDroidConfigurations = {
       No1TypeP = nixOnDroidConfiguration {
-        inherit specialArgs;
+        extraSpecialArgs = specialArgs;
         modules = [
           ./No1TypeP
         ];
       };
-      default = flake.nixOnDroidConfigurations.No1TypeP;
+      default = config.flake.nixOnDroidConfigurations.No1TypeP;
     };
   };
 }
