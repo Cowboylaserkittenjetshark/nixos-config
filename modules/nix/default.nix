@@ -3,6 +3,7 @@
     ./builders.nix
     ./substituters.nix
     ./agenix.nix
+    ./nh.nix
   ];
 
   nixpkgs.config.allowUnfree = true;
