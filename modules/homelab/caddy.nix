@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  domain = "cblkjs.com";
+  inherit (config.homelab) domain;
 in {
   services.caddy = {
     enable = true;

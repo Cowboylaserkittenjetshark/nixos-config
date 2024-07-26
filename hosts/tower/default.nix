@@ -10,7 +10,7 @@
     ../../modules/server.nix
     # Using ancient gpu :/
     ../../modules/hardware/bonaire.nix
-    ../../modules/homelab/default.nix
+    ../../modules/homelab
     ../../modules/network/vpns.nix
     ../../modules/network/tailscale/server.nix
     ../../modules/services/octoprint.nix
@@ -53,6 +53,11 @@
   desktopAssets = {
     wallpaper = ../amusementpark.png;
     lockscreen = ../amusementpark.png;
+  };
+
+  homelab = {
+    enable = true;
+    domain = "cblkjs.com";
   };
 
   # This value determines the NixOS release from which the default

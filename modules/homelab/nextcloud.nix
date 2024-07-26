@@ -85,7 +85,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud29;
-    hostName = "nc.cblkjs.com";
+    hostName = "nc.${config.homelab.domain}";
     config = {
       adminuser = "admin";
       adminpassFile = config.age.secrets.nextcloud-admin-pass.path;

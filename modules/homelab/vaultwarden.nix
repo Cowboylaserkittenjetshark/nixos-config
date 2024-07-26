@@ -10,7 +10,7 @@
     };
   };
 
-  services.caddy.virtualHosts."vw.cblkjs.com".extraConfig = ''
+  services.caddy.virtualHosts."vw.${config.homelab.domain}".extraConfig = ''
     # Adapted from https://github.com/dani-garcia/vaultwarden/wiki/Proxy-examples
 
     header / {
