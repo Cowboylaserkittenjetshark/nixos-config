@@ -13,6 +13,7 @@
     ../../modules/homelab/default.nix
     ../../modules/network/vpns.nix
     ../../modules/network/tailscale/server.nix
+    ../../modules/services/octoprint.nix
   ];
 
   networking = {
