@@ -1,5 +1,6 @@
 {config, ...}: let
-inherit (config.homelab) domain; in {
+  inherit (config.homelab) domain;
+in {
   services.cloudflared = {
     enable = true;
     tunnels.container-stack = {

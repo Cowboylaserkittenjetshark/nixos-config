@@ -1,4 +1,9 @@
-{lib, pkgs, ...}: with lib; {
+{
+  lib,
+  pkgs,
+  ...
+}:
+with lib; {
   imports = [
     ./caddy.nix
     ./cloudflared.nix
