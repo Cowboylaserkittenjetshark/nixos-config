@@ -1,6 +1,6 @@
 {...}: {
   security.pam = {
-    u2f.cue = true;
+    u2f.settings.cue = true;
     services = {
       login.u2fAuth = true;
       swaylock.u2fAuth = true;
