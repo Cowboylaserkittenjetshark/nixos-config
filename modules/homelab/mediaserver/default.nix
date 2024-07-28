@@ -27,7 +27,7 @@ in {
     
     dataDirMode = mkOption {
       type = types.str;
-      default = "0755";
+      default = "0775";
       description = lib.mdDoc ''
         The file access mode to use when initializing dataDir
       '';
@@ -42,7 +42,7 @@ in {
     };
   };
   
-  config = mkIf (cfg.enable && config.homelabe.enable) {
+  config = mkIf (cfg.enable && config.homelab.enable) {
     services = {
       prowlarr.enable = true;
       sonarr.enable = true;
