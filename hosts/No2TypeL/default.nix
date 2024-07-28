@@ -14,6 +14,8 @@
     inputs.disko.nixosModules.disko
     ./disk-config.nix
     inputs.lanzaboote.nixosModules.lanzaboote
+    # temp
+    ../../modules/mediaServer
   ];
 
   programs.light.enable = true;
