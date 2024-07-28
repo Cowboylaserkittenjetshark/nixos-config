@@ -51,6 +51,7 @@ in {
       lidarr.enable = false;
       flaresolverr.enable = true;
       qbittorrent.enable = true;
+      jellyfin.enable = true;
     };
     
     users.groups.${cfg.group}.members = [
