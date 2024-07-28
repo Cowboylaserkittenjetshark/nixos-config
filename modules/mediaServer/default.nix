@@ -1,5 +1,8 @@
-{pkgs, lib, ...}:
 {
+  pkgs,
+  lib,
+  ...
+}: {
   imports = [
     ./qbittorrent.nix
   ];
@@ -21,7 +24,7 @@
     "qbittorrent"
   ];
 
-  system.activationScripts.initMediaServer = lib.stringAfter [ "var" ] ''
+  system.activationScripts.initMediaServer = lib.stringAfter ["var"] ''
     # Create data directory if it doesn't exist
     install -d -m 0775 -g media \
       /var/lib/mediaserver \
