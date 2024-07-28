@@ -14,7 +14,6 @@
     ../../modules/network/vpns.nix
     ../../modules/network/tailscale/server.nix
     ../../modules/services/octoprint.nix
-    ../../modules/mediaserver
   ];
 
   networking = {

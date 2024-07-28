@@ -12,6 +12,7 @@ with lib; {
     # ./containers/mosquitto.nix
     # ./containers/homeassistant.nix
     ./backups.nix
+    ./mediaserver
   ];
 
   options.homelab = {
@@ -27,9 +28,5 @@ with lib; {
         Base domain
       '';
     };
-  };
-
-  config = mkIf cfg.enable {
-    # TODO
   };
 }
