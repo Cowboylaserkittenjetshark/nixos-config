@@ -5,6 +5,24 @@
   ...
 }: with lib; let
   cfg = config.homelab.mediaserver;
+  apps = [
+    {
+      name = "prowlarr";
+      port = "9696";
+    }
+    {
+      name = "sonarr";
+      port = "8989";
+    }
+    {
+      name = "qbittorrent";
+      port = "8080";
+    }
+    {
+      name = "jellyfin";
+      port = "8096";
+    }
+  ];
 in {
   imports = [
     ./qbittorrent.nix
@@ -51,6 +69,7 @@ in {
       lidarr.enable = false;
       flaresolverr.enable = true;
       qbittorrent.enable = true;
+      sabnzbd.enable = true;
       jellyfin.enable = true;
     };
     
@@ -61,6 +80,7 @@ in {
       # "bazarr"
       # "lidarr"
       "qbittorrent"
+      "sabnzbd"
     ];
 
     system.activationScripts.initMediaServer = lib.stringAfter ["var"] ''
@@ -73,5 +93,20 @@ in {
         ${cfg.dataDir}/usenet \
         ${cfg.dataDir}/torrents
     '';
+
+    services.caddy.virtualHosts = listToAttrs (map 
+      (app: {
+        name = "${app.name}.${config.homelab.domain}";
+        value.extraConfig = ''
+            import localOnly
+            reverse_proxy 127.0.0.1:${app.port}
+          '';
+      })
+      apps
+    );
+
+    networking.hosts = {
+      "127.0.0.1" = map (app: "${app.name}.${config.homelab.domain}") apps;
+    };
   };
 }

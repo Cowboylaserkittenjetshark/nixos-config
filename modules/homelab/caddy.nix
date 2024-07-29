@@ -17,6 +17,14 @@ in {
       # Contains `acme_dns cloudflare <token>`
       import ${config.age.secrets.caddy-cloudflare-dns.path}
     '';
+    extraConfig = ''
+      # Use https://caddyserver.com/docs/caddyfile/matchers#client-ip to block traffic from cloudflared
+      # It's remote_ip is in private_ranges (127.0.0.1), so the remote_ip matcher cannot be used
+      (localOnly) {
+        @notPrivate not client_ip private_ranges
+        abort @notPrivate
+      }
+    '';
     virtualHosts = {
       "*.${domain}".extraConfig = ''
         redir https://${domain}{uri} permanent
