@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: with lib; let
+}:
+with lib; let
   cfg = config.homelab.mediaserver;
   apps = [
     {
@@ -27,7 +28,7 @@ in {
   imports = [
     ./qbittorrent.nix
   ];
-  
+
   options.homelab.mediaserver = {
     enable = mkOption {
       type = types.bool;
@@ -42,7 +43,7 @@ in {
         The base directory where applications will store the media library and supporting data
       '';
     };
-    
+
     dataDirMode = mkOption {
       type = types.str;
       default = "0775";
@@ -59,7 +60,7 @@ in {
       '';
     };
   };
-  
+
   config = mkIf (cfg.enable && config.homelab.enable) {
     services = {
       prowlarr.enable = true;
@@ -72,7 +73,7 @@ in {
       sabnzbd.enable = true;
       jellyfin.enable = true;
     };
-    
+
     users.groups.${cfg.group}.members = [
       "prowlarr"
       "sonarr"
@@ -94,13 +95,14 @@ in {
         ${cfg.dataDir}/torrents
     '';
 
-    services.caddy.virtualHosts = listToAttrs (map 
+    services.caddy.virtualHosts = listToAttrs (
+      map
       (app: {
         name = "${app.name}.${config.homelab.domain}";
         value.extraConfig = ''
-            import localOnly
-            reverse_proxy 127.0.0.1:${app.port}
-          '';
+          import localOnly
+          reverse_proxy 127.0.0.1:${app.port}
+        '';
       })
       apps
     );
