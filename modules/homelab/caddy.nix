@@ -21,7 +21,7 @@ in {
       # Use https://caddyserver.com/docs/caddyfile/matchers#client-ip to block traffic from cloudflared
       # It's remote_ip is in private_ranges (127.0.0.1), so the remote_ip matcher cannot be used
       (localOnly) {
-        @notPrivate not client_ip private_ranges
+        @notPrivate not client_ip private_ranges 100.0.0.0/8
         abort @notPrivate
       }
     '';
