@@ -24,16 +24,19 @@ with lib; {
     domain = mkOption {
       type = types.str;
       default = "example.com";
-      description = mdDoc ''
-        Base domain
-      '';
+      description = "Base domain";
     };
-    vpnInterface = mkOption {
-      type = types.str;
-      default = null;
-      description = mdDoc ''
-        Name of the vpn interface to expose private services to
-      '';
+    vpnAccess = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Whether to enable exposing private services over a VPN";
+      };
+      interface = mkOption {
+        type = types.str;
+        default = null;
+        description = "Name of the vpn interface";
+      };
     };
   };
 }
