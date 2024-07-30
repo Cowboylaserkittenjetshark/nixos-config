@@ -107,8 +107,11 @@ in {
       apps
     );
 
-    networking.hosts = {
-      "127.0.0.1" = map (app: "${app.name}.${config.homelab.domain}") apps;
+    networking = {
+      hosts = {
+        "127.0.0.1" = map (app: "${app.name}.${config.homelab.domain}") apps;
+      };
+      firewall.interfaces.${config.homelab.vpnInterface}.allowedTCPPorts = mkIf (config.homelab.vpnInterface != null) (map (app: app.port) apps);
     };
   };
 }

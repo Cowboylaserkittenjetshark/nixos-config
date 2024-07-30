@@ -28,5 +28,12 @@ with lib; {
         Base domain
       '';
     };
+    vpnInterface = mkOption {
+      type = types.str;
+      default = null;
+      description = mdDoc ''
+        Name of the vpn interface to expose private services to
+      '';
+    };
   };
 }
