@@ -42,11 +42,6 @@
     };
   };
 
-  services.resolved = {
-    enable = true;
-    dnsovertls = "true";
-  };
-
   # Set your time zone.
   time.timeZone = "America/New_York";
 

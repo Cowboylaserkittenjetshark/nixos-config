@@ -13,6 +13,7 @@ with lib; {
     # ./containers/homeassistant.nix
     ./backups.nix
     ./mediaserver
+    ./adguardhome.nix
   ];
 
   options.homelab = {
