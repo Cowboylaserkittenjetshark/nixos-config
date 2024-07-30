@@ -58,6 +58,10 @@
   homelab = {
     enable = true;
     domain = "cblkjs.com";
+    vpnAccess = {
+      enable = true;
+      interface = "tailscale0";
+    };
   };
 
   # This value determines the NixOS release from which the default
