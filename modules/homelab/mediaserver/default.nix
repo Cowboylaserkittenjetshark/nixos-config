@@ -70,7 +70,6 @@ in {
       lidarr.enable = false;
       flaresolverr.enable = true;
       qbittorrent.enable = true;
-      sabnzbd.enable = true;
       jellyfin.enable = true;
     };
 
@@ -81,7 +80,6 @@ in {
       # "bazarr"
       # "lidarr"
       "qbittorrent"
-      "sabnzbd"
     ];
 
     system.activationScripts.initMediaServer = lib.stringAfter ["var"] ''
