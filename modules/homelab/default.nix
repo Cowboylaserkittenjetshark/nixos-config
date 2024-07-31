@@ -38,6 +38,11 @@ with lib; {
         default = null;
         description = "Name of the vpn interface";
       };
+      address = mkOption {
+        type = types.str;
+        default = null;
+        description = "IP address (or domain like one from Tailscale MagicDNS) of the server on the vpn";
+      };
     };
   };
 }

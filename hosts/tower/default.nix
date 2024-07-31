@@ -56,6 +56,7 @@
     vpnAccess = {
       enable = true;
       interface = "tailscale0";
+      address = "100.109.116.3";
     };
   };
 
