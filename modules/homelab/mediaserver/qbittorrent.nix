@@ -68,9 +68,14 @@ in {
     systemd.services.qbittorrent = {
       # based on the plex.nix service module and
       # https://github.com/qbittorrent/qBittorrent/blob/master/dist/unix/systemd/qbittorrent-nox%40.service.in
-      description = "qBittorrent-nox service";
-      documentation = ["man:qbittorrent-nox(1)"];
-      after = ["local-fs.target" "network-online.target" "nss-lookup.target"];
+      # and https://github.com/pceiley/nix-config/blob/4738958966cd48dc45fd3ce59d7fb8a3facf2208/hosts/common/modules/qbittorrent.nix#L69-L110
+      unitConfig = {
+        Description = "qBittorrent-nox service";
+        Documentation = ["man:qbittorrent-nox(1)"];
+        Wants = ["network-online.target"];
+        After = ["local-fs.target" "network-online.target" "nss-lookup.target"];
+      };
+
       wantedBy = ["multi-user.target"];
 
       serviceConfig = {
