@@ -56,35 +56,52 @@ in {
       '';
     };
 
+    user = mkOption {
+      type = types.str;
+      default = "mediaserver";
+      description = "User account under which the media server services run.";
+    };
+
     group = mkOption {
       type = types.str;
-      default = "media";
-      description = lib.mdDoc ''
-        The group that owns dataDir
-      '';
+      default = "mediaserver";
+      description = "Group under which the media server services run.";
     };
   };
 
   config = mkIf (cfg.enable && config.homelab.enable) {
     services = {
       prowlarr.enable = true;
-      sonarr.enable = true;
+      sonarr = {
+        enable = true;
+        inherit (cfg) user group;
+      };
       radarr.enable = false;
-      bazarr.enable = true;
+      bazarr = {
+        enable = true;
+        inherit (cfg) user group;
+      };
       lidarr.enable = false;
       flaresolverr.enable = true;
-      qbittorrent.enable = true;
-      jellyfin.enable = true;
+      qbittorrent = {
+        enable = true;
+        inherit (cfg) user group;
+      };
+      jellyfin = {
+        enable = true;
+        inherit (cfg) user group;
+      };
     };
 
-    users.groups.${cfg.group}.members = [
-      "prowlarr"
-      "sonarr"
-      # "radarr"
-      "bazarr"
-      # "lidarr"
-      "qbittorrent"
-    ];
+    users = {
+      users.${cfg.user} = {
+        inherit (cfg) group;
+        isSystemUser = true;
+      };
+      groups.${cfg.group}.members = [
+        "prowlarr"
+      ];
+    };
 
     system.activationScripts.initMediaServer = lib.stringAfter ["var"] ''
       # Create data directory if it doesn't exist
