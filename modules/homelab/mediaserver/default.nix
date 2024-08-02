@@ -16,6 +16,10 @@ with lib; let
       port = "8989";
     }
     {
+      name = "bazarr";
+      port = "6767";
+    }
+    {
       name = "qbittorrent";
       port = "8080";
     }
@@ -66,7 +70,7 @@ in {
       prowlarr.enable = true;
       sonarr.enable = true;
       radarr.enable = false;
-      bazarr.enable = false;
+      bazarr.enable = true;
       lidarr.enable = false;
       flaresolverr.enable = true;
       qbittorrent.enable = true;
@@ -77,7 +81,7 @@ in {
       "prowlarr"
       "sonarr"
       # "radarr"
-      # "bazarr"
+      "bazarr"
       # "lidarr"
       "qbittorrent"
     ];
