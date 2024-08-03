@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-with lib; let 
+with lib; let
   cfg = config.services.bazarr;
 in {
   config = mkIf cfg.enable {
@@ -13,14 +13,14 @@ in {
     systemd.services.bazarr = mkForce {
       unitConfig = {
         Description = "Bazarr Daemon";
-        After = [ 
+        After = [
           "syslog.target"
-          "network.target" 
+          "network.target"
           (optionalString config.services.sonarr.enable "sonarr.service")
           (optionalString config.services.radarr.enable "radarr.service")
         ];
       };
-      
+
       serviceConfig = {
         WorkingDirectory = "/var/lib/bazarr";
         User = cfg.user;
@@ -41,7 +41,7 @@ in {
         # ExecStartPre = "${pkgs.coreutils}/bin/sleep 30"; # Why tho?
       };
 
-      wantedBy = [ "multi-user.target" ];
+      wantedBy = ["multi-user.target"];
     };
   };
 }

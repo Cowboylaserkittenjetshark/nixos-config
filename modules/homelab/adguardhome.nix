@@ -61,7 +61,7 @@ with lib; {
 
   systemd.services.adguardhome = {
     serviceConfig.ExecStartPre = mkAfter [
-     "+${(pkgs.writeShellScript "install-adguard-home-webui-password" ''
+      "+${(pkgs.writeShellScript "install-adguard-home-webui-password" ''
         secret=$(<${config.age.secrets.adguard-home-webui-password.path})
         configFile=/var/lib/AdGuardHome/AdGuardHome.yaml
         ${pkgs.gnused}/bin/sed -i "s#@adguard-home-webui-password@#$secret#" "$configFile"
