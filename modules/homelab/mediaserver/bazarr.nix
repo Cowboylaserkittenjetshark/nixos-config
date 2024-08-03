@@ -20,6 +20,7 @@ in {
           (optionalString config.services.radarr.enable "radarr.service")
         ];
       };
+      
       serviceConfig = {
         WorkingDirectory = "/var/lib/bazarr";
         User = cfg.user;
@@ -39,6 +40,8 @@ in {
         SyslogIdentifier = "bazarr";
         # ExecStartPre = "${pkgs.coreutils}/bin/sleep 30"; # Why tho?
       };
+
+      wantedBy = [ "multi-user.target" ];
     };
   };
 }
