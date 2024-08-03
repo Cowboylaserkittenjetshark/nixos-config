@@ -2,6 +2,7 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -60,7 +61,7 @@
     };
   };
 
-  programs.nh = {
+  programs.nh = lib.mkForce {
     enable = true;
     flake = "/home/cblkjs/nixos-config";
   };
