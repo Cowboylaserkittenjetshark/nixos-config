@@ -31,6 +31,7 @@ with lib; let
 in {
   imports = [
     ./qbittorrent.nix
+    ./bazarr.nix
   ];
 
   options.homelab.mediaserver = {
