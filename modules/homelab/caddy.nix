@@ -27,7 +27,7 @@ in {
     '';
     virtualHosts = {
       "*.${domain}".extraConfig = ''
-        redir https://${domain}{uri} permanent
+        abort
       '';
       "${domain}".extraConfig = ''
         respond "Hello, world :)"
