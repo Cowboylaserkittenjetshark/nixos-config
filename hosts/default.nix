@@ -30,6 +30,13 @@ in {
           ../users/cblkjs
         ];
       };
+      No2TypeT = nixosSystem {
+        inherit specialArgs;
+        modules = [
+          ./No2TypeT
+          ../users/cblkjs
+        ];
+      };
     };
 
     nixOnDroidConfigurations = {
