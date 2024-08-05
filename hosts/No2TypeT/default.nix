@@ -51,7 +51,7 @@
     enable = true;
     networks = {
       "20-wireless" = {
-        matchConfig.Name = "wlp4s0";
+        matchConfig.Name = "wlan0";
         networkConfig = {
           DHCP = "yes";
           IgnoreCarrierLoss = "3s";
