@@ -7,7 +7,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/desktop.nix
     ../../modules/server.nix
     # Using ancient nvidia gpu :/
     ../../modules/hardware/nvidia.nix
