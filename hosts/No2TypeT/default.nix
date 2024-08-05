@@ -69,10 +69,5 @@
 
   time.timeZone = "America/New_York";
 
-  desktopAssets = {
-    wallpaper = ../amusementpark.png;
-    lockscreen = ../amusementpark.png;
-  };
-
   system.stateVersion = "23.11";
 }
