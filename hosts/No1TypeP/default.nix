@@ -6,6 +6,7 @@
   imports = [
     ../../modules/nix-on-droid.nix
   ];
+  roles.isPhone = true;
   user.shell = "${pkgs.zsh}/bin/zsh";
   home-manager = {
     config = {pkgs, ...}: {

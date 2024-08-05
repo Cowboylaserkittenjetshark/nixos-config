@@ -17,6 +17,8 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
+  roles.isServer = true;
+
   # For lanzaboote (later)
   # boot.loader.systemd-boot.enable = lib.mkForce false;
   # boot.lanzaboote = {

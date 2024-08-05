@@ -8,6 +8,7 @@
     ./impermanence
     ./services/pipewire.nix
     ./catppuccin.nix
+    ./roles.nix
   ];
 
   services.upower.enable = true;

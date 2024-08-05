@@ -17,6 +17,11 @@
     ../../modules/services/octoprint.nix
   ];
 
+  roles = {
+    isServer = true;
+    isDesktop = true;
+  };
+
   networking = {
     hostName = "tower";
     useNetworkd = true;
