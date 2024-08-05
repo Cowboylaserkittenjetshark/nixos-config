@@ -9,6 +9,8 @@
     ./hardware-configuration.nix
     ../../modules/desktop.nix
     ../../modules/server.nix
+    # Using ancient nvidia gpu :/
+    ../../modules/hardware/nvidia.nix
     ../../modules/network/vpns.nix
     ../../modules/network/tailscale/server.nix
     inputs.disko.nixosModules.disko
