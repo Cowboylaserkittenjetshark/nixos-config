@@ -55,17 +55,9 @@
       "20-wireless" = {
         matchConfig.Name = "wlan0";
         networkConfig = {
-          DHCP = "yes";
-          IgnoreCarrierLoss = "3s";
-        };
-        dhcpV4Config.UseDNS = false;
-        dhcpV6Config.UseDNS = false;
-      };
-      "20-wired" = {
-        matchConfig.Name = "enp3s0";
-        networkConfig = {
           Address = "192.168.86.199/24";
           Gateway = "192.168.86.1";
+          IgnoreCarrierLoss = "3s";
         };
       };
     };
