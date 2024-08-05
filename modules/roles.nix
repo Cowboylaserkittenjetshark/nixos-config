@@ -5,11 +5,11 @@
 }:
 with lib; let
   mkRole = role:
-    mkOption {
+    (mkOption {
       type = types.bool;
       default = false;
       description = "Whether or not the system is a ${toLower role}";
-    };
+    });
   mkRoleOpts = roles: (listToAttrs (map (role: {
       name = "is${role}";
       value = mkRole role;
