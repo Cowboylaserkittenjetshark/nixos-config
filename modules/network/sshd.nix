@@ -1,5 +1,5 @@
-{config, ...}: {
-  config = mkIf config.systemAttributes.roles.server {
+{lib, config, ...}: {
+  config = lib.mkIf config.systemAttributes.roles.server {
     services.openssh = {
       enable = true;
       # require public key authentication for better security

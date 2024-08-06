@@ -1,5 +1,5 @@
 {lib, config, ...}: {
-  config = mkIf config.systemAttributes.graphical {
+  config = lib.mkIf config.systemAttributes.graphical {
     programs.chromium = {
       enable = true;
       extraOpts = {

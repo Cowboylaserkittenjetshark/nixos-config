@@ -7,7 +7,7 @@
     ./catppuccin.nix
     ./systemAttributes.nix
 
-    ./authenticaiton
+    ./authentication
     ./desktopEnvironment
     ./homelab
     ./impermanence

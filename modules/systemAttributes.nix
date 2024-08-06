@@ -1,5 +1,5 @@
 {
-  copnfig,
+  config,
   lib,
   ...
 }:
@@ -15,7 +15,7 @@ let
       description = "Whether or not the system is a ${role}";
     });
 
-  mkRoleOpts = roles: (listToAttrs (map (role: {
+  mkRoleOptions = roles: (listToAttrs (map (role: {
       name = "${role}";
       value = mkRole role;
     })
@@ -38,12 +38,12 @@ in {
         "wired-lan"
       ]);
       default = [];
-      description "A list of the system's capabilities";
+      description = "A list of the system's capabilities";
     };
     
-    graphical = {
+    graphical = mkOption {
       type = types.bool;
-      default = (cf.roles.laptop || cfg.roles.desktop);
+      default = (cfg.roles.laptop && cfg.roles.desktop);
       description = "Whether the system has a graphical session";
     };
   };
