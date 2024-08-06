@@ -43,7 +43,7 @@ in {
     
     graphical = mkOption {
       type = types.bool;
-      default = (cfg.roles.laptop && cfg.roles.desktop);
+      default = (cfg.roles.laptop || cfg.roles.desktop);
       description = "Whether the system has a graphical session";
     };
   };
