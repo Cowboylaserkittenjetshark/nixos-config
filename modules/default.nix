@@ -4,13 +4,17 @@
   ...
 }: {
   imports = [
-    ./nix
-    ./impermanence
-    ./services/pipewire.nix
     ./catppuccin.nix
     ./systemAttributes.nix
-    ./programs/gnupg.nix
-    ./authentication
+
+    ./authenticaiton
+    ./desktopEnvironment
+    ./homelab
+    ./impermanence
+    ./network
+    ./nix
+    ./programs
+    ./services
   ];
 
   services.upower.enable = true;

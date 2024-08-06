@@ -8,8 +8,6 @@
   imports = [
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    ../../modules/network/vpns.nix
-    ../../modules/network/tailscale/client.nix
     inputs.disko.nixosModules.disko
     ./disk-config.nix
     inputs.lanzaboote.nixosModules.lanzaboote

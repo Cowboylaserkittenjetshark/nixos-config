@@ -14,6 +14,7 @@ in {
         modules = [
           ./lap
           ../users/cblkjs
+          ../modules
         ];
       };
       tower = nixosSystem {
@@ -21,6 +22,7 @@ in {
         modules = [
           ./tower
           ../users/cblkjs
+          ../modules
         ];
       };
       No2TypeL = nixosSystem {
@@ -28,6 +30,7 @@ in {
         modules = [
           ./No2TypeL
           ../users/cblkjs
+          ../modules
         ];
       };
       No2TypeT = nixosSystem {
@@ -35,6 +38,7 @@ in {
         modules = [
           ./No2TypeT
           ../users/cblkjs
+          ../modules
         ];
       };
     };

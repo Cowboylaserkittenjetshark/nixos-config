@@ -9,9 +9,6 @@
     ./hardware-configuration.nix
     # Using ancient gpu :/
     ../../modules/hardware/bonaire.nix
-    ../../modules/homelab
-    ../../modules/network/vpns.nix
-    ../../modules/network/tailscale/server.nix
     ../../modules/services/octoprint.nix
   ];
 

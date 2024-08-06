@@ -7,8 +7,6 @@
   imports = [
     ./hardware-configuration.nix
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t420
-    ../../modules/network/vpns.nix
-    ../../modules/network/tailscale/client.nix
     inputs.disko.nixosModules.disko
     ./disk-config.nix
   ];
