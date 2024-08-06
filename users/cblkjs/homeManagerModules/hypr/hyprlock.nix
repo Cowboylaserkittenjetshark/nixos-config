@@ -5,8 +5,8 @@
   config,
   osConfig,
   ...
-}: with osConfig.roles; {
-  config = lib.mkIf (isDesktop || isLaptop) {
+}: {
+  config = lib.mkIf osConfig.systemAttributes.graphical {
     programs.hyprlock = let
       accent = "green";
     in {

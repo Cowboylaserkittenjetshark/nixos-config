@@ -7,7 +7,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/server.nix
     # Using ancient nvidia gpu :/
     ../../modules/hardware/nvidia.nix
     ../../modules/network/vpns.nix
@@ -17,7 +16,15 @@
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  roles.isServer = true;
+  systemAttributes = {
+    roles.server = true;
+    capabilities = [
+      "audio"
+      "bluetooth"
+      "wireless-lan"
+      "wired-lan"
+    ];
+  };
 
   # For lanzaboote (later)
   # boot.loader.systemd-boot.enable = lib.mkForce false;

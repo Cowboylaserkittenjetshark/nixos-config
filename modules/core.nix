@@ -8,7 +8,9 @@
     ./impermanence
     ./services/pipewire.nix
     ./catppuccin.nix
-    ./roles.nix
+    ./systemAttributes.nix
+    ./programs/gnupg.nix
+    ./authentication
   ];
 
   services.upower.enable = true;

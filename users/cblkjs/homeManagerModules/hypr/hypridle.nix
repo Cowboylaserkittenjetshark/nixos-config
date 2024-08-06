@@ -5,11 +5,11 @@
   osConfig,
   inputs,
   ...
-}: with osConfig.roles; let
+}: let
   hyprlock = lib.getExe config.programs.hyprlock.package;
   hyprctl = inputs.hyprland.packages.${pkgs.system}.hyprland + "/bin/hyprctl";
 in {
-  config = lib.mkIf (isLaptop || isDesktop) {
+  config = lib.mkIf osConfig.systemAttributes.graphical {
     services.hypridle = {
       enable = true;
       settings = {

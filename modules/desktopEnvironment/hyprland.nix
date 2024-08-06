@@ -1,11 +1,14 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: {
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  config = lib.mkIf config.systemAttributes.graphical {
+    programs.hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    };
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
   };
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

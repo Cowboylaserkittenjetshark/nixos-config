@@ -7,8 +7,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/desktop.nix
-    ../../modules/server.nix
     # Using ancient gpu :/
     ../../modules/hardware/bonaire.nix
     ../../modules/homelab
@@ -17,9 +15,15 @@
     ../../modules/services/octoprint.nix
   ];
 
-  roles = {
-    isServer = true;
-    isDesktop = true;
+  systemAttributes= {
+    roles = {
+      server = true;
+      desktop = true;
+    };
+    capabilities = [
+      "audio"
+      "wired-lan"
+    ];
   };
 
   networking = {

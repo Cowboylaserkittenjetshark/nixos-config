@@ -1,10 +1,12 @@
-{...}: {
-  services.pipewire = {
-    enable = true;
-    alsa = {
+{lib, config, ...}: {
+  config = lib.mkIf (builtins.elem "audio" config.systemAttributes.capabilities) {
+    services.pipewire = {
       enable = true;
-      support32Bit = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
     };
-    pulse.enable = true;
   };
 }
