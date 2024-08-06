@@ -7,10 +7,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
-    inputs.disko.nixosModules.disko
     ./disk-config.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
+    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
 
   systemAttributes= {

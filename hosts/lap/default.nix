@@ -6,9 +6,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t420
-    inputs.disko.nixosModules.disko
     ./disk-config.nix
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t420
   ];
 
   systemAttributes = {

@@ -5,41 +5,31 @@
 }: let
   inherit (inputs.nixpkgs.lib) nixosSystem;
   inherit (inputs.nix-on-droid.lib) nixOnDroidConfiguration;
+  withCommonModules = path: ([ path ] ++ [
+    ../modules
+    ../users/cblkjs
+    inputs.disko.nixosModules.disko
+    inputs.lanzaboote.nixosModules.lanzaboote
+  ]);
   specialArgs = {inherit inputs;};
 in {
   flake = {
     nixosConfigurations = {
       lap = nixosSystem {
         inherit specialArgs;
-        modules = [
-          ./lap
-          ../users/cblkjs
-          ../modules
-        ];
+        modules = withCommonModules ./lap;
       };
       tower = nixosSystem {
         inherit specialArgs;
-        modules = [
-          ./tower
-          ../users/cblkjs
-          ../modules
-        ];
+        modules = withCommonModules ./tower;
       };
       No2TypeL = nixosSystem {
         inherit specialArgs;
-        modules = [
-          ./No2TypeL
-          ../users/cblkjs
-          ../modules
-        ];
+        modules = withCommonModules ./No2TypeL;
       };
       No2TypeT = nixosSystem {
         inherit specialArgs;
-        modules = [
-          ./No2TypeT
-          ../users/cblkjs
-          ../modules
-        ];
+        modules = withCommonModules ./No2TypeT;
       };
     };
 

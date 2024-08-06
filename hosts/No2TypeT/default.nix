@@ -9,9 +9,7 @@
     ./hardware-configuration.nix
     # Using ancient nvidia gpu :/
     ../../modules/hardware/nvidia.nix
-    inputs.disko.nixosModules.disko
     ./disk-config.nix
-    inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   systemAttributes = {
