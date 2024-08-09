@@ -9,6 +9,7 @@
 
     ./authentication
     ./desktopEnvironment
+    ./gaming
     ./homelab
     ./impermanence
     ./network

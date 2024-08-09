@@ -65,6 +65,8 @@
       url = "github:nix-community/nix-on-droid/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
   outputs = inputs:
