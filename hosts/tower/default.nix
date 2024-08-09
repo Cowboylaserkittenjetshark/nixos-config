@@ -12,7 +12,7 @@
     ../../modules/services/octoprint.nix
   ];
 
-  systemAttributes= {
+  systemAttributes = {
     roles = {
       server = true;
       desktop = true;

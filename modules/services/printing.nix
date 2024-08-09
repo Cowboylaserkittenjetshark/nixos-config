@@ -1,4 +1,8 @@
-{lib, config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   config = lib.mkIf config.systemAttributes.graphical {
     services.printing.enable = true; # enables printing support via the CUPS daemon
     services.avahi.enable = true; # runs the Avahi daemon

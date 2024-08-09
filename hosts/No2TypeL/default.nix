@@ -11,7 +11,7 @@
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
 
-  systemAttributes= {
+  systemAttributes = {
     roles.laptop = true;
     capabilities = [
       "audio"

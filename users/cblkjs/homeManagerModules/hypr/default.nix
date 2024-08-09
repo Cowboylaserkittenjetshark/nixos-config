@@ -5,10 +5,10 @@
   ...
 }: {
   imports = [
-      ./hyprland.nix
-      ./hypridle.nix
-      ./hyprlock.nix
-    ];
+    ./hyprland.nix
+    ./hypridle.nix
+    ./hyprlock.nix
+  ];
 
   options = {};
 

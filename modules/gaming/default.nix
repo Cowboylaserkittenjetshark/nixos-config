@@ -1,4 +1,9 @@
-{lib, config, inputs, ...}: let
+{
+  lib,
+  config,
+  inputs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   ngMods = inputs.nix-gaming.nixosModules;
   cfg = config.gaming;

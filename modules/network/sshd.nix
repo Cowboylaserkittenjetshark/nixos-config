@@ -1,4 +1,8 @@
-{lib, config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   config = lib.mkIf config.systemAttributes.roles.server {
     services.openssh = {
       enable = true;

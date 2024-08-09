@@ -5,12 +5,13 @@
 }: let
   inherit (inputs.nixpkgs.lib) nixosSystem;
   inherit (inputs.nix-on-droid.lib) nixOnDroidConfiguration;
-  withCommonModules = path: ([ path ] ++ [
-    ../modules
-    ../users/cblkjs
-    inputs.disko.nixosModules.disko
-    inputs.lanzaboote.nixosModules.lanzaboote
-  ]);
+  withCommonModules = path: ([path]
+    ++ [
+      ../modules
+      ../users/cblkjs
+      inputs.disko.nixosModules.disko
+      inputs.lanzaboote.nixosModules.lanzaboote
+    ]);
   specialArgs = {inherit inputs;};
 in {
   flake = {
