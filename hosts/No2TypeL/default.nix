@@ -98,5 +98,7 @@
     lockscreen = ../amusementpark.png;
   };
 
+  gaming.enable = true;
+
   system.stateVersion = "23.11";
 }
