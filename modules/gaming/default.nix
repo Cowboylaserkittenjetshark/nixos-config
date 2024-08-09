@@ -14,7 +14,7 @@ in {
   ];
 
   options.gaming = {
-    enable = lib.mkEnableOption "programs and optimizations for gaming."
+    enable = lib.mkEnableOption "programs and optimizations for gaming.";
   };
 
   config = mkIf cfg.enable {
