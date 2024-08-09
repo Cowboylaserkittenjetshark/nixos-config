@@ -7,7 +7,7 @@
   ...
 }: let
   hyprlock = lib.getExe config.programs.hyprlock.package;
-  hyprctl = inputs.hyprland.packages.${pkgs.system}.hyprland + "/bin/hyprctl";
+  hyprctl = lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl";
 in {
   config = lib.mkIf osConfig.systemAttributes.graphical {
     services.hypridle = {
