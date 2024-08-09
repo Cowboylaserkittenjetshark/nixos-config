@@ -1,6 +1,6 @@
 {lib, config, inputs, ...}: let
   inherit (lib) mkEnableOption mkIf;
-  ngMods = inputs.nix-gaming;
+  ngMods = inputs.nix-gaming.nixosModules;
   cfg = config.gaming;
 
   gamescopeArgs = [
@@ -22,7 +22,6 @@ in {
     programs = {
       steam = {
         enable = true;
-        hardware.graphics.enable32Bit = true; # Enables support for 32bit libs that steam uses
         gamescopeSession = {
           enable = true;
           args = gamescopeArgs;
@@ -36,5 +35,6 @@ in {
         capSysNice = true;
       };
     };
+    hardware.graphics.enable32Bit = true; # Enables support for 32bit libs that steam uses
   };
 }
