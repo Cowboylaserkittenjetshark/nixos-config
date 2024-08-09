@@ -39,7 +39,7 @@ in {
         settings = {
           general.renice = 15;
           custom = let
-            notify = "${lib.getExe' pkgs.libnotify} -a 'Gamemode'";
+            notify = "${lib.getExe pkgs.libnotify} -a 'Gamemode'";
           in {
             start = "${notify} Gamemode activated";
             end = "${notify} Gamemode deactivated";
