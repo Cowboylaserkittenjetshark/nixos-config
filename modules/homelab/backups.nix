@@ -26,6 +26,12 @@ in {
       "${nc_home_dir}"
       # Backup DBs
       "${db_backup_dir}"
+      # Media server
+      "/var/lib/prowlarr/Backups"
+      "${config.services.sonarr.dataDir}/Backups"
+      "/var/lib/bazarr/backup"
+      "${config.services.qbittorrent.dataDir}/qBittorrent/config/qBittorrent.conf"
+      "${config.services.qbittorrent.dataDir}/qBittorrent/config/categories.json"
     ];
 
     backupPrepareCommand = ''
