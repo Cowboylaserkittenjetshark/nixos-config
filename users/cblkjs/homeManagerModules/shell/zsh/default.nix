@@ -64,6 +64,8 @@
           }
         ''
       }
+      # https://github.com/jeffreytse/zsh-vi-mode
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
     '';
   };
 
