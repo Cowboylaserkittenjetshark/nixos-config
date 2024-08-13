@@ -23,7 +23,7 @@
         background = [
           {
             monitor = "";
-            path = "${toString osConfig.desktopAssets.lockscreen}";
+            path = "${osConfig.desktopAssets.lockscreen}";
             blur_passes = 1;
             blur_size = 3;
             color = "$base";
@@ -79,7 +79,7 @@
         image = [
           {
             monitor = "";
-            path = config.avatar;
+            path = "${config.avatar}";
             size = 100;
             border_color = "\$${accent}";
             position = "0, 75";
