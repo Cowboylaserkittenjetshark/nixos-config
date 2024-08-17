@@ -18,7 +18,6 @@
     ./homeManagerModules/bat.nix
     ./homeManagerModules/mako.nix
     ./homeManagerModules/avatar.nix
-    ./homeManagerModules/ags
     ./homeManagerModules/programs/chromium.nix
     ./homeManagerModules/programs/rbw.nix
   ];
