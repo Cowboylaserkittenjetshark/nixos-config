@@ -6,7 +6,7 @@
 }: {
   programs.bat = {
     enable = true;
-    extraPackages = with pkgs.bat-extras; [batdiff batman batgrep batwatch];
+    extraPackages = with pkgs.bat-extras; [batman batgrep batwatch];
   };
   home.shellAliases = {cat = "bat";};
 }
