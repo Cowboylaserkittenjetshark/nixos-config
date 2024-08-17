@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}:
+{lib, ...}:
 with lib; {
   options.avatar = mkOption {
     type = types.path;

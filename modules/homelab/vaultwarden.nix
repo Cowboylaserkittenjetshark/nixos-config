@@ -1,4 +1,8 @@
-{lib, config, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit (config.homelab) domain enable;
   cfg = config.services.vaultwarden;
 in {

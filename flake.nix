@@ -81,7 +81,7 @@
         ...
       }: {
         devShells.default = pkgs.mkShell {
-          packages = [ pkgs.nil ];
+          packages = [pkgs.nil];
         };
         formatter = pkgs.alejandra;
       };
