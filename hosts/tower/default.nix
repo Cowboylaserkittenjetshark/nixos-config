@@ -42,10 +42,7 @@
     enable = true;
     networks."20-wired" = {
       matchConfig.Name = "enp34s0";
-      networkConfig = {
-        Address = "192.168.86.198/24";
-        Gateway = "192.168.86.1";
-      };
+      networkConfig.DHCP = "yes";
     };
   };
 
