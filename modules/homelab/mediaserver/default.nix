@@ -98,6 +98,8 @@ in {
       users.${cfg.user} = {
         inherit (cfg) group;
         isSystemUser = true;
+        home = "${cfg.dataDir}/home";
+        createHome = true;
       };
       groups.${cfg.group}.members = [
         "prowlarr"
