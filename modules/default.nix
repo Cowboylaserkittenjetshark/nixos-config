@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   ...
 }: {
@@ -15,7 +16,6 @@
     ./nix
     ./programs
     ./services
-    ./school.nix
   ];
 
   services.upower.enable = true;
