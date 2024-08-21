@@ -39,6 +39,12 @@ in {
           id = "pixel_4a_jz65-photos";
           devices = deviceNames;
         };
+        pictures = {
+          label = "Pictures";
+          path = "~/phone/pictures";
+          id = "9nbzj-x0w6n";
+          devices = deviceNames;
+        };
         music = {
           label = "Music";
           path = "~/Music";
