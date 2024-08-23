@@ -1,11 +1,11 @@
 {
-  config,
   lib,
   pkgs,
+  config,
   ...
-}:
-with lib; let
+}: let
   cfg = config.services.bazarr;
+  inherit (lib) mkIf optionalString mkForce;
 in {
   config = mkIf cfg.enable {
     # Based on https://github.com/NixOS/nixpkgs/blob/9f918d616c5321ad374ae6cb5ea89c9e04bf3e58/nixos/modules/services/misc/bazarr.nix#L40-L58

@@ -1,5 +1,9 @@
-{lib, ...}:
-with lib; {
+{
+  lib,
+  ...
+}: let
+  inherit (lib) mkOption types;
+in {
   imports = [
     ./caddy.nix
     ./cloudflared.nix

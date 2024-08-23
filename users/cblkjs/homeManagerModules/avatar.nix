@@ -1,5 +1,9 @@
-{lib, ...}:
-with lib; {
+{
+  lib,
+  ...
+}:let 
+  inherit (lib) mkOption types;
+in {
   options.avatar = mkOption {
     type = types.path;
     defaultText = "~/.face";

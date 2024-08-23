@@ -1,11 +1,10 @@
 {
-  pkgs,
   lib,
   config,
   ...
-}:
-with lib; let
+}: let
   cfg = config.homelab.mediaserver;
+  inherit (lib) mkOption types mkIf listToAttrs toInt;
   apps = [
     {
       name = "prowlarr";
@@ -38,23 +37,19 @@ in {
     enable = mkOption {
       type = types.bool;
       default = true;
-      description = lib.mdDoc "a mediaserver stack (*arrs, qbittorrent, etc.)";
+      description = "a mediaserver stack (*arrs, qbittorrent, etc.)";
     };
 
     dataDir = mkOption {
       type = types.path;
       default = "/var/lib/mediaserver";
-      description = lib.mdDoc ''
-        The base directory where applications will store the media library and supporting data
-      '';
+      description = "The base directory where applications will store the media library and supporting data";
     };
 
     dataDirMode = mkOption {
       type = types.str;
       default = "0775";
-      description = lib.mdDoc ''
-        The file access mode to use when initializing dataDir
-      '';
+      description = "The file access mode to use when initializing dataDir";
     };
 
     user = mkOption {

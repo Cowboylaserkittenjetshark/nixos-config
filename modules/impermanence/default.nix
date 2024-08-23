@@ -7,9 +7,9 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.impermanence;
+  inherit (lib) mkOption types mkIf;
 in {
   imports = [inputs.impermanence.nixosModules.impermanence];
   options = {
@@ -22,16 +22,12 @@ in {
       persistPath = mkOption {
         type = types.str;
         default = "/persist";
-        description = mdDoc ''
-          Path where persisted data is mounted on the booted system.
-        '';
+        description = "Path where persisted data is mounted on the booted system.";
       };
       cryptDeviceName = mkOption {
         type = types.str;
         default = "crypt";
-        description = mdDoc ''
-          Mapped name of the opened LUKS device under /dev/mapper/
-        '';
+        description = "Mapped name of the opened LUKS device under /dev/mapper/";
       };
     };
   };
