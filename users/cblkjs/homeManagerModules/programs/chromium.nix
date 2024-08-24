@@ -1,6 +1,7 @@
-{...}: {
+{pkgs, ...}: {
   programs.chromium = {
     enable = true;
+    package = pkgs.ungoogled-chromium;
     extensions = [
       # uBlock Origin
       {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
