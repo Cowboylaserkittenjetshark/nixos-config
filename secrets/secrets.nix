@@ -25,4 +25,6 @@ in {
   "Windscribe-Atlanta-Mountain-auth.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-WashingtonDC-Precedent-conf.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-WashingtonDC-Precedent-auth.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-Dallas-Ranch-conf.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-Dallas-Ranch-auth.age".publicKeys = [cblkjs] ++ systems;
 }
