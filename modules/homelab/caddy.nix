@@ -32,6 +32,8 @@ in {
           abort
         '';
         "${domain}".extraConfig = ''
+          root * /srv/caddy/
+          file_server /static/*
           respond "Hello, world :)"
         '';
       };
