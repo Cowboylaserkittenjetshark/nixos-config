@@ -69,6 +69,13 @@ in {
         # Nextcloud
         ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --off
       '';
+
+      pruneOpts = [
+        "--keep-daily 7"
+        "--keep-weekly 5"
+        "--keep-monthly 12"
+        "--keep-yearly 75"
+      ];
     };
 
     systemd.tmpfiles.settings."10-backups".${db_backup_dir}.D = {
