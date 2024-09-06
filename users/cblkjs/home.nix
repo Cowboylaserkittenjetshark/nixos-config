@@ -1,9 +1,8 @@
 {
   config,
   pkgs,
-  inputs,
   ...
-}: rec {
+}: {
   imports = [
     ./homeManagerModules/catppuccin.nix
     ./homeManagerModules/foot.nix
@@ -57,6 +56,7 @@
   home.packages = with pkgs; [
     okular
     p7zip
+    obsidian
   ];
 
   fonts.fontconfig.enable = true;
