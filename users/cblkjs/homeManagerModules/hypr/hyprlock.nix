@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   inputs,
   config,
   osConfig,
@@ -23,7 +22,7 @@
         background = [
           {
             monitor = "";
-            path = "${osConfig.desktopAssets.lockscreen}";
+            path = "${config.desktopAssets.lockscreen}";
             blur_passes = 1;
             blur_size = 3;
             color = "$base";

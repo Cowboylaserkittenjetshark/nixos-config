@@ -115,7 +115,7 @@
       layerrule = blur, notifications
       layerrule = ignorezero, notifications
 
-      exec-once=swaybg -i ${toString osConfig.desktopAssets.wallpaper}
+      exec-once=swaybg -i ${toString config.desktopAssets.wallpaper}
     '';
     home.packages = [pkgs.swaybg];
   };

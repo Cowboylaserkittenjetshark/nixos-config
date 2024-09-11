@@ -19,6 +19,7 @@
     ./homeManagerModules/avatar.nix
     ./homeManagerModules/programs/chromium.nix
     ./homeManagerModules/programs/rbw.nix
+    ../common/homeManagerModules/desktopEnvironment/desktopAssets.nix
   ];
 
   # Home Manager needs a bit of information about you and the
