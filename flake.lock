@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726118905,
-        "narHash": "sha256-sy+vPXXszqdrZN4syYU91UhQ0UDMMyFUmFYLLZamfMo=",
+        "lastModified": 1726121048,
+        "narHash": "sha256-0xt2M3aHL621pCXuFdeDBhwvVn+yfQbF4/B6n+22Qnk=",
         "owner": "Cowboylaserkittenjetshark",
         "repo": "nixcaddy",
-        "rev": "d3a853b1cdc34737b846c948b91aa911cfaccaa3",
+        "rev": "4a8d7b8fe658192d27745f79f181a6a601f646f2",
         "type": "github"
       },
       "original": {
