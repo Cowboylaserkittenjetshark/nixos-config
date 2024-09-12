@@ -6,15 +6,16 @@
   ...
 }: let
   inherit (config.homelab) domain enable;
+  inherit (lib) mkIf warnIfNot versionAtLeast;
   customCaddyPkg = inputs.custom-caddy.packages.${pkgs.system}.default;
   defaultCaddyPkg = pkgs.caddy;
 in {
-  config = lib.mkIf enable {
+  config = mkIf enable {
     services.caddy = {
       enable = true;
       package =
-        lib.warnIfNot
-        (lib.versionAtLeast customCaddyPkg.version defaultCaddyPkg.version)
+        warnIfNot
+        (versionAtLeast customCaddyPkg.version defaultCaddyPkg.version)
         ''          The version of Caddy in the package is older than the version in your version of nixpkgs
                       Caddy from nixpkgs:  ${defaultCaddyPkg.version}
                       Caddy form nixcaddy: ${customCaddyPkg.version}
