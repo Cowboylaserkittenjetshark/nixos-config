@@ -12,11 +12,12 @@ in {
   config = lib.mkIf enable {
     services.caddy = {
       enable = true;
-      package = lib.warnIfNot
+      package =
+        lib.warnIfNot
         (lib.versionAtLeast customCaddyPkg.version defaultCaddyPkg.version)
-        ''The version of Caddy in the package is older than the version in your version of nixpkgs
-            Caddy from nixpkgs:  ${defaultCaddyPkg.version}
-            Caddy form nixcaddy: ${customCaddyPkg.version}
+        ''          The version of Caddy in the package is older than the version in your version of nixpkgs
+                      Caddy from nixpkgs:  ${defaultCaddyPkg.version}
+                      Caddy form nixcaddy: ${customCaddyPkg.version}
         ''
         customCaddyPkg;
       globalConfig = ''

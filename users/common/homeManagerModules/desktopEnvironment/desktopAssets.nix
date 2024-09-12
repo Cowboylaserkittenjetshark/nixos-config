@@ -1,4 +1,9 @@
-{config, osConfig, lib, ...}: let
+{
+  config,
+  osConfig,
+  lib,
+  ...
+}: let
   inherit (lib) mkOption types;
   inherit (osConfig.desktopAssets) wallpaper lockscreen;
 in {
