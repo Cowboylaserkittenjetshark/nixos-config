@@ -6,11 +6,13 @@
   ...
 }: let
   inherit (config.homelab) domain enable;
+  customCaddyPkg = inputs.custom-caddy.packages.${pkgs.system}.default;
+  defaultCaddyPkg = pkgs.caddy;
 in {
   config = lib.mkIf enable {
     services.caddy = {
       enable = true;
-      package = inputs.custom-caddy.packages.${pkgs.system}.default;
+      package = lib.warnIfNot (lib.versionAtLeast customCaddyPkg.version defaultCaddyPkg.version) customCaddyPkg;
       globalConfig = ''
         servers {
           # Trust cloudflared
