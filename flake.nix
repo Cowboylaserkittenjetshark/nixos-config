@@ -79,7 +79,10 @@
         ...
       }: {
         devShells.default = pkgs.mkShell {
-          packages = [pkgs.nil];
+          packages = with pkgs; [
+            nil
+            just
+          ];
         };
         formatter = pkgs.alejandra;
       };
