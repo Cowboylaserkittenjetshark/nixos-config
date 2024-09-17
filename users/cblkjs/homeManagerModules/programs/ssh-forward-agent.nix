@@ -30,7 +30,7 @@
       trap cleanup EXIT
 
       echo "Starting agent"
-      SSH_ASKPASS="$${pkgs.ssh-askpass-fullscreen}"
+      SSH_ASKPASS="${pkgs.lxqt.lxqt-openssh-askpass}"
       eval "$(ssh-agent)"
       ssh-add "$$HOME"/.ssh/id_ed25519_sk
       ssh -A "$$1"
