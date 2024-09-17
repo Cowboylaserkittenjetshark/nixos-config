@@ -4,21 +4,21 @@
 
     function cleanup {
       # Preserve the PID in case ssh-agent -k fails to kill the agent
-      PID="$SSH_AGENT_PID"
+      PID="$$SSH_AGENT_PID"
 
       echo "Killing agent"
       ssh-agent -k
 
       # The ssh-askpass program may keep the parent agent process alive
-      if ps -p "$PID" > /dev/null; then
+      if ps -p "$$PID" > /dev/null; then
         echo "Agent did not stop, killing children"
-        pkill -P "$PID"
+        pkill -P "$$PID"
         sleep 1
 
-        if ps -p "$PID" > /dev/null; then
+        if ps -p "$$PID" > /dev/null; then
           echo "Agent still did not stop, force killing"
-          pkill -KILL -P "$PID"
-          pkill -KILL "$PID"
+          pkill -KILL -P "$$PID"
+          pkill -KILL "$$PID"
         fi
       fi
 
@@ -26,14 +26,14 @@
 
     }
 
-    if [ "$#" -gt 0 ]; then
+    if [ "$$#" -gt 0 ]; then
       trap cleanup EXIT
 
       echo "Starting agent"
-      SSH_ASKPASS="${pkgs.ssh-askpass-fullscreen}"
+      SSH_ASKPASS="$${pkgs.ssh-askpass-fullscreen}"
       eval "$(ssh-agent)"
-      ssh-add "$HOME"/.ssh/id_ed25519_sk
-      ssh -A "$1"
+      ssh-add "$$HOME"/.ssh/id_ed25519_sk
+      ssh -A "$$1"
     else
       echo "Missing arguments"
     fi

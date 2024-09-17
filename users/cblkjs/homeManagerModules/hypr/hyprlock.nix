@@ -9,11 +9,11 @@
   hyprlock-restore = pkgs.writeShellScriptBin "hyprlock-restore" ''
     set -xeuo pipefail
 
-    instance="${1 - 0}"
+    instance="$${1-0}"
 
-    hyprctl --instance "$instance" 'keyword misc:allow_session_lock_restore 1'
-    hyprctl --instance "$instance" 'dispatch exec hyprlock'
-    hyprctl --instance "$instance" 'keyword misc:allow_session_lock_restore 0'
+    hyprctl --instance "$$instance" 'keyword misc:allow_session_lock_restore 1'
+    hyprctl --instance "$$instance" 'dispatch exec hyprlock'
+    hyprctl --instance "$$instance" 'keyword misc:allow_session_lock_restore 0'
   '';
 in {
   config = lib.mkIf osConfig.systemAttributes.graphical {
