@@ -23,7 +23,7 @@
       fi
 
       echo "Agent stopped"
-    
+
     }
 
     if [ "$#" -gt 0 ]; then
