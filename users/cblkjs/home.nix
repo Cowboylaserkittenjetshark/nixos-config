@@ -19,6 +19,7 @@
     ./homeManagerModules/avatar.nix
     ./homeManagerModules/programs/chromium.nix
     ./homeManagerModules/programs/rbw.nix
+    ./homeManagerModules/programs/ssh-forward-agent.nix
     ../common/homeManagerModules/desktopEnvironment/desktopAssets.nix
   ];
 
