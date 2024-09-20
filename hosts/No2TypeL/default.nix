@@ -10,7 +10,6 @@
     ./disk-config.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
-  boot.kernelModules = ["pkcs8_key_parser"];
 
   systemAttributes = {
     roles.laptop = true;
@@ -88,6 +87,9 @@
     enable = true;
     dnsovertls = "false";
   };
+
+  # Required by IWD to decrypt 802.1x EAP-TLS TLS client keys
+  boot.kernelModules = ["pkcs8_key_parser"];
 
   time.timeZone = "America/New_York";
 
