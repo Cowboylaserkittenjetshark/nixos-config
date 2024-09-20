@@ -10,7 +10,6 @@
     ./disk-config.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
-  boot.kernelPackages = lib.mkForce(pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10));
   boot.kernelModules = ["pkcs8_key_parser"];
 
   systemAttributes = {
