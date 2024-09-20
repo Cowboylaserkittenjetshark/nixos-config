@@ -10,6 +10,7 @@
     ./disk-config.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
+  boot.kernelPackages = lib.mkForce(pkgs.linuxPackagesFor (pkgs.linuxKernel.kernels.linux_6_10));
 
   systemAttributes = {
     roles.laptop = true;
