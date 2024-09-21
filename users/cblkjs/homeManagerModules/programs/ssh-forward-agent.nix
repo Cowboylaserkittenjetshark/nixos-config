@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{lib, pkgs, ...}: let
   ssh-forward-agent = pkgs.writeShellScriptBin "ssh-forward-agent" ''
     set -euo pipefail
 
@@ -30,7 +30,7 @@
       trap cleanup EXIT
 
       echo "Starting agent"
-      SSH_ASKPASS="${pkgs.lxqt.lxqt-openssh-askpass}"
+      SSH_ASKPASS="${lib.getExe pkgs.lxqt.lxqt-openssh-askpass}"
       eval "''$(ssh-agent)"
       ssh-add "''$HOME"/.ssh/id_ed25519_sk
       ssh -A "''$1"
