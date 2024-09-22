@@ -43,9 +43,8 @@ in {
         '';
         "${domain}".extraConfig = ''
           root * /srv/caddy/
-          route {
-            file_server /static/*
-            respond "Hello, world :)"
+          file_server {
+            precompressed gzip
           }
         '';
       };
