@@ -50,7 +50,7 @@
         animation=workspaces,1,6,overshot,slide
         animation=border,1,2,overshot
         animation=borderangle,1,40,default,loop
-        animation=layers,1,5,overshot,slide
+        animation=layers,1,5,overshot,popin 80%
       }
 
       dwindle {
