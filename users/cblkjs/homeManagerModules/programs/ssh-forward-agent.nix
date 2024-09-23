@@ -1,4 +1,8 @@
-{lib, pkgs, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   ssh-forward-agent = pkgs.writeShellScriptBin "ssh-forward-agent" ''
     set -euo pipefail
 
