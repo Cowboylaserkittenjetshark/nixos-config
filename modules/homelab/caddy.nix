@@ -43,9 +43,8 @@ in {
         '';
         "${domain}".extraConfig = ''
           root * /srv/caddy/
-          file_server {
-            precompressed gzip
-          }
+          encode zstd gzip
+          file_server
         '';
       };
     };
