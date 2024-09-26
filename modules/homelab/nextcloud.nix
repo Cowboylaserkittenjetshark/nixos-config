@@ -21,7 +21,6 @@ in {
        # Adapted from https://caddy.community/t/caddy-v2-configuration-nextcloud-docker-php-fpm-with-rules-from-htaccess/20662
 
        # Nextcloud static files reside here
-       # root * ${ncCfg.package}
        root * ${config.services.nginx.virtualHosts.${ncCfg.hostName}.root}
 
        # Encode responses with whichever is supported by the client
@@ -48,43 +47,43 @@ in {
       	-X-Powered-By
       }
 
-      #  # From .htaccess, deny access to sensible files and directories
-      # @forbidden {
-      #    path /README
-      # 	path /build/* /tests/* /config/* /lib/* /3rdparty/* /templates/* /data/*
-      # 	path /.* /autotest* /occ* /issue* /indie* /db_* /console*
-      # 	not path /.well-known/*
-      # }
-      # error @forbidden 404
+      # From .htaccess, deny access to sensible files and directories
+      @forbidden {
+        path /README
+      	path /build/* /tests/* /config/* /lib/* /3rdparty/* /templates/* /data/*
+      	path /.* /autotest* /occ* /issue* /indie* /db_* /console*
+      	not path /.well-known/*
+      }
+      error @forbidden 404
 
-      #  # From .htaccess, set cache for versioned static files (cache-busting)
-      # @immutable {
-      # 	path *.css *.js *.mjs *.svg *.gif *.png *.jpg *.ico *.wasm *.tflite
-      # 	query v=*
-      # }
-      # header @immutable Cache-Control "max-age=15778463, immutable"
+      # From .htaccess, set cache for versioned static files (cache-busting)
+      @immutable {
+      	path *.css *.js *.mjs *.svg *.gif *.png *.jpg *.ico *.wasm *.tflite
+      	query v=*
+      }
+      header @immutable Cache-Control "max-age=15778463, immutable"
 
-      #  # From .htaccess, set cache for normal static files
-      # @static {
-      # 	path *.css *.js *.mjs *.svg *.gif *.png *.jpg *.ico *.wasm *.tflite
-      # 	not query v=*
-      # }
-      # header @static Cache-Control "max-age=15778463"
+      # From .htaccess, set cache for normal static files
+      @static {
+      	path *.css *.js *.mjs *.svg *.gif *.png *.jpg *.ico *.wasm *.tflite
+      	not query v=*
+      }
+      header @static Cache-Control "max-age=15778463"
 
-      # # From .htaccess, cache fonts for 1 week
-      # @woff2 path *.woff2
-      # header @woff2 Cache-Control "max-age=604800"
+      # From .htaccess, cache fonts for 1 week
+      @woff2 path *.woff2
+      header @woff2 Cache-Control "max-age=604800"
 
-       # Proxy to fpm over unix socket
+      # Proxy to fpm over unix socket
       php_fastcgi unix/${config.services.phpfpm.pools.nextcloud.socket} {
-         # Enable pretty urls
+        # Enable pretty urls
       	env front_controller_active true
 
-         # Avoid sending the security headers twice
+        # Avoid sending the security headers twice
       	env modHeadersAvailable true
       }
 
-       # Enable file server for static files
+      # Enable file server for static files
       file_server
     '';
     # * End nginx disable *
