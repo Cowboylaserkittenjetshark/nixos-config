@@ -97,8 +97,8 @@
   services.blueman.enable = true;
 
   desktopAssets = {
-    wallpaper = ../amusementpark.png;
-    lockscreen = ../amusementpark.png;
+    wallpaper = config.age.secrets.Forest-Kingdom-Dithered-Mocha.path;
+    lockscreen = config.age.secrets.Amusement-Park2-Dithered-Mocha.path;
   };
 
   gaming.enable = true;
