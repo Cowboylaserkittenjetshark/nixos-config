@@ -33,7 +33,7 @@ in {
         background = [
           {
             monitor = "";
-            path = "${config.desktopAssets.lockscreen}";
+            path = "${osConfig.desktopAssets.lockscreen}";
             blur_passes = 1;
             blur_size = 3;
             color = "$base";
