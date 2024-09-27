@@ -114,7 +114,7 @@
       layerrule = blur, notifications
       layerrule = ignorezero, notifications
 
-      exec-once=${pkgs.swaybg} -m fill -i ${osConfig.desktopAssets.wallpaper}
+      exec-once=${lib.getExe pkgs.swaybg} -m fill -i ${osConfig.desktopAssets.wallpaper}
     '';
   };
 }
