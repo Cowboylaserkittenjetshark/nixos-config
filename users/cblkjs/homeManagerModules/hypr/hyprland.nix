@@ -152,6 +152,7 @@
 
       windowrulev2 = opacity 0.95,class:^(chromium-browser)$
       windowrulev2 = opacity 0.80,class:^(foot)$
+      windowrulev2 = opacity 0.80,title:^(Bitwarden)$
       windowrulev2 = opacity 0.80,class:^(qt5ct)$
       windowrulev2 = opacity 0.80,class:^(qt6ct)$
       windowrulev2 = opacity 0.80,class:^(org.pulseaudio.pavucontrol)$
