@@ -7,13 +7,27 @@
   ...
 }: let
   hyprlock-restore = pkgs.writeShellScriptBin "hyprlock-restore" ''
-    set -xeuo pipefail
+    set -euo pipefail
+
+    function cleanup {
+      echo "Disabling session restore"
+      hyprctl --instance "''$instance" 'keyword misc:allow_session_lock_restore 0'
+    }
 
     instance="''${1-0}"
 
+    trap cleanup EXIT
+    echo "Killing all hyprlock instances..."
+    pkill -KILL -x hyprlock || true
+    echo "Enabling session restore..."
     hyprctl --instance "''$instance" 'keyword misc:allow_session_lock_restore 1'
+    echo "Relaunching Hyprlock..."
     hyprctl --instance "''$instance" 'dispatch exec hyprlock'
-    hyprctl --instance "''$instance" 'keyword misc:allow_session_lock_restore 0'
+    echo "Waiting for unlock..."
+    while pgrep -x hyprlock > /dev/null; do
+      sleep 1
+    done
+    echo "Session restored!"
   '';
 in {
   config = lib.mkIf osConfig.systemAttributes.graphical {
