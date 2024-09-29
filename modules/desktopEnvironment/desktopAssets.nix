@@ -1,4 +1,8 @@
-{lib, config, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit (lib) mkOption types mkIf;
 in {
   options.desktopAssets = {
