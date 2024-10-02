@@ -89,7 +89,7 @@ in {
     # * End nginx disable *
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud29;
+      package = pkgs.nextcloud30;
       hostName = "nc.${domain}";
       config = {
         adminuser = "admin";
