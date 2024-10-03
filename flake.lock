@@ -483,6 +483,36 @@
         "url": "https://github.com/hyprwm/Hyprland"
       }
     },
+    "hyprland-plugins": {
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ],
+        "nixpkgs": [
+          "hyprland-plugins",
+          "hyprland",
+          "nixpkgs"
+        ],
+        "systems": [
+          "hyprland-plugins",
+          "hyprland",
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1727705521,
+        "narHash": "sha256-tR4bc6zONkxore1F7CRrwHs9NITht8NY0JTidPSmMXY=",
+        "owner": "hyprwm",
+        "repo": "hyprland-plugins",
+        "rev": "9215288eb2ded9d0c08d468ea90ba68f43162c67",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "hyprland-plugins",
+        "type": "github"
+      }
+    },
     "hyprland-protocols": {
       "inputs": {
         "nixpkgs": [
@@ -941,6 +971,7 @@
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "hyprland-plugins": "hyprland-plugins",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "nix-gaming": "nix-gaming",
