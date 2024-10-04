@@ -5,7 +5,6 @@
 }: {
   imports = [
     ./homeManagerModules/catppuccin.nix
-    ./homeManagerModules/cava.nix
     ./homeManagerModules/foot.nix
     ./homeManagerModules/shell/zsh
     ./homeManagerModules/hypr

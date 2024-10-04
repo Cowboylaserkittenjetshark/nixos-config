@@ -4,16 +4,11 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf getExe;
-in {
-  config = mkIf osConfig.systemAttributes.graphical {
+}: {
+  config = lib.mkIf osConfig.systemAttributes.graphical {
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-      plugins = [
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
-      ];
     };
 
     wayland.windowManager.hyprland.extraConfig = ''
@@ -81,12 +76,6 @@ in {
         initial_workspace_tracking = 2
         enable_swallow = true
         swallow_regex = ^(foot)$
-      }
-
-      plugin {
-        hyprwinwrap {
-          class = foot-bg
-        }
       }
 
       $mod = SUPER
@@ -187,8 +176,7 @@ in {
       layerrule = blur,notifications
       layerrule = ignorezero,notifications
 
-      exec-once=${getExe pkgs.swaybg} -m fill -i ${osConfig.desktopAssets.wallpaper}
-      exec-once=${getExe pkgs.foot} --app-id "foot-bg" -o colors.alpha=0.0 ${getExe pkgs.cava}
+      exec-once=${lib.getExe pkgs.swaybg} -m fill -i ${osConfig.desktopAssets.wallpaper}
     '';
   };
 }
