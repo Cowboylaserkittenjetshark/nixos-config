@@ -20,5 +20,6 @@ in {
         };
       };
     };
+    systemd.services.cloudflared-tunnel-container-stack.environment.TUNNEL_TRANSPORT_PROTOCOL = "http2";
   };
 }
