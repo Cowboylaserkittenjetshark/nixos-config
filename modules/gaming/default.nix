@@ -26,7 +26,7 @@ in {
 
   config = mkIf cfg.enable {
     services.pipewire.lowLatency.enable = true;
-    
+
     programs = {
       steam = {
         enable = true;
@@ -36,7 +36,7 @@ in {
         };
         platformOptimizations.enable = true;
       };
-      
+
       gamemode = {
         enable = true;
         settings = {
@@ -49,7 +49,7 @@ in {
           };
         };
       };
-      
+
       gamescope = {
         enable = true;
         args = gamescopeArgs;
@@ -68,6 +68,6 @@ in {
       })
     ];
 
-    environment.systemPackages = [ ngPkgs.viper ];
+    environment.systemPackages = [ngPkgs.viper];
   };
 }
