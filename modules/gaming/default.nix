@@ -63,7 +63,7 @@ in {
     nixpkgs.overlays = [
       (_: prev: {
         steam = prev.steam.override {
-          extraProfile = "export STEAM_EXTRA_COMPAT_TOOLS_PATHS='${ngPkgs.northstar-proton}'";
+          extraProfile = "export STEAM_EXTRA_COMPAT_TOOLS_PATHS='${pkgs.proton-ge-bin}'";
         };
       })
     ];
