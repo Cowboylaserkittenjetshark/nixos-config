@@ -64,6 +64,11 @@
     };
   };
 
+  services.openssh.vpnAccess = {
+    enable = true;
+    interface = "tailscale0";
+  };
+
   programs.nh = lib.mkForce {
     enable = true;
     flake = "/home/cblkjs/nixos-config";
