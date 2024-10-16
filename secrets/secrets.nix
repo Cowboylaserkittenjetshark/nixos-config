@@ -27,6 +27,10 @@ in {
   "Windscribe-WashingtonDC-Precedent-auth.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-Dallas-Ranch-conf.age".publicKeys = [cblkjs] ++ systems;
   "Windscribe-Dallas-Ranch-auth.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_1/pk.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_1/peer_psk.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_2/pk.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_2/peer_psk.age".publicKeys = [cblkjs] ++ systems;
 
   # Wallpapers
   "Forest-Kingdom-Dithered-Mocha.age".publicKeys = [cblkjs] ++ systems;
