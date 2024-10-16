@@ -46,6 +46,21 @@
     };
   };
 
+  vpns.windscribe = {
+    wireguard = {
+      enable = true;
+      server = "Dallas Ranch";
+      keyPair = {
+        privateKeyFile = config.age.secrets.windscribe-wg-kp1-pk.path;
+        peer = {
+          publicKey = "pASG4FD9LwOfJukT/wYbUF10gD6v8DVuv5hrNbiOnHQ=";
+          presharedKeyFile = config.age.secrets.windscribe-wg-kp1-peer_psk.path;
+        };
+      };
+    };
+    openvpn.enable = true;
+  };
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 

@@ -1,18 +1,23 @@
-{config, ...}: let
-  # vpns = {
-  #   "Dallas Ranch" = {
-  #     wireguard = {
-  #       interface = {
-  #         address = "100.67.252.231/32";
-  #         dns = "10.255.255.1";
-  #       };
-  #       peer = {
-  #         allowedIPs = ["0.0.0.0/0" "::/0"];
-  #         endpoint = "dfw-86-wg.whiskergalaxy.com:443";
-  #       };
-  #     };
-  #   };
-  # };
+{lib, config, ...}: let
+  cfg = config.vpns;
+  servers = {
+    windscribe = {
+      "Dallas Ranch" = {
+        wireguard = {
+          interface = {
+            address = "100.67.252.231";
+            dns = "10.255.255.1";
+          };
+          peer = {
+            allowedIPs = ["0.0.0.0/0" "::/0"];
+            endpoint = "dfw-86-wg.whiskergalaxy.com:443";
+          };
+        };
+      };
+    };
+  };
+  inherit (lib) types mkOption mkEnableOption mkIf;
+  inherit (builtins) attrNames getAttr;
   mkWGSecret = path: {
         file = path;
         mode = "400";
@@ -20,8 +25,51 @@
     
   };
 in {
+  options.vpns = {
+    windscribe = {
+      wireguard = {
+        enable = mkEnableOption "a windscribe wireguard tunnel.";
+        keyPair = {
+          privateKeyFile = mkOption {
+            description = "Path to the file containing the private key.";
+            type = types.path;
+            default = null;
+          };
+          peer = {
+            publicKey = mkOption {
+              description = "The peer's public key.";
+              type = types.str;
+              default = null;
+            };
+            presharedKeyFile = mkOption {
+              description = "Path to the file containing the preshared key";
+              type = types.path;
+              default = null;
+            };
+          };
+        };
+        server = mkOption {
+          description = "The server to connect to.";
+          type = types.enum (attrNames servers.windscribe);
+          default = null;
+        };
+      };
+      openvpn = {
+        enable = mkEnableOption "windscribe openvpn tunnels.";
+        autoStart = mkOption {
+          description = ''
+            The name of the tunnel to autostart.
+            If no tunnel is specified, no tunnel will autostart but they will all remain available to start manually.
+          '';
+          type = types.str;
+          default = null;
+        };
+      };
+    };
+  };
+
   config = {
-    services.openvpn.servers = {
+    services.openvpn.servers = mkIf cfg.windscribe.openvpn.enable {
       Windscribe-Atlanta-Mountain = {
         config = ''
           config ${config.age.secrets.Windscribe-Atlanta-Mountain-conf.path}
@@ -51,36 +99,35 @@ in {
       };
     };
 
-    systemd.network = {
+    systemd.network = let 
+      wgcfg = cfg.windscribe.wireguard;
+    in mkIf wgcfg.enable {
       netdevs."99-wg0" = {
         netdevConfig = {
           Kind = "wireguard";
           Name = "wg0";
-          # MTUBytes = 1300; # Why tho?
         };
 
         wireguardConfig = {
-          # ListenPort = 443; # Why?
-          PrivateKeyFile = config.age.secrets.windscribe-wg-kp1-pk.path;
-          FirewallMark = 8888; # # But why?
+          PrivateKeyFile = wgcfg.keyPair.privateKeyFile;
+          FirewallMark = 8888;
         };
 
         wireguardPeers = [
           {
-            Endpoint = "dfw-86-wg.whiskergalaxy.com:443";
-            AllowedIPs = ["0.0.0.0/0" "::/0"];
-            PublicKey = "pASG4FD9LwOfJukT/wYbUF10gD6v8DVuv5hrNbiOnHQ="; # This is for kp1 only
-            PresharedKeyFile = config.age.secrets.windscribe-wg-kp1-peer_psk.path;
+            Endpoint = (getAttr wgcfg.server servers.windscribe).wireguard.peer.endpoint;
+            AllowedIPs = (getAttr wgcfg.server servers.windscribe).wireguard.peer.allowedIPs;
+            PublicKey = wgcfg.keyPair.peer.publicKey;
+            PresharedKeyFile = wgcfg.keyPair.peer.presharedKeyFile;
             PersistentKeepalive = 25;
           }
         ];
-
       };
       networks."50-wg0" = {
         matchConfig.Name = "wg0";
         networkConfig = {
-          Address = "100.67.252.231/32";
-          DNS = "10.255.255.1";
+          Address = "${(getAttr wgcfg.server servers.windscribe).wireguard.interface.address}/32";
+          DNS = (getAttr wgcfg.server servers.windscribe).wireguard.interface.dns;
           DNSDefaultRoute = true;
           Domains = "~.";
           IPv6AcceptRA = false;
@@ -95,19 +142,10 @@ in {
           }
           # Exclude the endpoint address
           {
-            To = "100.67.252.231";
+            To = (getAttr wgcfg.server servers.windscribe).wireguard.interface.address;
             Priority = 5;
           }
           # Exclude tailscale addresses
-          # Ranges overlap >:(
-          # {
-          #   To = "100.64.0.0/10";
-          #   Priority = 9;
-          # }
-          # {
-          #   To = "fd7a:115c:a1e0::/48";
-          #   Priority = 9;
-          # }
           {
             To = "100.109.116.3";
             Table = 52;
