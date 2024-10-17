@@ -165,18 +165,23 @@ in {
             Priority = 5;
           }
           # Exclude tailscale addresses
+          # {
+          #   To = "100.109.116.3";
+          #   Table = 52;
+          #   Priority = 9;
+          # }
+          # {
+          #   To = "100.72.92.2";
+          #   Table = 52;
+          #   Priority = 9;
+          # }
+          # {
+          #   To = "100.100.100.100";
+          #   Table = 52;
+          #   Priority = 9;
+          # }
           {
-            To = "100.109.116.3";
-            Table = 52;
-            Priority = 9;
-          }
-          {
-            To = "100.72.92.2";
-            Table = 52;
-            Priority = 9;
-          }
-          {
-            To = "100.100.100.100";
+            To = "100.64.0.0/10";
             Table = 52;
             Priority = 9;
           }
