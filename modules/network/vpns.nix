@@ -1,23 +1,56 @@
 {lib, config, ...}: let
+  inherit (lib) types mkOption mkEnableOption mkIf toInt;
+  inherit (builtins) attrNames getAttr toString;
+
   cfg = config.vpns;
+
   servers = {
     windscribe = {
       "Dallas Ranch" = {
         wireguard = {
           interface = {
-            address = "100.67.252.231";
-            dns = "10.255.255.1";
+            Address = "100.67.252.231";
+            DNS = "10.255.255.1";
           };
           peer = {
-            allowedIPs = ["0.0.0.0/0" "::/0"];
-            endpoint = "dfw-86-wg.whiskergalaxy.com:443";
+            AllowedIPs = ["0.0.0.0/0" "::/0"];
+            Endpoint = "dfw-86-wg.whiskergalaxy.com:443";
           };
+        };
+      };
+      "Atlanta Mountain" = {
+        interface = {
+          Address = "100.80.105.61";
+          DNS = "10.255.255.1";
+        };
+        peer = {
+          AllowedIPs = ["0.0.0.0/0" "::/0"];
+          Endpoint = "atl-109-wg.whiskergalaxy.com:443";
         };
       };
     };
   };
-  inherit (lib) types mkOption mkEnableOption mkIf;
-  inherit (builtins) attrNames getAttr;
+
+  keyPairs = let inherit (config.age) secrets; in {
+    "1" = {
+      PrivateKeyFile = secrets.windscribe-wg-kp1-pk.path;
+      PublicKey = "pASG4FD9LwOfJukT/wYbUF10gD6v8DVuv5hrNbiOnHQ=";
+      PresharedKeyFile = secrets.windscribe-wg-kp1-peer_psk.path;
+    };
+    "2" = {
+      PrivateKeyFile = secrets.windscribe-wg-kp2-pk.path;
+      PublicKey = "D2Tx/zEgTy2uoH2HLp5EBIFyLkHGEhkhLMYYedpcUFw=";
+      PresharedKeyFile = secrets.windscribe-wg-kp2-peer_psk.path;
+    };
+  };
+
+  getKeyPair = key: getAttr (toString key) keyPairs;
+
+  mkOVPNSecret = path: {
+        file = path;
+        mode = "400";
+  };
+  
   mkWGSecret = path: {
         file = path;
         mode = "400";
@@ -29,24 +62,10 @@ in {
     windscribe = {
       wireguard = {
         enable = mkEnableOption "a windscribe wireguard tunnel.";
-        keyPair = {
-          privateKeyFile = mkOption {
-            description = "Path to the file containing the private key.";
-            type = types.path;
-            default = null;
-          };
-          peer = {
-            publicKey = mkOption {
-              description = "The peer's public key.";
-              type = types.str;
-              default = null;
-            };
-            presharedKeyFile = mkOption {
-              description = "Path to the file containing the preshared key";
-              type = types.path;
-              default = null;
-            };
-          };
+        keyPair = mkOption {
+          description = "The keypair to use when connecting to the server. The same keypair cannot be used to make parallel connections to the same server.";
+          type = types.enum (map toInt (attrNames keyPairs));
+          default = null;
         };
         server = mkOption {
           description = "The server to connect to.";
@@ -100,7 +119,9 @@ in {
     };
 
     systemd.network = let 
+      keyPair = getKeyPair wgcfg.keyPair;
       wgcfg = cfg.windscribe.wireguard;
+      server = (getAttr wgcfg.server servers.windscribe).wireguard;
     in mkIf wgcfg.enable {
       netdevs."99-wg0" = {
         netdevConfig = {
@@ -109,16 +130,14 @@ in {
         };
 
         wireguardConfig = {
-          PrivateKeyFile = wgcfg.keyPair.privateKeyFile;
+          inherit (keyPair) PrivateKeyFile;
           FirewallMark = 8888;
         };
 
         wireguardPeers = [
           {
-            Endpoint = (getAttr wgcfg.server servers.windscribe).wireguard.peer.endpoint;
-            AllowedIPs = (getAttr wgcfg.server servers.windscribe).wireguard.peer.allowedIPs;
-            PublicKey = wgcfg.keyPair.peer.publicKey;
-            PresharedKeyFile = wgcfg.keyPair.peer.presharedKeyFile;
+            inherit (keyPair) PublicKey PresharedKeyFile;
+            inherit (server.peer) Endpoint AllowedIPs;
             PersistentKeepalive = 25;
           }
         ];
@@ -126,8 +145,8 @@ in {
       networks."50-wg0" = {
         matchConfig.Name = "wg0";
         networkConfig = {
-          Address = "${(getAttr wgcfg.server servers.windscribe).wireguard.interface.address}/32";
-          DNS = (getAttr wgcfg.server servers.windscribe).wireguard.interface.dns;
+          Address = "${server.interface.Address}/32";
+          inherit (server.interface) DNS;
           DNSDefaultRoute = true;
           Domains = "~.";
           IPv6AcceptRA = false;
@@ -142,7 +161,7 @@ in {
           }
           # Exclude the endpoint address
           {
-            To = (getAttr wgcfg.server servers.windscribe).wireguard.interface.address;
+            To = server.interface.Address;
             Priority = 5;
           }
           # Exclude tailscale addresses
@@ -173,30 +192,13 @@ in {
     };
   
     age.secrets = {
-      Windscribe-Atlanta-Mountain-conf = {
-        file = ../../secrets/Windscribe-Atlanta-Mountain-conf.age;
-        mode = "400";
-      };
-      Windscribe-Atlanta-Mountain-auth = {
-        file = ../../secrets/Windscribe-Atlanta-Mountain-auth.age;
-        mode = "400";
-      };
-      Windscribe-WashingtonDC-Precedent-conf = {
-        file = ../../secrets/Windscribe-WashingtonDC-Precedent-conf.age;
-        mode = "400";
-      };
-      Windscribe-WashingtonDC-Precedent-auth = {
-        file = ../../secrets/Windscribe-WashingtonDC-Precedent-auth.age;
-        mode = "400";
-      };
-      Windscribe-Dallas-Ranch-conf = {
-        file = ../../secrets/Windscribe-Dallas-Ranch-conf.age;
-        mode = "400";
-      };
-      Windscribe-Dallas-Ranch-auth = {
-        file = ../../secrets/Windscribe-Dallas-Ranch-auth.age;
-        mode = "400";
-      };
+      Windscribe-Atlanta-Mountain-conf = mkOVPNSecret ../../secrets/Windscribe-Atlanta-Mountain-conf.age;
+      Windscribe-Atlanta-Mountain-auth = mkOVPNSecret ../../secrets/Windscribe-Atlanta-Mountain-auth.age;
+      Windscribe-WashingtonDC-Precedent-conf = mkOVPNSecret ../../secrets/Windscribe-WashingtonDC-Precedent-conf.age;
+      Windscribe-WashingtonDC-Precedent-auth = mkOVPNSecret ../../secrets/Windscribe-WashingtonDC-Precedent-auth.age;
+      Windscribe-Dallas-Ranch-conf = mkOVPNSecret ../../secrets/Windscribe-Dallas-Ranch-conf.age;
+      Windscribe-Dallas-Ranch-auth = mkOVPNSecret ../../secrets/Windscribe-Dallas-Ranch-auth.age;
+
       windscribe-wg-kp1-pk = mkWGSecret ../../secrets/vpns/windscribe/wireguard/keypair_1/pk.age;
       windscribe-wg-kp1-peer_psk = mkWGSecret ../../secrets/vpns/windscribe/wireguard/keypair_1/peer_psk.age;
       windscribe-wg-kp2-pk = mkWGSecret ../../secrets/vpns/windscribe/wireguard/keypair_2/pk.age;
