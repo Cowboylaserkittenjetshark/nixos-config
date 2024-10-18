@@ -10,18 +10,19 @@
   cfg = config.vpns;
 
   servers = {
-    windscribe = {
+    windscribe = let 
+      DNS = "10.255.255.1";
+      AllowedIPs = ["0.0.0.0/0" "::/0"];
+    in {
       "Dallas Ranch".wireguard = {
         Address = "100.67.252.231";
-        DNS = "10.255.255.1";
-        AllowedIPs = ["0.0.0.0/0" "::/0"];
         Endpoint = "dfw-86-wg.whiskergalaxy.com:443";
+        inherit AllowedIPs DNS;
       };
       "Atlanta Mountain".wireguard = {
         Address = "100.80.105.61";
-        DNS = "10.255.255.1";
-        AllowedIPs = ["0.0.0.0/0" "::/0"];
         Endpoint = "atl-109-wg.whiskergalaxy.com:443";
+        inherit AllowedIPs DNS;
       };
       "WashingtonDC Precedent" = {};
     };
