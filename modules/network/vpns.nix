@@ -11,27 +11,17 @@
 
   servers = {
     windscribe = {
-      "Dallas Ranch" = {
-        wireguard = {
-          interface = {
-            Address = "100.67.252.231";
-            DNS = "10.255.255.1";
-          };
-          peer = {
-            AllowedIPs = ["0.0.0.0/0" "::/0"];
-            Endpoint = "dfw-86-wg.whiskergalaxy.com:443";
-          };
-        };
+      "Dallas Ranch".wireguard = {
+        Address = "100.67.252.231";
+        DNS = "10.255.255.1";
+        AllowedIPs = ["0.0.0.0/0" "::/0"];
+        Endpoint = "dfw-86-wg.whiskergalaxy.com:443";
       };
-      "Atlanta Mountain" = {
-        interface = {
-          Address = "100.80.105.61";
-          DNS = "10.255.255.1";
-        };
-        peer = {
-          AllowedIPs = ["0.0.0.0/0" "::/0"];
-          Endpoint = "atl-109-wg.whiskergalaxy.com:443";
-        };
+      "Atlanta Mountain".wireguard = {
+        Address = "100.80.105.61";
+        DNS = "10.255.255.1";
+        AllowedIPs = ["0.0.0.0/0" "::/0"];
+        Endpoint = "atl-109-wg.whiskergalaxy.com:443";
       };
       "WashingtonDC Precedent" = {};
     };
@@ -149,7 +139,7 @@ in {
           wireguardPeers = [
             {
               inherit (keyPair) PublicKey PresharedKeyFile;
-              inherit (server.peer) Endpoint AllowedIPs;
+              inherit (server) Endpoint AllowedIPs;
               PersistentKeepalive = 25;
             }
           ];
@@ -157,8 +147,8 @@ in {
         networks."50-wg0" = {
           matchConfig.Name = "wg0";
           networkConfig = {
-            Address = "${server.interface.Address}/32";
-            inherit (server.interface) DNS;
+            Address = "${server.Address}/32";
+            inherit (server) DNS;
             DNSDefaultRoute = true;
             Domains = "~.";
             IPv6AcceptRA = false;
@@ -177,7 +167,7 @@ in {
             }
             # Exclude the endpoint address
             {
-              To = server.interface.Address;
+              To = server.Address;
               Priority = 5;
             }
             # Exclude tailscale addresses
