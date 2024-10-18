@@ -10,7 +10,7 @@
   cfg = config.vpns;
 
   servers = {
-    windscribe = let 
+    windscribe = let
       DNS = "10.255.255.1";
       AllowedIPs = ["0.0.0.0/0" "::/0"];
     in {
