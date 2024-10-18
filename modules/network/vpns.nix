@@ -1,5 +1,5 @@
-{lib, config, ...}: let
-  inherit (lib) types mkOption mkEnableOption mkIf toInt;
+{lib, pkgs, config, ...}: let
+  inherit (lib) types mkOption mkEnableOption mkIf toInt getExe getExe';
   inherit (builtins) attrNames getAttr toString;
 
   cfg = config.vpns;
@@ -72,6 +72,7 @@ in {
           type = types.enum (attrNames servers.windscribe);
           default = null;
         };
+        autoStart = mkEnableOption "automatically starting the wireguard tunnel";
       };
       openvpn = {
         enable = mkEnableOption "windscribe openvpn tunnels.";
@@ -118,81 +119,91 @@ in {
       };
     };
 
-    systemd.network = let 
+    systemd = let 
       keyPair = getKeyPair wgcfg.keyPair;
       wgcfg = cfg.windscribe.wireguard;
       server = (getAttr wgcfg.server servers.windscribe).wireguard;
-    in mkIf wgcfg.enable {
-      netdevs."99-wg0" = {
-        netdevConfig = {
-          Kind = "wireguard";
-          Name = "wg0";
+    in {
+      services.wireguard-autostart = mkIf wgcfg.autoStart {
+        unitConfig = {
+          Description = "Automatically bring up wireguard tunnel";
+          Wants = ["network-online.target"];
+          After = [ "network-online.target" "nss-lookup.target"];
         };
+        wantedBy = ["multi-user.target"];
 
-        wireguardConfig = {
-          inherit (keyPair) PrivateKeyFile;
-          FirewallMark = 8888;
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = "yes";
+          ExecStart = pkgs.writeShellScript "wireguard-autostart" ''
+            until ${getExe pkgs.dig} +tries=1 +timeout=1 nixos.org; do
+                sleep 1
+            done
+            ${getExe' pkgs.systemd "networkctl"} up wg0
+          '';
         };
-
-        wireguardPeers = [
-          {
-            inherit (keyPair) PublicKey PresharedKeyFile;
-            inherit (server.peer) Endpoint AllowedIPs;
-            PersistentKeepalive = 25;
-          }
-        ];
       };
-      networks."50-wg0" = {
-        matchConfig.Name = "wg0";
-        networkConfig = {
-          Address = "${server.interface.Address}/32";
-          inherit (server.interface) DNS;
-          DNSDefaultRoute = true;
-          Domains = "~.";
-          IPv6AcceptRA = false;
-        };
+      network =  mkIf wgcfg.enable {
+        netdevs."99-wg0" = {
+          netdevConfig = {
+            Kind = "wireguard";
+            Name = "wg0";
+          };
 
-        routingPolicyRules = [
-          {
+          wireguardConfig = {
+            inherit (keyPair) PrivateKeyFile;
             FirewallMark = 8888;
-            InvertRule = true;
-            Table = 1000;
-            Priority = 10;
-          }
-          # Exclude the endpoint address
-          {
-            To = server.interface.Address;
-            Priority = 5;
-          }
-          # Exclude tailscale addresses
-          # {
-          #   To = "100.109.116.3";
-          #   Table = 52;
-          #   Priority = 9;
-          # }
-          # {
-          #   To = "100.72.92.2";
-          #   Table = 52;
-          #   Priority = 9;
-          # }
-          # {
-          #   To = "100.100.100.100";
-          #   Table = 52;
-          #   Priority = 9;
-          # }
-          {
-            To = "100.64.0.0/10";
-            Table = 52;
-            Priority = 9;
-          }
-        ];
+          };
 
-        routes = [
-          {
-            Destination = "0.0.0.0/0";
-            Table = 1000;
-          }
-        ];
+          wireguardPeers = [
+            {
+              inherit (keyPair) PublicKey PresharedKeyFile;
+              inherit (server.peer) Endpoint AllowedIPs;
+              PersistentKeepalive = 25;
+            }
+          ];
+        };
+        networks."50-wg0" = {
+          matchConfig.Name = "wg0";
+          networkConfig = {
+            Address = "${server.interface.Address}/32";
+            inherit (server.interface) DNS;
+            DNSDefaultRoute = true;
+            Domains = "~.";
+            IPv6AcceptRA = false;
+          };
+
+          # DNS must be available to resolve the endpoint domain, so we bring the interface up later with a service
+          # See the wireguard-autostart service defined above
+          linkConfig.ActivationPolicy = "down";
+
+          routingPolicyRules = [
+            {
+              FirewallMark = 8888;
+              InvertRule = true;
+              Table = 1000;
+              Priority = 10;
+            }
+            # Exclude the endpoint address
+            {
+              To = server.interface.Address;
+              Priority = 5;
+            }
+            # Exclude tailscale addresses
+            {
+              To = "100.64.0.0/10";
+              Table = 52;
+              Priority = 9;
+            }
+          ];
+
+          routes = [
+            {
+              Destination = "0.0.0.0/0";
+              Table = 1000;
+            }
+          ];
+        };
       };
     };
   

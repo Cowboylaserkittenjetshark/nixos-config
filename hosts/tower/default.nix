@@ -51,6 +51,7 @@
       enable = true;
       server = "Dallas Ranch";
       keyPair = 1;
+      autoStart = true;
     };
     openvpn.enable = true;
   };
