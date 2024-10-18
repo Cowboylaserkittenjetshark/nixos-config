@@ -4,8 +4,8 @@
   config,
   ...
 }: let
-  inherit (lib) types mkOption mkEnableOption mkIf toInt getExe getExe';
-  inherit (builtins) attrNames getAttr toString;
+  inherit (lib) types mkOption mkEnableOption mkIf toInt getExe getExe' splitString;
+  inherit (builtins) attrNames getAttr toString concatStringsSep listToAttrs;
 
   cfg = config.vpns;
 
@@ -33,6 +33,7 @@
           Endpoint = "atl-109-wg.whiskergalaxy.com:443";
         };
       };
+      "WashingtonDC Precedent" = {};
     };
   };
 
@@ -51,8 +52,6 @@
     };
   };
 
-  getKeyPair = key: getAttr (toString key) keyPairs;
-
   mkOVPNSecret = path: {
     file = path;
     mode = "400";
@@ -62,6 +61,20 @@
     file = path;
     mode = "400";
     owner = "systemd-network";
+  };
+
+  hyphenateServerName = serverName: concatStringsSep "-" (splitString " " serverName);
+
+  genOvpnServer = serverName: {
+    config = let 
+      hyphenatedServerName = hyphenateServerName serverName;
+    in ''
+      config ${(getAttr "Windscribe-${hyphenatedServerName}-conf" config.age.secrets).path}
+      
+      auth-user-pass ${(getAttr "Windscribe-${hyphenatedServerName}-auth" config.age.secrets).path}
+      route 10.64.0.0 255.192.0.0 net_gateway
+    '';
+    autoStart = cfg.windscribe.openvpn.autoStart == serverName;
   };
 in {
   options.vpns = {
@@ -88,45 +101,17 @@ in {
             If no tunnel is specified, no tunnel will autostart but they will all remain available to start manually.
           '';
           type = types.str;
-          default = null;
+          default = "";
         };
       };
     };
   };
 
   config = {
-    services.openvpn.servers = mkIf cfg.windscribe.openvpn.enable {
-      Windscribe-Atlanta-Mountain = {
-        config = ''
-          config ${config.age.secrets.Windscribe-Atlanta-Mountain-conf.path}
-
-          auth-user-pass ${config.age.secrets.Windscribe-Atlanta-Mountain-auth.path}
-          route 10.64.0.0 255.192.0.0 net_gateway
-        '';
-        autoStart = false;
-      };
-      Windscribe-WashingtonDC-Precedent = {
-        config = ''
-          config ${config.age.secrets.Windscribe-WashingtonDC-Precedent-conf.path}
-
-          auth-user-pass ${config.age.secrets.Windscribe-WashingtonDC-Precedent-auth.path}
-          route 10.64.0.0 255.192.0.0 net_gateway
-        '';
-        autoStart = false;
-      };
-      Windscribe-Dallas-Ranch = {
-        config = ''
-          config ${config.age.secrets.Windscribe-Dallas-Ranch-conf.path}
-
-          auth-user-pass ${config.age.secrets.Windscribe-Dallas-Ranch-auth.path}
-          route 10.64.0.0 255.192.0.0 net_gateway
-        '';
-        autoStart = false;
-      };
-    };
+    services.openvpn.servers = mkIf cfg.windscribe.openvpn.enable (listToAttrs (map (serverName: {name = "Windscribe-${hyphenateServerName serverName}"; value = genOvpnServer serverName;}) (attrNames servers.windscribe)));
 
     systemd = let
-      keyPair = getKeyPair wgcfg.keyPair;
+      keyPair = getAttr (toString wgcfg.keyPair) keyPairs;
       wgcfg = cfg.windscribe.wireguard;
       server = (getAttr wgcfg.server servers.windscribe).wireguard;
     in {
