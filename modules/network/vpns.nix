@@ -56,11 +56,11 @@
   hyphenateServerName = serverName: concatStringsSep "-" (splitString " " serverName);
 
   genOvpnServer = serverName: {
-    config = let 
+    config = let
       hyphenatedServerName = hyphenateServerName serverName;
     in ''
       config ${(getAttr "Windscribe-${hyphenatedServerName}-conf" config.age.secrets).path}
-      
+
       auth-user-pass ${(getAttr "Windscribe-${hyphenatedServerName}-auth" config.age.secrets).path}
       route 10.64.0.0 255.192.0.0 net_gateway
     '';
@@ -98,7 +98,10 @@ in {
   };
 
   config = {
-    services.openvpn.servers = mkIf cfg.windscribe.openvpn.enable (listToAttrs (map (serverName: {name = "Windscribe-${hyphenateServerName serverName}"; value = genOvpnServer serverName;}) (attrNames servers.windscribe)));
+    services.openvpn.servers = mkIf cfg.windscribe.openvpn.enable (listToAttrs (map (serverName: {
+      name = "Windscribe-${hyphenateServerName serverName}";
+      value = genOvpnServer serverName;
+    }) (attrNames servers.windscribe)));
 
     systemd = let
       keyPair = getAttr (toString wgcfg.keyPair) keyPairs;
