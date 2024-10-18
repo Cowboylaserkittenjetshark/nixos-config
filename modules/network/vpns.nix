@@ -1,4 +1,9 @@
-{lib, pkgs, config, ...}: let
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
   inherit (lib) types mkOption mkEnableOption mkIf toInt getExe getExe';
   inherit (builtins) attrNames getAttr toString;
 
@@ -31,7 +36,9 @@
     };
   };
 
-  keyPairs = let inherit (config.age) secrets; in {
+  keyPairs = let
+    inherit (config.age) secrets;
+  in {
     "1" = {
       PrivateKeyFile = secrets.windscribe-wg-kp1-pk.path;
       PublicKey = "pASG4FD9LwOfJukT/wYbUF10gD6v8DVuv5hrNbiOnHQ=";
@@ -47,15 +54,14 @@
   getKeyPair = key: getAttr (toString key) keyPairs;
 
   mkOVPNSecret = path: {
-        file = path;
-        mode = "400";
+    file = path;
+    mode = "400";
   };
-  
+
   mkWGSecret = path: {
-        file = path;
-        mode = "400";
-        owner = "systemd-network";
-    
+    file = path;
+    mode = "400";
+    owner = "systemd-network";
   };
 in {
   options.vpns = {
@@ -119,7 +125,7 @@ in {
       };
     };
 
-    systemd = let 
+    systemd = let
       keyPair = getKeyPair wgcfg.keyPair;
       wgcfg = cfg.windscribe.wireguard;
       server = (getAttr wgcfg.server servers.windscribe).wireguard;
@@ -128,7 +134,7 @@ in {
         unitConfig = {
           Description = "Automatically bring up wireguard tunnel";
           Wants = ["network-online.target"];
-          After = [ "network-online.target" "nss-lookup.target"];
+          After = ["network-online.target" "nss-lookup.target"];
         };
         wantedBy = ["multi-user.target"];
 
@@ -143,7 +149,7 @@ in {
           '';
         };
       };
-      network =  mkIf wgcfg.enable {
+      network = mkIf wgcfg.enable {
         netdevs."99-wg0" = {
           netdevConfig = {
             Kind = "wireguard";
@@ -206,7 +212,7 @@ in {
         };
       };
     };
-  
+
     age.secrets = {
       Windscribe-Atlanta-Mountain-conf = mkOVPNSecret ../../secrets/Windscribe-Atlanta-Mountain-conf.age;
       Windscribe-Atlanta-Mountain-auth = mkOVPNSecret ../../secrets/Windscribe-Atlanta-Mountain-auth.age;
