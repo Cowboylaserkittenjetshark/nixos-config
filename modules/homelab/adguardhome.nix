@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkIf mkForce mkAfter;
+  inherit (lib) mkIf mkAfter;
   providers = {
     Quad9 = {
       DoH = ["https://dns.quad9.net/dns-query"];
@@ -63,13 +63,13 @@ in {
           ];
         };
       };
-      resolved.enable = mkForce false;
+      # Runs on port 53
+      resolved.extraConfig = ''
+        DNSStubListener=no
+      '';
     };
-    networking.firewall.interfaces = mkIf config.homelab.vpnAccess.enable {
-      ${config.homelab.vpnAccess.interface} = {
-        allowedTCPPorts = [53];
-        allowedUDPPorts = [53];
-      };
+    networking = mkIf config.homelab.vpnAccess.enable {
+      firewall.interfaces.${config.homelab.vpnAccess.interface}.allowedUDPPorts = [53];
     };
 
     services.caddy.virtualHosts."dns.${config.homelab.domain}".extraConfig = ''

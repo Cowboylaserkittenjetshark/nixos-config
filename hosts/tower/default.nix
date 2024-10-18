@@ -1,8 +1,6 @@
 {
-  inputs,
-  config,
-  pkgs,
   lib,
+  config,
   ...
 }: {
   imports = [
@@ -39,7 +37,7 @@
 
   systemd.network = {
     enable = true;
-    networks."20-wired" = {
+    networks."20-main" = {
       matchConfig.Name = "enp34s0";
       networkConfig.DHCP = "yes";
     };
@@ -71,6 +69,11 @@
       interface = "tailscale0";
       address = "100.109.116.3";
     };
+  };
+
+  services.resolved = {
+    enable = true;
+    dnsovertls = "false";
   };
 
   services.openssh.vpnAccess = {

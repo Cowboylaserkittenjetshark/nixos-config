@@ -1,11 +1,10 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
-  inherit (lib) types mkOption mkEnableOption mkIf toInt getExe getExe' splitString;
-  inherit (builtins) attrNames getAttr toString concatStringsSep listToAttrs;
+  inherit (lib) types mkOption mkEnableOption mkIf toInt splitString;
+  inherit (builtins) attrNames getAttr toString concatStringsSep listToAttrs head;
 
   cfg = config.vpns;
 
@@ -104,30 +103,12 @@ in {
       value = genOvpnServer serverName;
     }) (attrNames servers.windscribe)));
 
+
     systemd = let
       keyPair = getAttr (toString wgcfg.keyPair) keyPairs;
       wgcfg = cfg.windscribe.wireguard;
       server = (getAttr wgcfg.server servers.windscribe).wireguard;
     in {
-      services.wireguard-autostart = mkIf wgcfg.autoStart {
-        unitConfig = {
-          Description = "Automatically bring up wireguard tunnel";
-          Wants = ["network-online.target"];
-          After = ["network-online.target" "nss-lookup.target"];
-        };
-        wantedBy = ["multi-user.target"];
-
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = "yes";
-          ExecStart = pkgs.writeShellScript "wireguard-autostart" ''
-            until ${getExe pkgs.dig} +tries=1 +timeout=1 nixos.org; do
-                sleep 1
-            done
-            ${getExe' pkgs.systemd "networkctl"} up wg0
-          '';
-        };
-      };
       network = mkIf wgcfg.enable {
         netdevs."99-wg0" = {
           netdevConfig = {
@@ -148,46 +129,51 @@ in {
             }
           ];
         };
-        networks."50-wg0" = {
-          matchConfig.Name = "wg0";
-          networkConfig = {
-            Address = "${server.Address}/32";
-            inherit (server) DNS;
-            DNSDefaultRoute = true;
-            Domains = "~.";
-            IPv6AcceptRA = false;
+        networks = {
+          "50-wg0" = {
+            matchConfig.Name = "wg0";
+            networkConfig = {
+              Address = "${server.Address}/32";
+              inherit (server) DNS;
+              DNSDefaultRoute = true;
+              Domains = "~.";
+              IPv6AcceptRA = false;
+            };
+
+            routingPolicyRules = [
+              {
+                FirewallMark = 8888;
+                InvertRule = true;
+                Table = 1000;
+                Priority = 10;
+              }
+              ##### TODO ##### This shouldn't be neccesary? It should actually be the IP of the endpoint, not the interface address
+              # Exclude the endpoint address
+              {
+                To = server.Address;
+                Priority = 5;
+              }
+              ##### TODO ##### Make this optional
+              # Exclude tailscale addresses
+              {
+                To = "100.64.0.0/10";
+                Table = 52;
+                Priority = 9;
+              }
+            ];
+
+            routes = [
+              {
+                Destination = "0.0.0.0/0";
+                Table = 1000;
+              }
+            ];
           };
-
-          # DNS must be available to resolve the endpoint domain, so we bring the interface up later with a service
-          # See the wireguard-autostart service defined above
-          linkConfig.ActivationPolicy = "down";
-
-          routingPolicyRules = [
-            {
-              FirewallMark = 8888;
-              InvertRule = true;
-              Table = 1000;
-              Priority = 10;
-            }
-            # Exclude the endpoint address
-            {
-              To = server.Address;
-              Priority = 5;
-            }
-            # Exclude tailscale addresses
-            {
-              To = "100.64.0.0/10";
-              Table = 52;
-              Priority = 9;
-            }
-          ];
-
-          routes = [
-            {
-              Destination = "0.0.0.0/0";
-              Table = 1000;
-            }
-          ];
+          "20-main" = {
+            networkConfig.Domains = "~${head (splitString ":" server.Endpoint)}";
+            ##### TODO ##### Should consider not setting this
+            networkConfig.DNS = "9.9.9.9";
+          };
         };
       };
     };
