@@ -13,6 +13,8 @@
       {id = "clngdbkpkpeebahjckkjfobafhncgmne";}
       # Catppuccin Mocha Theme
       {id = "bkkmolkhemgaeaeggcmfbghljjjoofoh";}
+      # Zotero Connector
+      {id = "ekhagklcjbdpajgpjgmbionohlpdbjgc";}
     ];
   };
 }
