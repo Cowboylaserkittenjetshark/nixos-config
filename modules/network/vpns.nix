@@ -103,7 +103,6 @@ in {
       value = genOvpnServer serverName;
     }) (attrNames servers.windscribe)));
 
-
     systemd = let
       keyPair = getAttr (toString wgcfg.keyPair) keyPairs;
       wgcfg = cfg.windscribe.wireguard;
