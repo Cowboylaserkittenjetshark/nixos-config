@@ -133,7 +133,7 @@ in {
           "50-wg0" = {
             matchConfig.Name = "wg0";
             networkConfig = {
-              Address = "${server.Address}/32";
+              Address = "${keyPair.Address}/32";
               inherit (server) DNS;
               DNSDefaultRoute = true;
               Domains = "~.";
@@ -150,7 +150,7 @@ in {
               ##### TODO ##### This shouldn't be neccesary? It should actually be the IP of the endpoint, not the interface address
               # Exclude the endpoint address
               {
-                To = server.Address;
+                To = keyPair.Address;
                 Priority = 5;
               }
               ##### TODO ##### Make this optional
