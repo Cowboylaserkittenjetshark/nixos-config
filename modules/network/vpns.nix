@@ -10,7 +10,7 @@
 
   servers = {
     windscribe = let
-      DNS = "10.255.255.1";
+      DNS = "10.255.255.4";
       AllowedIPs = ["0.0.0.0/0" "::/0"];
     in {
       "Dallas Ranch".wireguard = {
