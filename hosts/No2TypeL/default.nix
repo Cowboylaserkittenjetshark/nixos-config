@@ -72,7 +72,7 @@
 
   systemd.network = {
     enable = true;
-    networks."20-wireless" = {
+    networks."20-main" = {
       matchConfig.Name = "wlan0";
       networkConfig = {
         DHCP = "yes";
