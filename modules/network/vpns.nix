@@ -16,11 +16,13 @@
       "Dallas Ranch".wireguard = {
         Address = "100.67.252.231";
         Endpoint = "dfw-86-wg.whiskergalaxy.com:443";
+        PublicKey = "pASG4FD9LwOfJukT/wYbUF10gD6v8DVuv5hrNbiOnHQ=";
         inherit AllowedIPs DNS;
       };
       "Atlanta Mountain".wireguard = {
         Address = "100.80.105.61";
         Endpoint = "atl-109-wg.whiskergalaxy.com:443";
+        PublicKey = "D2Tx/zEgTy2uoH2HLp5EBIFyLkHGEhkhLMYYedpcUFw=";
         inherit AllowedIPs DNS;
       };
       "WashingtonDC Precedent" = {};
@@ -32,12 +34,10 @@
   in {
     "1" = {
       PrivateKeyFile = secrets.windscribe-wg-kp1-pk.path;
-      PublicKey = "pASG4FD9LwOfJukT/wYbUF10gD6v8DVuv5hrNbiOnHQ=";
       PresharedKeyFile = secrets.windscribe-wg-kp1-peer_psk.path;
     };
     "2" = {
       PrivateKeyFile = secrets.windscribe-wg-kp2-pk.path;
-      PublicKey = "D2Tx/zEgTy2uoH2HLp5EBIFyLkHGEhkhLMYYedpcUFw=";
       PresharedKeyFile = secrets.windscribe-wg-kp2-peer_psk.path;
     };
   };
@@ -123,8 +123,8 @@ in {
 
           wireguardPeers = [
             {
-              inherit (keyPair) PublicKey PresharedKeyFile;
-              inherit (server) Endpoint AllowedIPs;
+              inherit (keyPair) PresharedKeyFile;
+              inherit (server) Endpoint AllowedIPs PublicKey;
               PersistentKeepalive = 25;
             }
           ];
