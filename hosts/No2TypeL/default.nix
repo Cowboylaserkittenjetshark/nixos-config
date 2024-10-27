@@ -88,6 +88,16 @@
     dnsovertls = "false";
   };
 
+  vpns.windscribe = {
+    wireguard = {
+      enable = true;
+      server = "Dallas Ranch";
+      keyPair = 2;
+      autoStart = true;
+    };
+    openvpn.enable = true;
+  };
+
   # Required by IWD to decrypt 802.1x EAP-TLS TLS client keys
   boot.kernelModules = ["pkcs8_key_parser"];
 
