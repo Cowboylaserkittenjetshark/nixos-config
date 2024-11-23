@@ -91,10 +91,7 @@ in {
         enable = true;
         inherit (cfg) user group;
       };
-      jellyseerr = {
-        enable = true;
-        inherit (cfg) user group;
-      };
+      jellyseerr.enable = true;
     };
 
     users = {
