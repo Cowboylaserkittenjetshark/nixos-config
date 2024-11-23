@@ -26,6 +26,10 @@
       name = "jellyfin";
       port = "8096";
     }
+    {
+      name = "jellyseerr";
+      port = "5055";
+    }
   ];
 in {
   imports = [
@@ -84,6 +88,10 @@ in {
         inherit (cfg) user group;
       };
       jellyfin = {
+        enable = true;
+        inherit (cfg) user group;
+      };
+      jellyseerr = {
         enable = true;
         inherit (cfg) user group;
       };
