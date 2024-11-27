@@ -55,7 +55,7 @@
   programs.btop.enable = true;
 
   home.packages = with pkgs; [
-    okular
+    sioyek
     p7zip
     obsidian
   ];
