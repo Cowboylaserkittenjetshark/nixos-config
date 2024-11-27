@@ -56,6 +56,9 @@
 
   home.packages = with pkgs; [
     sioyek
+    ripgrep
+    jellyfin-mpv-shim
+    pavucontrol
     p7zip
     obsidian
   ];
