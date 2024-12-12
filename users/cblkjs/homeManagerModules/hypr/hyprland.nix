@@ -9,12 +9,16 @@
     wayland.windowManager.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      plugins = [
+        pkgs.hyprlandPlugins.hyprscroller
+      ];
     };
 
     wayland.windowManager.hyprland.extraConfig = ''
       monitor=,preferred,auto,auto
 
       general {
+        layout = ${if osConfig.systemAttributes.roles.laptop then "scroller" else "dwindle"}
         gaps_in = 5
         gaps_out = 5
         gaps_workspaces = 50
