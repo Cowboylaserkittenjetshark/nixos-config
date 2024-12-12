@@ -154,7 +154,6 @@
       windowrulev2 = pin, title:^((Save|Open) Files*)$
       windowrulev2 = size 75% 50%, title:^((Save|Open) Files*)$
 
-      windowrulev2 = opacity 0.95,class:^(chromium-browser)$
       windowrulev2 = opacity 0.80,class:^(foot)$
       windowrulev2 = opacity 0.80,title:^(Bitwarden)$
       windowrulev2 = opacity 0.80,class:^(qt5ct)$
