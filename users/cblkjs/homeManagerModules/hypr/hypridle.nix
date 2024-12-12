@@ -1,13 +1,11 @@
 {
   lib,
-  pkgs,
   config,
   osConfig,
-  inputs,
   ...
 }: let
   hyprlock = lib.getExe config.programs.hyprlock.package;
-  hyprctl = lib.getExe' inputs.hyprland.packages.${pkgs.system}.hyprland "hyprctl";
+  hyprctl = lib.getExe' config.wayland.windowManager.hyprland.package "hyprctl";
 in {
   config = lib.mkIf osConfig.systemAttributes.graphical {
     services.hypridle = {

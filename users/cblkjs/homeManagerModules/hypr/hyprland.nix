@@ -1,6 +1,5 @@
 {
   osConfig,
-  inputs,
   lib,
   pkgs,
   ...
@@ -8,7 +7,6 @@
   config = lib.mkIf osConfig.systemAttributes.graphical {
     wayland.windowManager.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       plugins = [
         pkgs.hyprlandPlugins.hyprscroller
       ];
