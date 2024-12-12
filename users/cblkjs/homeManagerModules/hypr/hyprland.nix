@@ -62,8 +62,8 @@
         animation = fade, 1, 3, md3_decel
         animation = layersIn, 1, 3, menu_decel, slide
         animation = layersOut, 1, 1.6, menu_accel
-        animation = fadeLayersIn, 1, 2, menu_decel
-        animation = fadeLayersOut, 1, 4.5, menu_accel
+        animation = fadeLayersIn, 1, 0.75, menu_decel
+        animation = fadeLayersOut, 1, 1.5, menu_accel
         animation = workspaces, 1, 7, menu_decel, slide
         animation = specialWorkspace, 1, 3, md3_decel, slidevert
       }
@@ -178,6 +178,9 @@
 
       layerrule = blur,notifications
       layerrule = ignorezero,notifications
+      layerrule = animation fade,launcher
+      layerrule = blur,launcher
+      layerrule = xray,launcher
 
       exec-once=${lib.getExe pkgs.swaybg} -m fill -i ${osConfig.desktopAssets.wallpaper}
     '';
