@@ -19,7 +19,7 @@
       // Misc
       Mod+W       { close-window; }
       Mod+Shift+Q { quit; }
-      Mod+Shift+L { spawn "hyprlock" "--immediate"; }
+      Mod+Alt+L { spawn "hyprlock" "--immediate"; }
 
       // Spawns
       Mod+Return { spawn "foot"; }
