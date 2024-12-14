@@ -11,16 +11,25 @@
         touchpad {
           tap
           natural-scroll
-          accel-speed 0.4
+          accel-speed 0.25
         }
     }
 
     binds {
-      Mod+Return { spawn "foot"; }
-      // Mod+D { spawn "tofi-drun | xargs niri msg action spawn --"; }
-      Mod+D { spawn "${ pkgs.writeShellScript "launcher.sh" "tofi-drun | xargs niri msg action spawn --"}"; }
+      // Misc
+      Mod+W       { close-window; }
+      Mod+Shift+Q { quit; }
+      Mod+Shift+L { spawn "hyprlock" "--immediate"; }
 
-      Mod+W { close-window; }
+      // Spawns
+      Mod+Return { spawn "foot"; }
+      Mod+D      { spawn "${ pkgs.writeShellScript "launcher.sh" "tofi-drun | xargs niri msg action spawn --"}"; }
+
+      // Media keys
+      XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+      XF86AudioLowerVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+      XF86AudioMute        allow-when-locked=true repeat=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+      XF86AudioMicMute     allow-when-locked=true repeat=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
       // Focus column/window
       Mod+Left  { focus-column-left; }
