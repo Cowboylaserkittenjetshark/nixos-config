@@ -5,18 +5,13 @@
   ...
 }: {
   config = lib.mkIf osConfig.systemAttributes.graphical {
-    wayland.windowManager.hyprland = {
-      enable = true;
-      plugins = [
-        pkgs.hyprlandPlugins.hyprscroller
-      ];
-    };
+    wayland.windowManager.hyprland.enable = true;
 
     wayland.windowManager.hyprland.extraConfig = ''
       monitor=,preferred,auto,auto
 
       general {
-        layout = ${if osConfig.systemAttributes.roles.laptop then "scroller" else "dwindle"}
+        layout = dwindle
         gaps_in = 5
         gaps_out = 5
         gaps_workspaces = 50

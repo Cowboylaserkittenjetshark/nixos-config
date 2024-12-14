@@ -20,6 +20,7 @@
     ./homeManagerModules/programs/chromium.nix
     ./homeManagerModules/programs/rbw.nix
     ./homeManagerModules/programs/ssh-forward-agent.nix
+    ./homeManagerModules/niri
   ];
 
   # Home Manager needs a bit of information about you and the
