@@ -1,11 +1,16 @@
-{lib, pkgs, osConfig, ...}: {
+{
+  lib,
+  pkgs,
+  osConfig,
+  ...
+}: {
   xdg.configFile."niri/config.kdl".text = ''
     prefer-no-csd
 
     output "eDP-1" {
       scale 2.0
     }
-    
+
     input {
       focus-follows-mouse
         touchpad {
@@ -23,7 +28,7 @@
 
       // Spawns
       Mod+Return { spawn "foot"; }
-      Mod+D      { spawn "${ pkgs.writeShellScript "launcher.sh" "tofi-drun | xargs niri msg action spawn --"}"; }
+      Mod+D      { spawn "${pkgs.writeShellScript "launcher.sh" "tofi-drun | xargs niri msg action spawn --"}"; }
 
       // Media keys
       XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
