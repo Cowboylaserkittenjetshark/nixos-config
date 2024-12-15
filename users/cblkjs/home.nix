@@ -20,6 +20,7 @@
     ./homeManagerModules/programs/chromium.nix
     ./homeManagerModules/programs/rbw.nix
     ./homeManagerModules/programs/ssh-forward-agent.nix
+    ./homeManagerModules/programs/spotify-player
     ./homeManagerModules/niri
   ];
 
