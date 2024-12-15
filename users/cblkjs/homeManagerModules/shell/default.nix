@@ -1,0 +1,6 @@
+{...}: {
+  imports = [
+    ./zsh
+    ./zoxide.nix
+  ];
+}

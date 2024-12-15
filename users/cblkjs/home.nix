@@ -4,24 +4,13 @@
   ...
 }: {
   imports = [
-    ./homeManagerModules/catppuccin.nix
-    ./homeManagerModules/foot.nix
-    ./homeManagerModules/shell/zsh
-    ./homeManagerModules/hypr
-    ./homeManagerModules/tofi.nix
-    ./homeManagerModules/helix.nix
     ../common/homeManagerModules/direnv.nix
-    ./homeManagerModules/git.nix
+    ./homeManagerModules/programs
+    ./homeManagerModules/shell
+    ./homeManagerModules/desktopEnvironment
+    ./homeManagerModules/catppuccin.nix
     ./homeManagerModules/gtk.nix
-    ./homeManagerModules/zoxide.nix
-    ./homeManagerModules/bat.nix
-    ./homeManagerModules/mako.nix
     ./homeManagerModules/avatar.nix
-    ./homeManagerModules/programs/chromium.nix
-    ./homeManagerModules/programs/rbw.nix
-    ./homeManagerModules/programs/ssh-forward-agent.nix
-    ./homeManagerModules/programs/spotify-player
-    ./homeManagerModules/niri
   ];
 
   # Home Manager needs a bit of information about you and the
