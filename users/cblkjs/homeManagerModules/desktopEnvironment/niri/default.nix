@@ -130,6 +130,19 @@
         skip-at-startup
     }
 
+    spawn-at-startup "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "DISPLAY" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+    spawn-at-startup "systemctl" "--user" "stop" "niri-session.target"
+    spawn-at-startup "systemctl" "--user" "start" "niri-session.target"
     spawn-at-startup "${lib.getExe pkgs.swaybg}" "-m" "fill" "-i" "${osConfig.desktopAssets.wallpaper}"
   '';
+  
+  systemd.user.targets.niri-session = {
+    Unit = {
+      Description = "Niri compositor session";
+      Documentation = [ "man:systemd.special(7)" ];
+      BindsTo = [ "graphical-session.target" ];
+      Wants = [ "graphical-session-pre.target" ];
+      After = [ "graphical-session-pre.target" ];
+    };
+  };
 }
