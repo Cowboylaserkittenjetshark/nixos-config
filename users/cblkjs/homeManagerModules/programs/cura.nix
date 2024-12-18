@@ -35,8 +35,7 @@
     Type=Application
     Categories=Graphics;3DGraphics;
   '';
-in
-{
+in {
   home.packages = [
     curaLauncher
   ];

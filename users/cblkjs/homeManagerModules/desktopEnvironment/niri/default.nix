@@ -135,14 +135,14 @@
     spawn-at-startup "systemctl" "--user" "start" "niri-session.target"
     spawn-at-startup "${lib.getExe pkgs.swaybg}" "-m" "fill" "-i" "${osConfig.desktopAssets.wallpaper}"
   '';
-  
+
   systemd.user.targets.niri-session = {
     Unit = {
       Description = "Niri compositor session";
-      Documentation = [ "man:systemd.special(7)" ];
-      BindsTo = [ "graphical-session.target" ];
-      Wants = [ "graphical-session-pre.target" ];
-      After = [ "graphical-session-pre.target" ];
+      Documentation = ["man:systemd.special(7)"];
+      BindsTo = ["graphical-session.target"];
+      Wants = ["graphical-session-pre.target"];
+      After = ["graphical-session-pre.target"];
     };
   };
 }
