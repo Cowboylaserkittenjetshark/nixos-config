@@ -7,6 +7,7 @@
     ./hardware-configuration.nix
     # Using ancient gpu :/
     ../../modules/hardware/bonaire.nix
+    ../../modules/services/octoprint.nix
   ];
 
   systemAttributes = {
