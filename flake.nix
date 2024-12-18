@@ -60,6 +60,12 @@
     };
 
     nix-gaming.url = "github:fufexan/nix-gaming";
+
+    cura = {
+      # url = "git+https://github.com/Ultimaker/Cura?ref=refs/tags/5.9.0";
+      url = "https://github.com/Ultimaker/Cura/releases/download/5.9.0/UltiMaker-Cura-5.9.0-linux-X64.AppImage";
+      flake = false;
+    };
   };
 
   outputs = inputs:

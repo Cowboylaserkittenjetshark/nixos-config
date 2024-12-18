@@ -77,6 +77,18 @@
         "type": "github"
       }
     },
+    "cura": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-aCbD7RK3wB1EVEWOjKBuKHSOLVz5IoD0Na48F5jhzXE=",
+        "type": "file",
+        "url": "https://github.com/Ultimaker/Cura/releases/download/5.9.0/UltiMaker-Cura-5.9.0-linux-X64.AppImage"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/Ultimaker/Cura/releases/download/5.9.0/UltiMaker-Cura-5.9.0-linux-X64.AppImage"
+      }
+    },
     "custom-caddy": {
       "inputs": {
         "dist": "dist",
@@ -718,6 +730,7 @@
         "agenix": "agenix",
         "catppuccin": "catppuccin",
         "catppuccin-hyprland": "catppuccin-hyprland",
+        "cura": "cura",
         "custom-caddy": "custom-caddy",
         "disko": "disko",
         "eww": "eww",

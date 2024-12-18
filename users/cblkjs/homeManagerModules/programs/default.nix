@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./cura.nix
     ./chromium.nix
     ./rbw.nix
     ./ssh-forward-agent.nix
