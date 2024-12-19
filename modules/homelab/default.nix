@@ -11,6 +11,7 @@ in {
     ./backups.nix
     ./mediaserver
     ./adguardhome.nix
+    ./octoprint.nix
   ];
 
   options.homelab = {
