@@ -22,7 +22,7 @@ in {
 
       caddy.virtualHosts."octoprint.${domain}".extraConfig = ''
           import localOnly
-          reverse_proxy ${opCfg.host}:${opCfg.port}
+          reverse_proxy ${opCfg.host}:${toString opCfg.port}
       '';
     };
   };
