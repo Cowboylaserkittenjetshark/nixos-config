@@ -3,10 +3,12 @@
   config,
   ...
 }: let
+  inherit (lib) mkIf;
   inherit (config.homelab) domain enable;
   opCfg = config.services.octoprint;
+  opDomain = "octoprint.${domain}";
 in {
-  config = lib.mkIf enable {
+  config = mkIf enable {
     services = {
       octoprint = {
         enable = true;
@@ -20,10 +22,15 @@ in {
           ];
       };
 
-      caddy.virtualHosts."octoprint.${domain}".extraConfig = ''
+      caddy.virtualHosts."${opDomain}".extraConfig = ''
         import localOnly
         reverse_proxy ${opCfg.host}:${toString opCfg.port}
       '';
+    };
+
+    networking = {
+      hosts."${opCfg.host}" = [ "${opDomain}" ];
+      firewall.interfaces = mkIf config.homelab.vpnAccess.enable {${config.homelab.vpnAccess.interface}.allowedTCPPorts = opCfg.port; };
     };
   };
 }
