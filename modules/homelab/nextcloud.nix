@@ -94,6 +94,7 @@ in {
       config = {
         adminuser = "admin";
         adminpassFile = config.age.secrets.nextcloud-admin-pass.path;
+        dbtype = "sqlite";
       };
       settings = {
         log_type = "file";
