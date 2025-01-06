@@ -5,6 +5,7 @@
 }: {
   imports = [
     ../common/homeManagerModules/direnv.nix
+    ../common/homeManagerModules/zen.nix
     ./homeManagerModules/programs
     ./homeManagerModules/shell
     ./homeManagerModules/desktopEnvironment
