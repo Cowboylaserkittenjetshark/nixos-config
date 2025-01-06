@@ -30,7 +30,7 @@ in {
 
     networking = {
       hosts."${opCfg.host}" = ["${opDomain}"];
-      firewall.interfaces = mkIf config.homelab.vpnAccess.enable {${config.homelab.vpnAccess.interface}.allowedTCPPorts = opCfg.port;};
+      firewall.interfaces = mkIf config.homelab.vpnAccess.enable {${config.homelab.vpnAccess.interface}.allowedTCPPorts = [opCfg.port];};
     };
   };
 }
