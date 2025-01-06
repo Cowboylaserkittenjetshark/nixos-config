@@ -4,7 +4,7 @@
   ];
   catppuccin = {
     enable = true;
-    pointerCursor.enable = true;
+    cursors.enable = true;
     flavor = "mocha";
     accent = "green";
   };
