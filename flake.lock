@@ -136,11 +136,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1736184969,
-        "narHash": "sha256-TkeElu1Yg9NCKMbTRb+WeVBjNpYA2D9k7DorVRIKbpw=",
+        "lastModified": 1736581587,
+        "narHash": "sha256-927/vXo0x45xa8zFEECzkgVoX0fhpKZoESRzVZ1Og80=",
         "owner": "Cowboylaserkittenjetshark",
         "repo": "nixcaddy",
-        "rev": "6510a13e9b2554c8b12499fec2757dc48bc2ba03",
+        "rev": "02e28ab5b745930359dd1c61d44ce5e78315e669",
         "type": "github"
       },
       "original": {
@@ -195,11 +195,11 @@
     "dist": {
       "flake": false,
       "locked": {
-        "lastModified": 1735716344,
-        "narHash": "sha256-28ahonJ0qeynoqf02gws0LstaL4E08dywSJ8s3tgEDI=",
+        "lastModified": 1736362936,
+        "narHash": "sha256-us1TnszA/10OMVSDsNvzRb6mcM4eMR3pQ5EF4ggA958=",
         "owner": "caddyserver",
         "repo": "dist",
-        "rev": "1ae33b176567cc41823485fcd40a5901d77df66c",
+        "rev": "cc3d25545a2d88cb8dd3f8353d4285890bcb3e10",
         "type": "github"
       },
       "original": {
