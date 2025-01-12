@@ -168,8 +168,11 @@ in {
               }
             ];
           };
-          # Resolve the enpoint address over the main interface
-          "20-main".networkConfig.Domains = "~${head (splitString ":" server.Endpoint)}";
+          "20-main" = {
+            networkConfig.Domains = "~${head (splitString ":" server.Endpoint)}";
+            ##### TODO ##### Should consider not setting this
+            networkConfig.DNS = "9.9.9.9";
+          };
         };
       };
     };
