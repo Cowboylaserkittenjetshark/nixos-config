@@ -103,6 +103,14 @@ in {
         maintenance_window_start = 1;
         default_phone_region = "US";
       };
+      poolSettings = {
+        pm = "dynamic";
+        "pm.max_children" = "120";
+        "pm.max_requests" = "500";
+        "pm.max_spare_servers" = "90";
+        "pm.min_spare_servers" = "30";
+        "pm.start_servers" = "30";
+      };
     };
     age.secrets.nextcloud-admin-pass = {
       file = ../../secrets/nextcloud-admin-pass.age;
