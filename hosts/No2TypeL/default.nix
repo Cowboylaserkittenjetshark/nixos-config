@@ -85,7 +85,7 @@
 
   services.resolved = {
     enable = true;
-    dnsovertls = "false";
+    dnsovertls = "true";
   };
 
   vpns.windscribe = {

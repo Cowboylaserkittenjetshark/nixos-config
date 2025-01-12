@@ -62,7 +62,7 @@
 
   services.resolved = {
     enable = true;
-    dnsovertls = "false";
+    dnsovertls = "true";
   };
 
   # Set your time zone.
