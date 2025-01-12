@@ -137,6 +137,8 @@ in {
               DNSDefaultRoute = true;
               Domains = "~.";
               IPv6AcceptRA = false;
+              # The internal DNS resolvers of some VPNs (Windscribe) do not support DoTLS
+              DNSOverTLS = false;
             };
 
             routingPolicyRules = [
@@ -170,8 +172,9 @@ in {
           };
           "20-main" = {
             networkConfig.Domains = "~${head (splitString ":" server.Endpoint)}";
-            ##### TODO ##### Should consider not setting this
-            networkConfig.DNS = "9.9.9.9";
+            networkConfig.DNS = [
+              "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net"
+            ];
           };
         };
       };
