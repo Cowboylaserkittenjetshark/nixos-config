@@ -42,10 +42,10 @@ in {
               password = "@adguard-home-webui-password@";
             }
           ];
-          http.address = "0.0.0.0:3000";
+          http.address = "127.0.0.1:3000";
           language = "en";
           dns = with providers; {
-            bind_hosts = ["0.0.0.0"];
+            bind_hosts = ["127.0.0.1"];
             port = 53;
             bootstrap_dns = Quad9.IPv4 ++ ControlD.IPv4;
             upstream_dns = Quad9.DoH ++ ControlD.DoH;
