@@ -1,9 +1,10 @@
 {
+  pkgs,
   lib,
   config,
   ...
 }: let
-  inherit (lib) types mkOption mkEnableOption mkIf toInt splitString;
+  inherit (lib) types mkOption mkEnableOption mkIf toInt splitString getExe getExe';
   inherit (builtins) attrNames getAttr toString concatStringsSep listToAttrs head;
 
   cfg = config.vpns;
@@ -82,6 +83,7 @@ in {
           default = null;
         };
         autoStart = mkEnableOption "automatically starting the wireguard tunnel";
+        hostileNetworks = mkEnableOption "additional measures to try to bring tunnels up on hostile networks";
       };
       openvpn = {
         enable = mkEnableOption "windscribe openvpn tunnels.";
@@ -98,16 +100,45 @@ in {
   };
 
   config = {
-    services.openvpn.servers = mkIf cfg.windscribe.openvpn.enable (listToAttrs (map (serverName: {
-      name = "Windscribe-${hyphenateServerName serverName}";
-      value = genOvpnServer serverName;
-    }) (attrNames servers.windscribe)));
+    services = {
+      openvpn.servers = mkIf cfg.windscribe.openvpn.enable (listToAttrs (map (serverName: {
+        name = "Windscribe-${hyphenateServerName serverName}";
+        value = genOvpnServer serverName;
+      }) (attrNames servers.windscribe)));
+      dnscrypt-proxy2 = {
+        enable = true;
+        settings = {
+          listen_addresses = ["127.0.0.55:53"];
+          log_level = 0;
+        };
+      };
+    };
 
     systemd = let
       keyPair = getAttr (toString wgcfg.keyPair) keyPairs;
       wgcfg = cfg.windscribe.wireguard;
       server = (getAttr wgcfg.server servers.windscribe).wireguard;
+      endpointDomain = head (splitString ":" server.Endpoint);
     in {
+      services.wireguard-autostart = mkIf (cfg.windscribe.wireguard.hostileNetworks && cfg.windscribe.wireguard.autoStart) {
+        unitConfig = {
+          Description = "Automatically bring up wireguard tunnel";
+          Wants = ["network-online.target"];
+          After = ["network-online.target" "nss-lookup.target"];
+        };
+        wantedBy = ["sysinit.target"];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = "yes";
+          ExecStart = pkgs.writeShellScript "wireguard-autostart" ''
+            until resolvectl query ${endpointDomain}; do
+                echo "Failed to resolve endpoint"
+                sleep 1
+            done
+            ${getExe' pkgs.systemd "networkctl"} up wg0
+          '';
+        };
+      };
       network = mkIf wgcfg.enable {
         netdevs."99-wg0" = {
           netdevConfig = {
@@ -141,6 +172,14 @@ in {
               DNSOverTLS = false;
             };
 
+            # Some networks hijack DNS and prevent resolution of the tunnel endpoint address
+            # This can usually be circumvented with DNS over TLS, however systemd will always
+            # use plain DNS when starting the tunnel for the first time
+            # Instead of autostarting through the ActivationPolicy mechanism, we use a service
+            # to start once DoT has become available
+            # See the wireguard-autostart service defined above
+            linkConfig.ActivationPolicy = mkIf (cfg.windscribe.wireguard.hostileNetworks || !cfg.windscribe.wireguard.autoStart) "down";
+
             routingPolicyRules = [
               {
                 FirewallMark = 8888;
@@ -171,13 +210,15 @@ in {
             ];
           };
           "20-main" = {
-            networkConfig.Domains = "~${head (splitString ":" server.Endpoint)}";
+            networkConfig.Domains = "~${endpointDomain}";
             networkConfig = {
               DNS = [
-                "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net"
+                # "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net"
+                "127.0.0.55" # dnscrypt-proxy
               ];
-              DNSOverTLS = true;
-              DNSSEC = true;
+              # Must be disabled for dnscrypt-proxy
+              DNSOverTLS = mkIf cfg.windscribe.wireguard.hostileNetworks false;
+              DNSSEC = mkIf cfg.windscribe.wireguard.hostileNetworks false;
             };
           };
         };

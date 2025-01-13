@@ -91,6 +91,7 @@
   vpns.windscribe = {
     wireguard = {
       enable = true;
+      hostileNetworks = true;
       server = "Dallas Ranch";
       keyPair = 2;
       autoStart = true;
