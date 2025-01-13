@@ -63,10 +63,7 @@ in {
           ];
         };
       };
-      # Runs on port 53
-      resolved.extraConfig = ''
-        DNSStubListener=no
-      '';
+      resolved.fallbackDns = [];
     };
     networking = mkIf config.homelab.vpnAccess.enable {
       firewall.interfaces.${config.homelab.vpnAccess.interface}.allowedUDPPorts = [53];
