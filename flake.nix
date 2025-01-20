@@ -62,12 +62,13 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     cura = {
-      # url = "git+https://github.com/Ultimaker/Cura?ref=refs/tags/5.9.0";
       url = "https://github.com/Ultimaker/Cura/releases/download/5.9.0/UltiMaker-Cura-5.9.0-linux-X64.AppImage";
       flake = false;
     };
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+
+    waveforms.url = "github:liff/waveforms-flake";
   };
 
   outputs = inputs:

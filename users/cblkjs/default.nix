@@ -13,6 +13,6 @@
     hashedPasswordFile = "/persist/secrets/cblkjs-passwd";
     shell = pkgs.zsh;
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "plugdev" ];
   };
 }
