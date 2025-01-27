@@ -213,7 +213,8 @@ in {
             networkConfig.Domains = "~${endpointDomain}";
             networkConfig = {
               DNS = [
-                "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net"
+                "9.9.9.9#dns.quad9.net"
+                "149.112.112.112#dns.quad9.net"
                 # "127.0.0.55" # dnscrypt-proxy
               ];
               # Must be disabled for dnscrypt-proxy
