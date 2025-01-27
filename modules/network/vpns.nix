@@ -105,13 +105,13 @@ in {
         name = "Windscribe-${hyphenateServerName serverName}";
         value = genOvpnServer serverName;
       }) (attrNames servers.windscribe)));
-      dnscrypt-proxy2 = {
-        enable = true;
-        settings = {
-          listen_addresses = ["127.0.0.55:53"];
-          log_level = 0;
-        };
-      };
+      # dnscrypt-proxy2 = {
+      #   enable = true;
+      #   settings = {
+      #     listen_addresses = ["127.0.0.55:53"];
+      #     log_level = 0;
+      #   };
+      # };
     };
 
     systemd = let
@@ -213,12 +213,12 @@ in {
             networkConfig.Domains = "~${endpointDomain}";
             networkConfig = {
               DNS = [
-                # "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net"
-                "127.0.0.55" # dnscrypt-proxy
+                "9.9.9.9#dns.quad9.net" "149.112.112.112#dns.quad9.net"
+                # "127.0.0.55" # dnscrypt-proxy
               ];
               # Must be disabled for dnscrypt-proxy
-              DNSOverTLS = mkIf cfg.windscribe.wireguard.hostileNetworks false;
-              DNSSEC = mkIf cfg.windscribe.wireguard.hostileNetworks false;
+              DNSOverTLS = mkIf cfg.windscribe.wireguard.hostileNetworks true;
+              DNSSEC = mkIf cfg.windscribe.wireguard.hostileNetworks true;
             };
           };
         };
