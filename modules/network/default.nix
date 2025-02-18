@@ -33,7 +33,7 @@
   services = {
     resolved = {
       enable = true;
-      dnsovertls = "true";
+      dnsovertls = "false"; # Must be off for dnscrypt proxy
       fallbackDns = [];
     };
 
@@ -45,7 +45,4 @@
       };
     };
   };
-  
-
-  
 }

@@ -209,18 +209,9 @@ in {
               }
             ];
           };
-          "20-main" = {
-            networkConfig.Domains = "~${endpointDomain}";
-            networkConfig = {
-              DNS = [
-                "9.9.9.9#dns.quad9.net"
-                "149.112.112.112#dns.quad9.net"
-                # "127.0.0.55" # dnscrypt-proxy
-              ];
-              # Must be disabled for dnscrypt-proxy
-              DNSOverTLS = mkIf cfg.windscribe.wireguard.hostileNetworks true;
-              DNSSEC = mkIf cfg.windscribe.wireguard.hostileNetworks true;
-            };
+          "20-main".networkConfig = {
+            Domains = "~${endpointDomain}";
+            DNS = ["127.0.0.55"]; # dnscrypt
           };
         };
       };
