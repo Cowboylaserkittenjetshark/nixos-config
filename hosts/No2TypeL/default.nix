@@ -1,7 +1,6 @@
 {
   inputs,
   config,
-  pkgs,
   lib,
   ...
 }: {
@@ -52,41 +51,9 @@
     cryptDeviceName = config.disko.devices.disk.main.content.partitions.luks.content.name;
   };
 
-  networking = {
-    hostName = "No2TypeL";
-    useNetworkd = true;
-    nftables.enable = true;
-    firewall.enable = true;
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        IPv6.Enabled = true;
-        Settings.AutoConnect = true;
-      };
-    };
-    nameservers = [
-      "9.9.9.9#dns.quad9.net"
-      "149.112.112.112#dns.quad9.net"
-    ];
-  };
+  networking.hostName = "No2TypeL";
 
-  systemd.network = {
-    enable = true;
-    networks."20-main" = {
-      matchConfig.Name = "wlan0";
-      networkConfig = {
-        DHCP = "yes";
-        IgnoreCarrierLoss = "3s";
-      };
-      dhcpV4Config.UseDNS = false;
-      dhcpV6Config.UseDNS = false;
-    };
-  };
-
-  services.resolved = {
-    enable = true;
-    dnsovertls = "true";
-  };
+  systemd.network.networks."20-main".matchConfig.Name = "wlan0";
 
   vpns.windscribe = {
     wireguard = {

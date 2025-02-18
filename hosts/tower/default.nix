@@ -20,27 +20,9 @@
     ];
   };
 
-  networking = {
-    hostName = "tower";
-    useNetworkd = true;
-    nftables.enable = true;
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [];
-      allowedUDPPorts = [];
-    };
-    nameservers = ["127.0.0.1"];
-  };
+  networking.hostName = "tower";
 
-  systemd.network = {
-    enable = true;
-    networks."20-main" = {
-      matchConfig.Name = "enp34s0";
-      networkConfig.DHCP = "yes";
-      dhcpV4Config.UseDNS = false;
-      dhcpV6Config.UseDNS = false;
-    };
-  };
+  systemd.network.networks."20-main".matchConfig.Name = "enp34s0";
 
   vpns.windscribe = {
     wireguard = {
@@ -69,11 +51,6 @@
       interface = "tailscale0";
       address = "100.109.116.3";
     };
-  };
-
-  services.resolved = {
-    enable = true;
-    dnsovertls = "true";
   };
 
   services.openssh.vpnAccess = {

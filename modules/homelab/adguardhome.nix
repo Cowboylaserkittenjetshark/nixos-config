@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkIf mkAfter;
+  inherit (lib) mkIf mkAfter mkForce;
   inherit (config.homelab) vpnAccess domain;
   providers = {
     Quad9 = {
@@ -66,8 +66,9 @@ in {
       };
       resolved.fallbackDns = [];
     };
-    networking = mkIf vpnAccess.enable {
-      firewall.interfaces.${vpnAccess.interface}.allowedUDPPorts = [53];
+    networking = {
+      nameservers = mkForce ["127.0.0.1"];
+      firewall.interfaces.${vpnAccess.interface}.allowedUDPPorts = mkIf vpnAccess.enable [53];
     };
 
     services.caddy.virtualHosts."dns.${domain}".extraConfig = ''
