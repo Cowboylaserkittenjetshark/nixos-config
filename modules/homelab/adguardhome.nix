@@ -5,6 +5,7 @@
   ...
 }: let
   inherit (lib) mkIf mkAfter;
+  inherit (config.homelab) vpnAccess domain;
   providers = {
     Quad9 = {
       DoH = ["https://dns.quad9.net/dns-query"];
@@ -45,31 +46,31 @@ in {
           http.address = "127.0.0.1:3000";
           language = "en";
           dns = with providers; {
-            bind_hosts = ["127.0.0.1"];
+            bind_hosts = ["127.0.0.1"] ++ (if vpnAccess.enable then [vpnAccess.address] else []);
             port = 53;
             bootstrap_dns = Quad9.IPv4 ++ ControlD.IPv4;
             upstream_dns = Quad9.DoH ++ ControlD.DoH;
             fallback_dns = Quad9.IPv4 ++ ControlD.IPv4 ++ Cloudflare.all;
           };
-          filtering.rewrites = mkIf config.homelab.vpnAccess.enable [
+          filtering.rewrites = mkIf vpnAccess.enable [
             {
-              domain = "*.${config.homelab.domain}";
-              answer = "${config.homelab.vpnAccess.address}";
+              domain = "*.${domain}";
+              answer = "${vpnAccess.address}";
             }
             {
-              domain = "${config.homelab.domain}";
-              answer = "${config.homelab.vpnAccess.address}";
+              domain = "${domain}";
+              answer = "${vpnAccess.address}";
             }
           ];
         };
       };
       resolved.fallbackDns = [];
     };
-    networking = mkIf config.homelab.vpnAccess.enable {
-      firewall.interfaces.${config.homelab.vpnAccess.interface}.allowedUDPPorts = [53];
+    networking = mkIf vpnAccess.enable {
+      firewall.interfaces.${vpnAccess.interface}.allowedUDPPorts = [53];
     };
 
-    services.caddy.virtualHosts."dns.${config.homelab.domain}".extraConfig = ''
+    services.caddy.virtualHosts."dns.${domain}".extraConfig = ''
       import localOnly
       reverse_proxy 127.0.0.1:3000
     '';
