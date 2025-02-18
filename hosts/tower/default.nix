@@ -37,6 +37,8 @@
     networks."20-main" = {
       matchConfig.Name = "enp34s0";
       networkConfig.DHCP = "yes";
+      dhcpV4Config.UseDNS = false;
+      dhcpV6Config.UseDNS = false;
     };
   };
 
