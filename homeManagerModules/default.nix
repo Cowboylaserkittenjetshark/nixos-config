@@ -4,14 +4,12 @@
   ...
 }: {
   imports = [
-    ../common/homeManagerModules/direnv.nix
-    ../common/homeManagerModules/zen.nix
-    ./homeManagerModules/programs
-    ./homeManagerModules/shell
-    ./homeManagerModules/desktopEnvironment
-    ./homeManagerModules/catppuccin.nix
-    ./homeManagerModules/gtk.nix
-    ./homeManagerModules/avatar.nix
+    ./desktopEnvironment
+    ./programs
+    ./shell
+    ./avatar.nix
+    ./catppuccin.nix
+    ./gtk.nix
   ];
 
   # Home Manager needs a bit of information about you and the

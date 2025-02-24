@@ -6,7 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     # Using ancient gpu :/
-    ../../modules/hardware/bonaire.nix
+    ../../nixosModules/hardware/bonaire.nix
   ];
 
   systemAttributes = {

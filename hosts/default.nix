@@ -7,8 +7,7 @@
   inherit (inputs.nix-on-droid.lib) nixOnDroidConfiguration;
   withCommonModules = path: ([path]
     ++ [
-      ../modules
-      ../users/cblkjs
+      ../nixosModules
       inputs.disko.nixosModules.disko
       inputs.lanzaboote.nixosModules.lanzaboote
     ]);

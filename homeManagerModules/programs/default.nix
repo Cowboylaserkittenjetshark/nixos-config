@@ -11,5 +11,6 @@
     ./bat.nix
     ./mako.nix
     ./git.nix
+    ./zen.nix
   ];
 }

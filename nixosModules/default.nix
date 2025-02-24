@@ -1,12 +1,8 @@
 {
-  lib,
   pkgs,
   ...
 }: {
   imports = [
-    ./catppuccin.nix
-    ./systemAttributes.nix
-
     ./authentication
     ./desktopEnvironment
     ./gaming
@@ -16,6 +12,11 @@
     ./nix
     ./programs
     ./services
+    ./catppuccin.nix
+    ./home-manager.nix
+    ./systemAttributes.nix
+    ./users.nix
+    ./zsh.nix
   ];
 
   services.upower.enable = true;

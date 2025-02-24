@@ -1,14 +1,11 @@
 {
-  inputs,
   config,
-  pkgs,
-  lib,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
     # Using ancient nvidia gpu :/
-    ../../modules/hardware/nvidia.nix
+    ../../nixosModules/hardware/nvidia.nix
     ./disk-config.nix
   ];
 
