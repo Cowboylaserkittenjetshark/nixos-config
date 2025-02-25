@@ -85,6 +85,8 @@
           packages = with pkgs; [
             nil
             just
+            statix
+            deadnix
           ];
         };
         formatter = pkgs.alejandra;
