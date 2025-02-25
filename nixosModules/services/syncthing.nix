@@ -4,7 +4,7 @@
   ...
 }: let
   devices =
-    (lib.filterAttrs (device: attrs: device != config.networking.hostName) {
+    (lib.filterAttrs (device: _attrs: device != config.networking.hostName) {
       tower.id = "7ISVGVU-5KITNKD-7SJSM4L-ISNYXCZ-HIRCPFJ-CUMCTSH-WBNYXG3-J6YS2QU";
       lap.id = "2VTLDXN-ZCQG4SM-RJMQ7DV-HIK3KLS-4P2IJ5X-PTGPKMV-XHILX4U-YBVBQQK";
       No2TypeL.id = "6NQRLFY-5TQILNO-OLDZ6PI-5N6UOWX-RNS4DP4-TSNJVRV-HVIUZCP-USLWBQY";

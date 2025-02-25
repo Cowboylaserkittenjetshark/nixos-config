@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  inherit (lib) types mkOption mkEnableOption mkIf toInt splitString getExe getExe';
+  inherit (lib) types mkOption mkEnableOption mkIf toInt splitString getExe';
   inherit (builtins) attrNames getAttr toString concatStringsSep listToAttrs head;
 
   cfg = config.vpns;

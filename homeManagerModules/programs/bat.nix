@@ -1,7 +1,5 @@
 {
-  inputs,
   pkgs,
-  lib,
   ...
 }: {
   programs.bat = {
