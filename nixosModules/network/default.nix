@@ -1,10 +1,10 @@
-{ ...}: {
+{...}: {
   imports = [
     ./vpns.nix
     ./tailscale.nix
     ./sshd.nix
   ];
-  
+
   networking = {
     useNetworkd = true;
     nftables.enable = true;
@@ -17,7 +17,7 @@
     };
     nameservers = ["127.0.0.55"];
   };
-  
+
   systemd.network = {
     enable = true;
     networks."20-main" = {

@@ -46,7 +46,13 @@ in {
           http.address = "127.0.0.1:3000";
           language = "en";
           dns = with providers; {
-            bind_hosts = ["127.0.0.1"] ++ (if vpnAccess.enable then [vpnAccess.address] else []);
+            bind_hosts =
+              ["127.0.0.1"]
+              ++ (
+                if vpnAccess.enable
+                then [vpnAccess.address]
+                else []
+              );
             port = 53;
             bootstrap_dns = Quad9.IPv4 ++ ControlD.IPv4;
             upstream_dns = Quad9.DoH ++ ControlD.DoH;

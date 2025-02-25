@@ -9,7 +9,7 @@
   systemAttributes.roles.phone = true;
   user.shell = "${pkgs.zsh}/bin/zsh";
   home-manager = {
-    config = { ...}: {
+    config = {...}: {
       system.os = "Nix-on-Droid";
       home.stateVersion = "23.05";
       imports = [

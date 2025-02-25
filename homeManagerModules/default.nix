@@ -44,9 +44,7 @@
     ncspot.enable = true;
     eza.enable = true;
     btop.enable = true;
-    
   };
-
 
   home.packages = with pkgs; [
     sioyek

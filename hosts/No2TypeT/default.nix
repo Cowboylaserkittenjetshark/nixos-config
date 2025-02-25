@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: {
+{config, ...}: {
   imports = [
     ./hardware-configuration.nix
     # Using ancient nvidia gpu :/

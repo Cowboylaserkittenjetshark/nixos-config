@@ -85,11 +85,11 @@ in {
 
         # Enable file server for static files
         file_server
-      '';      
+      '';
     };
     users.groups.nextcloud.members = [caddyCfg.user];
     # * End nginx disable *
-    
+
     services.nextcloud = {
       enable = true;
       package = pkgs.nextcloud30;

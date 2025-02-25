@@ -1,7 +1,4 @@
-{
-  lib,
-  ...
-}: {
+{lib, ...}: {
   config = lib.mkIf false {
     services = {
       printing.enable = true; # enables printing support via the CUPS daemon

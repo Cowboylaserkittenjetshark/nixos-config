@@ -77,10 +77,7 @@
         ./hosts
       ];
       systems = ["x86_64-linux"];
-      perSystem = {
-        pkgs,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nil
