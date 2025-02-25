@@ -9,9 +9,11 @@ in {
     services.openssh = {
       enable = true;
       # require public key authentication for better security
-      settings.PasswordAuthentication = false;
-      settings.KbdInteractiveAuthentication = false;
-      settings.PermitRootLogin = "no";
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+      };
       # make sure no ports are open by default
       openFirewall = mkForce false;
     };

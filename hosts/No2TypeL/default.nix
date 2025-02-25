@@ -21,29 +21,38 @@
   };
 
   programs.light.enable = true;
-  services.actkbd = {
-    enable = true;
-    bindings = [
-      {
-        keys = [224];
-        events = ["key"];
-        command = "/run/current-system/sw/bin/light -U 10";
-      }
-      {
-        keys = [225];
-        events = ["key"];
-        command = "/run/current-system/sw/bin/light -A 10";
-      }
-    ];
+
+  hardware.bluetooth.enable = true;
+
+  services = {
+    actkbd = {
+      enable = true;
+      bindings = [
+        {
+          keys = [224];
+          events = ["key"];
+          command = "/run/current-system/sw/bin/light -U 10";
+        }
+        {
+          keys = [225];
+          events = ["key"];
+          command = "/run/current-system/sw/bin/light -A 10";
+        }
+      ];
+    };
+    fwupd.enable = true;
+    blueman.enable = true;
   };
 
-  boot.loader.systemd-boot.enable = lib.mkForce false;
-  boot.lanzaboote = {
-    enable = true;
-    pkiBundle = "/etc/secureboot";
+  boot = {
+    loader.systemd-boot.enable = lib.mkForce false;
+    lanzaboote = {
+      enable = true;
+      pkiBundle = "/etc/secureboot";
+    };
+    # Required by IWD to decrypt 802.1x EAP-TLS TLS client keys
+    kernelModules = ["pkcs8_key_parser"];
   };
-
-  services.fwupd.enable = true;
 
   impermanence = {
     enable = true;
@@ -66,13 +75,7 @@
     openvpn.enable = true;
   };
 
-  # Required by IWD to decrypt 802.1x EAP-TLS TLS client keys
-  boot.kernelModules = ["pkcs8_key_parser"];
-
   time.timeZone = "America/New_York";
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 
   desktopAssets = {
     wallpaper = "${config.age.secrets.Forest-Kingdom-Dithered-Mocha.path}";

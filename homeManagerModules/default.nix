@@ -31,18 +31,22 @@
 
   avatar = ./meow.png;
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
 
-  programs.gpg = {
-    enable = true;
-    homedir = "${config.xdg.dataHome}/gnupg";
+    gpg = {
+      enable = true;
+      homedir = "${config.xdg.dataHome}/gnupg";
+    };
+
+    nnn.enable = true;
+    ncspot.enable = true;
+    eza.enable = true;
+    btop.enable = true;
+    
   };
 
-  programs.nnn.enable = true;
-  programs.ncspot.enable = true;
-  programs.eza.enable = true;
-  programs.btop.enable = true;
 
   home.packages = with pkgs; [
     sioyek

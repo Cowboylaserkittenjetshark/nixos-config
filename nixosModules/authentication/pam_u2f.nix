@@ -1,4 +1,4 @@
-{...}: {
+_: {
   security.pam = {
     u2f.settings.cue = true;
     services = {

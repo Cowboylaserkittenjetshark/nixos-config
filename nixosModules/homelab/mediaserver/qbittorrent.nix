@@ -98,7 +98,7 @@ in {
 
     users.users = mkIf (cfg.user == "qbittorrent") {
       qbittorrent = {
-        group = cfg.group;
+        inherit (cfg) group;
         isSystemUser = true;
       };
     };

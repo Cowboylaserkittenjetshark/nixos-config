@@ -59,19 +59,20 @@
     };
   };
 
-  services.resolved = {
-    enable = true;
-    dnsovertls = "true";
+  hardware.bluetooth.enable = true;
+
+  services = {
+    resolved = {
+      enable = true;
+      dnsovertls = "true";
+    };
+    blueman.enable = true;
+    tlp.enable = true;
+    thermald.enable = true;
   };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
-
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
-
-  services.tlp.enable = true;
-  services.thermald.enable = true;
 
   desktopAssets = {
     wallpaper = ../amusementpark.png;

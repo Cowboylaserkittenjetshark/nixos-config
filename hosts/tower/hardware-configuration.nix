@@ -11,47 +11,48 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot = {
+    initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
+  };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
-    fsType = "btrfs";
-    options = ["subvol=root"];
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
+      fsType = "btrfs";
+      options = ["subvol=root"];
+    };
+    "/nix" = {
+      device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
+      fsType = "btrfs";
+      options = ["subvol=nix"];
+    };
+    "/swap" = {
+      device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
+      fsType = "btrfs";
+      options = ["subvol=swap"];
+    };
+    "/var" = {
+      device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
+      fsType = "btrfs";
+      options = ["subvol=var"];
+    };
+
+    "/home" = {
+      device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
+      fsType = "btrfs";
+      options = ["subvol=home"];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-uuid/F847-0DA6";
+      fsType = "vfat";
+    };
   };
 
   boot.initrd.luks.devices."data".device = "/dev/disk/by-uuid/350a7bf9-b1e4-486d-a627-7c5ecc30b6a4";
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
-    fsType = "btrfs";
-    options = ["subvol=nix"];
-  };
-
-  fileSystems."/swap" = {
-    device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
-    fsType = "btrfs";
-    options = ["subvol=swap"];
-  };
-
-  fileSystems."/var" = {
-    device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
-    fsType = "btrfs";
-    options = ["subvol=var"];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
-    fsType = "btrfs";
-    options = ["subvol=home"];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/F847-0DA6";
-    fsType = "vfat";
-  };
 
   swapDevices = [];
 

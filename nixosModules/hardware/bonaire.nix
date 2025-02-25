@@ -1,4 +1,4 @@
-{...}: {
+_: {
   # Enables options to fix legacy amd gpus
   # I use this for a FirePro W5100 (Bonaire), but it should work for any Southern/Sea Islands gpus
   boot.extraModprobeConfig = ''

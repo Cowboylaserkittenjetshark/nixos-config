@@ -1,4 +1,4 @@
-{...}: let
+_: let
   commonSubvolMountOptions = [
     "compress=zstd"
     "noatime"
