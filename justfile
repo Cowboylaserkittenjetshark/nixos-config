@@ -3,8 +3,10 @@ update: abortIfDirty && (commit "chore" "update lock file")
     nix flake update
     git add flake.lock
 
-# Format all nix files
-format: abortIfDirty && (commit "chore" "format")
+# Format and fixup all nix files
+tidy: abortIfDirty && (commit "chore" "format")
+    deadnix -e
+    statix fix
     nix fmt
     git add -u
 
