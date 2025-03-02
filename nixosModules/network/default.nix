@@ -1,4 +1,4 @@
-{...}: {
+_: {
   imports = [
     ./vpns.nix
     ./tailscale.nix

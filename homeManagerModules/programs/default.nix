@@ -1,4 +1,4 @@
-{...}: {
+_: {
   imports = [
     ./cura.nix
     ./chromium.nix

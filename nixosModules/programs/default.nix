@@ -1,4 +1,4 @@
-{...}: {
+_: {
   imports = [
     ./chromium.nix
     ./gnupg.nix
