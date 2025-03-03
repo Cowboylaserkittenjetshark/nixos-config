@@ -69,6 +69,11 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     waveforms.url = "github:liff/waveforms-flake";
+
+    zsh-helix-mode = {
+      url = "github:multirious/zsh-helix-mode/f0b48531169a3713fce7b20eaeabdf97c27dce67";
+      flake = false;
+    };
   };
 
   outputs = inputs:

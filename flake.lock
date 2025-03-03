@@ -761,7 +761,8 @@
         "nixpkgs": "nixpkgs_3",
         "rust-overlay": "rust-overlay_2",
         "waveforms": "waveforms",
-        "zen-browser": "zen-browser"
+        "zen-browser": "zen-browser",
+        "zsh-helix-mode": "zsh-helix-mode"
       }
     },
     "rust-overlay": {
@@ -884,6 +885,23 @@
       "original": {
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
+        "type": "github"
+      }
+    },
+    "zsh-helix-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1740201284,
+        "narHash": "sha256-jzIsrOADOemiUJLGPqHVTXzs2B6nur3kF0tid8UJNm8=",
+        "owner": "multirious",
+        "repo": "zsh-helix-mode",
+        "rev": "f0b48531169a3713fce7b20eaeabdf97c27dce67",
+        "type": "github"
+      },
+      "original": {
+        "owner": "multirious",
+        "repo": "zsh-helix-mode",
+        "rev": "f0b48531169a3713fce7b20eaeabdf97c27dce67",
         "type": "github"
       }
     }
