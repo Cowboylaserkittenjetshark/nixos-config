@@ -37,10 +37,10 @@
         path = "${config.xdg.dataHome}/zsh/history";
       };
       plugins = [
-        {
-          name = "zsh-helix-mode";
-          src = inputs.zsh-helix-mode;
-        }
+        # {
+        #   name = "zsh-helix-mode";
+        #   src = inputs.zsh-helix-mode;
+        # }
       ];
       initExtraFirst = ''
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
