@@ -62,7 +62,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     cura = {
-      url = "https://github.com/Ultimaker/Cura/releases/download/5.9.0/UltiMaker-Cura-5.9.0-linux-X64.AppImage";
+      url = "https://github.com/Ultimaker/Cura/releases/download/5.9.1/UltiMaker-Cura-5.9.1-linux-X64.AppImage";
       flake = false;
     };
 

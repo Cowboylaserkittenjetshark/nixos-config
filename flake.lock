@@ -77,13 +77,13 @@
     "cura": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-aCbD7RK3wB1EVEWOjKBuKHSOLVz5IoD0Na48F5jhzXE=",
+        "narHash": "sha256-e8dkz2PY6ZMQDaJSo0oh15odudaB7oI4N/J1EfJUaGk=",
         "type": "file",
-        "url": "https://github.com/Ultimaker/Cura/releases/download/5.9.0/UltiMaker-Cura-5.9.0-linux-X64.AppImage"
+        "url": "https://github.com/Ultimaker/Cura/releases/download/5.9.1/UltiMaker-Cura-5.9.1-linux-X64.AppImage"
       },
       "original": {
         "type": "file",
-        "url": "https://github.com/Ultimaker/Cura/releases/download/5.9.0/UltiMaker-Cura-5.9.0-linux-X64.AppImage"
+        "url": "https://github.com/Ultimaker/Cura/releases/download/5.9.1/UltiMaker-Cura-5.9.1-linux-X64.AppImage"
       }
     },
     "custom-caddy": {
