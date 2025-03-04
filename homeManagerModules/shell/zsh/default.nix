@@ -4,7 +4,9 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  cfg = config.programs.zsh;
+in {
   programs = {
     fzf = {
       enable = true;
@@ -21,7 +23,8 @@
         zstyle ':completion:*' list-colors "''${(s.:.)LS_COLORS}"
       '';
       autosuggestion.enable = true;
-      syntaxHighlighting.enable = true;
+      # We enable this manually in initExtra
+      syntaxHighlighting.enable = false;
       dotDir = ".config/zsh";
       history = {
         size = 10000;
@@ -37,10 +40,10 @@
         path = "${config.xdg.dataHome}/zsh/history";
       };
       plugins = [
-        # {
-        #   name = "zsh-helix-mode";
-        #   src = inputs.zsh-helix-mode;
-        # }
+        {
+          name = "zsh-helix-mode";
+          src = inputs.zsh-helix-mode;
+        }
       ];
       initExtraFirst = ''
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -56,6 +59,21 @@
         if [[ $options[zle] = on ]]; then
           eval "$(${pkgs.fzf}/bin/fzf --zsh)"
         fi
+
+        ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
+          zhm_history_prev
+          zhm_history_next
+          zhm_prompt_accept
+          zhm_accept
+          zhm_accept_or_insert_newline
+        )
+        ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
+          zhm_move_right
+        )
+        ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(
+          zhm_move_next_word_start
+          zhm_move_next_word_end
+        )
       '';
       initExtra = ''
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
@@ -94,6 +112,23 @@
             }
           ''
         }
+
+        # Manually enable syntax highlighting to get proper ordering with zhm compat hook
+        source ${cfg.syntaxHighlighting.package}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        ZSH_HIGHLIGHT_HIGHLIGHTERS+=(${lib.concatStringsSep " " (map lib.escapeShellArg cfg.syntaxHighlighting.highlighters)})
+        ${lib.concatStringsSep "\n" (
+            lib.mapAttrsToList
+              (name: value: "ZSH_HIGHLIGHT_STYLES+=(${lib.escapeShellArg name} ${lib.escapeShellArg value})")
+              cfg.syntaxHighlighting.styles
+        )}
+        ${lib.concatStringsSep "\n" (
+            lib.mapAttrsToList
+              (name: value: "ZSH_HIGHLIGHT_PATTERNS+=(${lib.escapeShellArg name} ${lib.escapeShellArg value})")
+              cfg.syntaxHighlighting.patterns
+        )}
+        
+        # Fix highlighting conflict between zhm and syntax highlighting
+        zhm-add-update-region-highlight-hook
       '';
     };
   };
