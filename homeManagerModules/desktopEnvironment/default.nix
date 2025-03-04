@@ -3,5 +3,6 @@ _: {
     ./hypr
     ./niri
     # ./eww
+    ./clipboard.nix
   ];
 }
