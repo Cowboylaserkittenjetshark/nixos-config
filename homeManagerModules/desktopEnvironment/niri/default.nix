@@ -33,6 +33,7 @@
       // Spawns
       Mod+Return { spawn "foot"; }
       Mod+D      { spawn "${pkgs.writeShellScript "launcher.sh" "tofi-drun | xargs niri msg action spawn --"}"; }
+      Mod+Shift+C { spawn "foot" "--title" "cliphist" "cliphist-fzf"; }
 
       // Media keys
       XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
@@ -110,6 +111,13 @@
     window-rule {
       opacity 0.95
       match app-id="foot"
+    }
+
+    // Floating clipboard manager
+    window-rule {
+      match title="cliphist"
+      open-floating true
+      open-focused true
     }
 
     layout {
