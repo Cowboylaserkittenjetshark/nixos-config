@@ -1,10 +1,20 @@
-_: {
+{inputs, pkgs, ...}: let
+  sioyek-launcher = pkgs.writeScript "sioyek-launcher" ''
+    #! /usr/bin/env zsh
+    PDF_PATH=''${1:h}/target/''${1:t:s/typ/pdf}
+    if [[ $PDF_PATH:e != "pdf" ]]; then
+      exit 1
+    else
+      sioyek $PDF_PATH
+    fi
+  '';
+in {
   programs.helix = {
     enable = true;
+    package = inputs.helix.packages.${pkgs.system}.default;
     defaultEditor = true;
     settings = {
-      # Needs https://github.com/helix-editor/helix/pull/11164
-      keys.normal."A-t" = ":run-shell-command sioyek %{filename}";
+      keys.normal."A-t" = ":sh ${sioyek-launcher} %{buffer_name}";
     };
     languages = {
       language = [
