@@ -73,7 +73,7 @@
     helix.url = "github:helix-editor/helix";
 
     zsh-helix-mode = {
-      url = "github:multirious/zsh-helix-mode/f0b48531169a3713fce7b20eaeabdf97c27dce67";
+      url = "github:multirious/zsh-helix-mode";
       flake = false;
     };
   };
