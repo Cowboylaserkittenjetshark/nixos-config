@@ -84,17 +84,5 @@
 
   gaming.enable = true;
 
-  services.octoprint = {
-    enable = true;
-    host = "127.0.0.1";
-    plugins = plugins:
-      with plugins; [
-        printtimegenius
-        simpleemergencystop
-        themeify
-        titlestatus
-      ];
-  };
-
   system.stateVersion = "23.11";
 }
