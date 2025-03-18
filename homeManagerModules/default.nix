@@ -53,6 +53,7 @@
     pavucontrol
     p7zip
     obsidian
+    julia
   ];
 
   fonts.fontconfig.enable = true;
