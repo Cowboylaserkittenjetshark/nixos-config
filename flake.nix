@@ -72,8 +72,8 @@
 
     helix.url = "github:helix-editor/helix";
 
-    zsh-helix-mode = {
-      url = "github:multirious/zsh-helix-mode";
+    zshelix = {
+      url = "github:thomasschafer/zshelix";
       flake = false;
     };
   };

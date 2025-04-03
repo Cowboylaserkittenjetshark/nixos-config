@@ -844,7 +844,7 @@
         "rust-overlay": "rust-overlay_3",
         "waveforms": "waveforms",
         "zen-browser": "zen-browser",
-        "zsh-helix-mode": "zsh-helix-mode"
+        "zshelix": "zshelix"
       }
     },
     "rust-overlay": {
@@ -1007,19 +1007,19 @@
         "type": "github"
       }
     },
-    "zsh-helix-mode": {
+    "zshelix": {
       "flake": false,
       "locked": {
-        "lastModified": 1742841247,
-        "narHash": "sha256-ZN2XZufbHhqnQCu0eUk2LnLGPwhX49fJS/I3Skv4t38=",
-        "owner": "multirious",
-        "repo": "zsh-helix-mode",
-        "rev": "ee1af4573dfa80b16a4abe0bb42a0a6834ac1ea6",
+        "lastModified": 1738776451,
+        "narHash": "sha256-X04W/a+Vm6qZPRps4MGoDMfH/UbmMWyI3TEhcyRRAwM=",
+        "owner": "thomasschafer",
+        "repo": "zshelix",
+        "rev": "65dd08bb9c542c2d9e06b33a514d666ae1b30c1d",
         "type": "github"
       },
       "original": {
-        "owner": "multirious",
-        "repo": "zsh-helix-mode",
+        "owner": "thomasschafer",
+        "repo": "zshelix",
         "type": "github"
       }
     }
