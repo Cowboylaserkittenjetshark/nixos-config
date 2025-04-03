@@ -1,4 +1,8 @@
-{lib, pkgs, ...}: let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) getExe getExe';
 in {
   systemd.user = {

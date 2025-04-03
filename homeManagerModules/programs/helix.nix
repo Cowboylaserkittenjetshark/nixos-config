@@ -1,4 +1,8 @@
-{inputs, pkgs, ...}: let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   sioyek-launcher = pkgs.writeScript "sioyek-launcher" ''
     #! /usr/bin/env zsh
     PDF_PATH=''${1:h}/target/''${1:t:s/typ/pdf}
