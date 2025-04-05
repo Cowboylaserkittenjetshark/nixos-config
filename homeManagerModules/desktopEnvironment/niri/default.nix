@@ -23,6 +23,7 @@
           accel-speed 0.25
         }
     }
+    screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
     binds {
       // Misc
