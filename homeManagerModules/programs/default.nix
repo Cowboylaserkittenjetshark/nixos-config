@@ -8,6 +8,7 @@ _: {
     ./foot.nix
     ./tofi.nix
     ./helix.nix
+    ./jujutsu.nix
     ./bat.nix
     ./mako.nix
     ./git.nix
