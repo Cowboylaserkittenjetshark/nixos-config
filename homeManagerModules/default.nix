@@ -40,7 +40,6 @@
       homedir = "${config.xdg.dataHome}/gnupg";
     };
 
-    nnn.enable = true;
     ncspot.enable = true;
     eza.enable = true;
     btop.enable = true;

@@ -12,6 +12,7 @@ _: {
     ./bat.nix
     ./mako.nix
     ./git.nix
+    ./yazi.nix
     ./zen.nix
   ];
 }
