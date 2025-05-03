@@ -6,8 +6,6 @@ in {
     ./cloudflared.nix
     ./vaultwarden.nix
     ./nextcloud.nix
-    # ./containers/mosquitto.nix
-    # ./containers/homeassistant.nix
     ./backups.nix
     ./mediaserver
     ./adguardhome.nix

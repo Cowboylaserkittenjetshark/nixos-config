@@ -8,8 +8,8 @@ in {
   config = lib.mkIf enable {
     services.cloudflared = {
       enable = true;
-      tunnels.container-stack = {
-        credentialsFile = "/etc/cloudflared/container-stack.json";
+      tunnels.homelab = {
+        credentialsFile = "/etc/cloudflared/homelab.json";
         default = "http_status:404";
         ingress = {
           "${domain}".service = "https://127.0.0.1";
@@ -20,6 +20,6 @@ in {
         };
       };
     };
-    systemd.services.cloudflared-tunnel-container-stack.environment.TUNNEL_TRANSPORT_PROTOCOL = "http2";
+    systemd.services.cloudflared-tunnel-homelab.environment.TUNNEL_TRANSPORT_PROTOCOL = "http2";
   };
 }
