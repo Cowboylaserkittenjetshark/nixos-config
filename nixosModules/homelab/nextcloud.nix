@@ -92,7 +92,7 @@ in {
 
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud30;
+      package = pkgs.nextcloud31;
       hostName = "nc.${domain}";
       config = {
         adminuser = "admin";
