@@ -22,11 +22,6 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    catppuccin-hyprland = {
-      url = "github:catppuccin/hyprland";
-      flake = false;
-    };
-
     custom-caddy = {
       url = "github:Cowboylaserkittenjetshark/nixcaddy/my-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
