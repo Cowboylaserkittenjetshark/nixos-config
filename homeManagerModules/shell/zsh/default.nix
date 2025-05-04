@@ -4,9 +4,7 @@
   pkgs,
   lib,
   ...
-}: let
-  cfg = config.programs.zsh;
-in {
+}: {
   programs = {
     fzf = {
       enable = true;
@@ -44,7 +42,7 @@ in {
           src = inputs.zshelix;
         }
       ];
-      initExtraFirst = ''
+      initContent = lib.mkBefore ''
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
         # Initialization code that may require console input (password prompts, [y/n]
         # confirmations, etc.) must go above this block; everything else may go below.
@@ -54,14 +52,13 @@ in {
 
         export GPG_TTY=$TTY
 
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+        ${builtins.readFile ./p10k.zsh}
+
         # Must be sourced before plugins
         if [[ $options[zle] = on ]]; then
           eval "$(${pkgs.fzf}/bin/fzf --zsh)"
         fi
-      '';
-      initExtra = ''
-        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-        ${builtins.readFile ./p10k.zsh}
       '';
     };
   };
