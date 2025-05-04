@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  inputs,
   config,
   osConfig,
   ...
@@ -29,20 +28,18 @@
     done
     echo "Session restored!"
   '';
+  font_family = "MesloLGS NF";
 in {
   config = lib.mkIf osConfig.systemAttributes.graphical {
-    programs.hyprlock = let
-      accent = "green";
-    in {
+    programs.hyprlock = {
       enable = true;
       settings = {
-        source = ["${inputs.catppuccin-hyprland}/themes/mocha.conf"];
-
         general = {
-          disable_loading_bar = true;
           hide_cursor = true;
           grace = 3;
         };
+
+        auth.fingerprint.enabled = true;
 
         background = [
           {
@@ -62,17 +59,17 @@ in {
             dots_size = 0.2;
             dots_spacing = 0.2;
             dots_center = true;
-            outer_color = "\$${accent}";
+            outer_color = "$accent";
             inner_color = "$surface0";
             font_color = "$text";
             fade_on_empty = false;
-            placeholder_text = ''<span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##''$${accent}Alpha">$USER</span></span>'';
+            placeholder_text = ''<span foreground="##$textAlpha"><i>󰌾 Logged in as </i><span foreground="##$accentAlpha">$USER</span></span>'';
             hide_input = false;
-            check_color = "\$${accent}";
+            check_color = "$accent";
             fail_color = "$red";
             fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
             capslock_color = "$yellow";
-            position = "0, -35";
+            position = "0, -47";
             halign = "center";
             valign = "center";
           }
@@ -81,10 +78,10 @@ in {
         label = [
           {
             monitor = "";
-            text = ''cmd[update:30000] echo "$(date +"%R")"'';
+            text = "$TIME12";
             color = "$text";
             font_size = 90;
-            font_family = "MesloLGS NF";
+            inherit font_family;
             position = "-30, 0";
             halign = "right";
             valign = "top";
@@ -94,18 +91,29 @@ in {
             text = ''cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"'';
             color = "$text";
             font_size = 25;
-            font_family = "$font";
+            inherit font_family;
             position = "-30, -150";
             halign = "right";
             valign = "top";
           }
+          {
+            monitor = "";
+            text = "$FPRINTPROMPT";
+            color = "$text";
+            font_size = 14;
+            inherit font_family;
+            position = "0, -107";
+            halign = "center";
+            valign = "center";
+          }
+
         ];
         image = [
           {
             monitor = "";
             path = "${config.avatar}";
             size = 100;
-            border_color = "\$${accent}";
+            border_color = "$accent";
             position = "0, 75";
             halign = "center";
             valign = "center";

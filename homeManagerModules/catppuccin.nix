@@ -7,5 +7,6 @@
     cursors.enable = true;
     flavor = "mocha";
     accent = "green";
+    hyprlock.useDefaultConfig = false;
   };
 }
