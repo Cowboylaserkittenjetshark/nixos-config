@@ -21,5 +21,6 @@ in {
       "tower"
       "No2TypeL"
       "No2TypeT"
+      "No3TypeL"
     ];
 }

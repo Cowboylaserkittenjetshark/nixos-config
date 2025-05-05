@@ -6,8 +6,9 @@ let
   tower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINv/CXWoX9CAUMQVvAP2h6zXg+afjXcIQfQoSeb2YShU";
   lap = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3s7N+BxkhCjisPLy7G0TsOvNEl9FwuiMIjj0ECPf2H";
   No2TypeL = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdFDjufx08HAlP1r3F8mBuO2wD96h5QVpeBGNwTOol8";
+  No3TypeL = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/MRqDZRbMdLAnrCZohyQINsby07ipPgZnxOQW4Vth9";
   No2TypeT = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA/sqijQePv3VqxJI5wepjd7PELimM6NE9QtFx/oebV/";
-  systems = [tower lap No2TypeL No2TypeT];
+  systems = [tower lap No2TypeL No2TypeT No3TypeL];
   homelab = [cblkjs tower];
 in {
   # Homelab module
