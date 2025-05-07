@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
+    ../../nixosModules/hardware/nvidia.nix
   ];
 
   systemAttributes = {
@@ -23,6 +24,13 @@
   };
 
   hardware.bluetooth.enable = true;
+
+  	hardware.nvidia.prime = {
+      sync.enable = true;
+  		# Make sure to use the correct Bus ID values for your system!
+  		intelBusId = "PCI:0:2:0";
+  		nvidiaBusId = "PCI:1:0:0";
+	};
 
   services = {
     fwupd.enable = true;
