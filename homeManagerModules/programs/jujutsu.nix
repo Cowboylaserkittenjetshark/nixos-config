@@ -9,7 +9,7 @@ _: {
 			signing = {
 				behavior = "drop";
 				backend = "ssh";
-	      key = "~/.ssh/id_ed25519_sk.pub";
+	      key = "~/.ssh/signing_key.pub";
 			};
 			git.sign-on-push = true;
 		};

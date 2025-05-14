@@ -4,7 +4,7 @@ _: {
     userName = "Cowboylaserkittenjetshark";
     userEmail = "82691052+Cowboylaserkittenjetshark@users.noreply.github.com";
     signing = {
-      key = "~/.ssh/id_ed25519_sk.pub";
+      key = "~/.ssh/signing_key.pub";
       signByDefault = true;
     };
     iniContent.gpg.format = "ssh";

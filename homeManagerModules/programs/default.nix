@@ -13,5 +13,6 @@ _: {
     ./git.nix
     ./yazi.nix
     ./zen.nix
+    ./ski.nix
   ];
 }
