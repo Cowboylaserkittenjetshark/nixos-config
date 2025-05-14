@@ -1,4 +1,4 @@
-_: {
+{config, ...}: {
 	programs.jujutsu = {
 		enable = true;
 		settings = {
@@ -9,7 +9,7 @@ _: {
 			signing = {
 				behavior = "drop";
 				backend = "ssh";
-	      key = "~/.ssh/signing_key.pub";
+	      key = "~/.ssh/${config.programs.ski.settings.roles.sign.target}.pub";
 			};
 			git.sign-on-push = true;
 		};

@@ -765,11 +765,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1747209857,
-        "narHash": "sha256-1/3qn3jAuuwnDmDqGTM+7S0CsvQhVvvfcJKolsZGdws=",
+        "lastModified": 1747211517,
+        "narHash": "sha256-hr8SeJ1S7iyPSDl4EuzbsWIaUZzJSmq76NEuL4dWeo8=",
         "owner": "Cowboylaserkittenjetshark",
         "repo": "ski",
-        "rev": "14cbfe30449cbc517f93c3179e3e121622fe6b25",
+        "rev": "bb8fbe78a584b3024d19601e25835078ca056643",
         "type": "github"
       },
       "original": {
