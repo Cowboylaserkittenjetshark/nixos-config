@@ -2,14 +2,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) getExe getExe';
-in {
+in
+{
   systemd.user = {
     timers.cliphist-clear = {
       Unit.Description = "Clear clipboard history";
       Timer.OnUnitActiveSec = "10min";
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
     services = {
       cliphist-image = {
@@ -24,7 +26,7 @@ in {
           Type = "exec";
           ExecStart = "${getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch ${getExe pkgs.cliphist} store";
         };
-        Install.WantedBy = ["graphical-session.target"];
+        Install.WantedBy = [ "graphical-session.target" ];
       };
       cliphist-text = {
         Unit = {
@@ -38,7 +40,7 @@ in {
           Type = "exec";
           ExecStart = "${getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch ${getExe pkgs.cliphist} store";
         };
-        Install.WantedBy = ["graphical-session.target"];
+        Install.WantedBy = [ "graphical-session.target" ];
       };
       clip-persist = {
         Unit = {
@@ -52,7 +54,7 @@ in {
           Type = "exec";
           ExecStart = "${getExe pkgs.wl-clip-persist} --clipboard regular";
         };
-        Install.WantedBy = ["graphical-session.target"];
+        Install.WantedBy = [ "graphical-session.target" ];
       };
       cliphist-clear = {
         Unit.Description = "Clear clipboard history";

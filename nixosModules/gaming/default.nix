@@ -4,7 +4,8 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) mkEnableOption mkIf getExe;
   ngMods = inputs.nix-gaming.nixosModules;
   ngPkgs = inputs.nix-gaming.packages.${pkgs.system};
@@ -14,7 +15,8 @@
     "--rt"
     "--expose-wayland"
   ];
-in {
+in
+{
   imports = [
     ngMods.pipewireLowLatency
     ngMods.platformOptimizations
@@ -41,12 +43,14 @@ in {
         enable = true;
         settings = {
           general.renice = 15;
-          custom = let
-            notify = "${getExe pkgs.libnotify} -a 'Gamemode'";
-          in {
-            start = "${notify} Gamemode activated";
-            end = "${notify} Gamemode deactivated";
-          };
+          custom =
+            let
+              notify = "${getExe pkgs.libnotify} -a 'Gamemode'";
+            in
+            {
+              start = "${notify} Gamemode activated";
+              end = "${notify} Gamemode deactivated";
+            };
         };
       };
 
@@ -68,6 +72,6 @@ in {
       })
     ];
 
-    environment.systemPackages = [ngPkgs.viper];
+    environment.systemPackages = [ ngPkgs.viper ];
   };
 }

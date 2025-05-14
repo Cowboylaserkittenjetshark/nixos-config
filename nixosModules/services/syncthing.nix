@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   devices =
     (lib.filterAttrs (device: _attrs: device != config.networking.hostName) {
       tower.id = "7ISVGVU-5KITNKD-7SJSM4L-ISNYXCZ-HIRCPFJ-CUMCTSH-WBNYXG3-J6YS2QU";
@@ -15,7 +16,8 @@
       Pixel.id = "56CEB2H-C65OL2E-DEQ7QNZ-TMA4G7J-L7DOXZS-AHHEDXF-S6POVBO-ULVVFQT";
     };
   deviceNames = builtins.attrNames devices;
-in {
+in
+{
   services.syncthing = {
     enable = true;
     dataDir = config.users.users.cblkjs.home;

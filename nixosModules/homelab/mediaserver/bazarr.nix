@@ -3,10 +3,12 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   cfg = config.services.bazarr;
   inherit (lib) mkIf optionalString mkForce;
-in {
+in
+{
   config = mkIf cfg.enable {
     # Based on https://github.com/NixOS/nixpkgs/blob/9f918d616c5321ad374ae6cb5ea89c9e04bf3e58/nixos/modules/services/misc/bazarr.nix#L40-L58
     # and the upstream service at https://wiki.bazarr.media/Getting-Started/Autostart/Linux/linux/
@@ -41,7 +43,7 @@ in {
         # ExecStartPre = "${pkgs.coreutils}/bin/sleep 30"; # Why tho?
       };
 
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
     };
   };
 }

@@ -15,7 +15,7 @@ _: {
         Settings.AutoConnect = true;
       };
     };
-    nameservers = ["127.0.0.55"];
+    nameservers = [ "127.0.0.55" ];
   };
 
   systemd.network = {
@@ -34,13 +34,13 @@ _: {
     resolved = {
       enable = true;
       dnsovertls = "false"; # Must be off for dnscrypt proxy
-      fallbackDns = [];
+      fallbackDns = [ ];
     };
 
     dnscrypt-proxy2 = {
       enable = true;
       settings = {
-        listen_addresses = ["127.0.0.55:53"];
+        listen_addresses = [ "127.0.0.55:53" ];
         log_level = 0;
       };
     };

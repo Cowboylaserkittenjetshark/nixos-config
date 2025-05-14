@@ -1,20 +1,21 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.chromium = {
     enable = true;
     package = pkgs.ungoogled-chromium;
     extensions = [
       # uBlock Origin
-      {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
+      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
       # Bitwarden
-      {id = "nngceckbapebfimnlniiiahkandclblb";}
+      { id = "nngceckbapebfimnlniiiahkandclblb"; }
       # Dark Reader
-      {id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";}
+      { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; }
       # Stylus
-      {id = "clngdbkpkpeebahjckkjfobafhncgmne";}
+      { id = "clngdbkpkpeebahjckkjfobafhncgmne"; }
       # Catppuccin Mocha Theme
-      {id = "bkkmolkhemgaeaeggcmfbghljjjoofoh";}
+      { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; }
       # Zotero Connector
-      {id = "ekhagklcjbdpajgpjgmbionohlpdbjgc";}
+      { id = "ekhagklcjbdpajgpjgmbionohlpdbjgc"; }
     ];
   };
 }

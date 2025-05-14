@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (config.homelab) domain enable;
-in {
+in
+{
   config = lib.mkIf enable {
     services.cloudflared = {
       enable = true;

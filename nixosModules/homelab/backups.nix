@@ -3,11 +3,13 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   vw_data_dir = config.services.vaultwarden.config.DATA_FOLDER;
   nc_home_dir = config.services.nextcloud.home;
   db_backup_dir = "/var/backup";
-in {
+in
+{
   config = lib.mkIf config.homelab.enable {
     services.restic.backups.homelab = {
       initialize = true;

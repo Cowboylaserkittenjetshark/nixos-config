@@ -2,10 +2,12 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (config.homelab) domain enable;
   cfg = config.services.vaultwarden;
-in {
+in
+{
   config = lib.mkIf enable {
     services.vaultwarden = {
       enable = true;

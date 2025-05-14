@@ -3,11 +3,13 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.homelab) domain enable;
   ncCfg = config.services.nextcloud;
   caddyCfg = config.services.caddy;
-in {
+in
+{
   config = lib.mkIf enable {
     # The nextcloud module enables nginx as the reverse proxy automatically. We're using caddy, so disable
     # * Start nxginx disable *
@@ -87,7 +89,7 @@ in {
         file_server
       '';
     };
-    users.groups.nextcloud.members = [caddyCfg.user];
+    users.groups.nextcloud.members = [ caddyCfg.user ];
     # * End nginx disable *
 
     services.nextcloud = {
@@ -102,7 +104,7 @@ in {
       settings = {
         log_type = "file";
         log_level = "debug";
-        trusted_proxies = ["127.0.0.1"];
+        trusted_proxies = [ "127.0.0.1" ];
         maintenance_window_start = 1;
         default_phone_region = "US";
       };

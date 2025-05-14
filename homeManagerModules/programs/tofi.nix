@@ -2,9 +2,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   font = "${pkgs.meslo-lgs-nf}/share/fonts/truetype/MesloLGS NF Bold.ttf";
-in {
+in
+{
   config.home.packages = [
     pkgs.tofi
   ];

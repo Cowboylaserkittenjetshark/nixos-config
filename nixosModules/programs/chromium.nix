@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   config = lib.mkIf config.systemAttributes.graphical {
     programs.chromium = {
       enable = true;
@@ -11,7 +12,7 @@
         "SyncDisabled" = true;
         "PasswordManagerEnabled" = false;
         "SpellcheckEnabled" = true;
-        "SpellcheckLanguage" = ["en-US"];
+        "SpellcheckLanguage" = [ "en-US" ];
       };
     };
   };

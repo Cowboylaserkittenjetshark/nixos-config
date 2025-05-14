@@ -3,7 +3,8 @@
   pkgs,
   osConfig,
   ...
-}: {
+}:
+{
   xdg.configFile."niri/config.kdl".text = ''
     prefer-no-csd
 
@@ -151,10 +152,10 @@
     targets.niri-session = {
       Unit = {
         Description = "Niri compositor session";
-        Documentation = ["man:systemd.special(7)"];
-        BindsTo = ["graphical-session.target"];
-        Wants = ["graphical-session-pre.target"];
-        After = ["graphical-session-pre.target"];
+        Documentation = [ "man:systemd.special(7)" ];
+        BindsTo = [ "graphical-session.target" ];
+        Wants = [ "graphical-session-pre.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
     };
 
@@ -173,7 +174,7 @@
         StandardOutput = "journal";
       };
 
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }

@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   config = lib.mkIf (builtins.elem "audio" config.systemAttributes.capabilities) {
     services.pipewire = {
       enable = true;

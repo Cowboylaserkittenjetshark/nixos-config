@@ -4,7 +4,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs = {
     fzf = {
       enable = true;
@@ -64,5 +65,5 @@
   };
 
   # For p10k
-  home.packages = [pkgs.meslo-lgs-nf];
+  home.packages = [ pkgs.meslo-lgs-nf ];
 }

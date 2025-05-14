@@ -6,44 +6,51 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   boot = {
-    initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "uas" "sd_mod"];
-    initrd.kernelModules = [];
-    kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "uas"
+      "sd_mod"
+    ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = [ ];
   };
 
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
       fsType = "btrfs";
-      options = ["subvol=root"];
+      options = [ "subvol=root" ];
     };
     "/nix" = {
       device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
       fsType = "btrfs";
-      options = ["subvol=nix"];
+      options = [ "subvol=nix" ];
     };
     "/swap" = {
       device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
       fsType = "btrfs";
-      options = ["subvol=swap"];
+      options = [ "subvol=swap" ];
     };
     "/var" = {
       device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
       fsType = "btrfs";
-      options = ["subvol=var"];
+      options = [ "subvol=var" ];
     };
 
     "/home" = {
       device = "/dev/disk/by-uuid/063a79d2-a904-4e52-8579-453570324320";
       fsType = "btrfs";
-      options = ["subvol=home"];
+      options = [ "subvol=home" ];
     };
 
     "/boot" = {
@@ -54,7 +61,7 @@
 
   boot.initrd.luks.devices."data".device = "/dev/disk/by-uuid/350a7bf9-b1e4-486d-a627-7c5ecc30b6a4";
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

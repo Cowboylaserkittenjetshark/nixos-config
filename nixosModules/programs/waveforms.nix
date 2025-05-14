@@ -1,6 +1,7 @@
-{inputs, ...}: {
+{ inputs, ... }:
+{
   imports = [
     inputs.waveforms.nixosModule
   ];
-  users.groups.plugdev = {};
+  users.groups.plugdev = { };
 }

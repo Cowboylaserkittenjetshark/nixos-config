@@ -3,26 +3,27 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf mkAfter mkForce;
   inherit (config.homelab) vpnAccess domain;
   providers = {
     Quad9 = {
-      DoH = ["https://dns.quad9.net/dns-query"];
+      DoH = [ "https://dns.quad9.net/dns-query" ];
       IPv4 = [
         "9.9.9.9"
         "149.112.112.112"
       ];
     };
     ControlD = {
-      DoH = ["https://freedns.controld.com/p0"];
+      DoH = [ "https://freedns.controld.com/p0" ];
       IPv4 = [
         "76.76.2.0"
         "76.76.10.0"
       ];
     };
     Cloudflare = rec {
-      DoH = ["https://dns.cloudflare.com/dns-query"];
+      DoH = [ "https://dns.cloudflare.com/dns-query" ];
       IPv4 = [
         "1.1.1.1"
         "1.0.0.1"
@@ -30,7 +31,8 @@
       all = DoH ++ IPv4;
     };
   };
-in {
+in
+{
   config = mkIf config.homelab.enable {
     services = {
       adguardhome = {
@@ -46,13 +48,7 @@ in {
           http.address = "127.0.0.1:3000";
           language = "en";
           dns = with providers; {
-            bind_hosts =
-              ["127.0.0.1"]
-              ++ (
-                if vpnAccess.enable
-                then [vpnAccess.address]
-                else []
-              );
+            bind_hosts = [ "127.0.0.1" ] ++ (if vpnAccess.enable then [ vpnAccess.address ] else [ ]);
             port = 53;
             bootstrap_dns = Quad9.IPv4 ++ ControlD.IPv4;
             upstream_dns = Quad9.DoH ++ ControlD.DoH;
@@ -70,11 +66,11 @@ in {
           ];
         };
       };
-      resolved.fallbackDns = [];
+      resolved.fallbackDns = [ ];
     };
     networking = {
-      nameservers = mkForce ["127.0.0.1"];
-      firewall.interfaces.${vpnAccess.interface}.allowedUDPPorts = mkIf vpnAccess.enable [53];
+      nameservers = mkForce [ "127.0.0.1" ];
+      firewall.interfaces.${vpnAccess.interface}.allowedUDPPorts = mkIf vpnAccess.enable [ 53 ];
     };
 
     services.caddy.virtualHosts."dns.${domain}".extraConfig = ''

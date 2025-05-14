@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
@@ -29,13 +30,13 @@
       enable = true;
       bindings = [
         {
-          keys = [224];
-          events = ["key"];
+          keys = [ 224 ];
+          events = [ "key" ];
           command = "/run/current-system/sw/bin/light -U 10";
         }
         {
-          keys = [225];
-          events = ["key"];
+          keys = [ 225 ];
+          events = [ "key" ];
           command = "/run/current-system/sw/bin/light -A 10";
         }
       ];
@@ -51,12 +52,13 @@
       pkiBundle = "/etc/secureboot";
     };
     # Required by IWD to decrypt 802.1x EAP-TLS TLS client keys
-    kernelModules = ["pkcs8_key_parser"];
+    kernelModules = [ "pkcs8_key_parser" ];
   };
 
   impermanence = {
     enable = true;
-    persistPath = config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
+    persistPath =
+      config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
     cryptDeviceName = config.disko.devices.disk.main.content.partitions.luks.content.name;
   };
 

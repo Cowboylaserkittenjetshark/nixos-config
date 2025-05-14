@@ -3,10 +3,12 @@
   config,
   osConfig,
   ...
-}: let
+}:
+let
   hyprlock = lib.getExe config.programs.hyprlock.package;
   hyprctl = lib.getExe' config.wayland.windowManager.hyprland.package "hyprctl";
-in {
+in
+{
   config = lib.mkIf osConfig.systemAttributes.graphical {
     services.hypridle = {
       enable = true;

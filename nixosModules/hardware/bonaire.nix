@@ -12,5 +12,5 @@ _: {
     options radeon cik_support=0
   '';
 
-  boot.kernelModules = ["amdgpu"];
+  boot.kernelModules = [ "amdgpu" ];
 }

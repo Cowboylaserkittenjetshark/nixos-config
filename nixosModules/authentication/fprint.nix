@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   config = lib.mkIf (builtins.elem "fingerprint" config.systemAttributes.capabilities) {
     services.fprintd.enable = true;
     security.pam = {

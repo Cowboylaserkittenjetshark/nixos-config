@@ -2,7 +2,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   ssh-forward-agent = pkgs.writeShellScriptBin "ssh-forward-agent" ''
     set -euo pipefail
 
@@ -42,6 +43,7 @@
       echo "Missing arguments"
     fi
   '';
-in {
-  home.packages = [ssh-forward-agent];
+in
+{
+  home.packages = [ ssh-forward-agent ];
 }

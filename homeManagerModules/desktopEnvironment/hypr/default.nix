@@ -5,7 +5,7 @@ _: {
     ./hyprlock.nix
   ];
 
-  options = {};
+  options = { };
 
-  config = {};
+  config = { };
 }

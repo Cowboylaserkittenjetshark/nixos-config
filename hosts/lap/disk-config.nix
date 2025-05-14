@@ -1,9 +1,11 @@
-_: let
+_:
+let
   commonSubvolMountOptions = [
     "compress=zstd"
     "noatime"
   ];
-in {
+in
+{
   disko.devices = {
     disk = {
       main = {
@@ -19,7 +21,7 @@ in {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["defaults"];
+                mountOptions = [ "defaults" ];
               };
             };
             luks = {
@@ -30,7 +32,7 @@ in {
                 settings.allowDiscards = true;
                 content = {
                   type = "btrfs";
-                  extraArgs = ["--force"];
+                  extraArgs = [ "--force" ];
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";

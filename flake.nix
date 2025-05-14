@@ -68,22 +68,25 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./hosts
       ];
-      systems = ["x86_64-linux"];
-      perSystem = {pkgs, ...}: {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            nil
-            just
-            statix
-            deadnix
-          ];
+      systems = [ "x86_64-linux" ];
+      perSystem =
+        { pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              nil
+              just
+              statix
+              deadnix
+            ];
+          };
+          formatter = pkgs.nixfmt-tree;
         };
-        formatter = pkgs.alejandra;
-      };
     };
 }

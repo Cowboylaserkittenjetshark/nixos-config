@@ -1,26 +1,33 @@
 {
   inputs,
   ...
-}: let
+}:
+let
   inherit (inputs.nixpkgs.lib) nixosSystem genAttrs;
 
-  mkNixosConfigurations = hosts: genAttrs hosts (host: nixosSystem {
-    specialArgs = {inherit inputs;};
-    modules = [
-      ./${host}
+  mkNixosConfigurations =
+    hosts:
+    genAttrs hosts (
+      host:
+      nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./${host}
 
-      # Common modules
-      ../nixosModules
-      inputs.disko.nixosModules.disko
-      inputs.lanzaboote.nixosModules.lanzaboote
-    ];
-  });
-in {
+          # Common modules
+          ../nixosModules
+          inputs.disko.nixosModules.disko
+          inputs.lanzaboote.nixosModules.lanzaboote
+        ];
+      }
+    );
+in
+{
   flake.nixosConfigurations = mkNixosConfigurations [
-      "lap"
-      "tower"
-      "No2TypeL"
-      "No2TypeT"
-      "No3TypeL"
-    ];
+    "lap"
+    "tower"
+    "No2TypeL"
+    "No2TypeT"
+    "No3TypeL"
+  ];
 }

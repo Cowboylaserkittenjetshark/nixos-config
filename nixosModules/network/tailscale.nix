@@ -2,21 +2,16 @@
   pkgs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.systemAttributes) roles;
-in {
+in
+{
   services.tailscale = {
     enable = true;
     useRoutingFeatures =
-      if roles.server
-      then
-        (
-          if (roles.laptop || roles.desktop)
-          then "both"
-          else "server"
-        )
-      else "client";
+      if roles.server then (if (roles.laptop || roles.desktop) then "both" else "server") else "client";
   };
 
-  environment.systemPackages = [pkgs.tailscale];
+  environment.systemPackages = [ pkgs.tailscale ];
 }

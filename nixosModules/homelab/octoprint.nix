@@ -2,19 +2,21 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkIf;
   inherit (config.homelab) domain enable;
   opCfg = config.services.octoprint;
   opDomain = "octoprint.${domain}";
-in {
+in
+{
   config = mkIf enable {
     services = {
       octoprint = {
         enable = true;
         host = "127.0.0.1";
-        plugins = plugins:
-          with plugins; [
+        plugins =
+          plugins: with plugins; [
             printtimegenius
             simpleemergencystop
             themeify
@@ -29,8 +31,10 @@ in {
     };
 
     networking = {
-      hosts."${opCfg.host}" = ["${opDomain}"];
-      firewall.interfaces = mkIf config.homelab.vpnAccess.enable {${config.homelab.vpnAccess.interface}.allowedTCPPorts = [opCfg.port];};
+      hosts."${opCfg.host}" = [ "${opDomain}" ];
+      firewall.interfaces = mkIf config.homelab.vpnAccess.enable {
+        ${config.homelab.vpnAccess.interface}.allowedTCPPorts = [ opCfg.port ];
+      };
     };
   };
 }

@@ -7,11 +7,13 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.impermanence;
   inherit (lib) mkOption types mkIf;
-in {
-  imports = [inputs.impermanence.nixosModules.impermanence];
+in
+{
+  imports = [ inputs.impermanence.nixosModules.impermanence ];
   options = {
     impermanence = {
       enable = mkOption {

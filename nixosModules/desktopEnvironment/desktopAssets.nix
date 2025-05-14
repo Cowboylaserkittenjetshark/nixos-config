@@ -2,9 +2,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types mkIf;
-in {
+in
+{
   options.desktopAssets = {
     wallpaper = mkOption {
       type = types.str;

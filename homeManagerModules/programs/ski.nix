@@ -1,4 +1,5 @@
-{inputs, pkgs,  ...}: {
+{ inputs, pkgs, ... }:
+{
   imports = [
     inputs.ski.homeModules.default
   ];

@@ -4,7 +4,8 @@
   config,
   osConfig,
   ...
-}: let
+}:
+let
   hyprlock-restore = pkgs.writeShellScriptBin "hyprlock-restore" ''
     set -euo pipefail
 
@@ -29,7 +30,8 @@
     echo "Session restored!"
   '';
   font_family = "MesloLGS NF";
-in {
+in
+{
   config = lib.mkIf osConfig.systemAttributes.graphical {
     programs.hyprlock = {
       enable = true;
@@ -121,6 +123,6 @@ in {
         ];
       };
     };
-    home.packages = [hyprlock-restore];
+    home.packages = [ hyprlock-restore ];
   };
 }

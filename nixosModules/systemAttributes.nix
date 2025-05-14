@@ -2,23 +2,30 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.systemAttributes;
 
   inherit (lib) types mkOption listToAttrs;
 
-  mkRole = role: (mkOption {
-    type = types.bool;
-    default = false;
-    description = "Whether or not the system is a ${role}";
-  });
+  mkRole =
+    role:
+    (mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether or not the system is a ${role}";
+    });
 
-  mkRoleOptions = roles: (listToAttrs (map (role: {
-      name = "${role}";
-      value = mkRole role;
-    })
-    roles));
-in {
+  mkRoleOptions =
+    roles:
+    (listToAttrs (
+      map (role: {
+        name = "${role}";
+        value = mkRole role;
+      }) roles
+    ));
+in
+{
   options.systemAttributes = {
     roles = mkRoleOptions [
       "desktop"
@@ -28,14 +35,16 @@ in {
     ];
 
     capabilities = mkOption {
-      type = types.listOf (types.enum [
-        "fingerprint"
-        "bluetooth"
-        "audio"
-        "wireless-lan"
-        "wired-lan"
-      ]);
-      default = [];
+      type = types.listOf (
+        types.enum [
+          "fingerprint"
+          "bluetooth"
+          "audio"
+          "wireless-lan"
+          "wired-lan"
+        ]
+      );
+      default = [ ];
       description = "A list of the system's capabilities";
     };
 

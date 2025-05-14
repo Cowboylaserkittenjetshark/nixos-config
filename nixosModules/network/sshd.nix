@@ -2,9 +2,16 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf mkForce mkOption types;
-in {
+}:
+let
+  inherit (lib)
+    mkIf
+    mkForce
+    mkOption
+    types
+    ;
+in
+{
   config = mkIf config.systemAttributes.roles.server {
     services.openssh = {
       enable = true;
@@ -17,7 +24,9 @@ in {
       # make sure no ports are open by default
       openFirewall = mkForce false;
     };
-    networking.firewall.interfaces = mkIf config.services.openssh.vpnAccess.enable {${config.services.openssh.vpnAccess.interface}.allowedTCPPorts = config.services.openssh.ports;};
+    networking.firewall.interfaces = mkIf config.services.openssh.vpnAccess.enable {
+      ${config.services.openssh.vpnAccess.interface}.allowedTCPPorts = config.services.openssh.ports;
+    };
   };
   options.services.openssh.vpnAccess = {
     enable = mkOption {

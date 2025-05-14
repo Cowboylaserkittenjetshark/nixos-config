@@ -4,23 +4,22 @@
   inputs,
   config,
   ...
-}: let
+}:
+let
   inherit (config.homelab) domain enable;
   inherit (lib) mkIf warnIfNot versionAtLeast;
   customCaddyPkg = inputs.custom-caddy.packages.${pkgs.system}.default;
   defaultCaddyPkg = pkgs.caddy;
-in {
+in
+{
   config = mkIf enable {
     services.caddy = {
       enable = true;
-      package =
-        warnIfNot
-        (versionAtLeast customCaddyPkg.version defaultCaddyPkg.version)
-        ''          The version of Caddy in the package is older than the version in your version of nixpkgs
-                      Caddy from nixpkgs:  ${defaultCaddyPkg.version}
-                      Caddy form nixcaddy: ${customCaddyPkg.version}
-        ''
-        customCaddyPkg;
+      package = warnIfNot (versionAtLeast customCaddyPkg.version defaultCaddyPkg.version) ''
+        The version of Caddy in the package is older than the version in your version of nixpkgs
+                    Caddy from nixpkgs:  ${defaultCaddyPkg.version}
+                    Caddy form nixcaddy: ${customCaddyPkg.version}
+      '' customCaddyPkg;
       globalConfig = ''
         servers {
           # Trust cloudflared
@@ -48,7 +47,10 @@ in {
         '';
       };
     };
-    networking.firewall.allowedTCPPorts = [80 443];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
     age.secrets.caddy-cloudflare-dns = {
       file = ../../secrets/caddy-cloudflare-dns.age;
       mode = "400";

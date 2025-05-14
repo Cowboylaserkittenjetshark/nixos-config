@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     # Using ancient nvidia gpu :/
@@ -25,7 +26,8 @@
 
   impermanence = {
     enable = true;
-    persistPath = config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
+    persistPath =
+      config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
     cryptDeviceName = config.disko.devices.disk.main.content.partitions.luks.content.name;
   };
 

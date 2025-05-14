@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
@@ -25,12 +26,12 @@
 
   hardware.bluetooth.enable = true;
 
-  	hardware.nvidia.prime = {
-      sync.enable = true;
-  		# Make sure to use the correct Bus ID values for your system!
-  		intelBusId = "PCI:0:2:0";
-  		nvidiaBusId = "PCI:1:0:0";
-	};
+  hardware.nvidia.prime = {
+    sync.enable = true;
+    # Make sure to use the correct Bus ID values for your system!
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
+  };
 
   services = {
     fwupd.enable = true;
@@ -39,11 +40,12 @@
   };
 
   # Required by IWD to decrypt 802.1x EAP-TLS TLS client keys
-  boot.kernelModules = ["pkcs8_key_parser"];
+  boot.kernelModules = [ "pkcs8_key_parser" ];
 
   impermanence = {
     enable = true;
-    persistPath = config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
+    persistPath =
+      config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
     cryptDeviceName = config.disko.devices.disk.main.content.partitions.luks.content.name;
   };
 

@@ -2,7 +2,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
@@ -22,11 +23,12 @@
 
   impermanence = {
     enable = true;
-    persistPath = config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
+    persistPath =
+      config.disko.devices.disk.main.content.partitions.luks.content.content.subvolumes."/persist".mountpoint;
     cryptDeviceName = config.disko.devices.disk.main.content.partitions.luks.content.name;
   };
 
-  boot.initrd.kernelModules = ["i915"];
+  boot.initrd.kernelModules = [ "i915" ];
 
   networking = {
     hostName = "lap";

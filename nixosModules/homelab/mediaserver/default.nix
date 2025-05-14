@@ -2,9 +2,16 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.homelab.mediaserver;
-  inherit (lib) mkOption types mkIf listToAttrs toInt;
+  inherit (lib)
+    mkOption
+    types
+    mkIf
+    listToAttrs
+    toInt
+    ;
   apps = [
     {
       name = "prowlarr";
@@ -31,7 +38,8 @@
       port = "5055";
     }
   ];
-in {
+in
+{
   imports = [
     ./qbittorrent.nix
     ./bazarr.nix
@@ -106,7 +114,7 @@ in {
       ];
     };
 
-    system.activationScripts.initMediaServer = lib.stringAfter ["var"] ''
+    system.activationScripts.initMediaServer = lib.stringAfter [ "var" ] ''
       # Create data directory if it doesn't exist
       install -d -m ${cfg.dataDirMode} -g ${cfg.group} \
         ${cfg.dataDir} \
@@ -118,18 +126,18 @@ in {
     '';
 
     services.caddy.virtualHosts = listToAttrs (
-      map
-      (app: {
+      map (app: {
         name = "${app.name}.${config.homelab.domain}";
         value.extraConfig = ''
           import localOnly
           reverse_proxy 127.0.0.1:${app.port}
         '';
-      })
-      apps
+      }) apps
     );
 
     networking.hosts."127.0.0.1" = map (app: "${app.name}.${config.homelab.domain}") apps;
-    networking.firewall.interfaces = mkIf config.homelab.vpnAccess.enable {${config.homelab.vpnAccess.interface}.allowedTCPPorts = map (app: toInt app.port) apps;};
+    networking.firewall.interfaces = mkIf config.homelab.vpnAccess.enable {
+      ${config.homelab.vpnAccess.interface}.allowedTCPPorts = map (app: toInt app.port) apps;
+    };
   };
 }
