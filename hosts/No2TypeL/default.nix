@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./disk-config.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
+    ../../nixosModules/hardware/ft232h.nix
   ];
 
   systemAttributes = {
