@@ -24,6 +24,7 @@
           accel-speed 0.25
         }
     }
+
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
     binds {
@@ -31,6 +32,7 @@
       Mod+W       { close-window; }
       Mod+Shift+Q { quit; }
       Mod+Alt+L { spawn "hyprlock" "--immediate"; }
+      Mod+O       { toggle-overview; }
 
       // Spawns
       Mod+Return { spawn "foot"; }
@@ -123,9 +125,12 @@
     }
 
     layout {
+      background-color "transparent"
+    
       focus-ring {
         off
       }
+
       border {
         width 2
         active-gradient from="#b4befe" to="#a6e3a1" angle=45 relative-to="workspace-view"
@@ -142,6 +147,17 @@
 
     hotkey-overlay {
         skip-at-startup
+    }
+
+    layer-rule {
+        match namespace="^wallpaper$"
+        place-within-backdrop true
+    }
+
+    overview {
+        workspace-shadow {
+            off
+        }
     }
 
     spawn-at-startup "${pkgs.writeShellScript "niri-init.sh" "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user stop niri-session.target && systemctl --user start niri-session.target"}"
