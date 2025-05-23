@@ -3,32 +3,34 @@
     enable = true;
     enableTransience = true;
     settings = {
-      format = ''$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character
-      '';
+      format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$fill$nix_shell$line_break$python$character";
 
-      directory.style = "blue";
+      directory.style = "bold lavender";
       
       character = {
-        success_symbol = "[❯](purple)";
+        success_symbol = "[❯](mauve)";
         error_symbol = "[❯](red)";
         vimcmd_symbol = "[❮](green)";
       };
       
       git_branch = {
         format = "[$branch]($style)";
-        style = "bright-black";
+        style = "bold mauve";
       };
 
       git_status = {
-        format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)";
-        style = "cyan";
-        conflicted = "​";
-        untracked = "​";
-        modified = "​";
-        staged = "​";
-        renamed = "​";
-        deleted = "​";
-        stashed = "≡";
+        format = "[$ahead_behind$staged$modified$renamed$deleted$untracked$conflicted$stashed]($style) ";
+        style = "sky";
+        ahead = " [$count⇡](green)";
+        behind = " [$count⇣](green)";
+        diverged = " [⇕](peach)⇡$ahead_count⇣$behind_count";
+        staged = " [$count+](yellow)";
+        modified = " [$count!](yellow)";
+        renamed = " [»$count](yellow)";
+        deleted = " [$count󰧧](red)";
+        untracked = " [$count?](blue)";
+        conflicted = "​[󰞇$count](red)";
+        stashed = " $count≡";
       };
 
       git_state = {
@@ -43,8 +45,15 @@
 
       python = {
         format = "[$virtualenv]($style) ";
-        style = "bright-black";
+        style = "yellow";
       };
+
+      nix_shell = {
+        format = "[$symbol $state]($style) ";
+        symbol = "";
+      };
+
+      fill.symbol = " ";
     };
   };
 
