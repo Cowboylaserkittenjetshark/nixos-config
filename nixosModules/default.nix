@@ -14,7 +14,7 @@
     ./home-manager.nix
     ./systemAttributes.nix
     ./users.nix
-    ./zsh.nix
+    ./shell
   ];
 
   services.upower.enable = true;

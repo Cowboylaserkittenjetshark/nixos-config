@@ -62,9 +62,9 @@
 
     helix.url = "github:helix-editor/helix";
 
-    zshelix = {
-      url = "github:thomasschafer/zshelix";
-      flake = false;
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
