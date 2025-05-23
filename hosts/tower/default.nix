@@ -39,11 +39,6 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  desktopAssets = {
-    wallpaper = "${config.age.secrets.Forest-Kingdom-Dithered-Mocha.path}";
-    lockscreen = "${config.age.secrets.Amusement-Park2-Dithered-Mocha.path}";
-  };
-
   homelab = {
     enable = true;
     domain = "cblkjs.com";

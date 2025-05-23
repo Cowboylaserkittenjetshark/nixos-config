@@ -66,11 +66,6 @@
 
   time.timeZone = "America/New_York";
 
-  desktopAssets = {
-    wallpaper = "${config.age.secrets.Forest-Kingdom-Dithered-Mocha.path}";
-    lockscreen = "${config.age.secrets.Amusement-Park2-Dithered-Mocha.path}";
-  };
-
   gaming.enable = true;
 
   services.openssh.vpnAccess = {
