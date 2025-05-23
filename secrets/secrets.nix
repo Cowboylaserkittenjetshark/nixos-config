@@ -45,4 +45,5 @@ in
   # Wallpapers
   "Forest-Kingdom-Dithered-Mocha.age".publicKeys = [ cblkjs ] ++ systems;
   "Amusement-Park2-Dithered-Mocha.age".publicKeys = [ cblkjs ] ++ systems;
+  "Forest-Kingdom-Desktop-Catppuccin-Mocha.age".publicKeys = [ cblkjs ] ++ systems;
 }
