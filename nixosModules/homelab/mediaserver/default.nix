@@ -90,7 +90,7 @@ in
         inherit (cfg) user group;
       };
       lidarr.enable = false;
-      flaresolverr.enable = false;
+      flaresolverr.enable = true;
       qbittorrent = {
         enable = true;
         inherit (cfg) user group;
