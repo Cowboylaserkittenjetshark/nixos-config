@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf osConfig.systemAttributes.graphical {
+  config = lib.mkIf osConfig.systemAttributes.roles.desktop {
     wayland.windowManager.hyprland.enable = true;
 
     wayland.windowManager.hyprland.extraConfig = ''
