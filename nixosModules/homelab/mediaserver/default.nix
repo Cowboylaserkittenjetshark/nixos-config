@@ -91,7 +91,7 @@ in
       };
       lidarr.enable = false;
       flaresolverr.enable = true;
-      qbittorrent = {
+      qbittorrentX = {
         enable = true;
         inherit (cfg) user group;
       };

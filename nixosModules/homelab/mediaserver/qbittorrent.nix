@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.services.qbittorrent;
+  cfg = config.services.qbittorrentX;
   inherit (lib)
     mkOption
     mkEnableOption
@@ -15,7 +15,7 @@ let
     ;
 in
 {
-  options.services.qbittorrent = {
+  options.services.qbittorrentX = {
     enable = mkEnableOption (lib.mdDoc "qBittorrent headless");
 
     dataDir = mkOption {
