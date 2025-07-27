@@ -3,8 +3,9 @@
   pkgs,
   osConfig,
   ...
-}:
-{
+}: let
+    playerctl = lib.getExe pkgs.playerctl;
+in {
   xdg.configFile."niri/config.kdl".text = ''
     prefer-no-csd
 
@@ -44,6 +45,9 @@
       XF86AudioLowerVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
       XF86AudioMute        allow-when-locked=true repeat=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
       XF86AudioMicMute     allow-when-locked=true repeat=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+      XF86AudioPlay        allow-when-locked=true repeat=false { spawn "${playerctl}" "play-pause"; }
+      XF86AudioPrev        allow-when-locked=true repeat=false { spawn "${playerctl}" "previous"; }
+      XF86AudioNext        allow-when-locked=true repeat=false { spawn "${playerctl}" "next"; }
 
       // Focus column/window
       Mod+Left  { focus-column-left; }
@@ -55,6 +59,11 @@
       Mod+J     { focus-window-or-workspace-down; }
       Mod+K     { focus-window-or-workspace-up; }
       Mod+L     { focus-column-right; }
+
+      Mod+WheelScrollDown  cooldown-ms=150 { focus-workspace-down; }
+      Mod+WheelScrollUp    cooldown-ms=150 { focus-workspace-up; }
+      Mod+WheelScrollRight cooldown-ms=150 { focus-column-right; }
+      Mod+WheelScrollLeft  cooldown-ms=150 { focus-column-left; }
 
       Mod+Home { focus-column-first; }
       Mod+End  { focus-column-last; }
@@ -75,6 +84,11 @@
       Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
       Mod+Ctrl+L     { move-column-right; }
 
+      Mod+Ctrl+WheelScrollDown  cooldown-ms=150 { move-column-left; }
+      Mod+Ctrl+WheelScrollUp    cooldown-ms=150 { move-window-down-or-to-workspace-down; }
+      Mod+Ctrl+WheelScrollRight cooldown-ms=150 { move-window-up-or-to-workspace-up; }
+      Mod+Ctrl+WheelScrollLeft  cooldown-ms=150 { move-column-right; }
+
       Mod+Ctrl+Home { move-column-to-first; }
       Mod+Ctrl+End  { move-column-to-last; }
 
@@ -83,20 +97,32 @@
       Mod+Shift+Down  { focus-monitor-down; }
       Mod+Shift+Up    { focus-monitor-up; }
       Mod+Shift+Right { focus-monitor-right; }
+
       Mod+Shift+H     { focus-monitor-left; }
       Mod+Shift+J     { focus-monitor-down; }
       Mod+Shift+K     { focus-monitor-up; }
       Mod+Shift+L     { focus-monitor-right; }
+      
+      Mod+Shift+WheelScrollDown  cooldown-ms=150 { focus-monitor-left; }
+      Mod+Shift+WheelScrollUp    cooldown-ms=150 { focus-monitor-down; }
+      Mod+Shift+WheelScrollRight cooldown-ms=150 { focus-monitor-up; }
+      Mod+Shift+WheelScrollLeft  cooldown-ms=150 { focus-monitor-right; }
 
       // Move to monitor
       Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
       Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
       Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
       Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
       Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
       Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
       Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
       Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+      Mod+Shift+Ctrl+WheelScrollDown  cooldown-ms=150 { move-column-to-monitor-left; }
+      Mod+Shift+Ctrl+WheelScrollUp    cooldown-ms=150 { move-column-to-monitor-down; }
+      Mod+Shift+Ctrl+WheelScrollRight cooldown-ms=150 { move-column-to-monitor-up; }
+      Mod+Shift+Ctrl+WheelScrollLeft  cooldown-ms=150 { move-column-to-monitor-right; }
     }
 
     // Applied to all windows
