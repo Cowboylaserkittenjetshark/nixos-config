@@ -2,6 +2,6 @@ _: {
   imports = [
     ./chromium.nix
     ./gnupg.nix
-    ./waveforms.nix
+    # ./waveforms.nix
   ];
 }
