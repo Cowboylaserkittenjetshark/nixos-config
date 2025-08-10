@@ -34,8 +34,8 @@ in
         "/var/lib/prowlarr/Backups"
         "${config.services.sonarr.dataDir}/Backups"
         "/var/lib/bazarr/backup"
-        "${config.services.qbittorrent.dataDir}/qBittorrent/config/qBittorrent.conf"
-        "${config.services.qbittorrent.dataDir}/qBittorrent/config/categories.json"
+        "${config.services.qbittorrentX.dataDir}/qBittorrent/config/qBittorrent.conf"
+        "${config.services.qbittorrentX.dataDir}/qBittorrent/config/categories.json"
       ];
 
       backupPrepareCommand = ''
