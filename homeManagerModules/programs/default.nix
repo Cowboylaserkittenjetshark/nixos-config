@@ -14,5 +14,6 @@ _: {
     ./yazi.nix
     ./zen.nix
     ./ski.nix
+    ./mpv.nix
   ];
 }
