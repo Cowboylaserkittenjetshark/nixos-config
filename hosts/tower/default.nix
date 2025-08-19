@@ -18,13 +18,12 @@
     capabilities = [
       "audio"
       "wired-lan"
-      "wireless-lan"
     ];
   };
 
   networking.hostName = "tower";
 
-  systemd.network.networks."20-main".matchConfig.Name = "wlan0";
+  systemd.network.networks."20-main".matchConfig.Name = "enp34s0";
 
   vpns.windscribe = {
     wireguard = {
