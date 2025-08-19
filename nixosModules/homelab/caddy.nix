@@ -1,25 +1,22 @@
 {
   lib,
   pkgs,
-  inputs,
   config,
   ...
 }:
 let
   inherit (config.homelab) domain enable;
-  inherit (lib) mkIf warnIfNot versionAtLeast;
-  customCaddyPkg = inputs.custom-caddy.packages.${pkgs.system}.default;
-  defaultCaddyPkg = pkgs.caddy;
+  inherit (lib) mkIf;
+  plugins = {
+    plugins = [ "github.com/caddy-dns/cloudflare@v0.2.1" "github.com/WeidiDeng/caddy-cloudflare-ip@v0.0.0-20231130002422-f53b62aa13cb" ];
+    hash = "sha256-V92nzVrL7cZmUk+ShHnNZE6GszU7fv8Nw9O+LMJSaZQ=";
+  };
 in
 {
   config = mkIf enable {
     services.caddy = {
       enable = true;
-      package = warnIfNot (versionAtLeast customCaddyPkg.version defaultCaddyPkg.version) ''
-        The version of Caddy in the package is older than the version in your version of nixpkgs
-                    Caddy from nixpkgs:  ${defaultCaddyPkg.version}
-                    Caddy form nixcaddy: ${customCaddyPkg.version}
-      '' customCaddyPkg;
+      package = pkgs.caddy.withPlugins plugins;
       globalConfig = ''
         servers {
           # Trust cloudflared

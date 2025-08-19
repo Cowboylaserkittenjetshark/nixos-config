@@ -22,11 +22,6 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    custom-caddy = {
-      url = "github:Cowboylaserkittenjetshark/nixcaddy/my-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     ski = {
       url = "github:Cowboylaserkittenjetshark/ski";
       inputs.nixpkgs.follows = "nixpkgs";
