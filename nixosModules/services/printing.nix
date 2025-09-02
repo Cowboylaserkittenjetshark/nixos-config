@@ -1,6 +1,6 @@
-{ lib, ... }:
+{pkgs, ...}:
 {
-  config = lib.mkIf false {
+  config = {
     services = {
       printing.enable = true; # enables printing support via the CUPS daemon
       avahi = {
@@ -8,6 +8,10 @@
         nssmdns4 = true; # enables the mDNS NSS plug-in
         openFirewall = true; # opens the firewall for UDP port 5353
       };
+    };
+    hardware.sane = {
+      enable = true;
+      extraBackends = [ pkgs.hplipWithPlugin ];
     };
   };
 }

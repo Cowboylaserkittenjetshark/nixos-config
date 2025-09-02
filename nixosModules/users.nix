@@ -8,6 +8,8 @@
       extraGroups = [
         "wheel"
         "plugdev"
+        "scanner"
+        "lp"
       ];
     };    
   };
