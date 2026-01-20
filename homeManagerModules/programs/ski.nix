@@ -4,7 +4,7 @@
     inputs.ski.homeModules.default
   ];
 
-  home.packages = [ inputs.ski.packages.${pkgs.system}.default ];
+  home.packages = [ inputs.ski.packages.${pkgs.stdenv.hostPlatform.system}.default ];
 
   programs.ski = {
     enable = true;

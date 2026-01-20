@@ -8,7 +8,7 @@
 let
   inherit (lib) mkEnableOption mkIf getExe;
   ngMods = inputs.nix-gaming.nixosModules;
-  ngPkgs = inputs.nix-gaming.packages.${pkgs.system};
+  ngPkgs = inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system};
   cfg = config.gaming;
 
   gamescopeArgs = [

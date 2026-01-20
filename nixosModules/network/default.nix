@@ -33,11 +33,13 @@ _: {
   services = {
     resolved = {
       enable = true;
-      dnsovertls = "false"; # Must be off for dnscrypt proxy
-      fallbackDns = [ ];
+      settings.Resolve = {
+        DNSOverTLS = "false"; # Must be off for dnscrypt proxy
+        FallbackDNS = [ ];
+      };
     };
 
-    dnscrypt-proxy2 = {
+    dnscrypt-proxy = {
       enable = true;
       settings = {
         listen_addresses = [ "127.0.0.55:53" ];
