@@ -1,6 +1,6 @@
 _: {
   imports = [
-    ./docker.nix
+    ./virtualisation.nix
     ./pipewire.nix
     ./printing.nix
     ./syncthing.nix
