@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   inputs,
   ...
@@ -8,93 +7,110 @@
   imports = [
     inputs.noctalia.homeModules.default
   ];
-
-  programs.noctalia-shell = {
-    enable = true;
-    settings = {
-      bar = {
-        density = "compact";
-        position = "bottom";
-        floating = true;
-        showCapsule = false;
-        widgets = {
-          left = [
+programs.noctalia-shell = {
+      enable = true;
+      settings = {
+        bar = {
+          position = "bottom";
+          density = "compact";
+          showCapsule = false;
+          floating = true;
+          widgets = {
+            left = [
+              {
+                id = "ControlCenter";
+                useDistroLogo = true;
+              }
+              {
+                id = "TaskbarGrouped";
+              }
+            ];
+            center = [
+              {
+                id = "MediaMini";
+                hideMode = "hidden";
+                maxWidth = 145;
+                scrollingMode = "always";
+                showAlbumArt = true;
+                showVisualizer = true;
+                useFixedWidth = false;
+                visualizerType = "mirrored";
+              }
+            ];
+            right = [
+              {
+                id = "Battery";
+                displayMode = "alwaysShow";
+                warningThreshold = 25;
+              }
+              {
+                id = "Bluetooth";
+              }
+              {
+                id = "Clock";
+                customFont = "";
+                formatHorizontal = "h:mm AP";
+                formatVertical = "h:mm AP";
+                usePrimaryColor = true;
+              }
+            ];
+          };
+        };
+        general = {
+          avatarImage = "${config.avatar}";
+          compactLockScreen = true;
+          showChangelogOnStartup = true;
+          telemetryEnabled = false;
+        };
+        ui.tooltipsEnabled = true;
+        location = {
+          weatherEnabled = false;
+          use12hourFormat = true;
+        };
+        wallpaper.enabled = false;
+        appLauncher = {
+          enableClipboardHistory = true;
+          terminalCommand = "foot";
+        };
+        controlCenter = {
+          shortcuts = {
+            left = [
+              { id = "Bluetooth"; }
+              { id = "ScreenRecorder"; }
+            ];
+            right = [
+              { id = "Notifications"; }
+              { id = "PowerProfile"; }
+              { id = "KeepAwake"; }
+              { id = "NightLight"; }
+            ];
+          };
+          cards = [
             {
-              id = "ControlCenter";
-              customIconPath = "";
-              icon = "noctalia";
-              useDistroLogo = true;
+              enabled = true;
+              id = "profile-card";
             }
             {
-              id = "Bluetooth";
+              enabled = true;
+              id = "shortcuts-card";
             }
             {
-              id = "TaskbarGrouped";
-            }
-          ];
-          center = [
-            {
-              id = "MediaMini";
-              hideMode = "hidden";
-              maxWidth = 145;
-              scrollingMode = "always";
-              showAlbumArt = true;
-              showVisualizer = true;
-              useFixedWidth = false;
-              visualizerType = "mirrored";
-            }
-          ];
-          right = [
-            {
-              id = "Battery";
-              displayMode = "alwaysShow";
-              warningThreshold = 25;
+              enabled = true;
+              id = "audio-card";
             }
             {
-              id = "Clock";
-              customFont = "";
-              formatHorizontal = "h:mm AP";
-              formatVertical = "h:mm AP";
-              useCustomFont = false;
-              usePrimaryColor = true;
+              enabled = true;
+              id = "weather-card";
+            }
+            {
+              enabled = true;
+              id = "media-sysmon-card";
             }
           ];
         };
+        dock.enabled = false;
+        network.wifiEnabled = false;
+        osd.location = "right";
       };
-      colorSchemes = {
-        generateTemplatesForPredefined = false;
-        predefinedScheme = "Catppuccin";
-      };
-      controlCenter.shortcuts = {
-        left = [
-          { id = "WiFi"; }
-          { id = "Bluetooth"; }
-          { id = "ScreenRecorder"; }
-          { id = "WallpaperSelector"; }
-        ];
-        right = [
-          { id = "Notifications"; }
-          { id = "PowerProfile"; }
-          { id = "KeepAwake"; }
-          { id = "NightLight"; }
-        ];
-      };
-      brightness.enforceMinimum = false;
-      general = {
-        avatarImage = "${config.avatar}";
-        radiusRatio = 0.2;
-      };
-      location = {
-        name = "Tokyo";
-        use12hourFormat = true;
-        useFahrenheit = true;
-        weatherEnabled = false;
-      };
-      network.wifiEnabled = false;
-      osd.location = "right";
-      setupCompleted = true;
-      ui.tooltipsEnabled = false;
-      wallpaper.enabled = false;
     };
-  };
 }

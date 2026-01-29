@@ -1,9 +1,7 @@
 _: {
   imports = [
-    ./hypr
-    ./niri
-    # ./eww
-    ./clipboard.nix
+    ./hypridle.nix
+    ./niri.nix
     ./noctalia.nix
   ];
 }

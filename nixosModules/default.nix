@@ -10,7 +10,7 @@
     ./nix
     ./programs
     ./services
-    ./catppuccin.nix
+    ./stylix.nix
     ./home-manager.nix
     ./systemAttributes.nix
     ./users.nix

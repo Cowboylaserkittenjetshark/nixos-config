@@ -9,7 +9,6 @@
     ./programs
     ./shell
     ./avatar.nix
-    ./catppuccin.nix
     ./gtk.nix
   ];
 

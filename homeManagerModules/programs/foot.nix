@@ -1,6 +1,3 @@
 _: {
-  programs.foot = {
-    enable = true;
-    settings.main.font = "MesloLGS NF:size=11";
-  };
+  programs.foot.enable = true;
 }

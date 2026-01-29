@@ -47,8 +47,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin.url = "github:catppuccin/nix";
-
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -64,6 +62,11 @@
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
