@@ -10,6 +10,7 @@
         "plugdev"
         "scanner"
         "lp"
+        "docker"
       ];
     };
   };

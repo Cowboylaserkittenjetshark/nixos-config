@@ -1,11 +1,8 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     winboat
-    podman-compose
+    docker-compose
   ];
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-  };
+  virtualisation.docker.enable = true;
 }
