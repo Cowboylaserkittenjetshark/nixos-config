@@ -1,9 +1,10 @@
-{
-  lib,
-  config,
-  ...
-}:
-{
+{ lib, ... }: let
+  vpnAccess = {
+    enable = true;
+    interface = "tailscale0";
+    address = "100.109.116.3";
+  };
+in {
   imports = [
     ./hardware-configuration.nix
     # Using ancient gpu :/
@@ -42,16 +43,16 @@
   homelab = {
     enable = true;
     domain = "cblkjs.com";
-    vpnAccess = {
-      enable = true;
-      interface = "tailscale0";
-      address = "100.109.116.3";
-    };
+    inherit vpnAccess;
   };
 
-  services.openssh.vpnAccess = {
-    enable = true;
-    interface = "tailscale0";
+  services = {
+    fstrim.enable = true;
+    openssh = { inherit vpnAccess; }; 
+    sunshine = {
+      enable = true;
+      inherit vpnAccess;
+    };
   };
 
   programs.nh = lib.mkForce {
@@ -61,7 +62,6 @@
 
   gaming.enable = true;
 
-  services.fstrim.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

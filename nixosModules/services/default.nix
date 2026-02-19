@@ -4,5 +4,6 @@ _: {
     ./pipewire.nix
     ./printing.nix
     ./syncthing.nix
+    ./sunshine.nix
   ];
 }

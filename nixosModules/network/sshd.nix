@@ -8,6 +8,7 @@ let
     mkIf
     mkForce
     mkOption
+    mkEnableOption
     types
     ;
 in
@@ -29,15 +30,16 @@ in
     };
   };
   options.services.openssh.vpnAccess = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Whether to open the specified listen ports to the specified VPN interface";
-    };
+    enable = mkEnableOption "opening the specified listen ports to the specified VPN interface";
     interface = mkOption {
       type = types.str;
       default = null;
       description = "Name of the vpn interface";
+    };
+    address = mkOption {
+      type = types.str;
+      default = null;
+      description = "IP address (or domain like one from Tailscale MagicDNS) of the server on the vpn";
     };
   };
 }
