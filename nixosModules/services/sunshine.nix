@@ -19,7 +19,7 @@ in {
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     services.sunshine.autoStart = false;
     networking.firewall.interfaces.${config.services.sunshine.vpnAccess.interface} = mkIf config.services.sunshine.vpnAccess.enable {
       allowedTCPPorts = generatePorts cfg.settings.port [

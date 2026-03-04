@@ -4,5 +4,6 @@ _: {
     ./cider.nix
     ./gnupg.nix
     ./waveforms.nix
+    ./helium.nix
   ];
 }
