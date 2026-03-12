@@ -30,13 +30,13 @@ in
       // Misc
       Mod+W       { close-window; }
       Mod+Shift+Q { quit; }
-      Mod+Alt+L { spawn "hyprlock" "--immediate"; }
+      Mod+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
       Mod+O       { toggle-overview; }
 
       // Spawns
       Mod+Return { spawn "foot"; }
-      Mod+D      { spawn "${pkgs.writeShellScript "launcher.sh" "tofi-drun | xargs niri msg action spawn --"}"; }
-      Mod+Shift+C { spawn "foot" "--title" "cliphist" "cliphist-fzf"; }
+      Mod+D      { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+      Mod+Shift+C { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
 
       // Media keys
       XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
