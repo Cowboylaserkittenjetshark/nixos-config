@@ -5,5 +5,6 @@ _: {
     ./gnupg.nix
     ./waveforms.nix
     ./helium.nix
+    ./code_composer_studio.nix
   ];
 }
