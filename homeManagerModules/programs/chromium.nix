@@ -1,20 +1,14 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   programs.chromium = {
     enable = true;
-    package = pkgs.ungoogled-chromium;
-    commandLineArgs = [ "--ozone-platform=wayland" ];
+    package = inputs.nur.legacyPackages.${pkgs.stdenv.hostPlatform.system}.repos.Ev357.helium;
+    commandLineArgs = [ "--password-store=basic" ];
     extensions = [
-      # uBlock Origin
-      { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
       # Bitwarden
       { id = "nngceckbapebfimnlniiiahkandclblb"; }
       # Dark Reader
       { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; }
-      # Stylus
-      { id = "clngdbkpkpeebahjckkjfobafhncgmne"; }
-      # Catppuccin Mocha Theme
-      { id = "bkkmolkhemgaeaeggcmfbghljjjoofoh"; }
       # Zotero Connector
       { id = "ekhagklcjbdpajgpjgmbionohlpdbjgc"; }
     ];
