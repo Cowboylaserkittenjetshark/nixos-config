@@ -11,6 +11,7 @@
         "scanner"
         "lp"
         "docker"
+        "video"
       ];
     };
   };

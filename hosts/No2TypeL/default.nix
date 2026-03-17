@@ -2,9 +2,11 @@
   inputs,
   config,
   lib,
+  pkgs,
   ...
-}:
-{
+}: let
+    xbacklight = lib.getExe' pkgs.acpilight "xbacklight";
+in {
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
@@ -22,7 +24,8 @@
     ];
   };
 
-  programs.light.enable = true;
+  hardware.acpilight.enable = true;
+  users.groups.video = {};
 
   hardware.bluetooth.enable = true;
 
@@ -33,12 +36,12 @@
         {
           keys = [ 224 ];
           events = [ "key" ];
-          command = "/run/current-system/sw/bin/light -U 10";
+          command = "${xbacklight} -dec 10 -fps 60";
         }
         {
           keys = [ 225 ];
           events = [ "key" ];
-          command = "/run/current-system/sw/bin/light -A 10";
+          command = "${xbacklight} -inc 10 -fps 60";
         }
       ];
     };
