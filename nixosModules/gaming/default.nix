@@ -18,7 +18,6 @@ let
 in
 {
   imports = [
-    ngMods.pipewireLowLatency
     ngMods.platformOptimizations
   ];
 
@@ -27,8 +26,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.pipewire.lowLatency.enable = true;
-
     programs = {
       steam = {
         enable = true;

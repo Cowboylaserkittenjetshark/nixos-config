@@ -49,11 +49,14 @@
     sioyek
     ripgrep
     jellyfin-mpv-shim
-    pavucontrol
+    pwvucontrol
     p7zip
     obsidian
-    # julia
+    julia
   ];
 
-  fonts.fontconfig.enable = true;
+  fonts = {
+    enableDefaultPackages = true;
+    fontconfig.enable = true;
+  };
 }
