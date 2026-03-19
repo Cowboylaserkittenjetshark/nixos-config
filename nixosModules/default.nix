@@ -48,4 +48,6 @@
     git
     acpi
   ];
+
+  fonts.enableDefaultPackages = true;
 }

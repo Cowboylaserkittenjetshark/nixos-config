@@ -55,8 +55,5 @@
     julia
   ];
 
-  fonts = {
-    enableDefaultPackages = true;
-    fontconfig.enable = true;
-  };
+  fonts.fontconfig.enable = true;
 }
