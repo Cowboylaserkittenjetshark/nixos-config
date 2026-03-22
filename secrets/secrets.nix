@@ -41,9 +41,4 @@ in
   "vpns/windscribe/wireguard/keypair_1/peer_psk.age".publicKeys = [ cblkjs ] ++ systems;
   "vpns/windscribe/wireguard/keypair_2/pk.age".publicKeys = [ cblkjs ] ++ systems;
   "vpns/windscribe/wireguard/keypair_2/peer_psk.age".publicKeys = [ cblkjs ] ++ systems;
-
-  # Wallpapers
-  "Forest-Kingdom-Dithered-Mocha.age".publicKeys = [ cblkjs ] ++ systems;
-  "Amusement-Park2-Dithered-Mocha.age".publicKeys = [ cblkjs ] ++ systems;
-  "Forest-Kingdom-Desktop-Catppuccin-Mocha.age".publicKeys = [ cblkjs ] ++ systems;
 }

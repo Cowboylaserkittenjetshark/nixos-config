@@ -10,7 +10,7 @@
     ./nix
     ./programs
     ./services
-    ./stylix.nix
+    ./stylix
     ./home-manager.nix
     ./systemAttributes.nix
     ./users.nix
@@ -51,6 +51,6 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    packages = [ pkgs.sarasa-gothic ];
   };
 }

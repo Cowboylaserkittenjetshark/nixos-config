@@ -135,12 +135,6 @@ in
       match app-id="chromium-browser"
     }
 
-    // Apply transparency
-    window-rule {
-      opacity 0.95
-      match app-id="foot"
-    }
-
     // Floating clipboard manager
     window-rule {
       match title="cliphist"
@@ -173,9 +167,10 @@ in
         skip-at-startup
     }
 
+    // Set the regular wallpaper on the backdrop.
     layer-rule {
-        match namespace="^wallpaper$"
-        place-within-backdrop true
+      match namespace="^noctalia-wallpaper*"
+      place-within-backdrop true
     }
 
     overview {
@@ -184,8 +179,6 @@ in
         }
     }
 
-    spawn-at-startup "${pkgs.writeShellScript "niri-init.sh" "${pkgs.dbus}/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP && systemctl --user stop niri-session.target && systemctl --user start niri-session.target"}"
-    spawn-at-startup "${lib.getExe pkgs.swaybg}" "-m" "fill" "-i" "${osConfig.desktopAssets.wallpaper}"
     spawn-at-startup "noctalia-shell"
   '';
 

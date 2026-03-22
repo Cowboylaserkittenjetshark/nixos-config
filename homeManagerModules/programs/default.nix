@@ -9,7 +9,6 @@ _: {
     ./helix.nix
     ./jujutsu.nix
     ./bat.nix
-    ./mako.nix
     ./git.nix
     ./yazi.nix
     ./zen.nix

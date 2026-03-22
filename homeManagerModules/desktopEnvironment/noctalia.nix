@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  pkgs,
   ...
 }:
 {
@@ -10,19 +11,52 @@
 programs.noctalia-shell = {
       enable = true;
       settings = {
+        audio = {
+          prefferedPlayer = "cider";
+          visualizerType = "mirrored";
+        };
+        desktopWidgets.enabled = false;
+        hooks.enabled = false;
+        idle = {
+          enabled = true;
+          fadeDuration = 5;
+          lockTimeout = 185;
+          screenOffTimeout = 180;
+        };
+        nightLight = {
+          enabled = true;
+          autoSchedule = false;
+          manualSunrise = "6:00";
+          manualSunset = "23:00";
+        };
+        sessionMenu = {
+          largeButtonsStyle = true;
+          largeButtonsLayout = "grid";
+        };
+        appLauncher = {
+          density = "comfortable";
+          position = "follow_bar";
+        };
         bar = {
-          position = "bottom";
-          density = "compact";
+          position = "top";
+          density = "mini";
           showCapsule = false;
-          floating = true;
+          showOutline = false;
+          floating = false;
+          outerCorners = false;
           widgets = {
             left = [
               {
                 id = "ControlCenter";
                 useDistroLogo = true;
+                enableColorization = true;
+                colorizeSystemIcon = "primary";
               }
               {
-                id = "TaskbarGrouped";
+                id = "Workspace";
+                showApplications = true;
+                labelMode = "none";
+                showBadge = false;
               }
             ];
             center = [
@@ -38,20 +72,20 @@ programs.noctalia-shell = {
               }
             ];
             right = [
+              { id = "Volume"; }
+              { id = "Bluetooth"; }
               {
                 id = "Battery";
-                displayMode = "alwaysShow";
-                warningThreshold = 25;
-              }
-              {
-                id = "Bluetooth";
+                displayMode = "graphic";
+                hideIfIdle = true;
+                hideIfNotDetected = true;
+                showNoctaliaPerformance = true;
+                showPowerProfiles = true;
               }
               {
                 id = "Clock";
-                customFont = "";
                 formatHorizontal = "h:mm AP";
                 formatVertical = "h:mm AP";
-                usePrimaryColor = true;
               }
             ];
           };
@@ -61,16 +95,24 @@ programs.noctalia-shell = {
           compactLockScreen = true;
           showChangelogOnStartup = true;
           telemetryEnabled = false;
+          lockScreenAnimations = true;
+          lockScreenBlur = 0.75;
+          lockScreenTint = 0.25;
         };
         ui.tooltipsEnabled = true;
         location = {
+          analogClockInCalendar = true;
           weatherEnabled = false;
           use12hourFormat = true;
         };
-        wallpaper.enabled = false;
+        wallpaper.enabled = true;
         appLauncher = {
           enableClipboardHistory = true;
           terminalCommand = "foot";
+        };
+        notifications = {
+          enabled = true;
+          clearDismissed = false;
         };
         controlCenter = {
           shortcuts = {
