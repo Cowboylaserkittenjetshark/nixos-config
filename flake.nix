@@ -54,8 +54,6 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-
     waveforms.url = "github:liff/waveforms-flake";
 
     helix.url = "github:helix-editor/helix";

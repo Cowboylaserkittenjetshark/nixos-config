@@ -11,7 +11,6 @@ _: {
     ./bat.nix
     ./git.nix
     ./yazi.nix
-    ./zen.nix
     ./ski.nix
     ./mpv.nix
   ];
