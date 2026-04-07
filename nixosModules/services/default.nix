@@ -5,5 +5,6 @@ _: {
     ./printing.nix
     ./syncthing.nix
     ./sunshine.nix
+    ./ssh-agent.nix
   ];
 }
