@@ -1,6 +1,6 @@
 { inputs, pkgs, lib, ... }: let
   wallpaper = ./forest_kingdom_desktop.jpg;
-  theme = "everforest-dark-hard";
+  theme = "rose-pine";
 in {
   imports = [
     inputs.stylix.nixosModules.stylix
