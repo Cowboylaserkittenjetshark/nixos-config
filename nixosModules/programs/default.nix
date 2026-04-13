@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   imports = [
     ./chromium.nix
     ./cider.nix
@@ -6,4 +6,8 @@ _: {
     ./waveforms.nix
     ./code_composer_studio.nix
   ];
+  programs.ssh = {
+    enableAskPassword = true;
+    askPassword = "${pkgs.openssh-askpass}/libexec/gtk-ssh-askpass";
+  };
 }
