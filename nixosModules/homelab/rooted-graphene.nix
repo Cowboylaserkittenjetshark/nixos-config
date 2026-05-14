@@ -13,7 +13,7 @@ let
     types
     ;
   inherit (types) str;
-  cfg = config.services.rooted-graphene;
+  cfg = config.homelab.rooted-graphene;
   rooted-ota = lib.getExe (pkgs.callPackage ../../pkgs/rooted-graphene { });
 in
 {
