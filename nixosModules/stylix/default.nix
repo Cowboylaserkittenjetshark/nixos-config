@@ -1,16 +1,23 @@
-{ inputs, pkgs, lib, ... }: let
+{
+  inputs,
+  pkgs,
+  lib,
+  ...
+}:
+let
   wallpaper = ./forest_kingdom_desktop.jpg;
   theme = "rose-pine-moon";
-in {
+in
+{
   imports = [
     inputs.stylix.nixosModules.stylix
   ];
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme}.yaml";
-    image = pkgs.runCommand "wallpaper.jpg" {} ''
+    image = pkgs.runCommand "wallpaper.jpg" { } ''
       ${lib.getExe pkgs.lutgen} apply -p ${theme} -P "${wallpaper}" --output $out
-    ''; 
+    '';
     opacity = {
       applications = 0.9;
       desktop = 0.9;

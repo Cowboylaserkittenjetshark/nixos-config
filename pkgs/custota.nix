@@ -4,9 +4,11 @@
   rustPlatform,
   git,
   breakpointHook,
-}: let
-    version = "5.22";
-in rustPlatform.buildRustPackage (finalAttrs: {
+}:
+let
+  version = "5.22";
+in
+rustPlatform.buildRustPackage (finalAttrs: {
   name = "custota-tool";
   src = fetchgit {
     url = "https://github.com/chenxiaolong/Custota.git";

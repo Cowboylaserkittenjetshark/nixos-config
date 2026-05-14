@@ -4,9 +4,11 @@
   lib,
   pkgs,
   ...
-}: let
-    xbacklight = lib.getExe' pkgs.acpilight "xbacklight";
-in {
+}:
+let
+  xbacklight = lib.getExe' pkgs.acpilight "xbacklight";
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
@@ -25,7 +27,7 @@ in {
   };
 
   hardware.acpilight.enable = true;
-  users.groups.video = {};
+  users.groups.video = { };
 
   hardware.bluetooth.enable = true;
 

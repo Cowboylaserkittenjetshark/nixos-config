@@ -1,10 +1,12 @@
-{ lib, ... }: let
+{ lib, ... }:
+let
   vpnAccess = {
     enable = true;
     interface = "tailscale0";
     address = "100.109.116.3";
   };
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     # Using ancient gpu :/
@@ -48,7 +50,7 @@ in {
 
   services = {
     fstrim.enable = true;
-    openssh = { inherit vpnAccess; }; 
+    openssh = { inherit vpnAccess; };
     sunshine = {
       enable = true;
       inherit vpnAccess;
@@ -61,7 +63,6 @@ in {
   };
 
   gaming.enable = true;
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

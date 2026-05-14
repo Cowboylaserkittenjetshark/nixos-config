@@ -92,12 +92,14 @@
               deadnix
             ];
           };
-          packages = let
-            inherit (pkgs) callPackage;
-          in {
-            custota = callPackage ./pkgs/custota.nix { };
-            rooted-graphene = callPackage ./pkgs/rooted-graphene { };
-          };
+          packages =
+            let
+              inherit (pkgs) callPackage;
+            in
+            {
+              custota = callPackage ./pkgs/custota.nix { };
+              rooted-graphene = callPackage ./pkgs/rooted-graphene { };
+            };
           formatter = pkgs.nixfmt-tree;
         };
     };

@@ -1,11 +1,23 @@
-{ config, lib, pkgs, ...  }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   inherit (config.homelab) domain enable;
-  inherit (lib) mkOption mkEnableOption mkIf types;
+  inherit (lib)
+    mkOption
+    mkEnableOption
+    mkIf
+    types
+    ;
   inherit (types) str;
   cfg = config.services.rooted-graphene;
   rooted-ota = lib.getExe (pkgs.callPackage ../../pkgs/rooted-graphene { });
-in {
-  options.homelab.rooted-graphene= {
+in
+{
+  options.homelab.rooted-graphene = {
     enable = mkEnableOption "custom OTA update server for GrapheneOS";
 
     deviceId = mkOption {
@@ -37,8 +49,8 @@ in {
       type = str;
       default = "rooted-graphene";
     };
-    
-    group  = mkOption {
+
+    group = mkOption {
       type = str;
       default = "rooted-graphene";
     };
