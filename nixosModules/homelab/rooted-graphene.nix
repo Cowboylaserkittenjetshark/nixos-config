@@ -1,13 +1,13 @@
 { config, lib, pkgs, ...  }: let
   inherit (config.homelab) domain enable;
-  inherit (lib) mkEnableOption;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.services.rooted-graphene;
   rooted-ota = lib.getExe (pkgs.callPackage ../../pkgs/rooted-graphene { });
 in {
   options.homelab.rooted-graphene= {
     enable = mkEnableOption "custom OTA update server for GrapheneOS";
   };
-  config = {
+  config = mkIf enable {
     services.caddy.virtualHosts."ota.${domain}".extraConfig = ''
       root /srv/caddy/rooted-graphene/
       file_server browse
