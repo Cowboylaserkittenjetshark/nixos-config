@@ -12,6 +12,7 @@ in
     ./mediaserver
     ./adguardhome.nix
     ./octoprint.nix
+    ./rooted-graphene.nix
   ];
 
   options.homelab = {

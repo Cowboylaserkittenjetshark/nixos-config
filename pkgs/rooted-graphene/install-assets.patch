@@ -1,0 +1,45 @@
+diff --git a/rooted-ota.sh b/rooted-ota.sh
+index 50ed14f..e69ae3a 100755
+--- a/rooted-ota.sh
++++ b/rooted-ota.sh
+@@ -22,6 +22,7 @@ if [[ -n "${DEBUG}" ]]; then set -x; fi
+ DEVICE_ID=${DEVICE_ID:-} # See here for device IDs https://grapheneos.org/releases
+ GITHUB_TOKEN=${GITHUB_TOKEN:-''}
+ GITHUB_REPO=${GITHUB_REPO:-''}
++DOMAIN_NAME=${DOMAIN_NAME:-''}
+ 
+ # Optional
+ # If you want an OTA patched with magisk, set the preinit for your device
+@@ -350,7 +351,7 @@ function patchOTAs() {
+       # Python image is designed to run as root, so chown the files it creates back at the end
+       # ... room for improvement 😐️
+       # shellcheck disable=SC2046
+-      docker run --rm -i $(tty &>/dev/null && echo '-t') -v "$PWD:/app"  -w /app \
++      docker run --network=host --rm -i $(tty &>/dev/null && echo '-t') -v "$PWD:/app"  -w /app \
+         -e PATH='/bin:/usr/local/bin:/sbin:/usr/bin/:/app/.tmp' \
+         --env-file <(env) \
+         python:${PYTHON_VERSION} sh -c \
+@@ -492,7 +493,7 @@ function createOtaServerData() {
+     args+=("--file" ".tmp/${flavor}/${DEVICE_ID}.json")
+     # e.g. https://github.com/schnatterer/rooted-graphene/releases/download/2023121200-v26.4-e54c67f/oriole-ota_update-2023121200.zip
+     # Instead of constructing the location we could also parse it from the upload response
+-    args+=("--location" "https://github.com/$GITHUB_REPO/releases/download/$OTA_VERSION/$POTENTIAL_ASSET_NAME")
++    args+=("--location" "https://$DOMAIN_NAME/$OTA_VERSION/$POTENTIAL_ASSET_NAME")
+   
+     .tmp/custota-tool gen-update-info "${args[@]}"
+   done
+@@ -613,3 +614,14 @@ function printRed() {
+       print "$@"
+   fi
+ }
++
++function installAssets() {
++  ASSET_DIRECTORY="${SRV_DIRECTORY}/${OTA_VERSION}/"
++  mkdir -p "${ASSET_DIRECTORY}"
++  cp --recursive --target-directory "${SRV_DIRECTORY}" .tmp/magisk .tmp/rootless
++  cp --target-directory "${ASSET_DIRECTORY}" .tmp/${DEVICE_ID}-${OTA_VERSION}*.zip .tmp/${DEVICE_ID}-${OTA_VERSION}*.zip.csig
++}
++
++createRootedOta
++createOtaServerData
++installAssets
