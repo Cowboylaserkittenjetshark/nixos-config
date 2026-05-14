@@ -12,6 +12,7 @@ let
     mkEnableOption
     mkIf
     types
+    getExe
     ;
   inherit (types) str;
   cfg = config.homelab.fmd-server;
@@ -40,18 +41,22 @@ in
 
   config = mkIf enable {
     services.caddy.virtualHosts."${cfg.subDomain}.${domain}".extraConfig = ''
-      import localOnly
-      reverse_proxy 127.0.0.1:${cfg.port}
+      reverse_proxy 127.0.0.1:${toString cfg.port}
     '';
 
     systemd.services."fmd-server" = {
+      after = [ "network-online.target" ];
+      wants = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = cfg.package;
-        Environment = "FMD_PORTINSECURE=${cfg.port}";
+        ExecStart = "${getExe cfg.package} serve";
+        Environment = "FMD_PORTINSECURE=${toString cfg.port}";
         EnvironmentFile = cfg.environmentFile;
       };
     };
+    
+    networking.hosts."127.0.0.1" = ["${cfg.subDomain}.${domain}"];
 
     age.secrets.fmd-server-environment = {
       file = ../../secrets/fmd-server-environment.age;
