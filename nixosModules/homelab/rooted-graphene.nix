@@ -72,26 +72,20 @@ in
       };
 
       services."rooted-ota" = {
+        script = ''
+          rm -rf ${cfg.assetsDirectory}
+          rm -rf /tmp/rooted-graphene
+          ${lib.getExe pkgs.git} clone https://github.com/schnatterer/rooted-graphene.git /tmp/rooted-graphene
+          cd /tmp/rooted-graphene
+          ${lib.getExe pkgs.git} status
+          ${rooted-ota}
+          cd /tmp
+          rm -rf /tmp/rooted-graphene
+        '';
         serviceConfig = {
           Type = "oneshot";
-          ExecStart = rooted-ota;
+          WorkingDirectory = "/tmp";
           RemainAfterExit = true; # Prevents the service from automatically starting on rebuild. See https://discourse.nixos.org/t/how-to-prevent-custom-systemd-service-from-restarting-on-nixos-rebuild-switch/43431
-          DynamicUser = true;
-          User = cfg.user;
-          Group = cfg.group;
-          SupplementaryGroups = "docker";
-          ProtectClock = true;
-          ProtectKernelTunables = true;
-          ProtectKernelModules = true;
-          ProtectKernelLogs = true;
-          SystemCallFilter = "~@clock @cpu-emulation @debug @obsolete @module @mount @raw-io @reboot @swap";
-          ProtectControlGroups = true;
-          RestrictNamespaces = true;
-          LockPersonality = true;
-          MemoryDenyWriteExecute = true;
-          RestrictRealtime = true;
-          RestrictSUIDSGID = true;
-
           Environment = [
             "DEVICE_ID=${cfg.deviceId}"
             "MAGISK_PREINIT_DEVICE=${cfg.magiskPreinitDevice}"
@@ -106,8 +100,6 @@ in
     age.secrets.rooted-graphene-environment = {
       file = ../../secrets/rooted-graphene-environment.age;
       mode = "400";
-      owner = cfg.user;
-      group = cfg.group;
     };
   };
 }

@@ -7,6 +7,11 @@
   android-tools,
   avbroot,
   unzip,
+  curl,
+  gawk,
+  git,
+  openssh,
+  docker,
   bash,
 }:
 
@@ -21,10 +26,15 @@ let
   binName = "rooted-ota";
 
   deps = [
-    bash
     android-tools
     avbroot
     unzip
+    curl
+    gawk
+    git
+    openssh
+    docker
+    bash
   ];
 in
 runCommand "${binName}"
