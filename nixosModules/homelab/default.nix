@@ -13,6 +13,7 @@ in
     ./adguardhome.nix
     ./octoprint.nix
     ./rooted-graphene.nix
+    ./fmd-server.nix
   ];
 
   options.homelab = {
