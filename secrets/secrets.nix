@@ -19,8 +19,7 @@ let
     cblkjs
     tower
   ];
-in
-{
+in {
   # Homelab module
   "caddy-cloudflare-dns.age".publicKeys = homelab;
   "vaultwarden-env.age".publicKeys = homelab;
@@ -32,14 +31,14 @@ in
   "rooted-graphene-environment.age".publicKeys = homelab;
 
   # VPN configs
-  "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [ cblkjs ] ++ systems;
-  "Windscribe-Atlanta-Mountain-auth.age".publicKeys = [ cblkjs ] ++ systems;
-  "Windscribe-WashingtonDC-Precedent-conf.age".publicKeys = [ cblkjs ] ++ systems;
-  "Windscribe-WashingtonDC-Precedent-auth.age".publicKeys = [ cblkjs ] ++ systems;
-  "Windscribe-Dallas-Ranch-conf.age".publicKeys = [ cblkjs ] ++ systems;
-  "Windscribe-Dallas-Ranch-auth.age".publicKeys = [ cblkjs ] ++ systems;
-  "vpns/windscribe/wireguard/keypair_1/pk.age".publicKeys = [ cblkjs ] ++ systems;
-  "vpns/windscribe/wireguard/keypair_1/peer_psk.age".publicKeys = [ cblkjs ] ++ systems;
-  "vpns/windscribe/wireguard/keypair_2/pk.age".publicKeys = [ cblkjs ] ++ systems;
-  "vpns/windscribe/wireguard/keypair_2/peer_psk.age".publicKeys = [ cblkjs ] ++ systems;
+  "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-Atlanta-Mountain-auth.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-WashingtonDC-Precedent-conf.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-WashingtonDC-Precedent-auth.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-Dallas-Ranch-conf.age".publicKeys = [cblkjs] ++ systems;
+  "Windscribe-Dallas-Ranch-auth.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_1/pk.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_1/peer_psk.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_2/pk.age".publicKeys = [cblkjs] ++ systems;
+  "vpns/windscribe/wireguard/keypair_2/peer_psk.age".publicKeys = [cblkjs] ++ systems;
 }
