@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.systemAttributes.roles.laptop {
+  config = lib.mkIf config.systemAttributes.graphical {
     programs.niri.enable = true;
     environment = {
       systemPackages = [ pkgs.xwayland-satellite ];
