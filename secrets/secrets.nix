@@ -29,6 +29,7 @@ in
   "restic/repo.age".publicKeys = homelab;
   "restic/password.age".publicKeys = homelab;
   "adguard-home-webui-password.age".publicKeys = homelab;
+  "rooted-graphene-environment.age".publicKeys = homelab;
 
   # VPN configs
   "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [ cblkjs ] ++ systems;
