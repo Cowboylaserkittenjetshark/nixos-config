@@ -6,7 +6,7 @@
 }:
 let
   wallpaper = ./forest_kingdom_desktop.jpg;
-  theme = "rose-pine-moon";
+  theme = "catppuccin-mocha";
 in
 {
   imports = [
