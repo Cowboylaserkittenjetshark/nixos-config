@@ -21,7 +21,10 @@ let
     hash = "sha256-CY12dWmf9wosB4x8v98Lw8RFhzColhKtLMaGKiiDGZU=";
   };
 
-  patchFile = ./install-assets.patch;
+  patches = [
+    ./install-assets.patch
+    ./pixincreate-magisk.patch
+  ];
 
   binName = "rooted-ota";
 
@@ -47,7 +50,7 @@ runCommand "${binName}"
   ''
     mkdir -p $out/bin
     install ${src}/rooted-ota.sh $out/bin/${binName}
-    patch -u $out/bin/${binName} -i ${patchFile}
+    ${lib.concatMapStringsSep "\n" (patchFile: "patch --no-backup-if-mismatch -u $out/bin/${binName} -i ${patchFile}") patches}
 
     wrapProgram $out/bin/${binName} \
       --prefix PATH : ${lib.makeBinPath deps}
