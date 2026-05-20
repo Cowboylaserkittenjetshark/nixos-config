@@ -14,6 +14,7 @@ in
     ./octoprint.nix
     ./rooted-graphene.nix
     ./fmd-server.nix
+    ./pocket-id.nix
   ];
 
   options.homelab = {
