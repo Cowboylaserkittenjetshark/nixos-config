@@ -33,6 +33,7 @@ in
   "fmd-server-environment.age".publicKeys = homelab;
   "pocket-id-encryption-key.age".publicKeys = homelab;
   "maxmind-license-key.age".publicKeys = homelab;
+  "smtp-password.age".publicKeys = homelab;
 
   # VPN configs
   "Windscribe-Atlanta-Mountain-conf.age".publicKeys = [ cblkjs ] ++ systems;
