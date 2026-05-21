@@ -59,7 +59,7 @@ in
   config = mkIf enable {
     services.caddy.virtualHosts."${cfg.subDomain}.${domain}".extraConfig = ''
       root ${cfg.assetsDirectory}
-      file_server browse
+      file_server
     '';
 
     systemd = {
