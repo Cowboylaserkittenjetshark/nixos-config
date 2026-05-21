@@ -49,7 +49,6 @@ in
     };
     fwupd.enable = true;
     blueman.enable = true;
-    opensnitch.enable = true;
   };
 
   boot = {
