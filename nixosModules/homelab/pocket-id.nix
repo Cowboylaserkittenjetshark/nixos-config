@@ -6,7 +6,7 @@
 let
   inherit (config.homelab) domain enable;
   subdomain = "oidc";
-  port = 1411;
+  port = "1411";
 in
 {
   config = lib.mkIf enable {
