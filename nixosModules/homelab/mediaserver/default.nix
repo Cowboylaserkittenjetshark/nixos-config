@@ -34,7 +34,7 @@ let
       port = "8096";
     }
     {
-      name = "jellyseerr";
+      name = "seerr";
       port = "5055";
     }
   ];
@@ -99,7 +99,7 @@ in
         enable = true;
         inherit (cfg) user group;
       };
-      jellyseerr.enable = true;
+      seerr.enable = true;
     };
 
     users = {
