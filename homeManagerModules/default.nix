@@ -7,6 +7,7 @@
   imports = [
     ./desktopEnvironment
     ./programs
+    ./services
     ./shell
     ./avatar.nix
     ./gtk.nix
