@@ -58,10 +58,12 @@ in
             {
               domain = "*.${domain}";
               answer = "${vpnAccess.address}";
+              enabled = true;
             }
             {
               domain = "${domain}";
               answer = "${vpnAccess.address}";
+              enabled = true;
             }
           ];
         };
