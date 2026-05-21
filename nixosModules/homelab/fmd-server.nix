@@ -13,8 +13,9 @@ let
     mkIf
     types
     getExe
+    concatStringsSep
     ;
-  inherit (types) str;
+  inherit (types) str path;
   cfg = config.homelab.fmd-server;
 in
 {
@@ -34,9 +35,25 @@ in
     };
 
     environmentFile = mkOption {
-      type = types.path;
+      type = path;
       default = config.age.secrets.fmd-server-environment.path;
     };
+
+    dataDir = mkOption {
+      type = path;
+      default = "/var/lib/fmd-server";
+    };
+
+    user = mkOption {
+      type = str;
+      default = "fmd-server";
+    };
+
+    group = mkOption {
+      type = str;
+      default = "fmd-server";
+    };
+
   };
 
   config = mkIf enable {
@@ -51,8 +68,69 @@ in
       serviceConfig = {
         Type = "simple";
         ExecStart = "${getExe cfg.package} serve";
-        Environment = "FMD_PORTINSECURE=${toString cfg.port}";
+        Restart = "always";
+        User = cfg.user;
+        Group = cfg.group;
+        DynamicUser = true;
+        Environment = [
+          "FMD_PORTINSECURE=${toString cfg.port}"
+          "FMD_DATABASEDIR=${cfg.dataDir}"
+        ];
         EnvironmentFile = cfg.environmentFile;
+
+        # Hardening
+        WorkingDirectory = cfg.dataDir;
+        AmbientCapabilities = "";
+        CapabilityBoundingSet = "";
+        DeviceAllow = "";
+        DevicePolicy = "closed";
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateNetwork = false; # provides the service through network
+        PrivateTmp = true;
+        PrivateUsers = true;
+        ProcSubset = "pid";
+        ProtectClock = true;
+        ProtectControlGroups = true;
+        ProtectHome = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectProc = "noaccess";
+        ProtectSystem = "strict";
+        ReadWritePaths = [ cfg.dataDir ];
+        RemoveIPC = true;
+        RestrictAddressFamilies = [
+          "AF_UNIX"
+          "AF_INET"
+          "AF_INET6"
+        ];
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        SystemCallArchitectures = "native";
+        SystemCallFilter = [
+          "@system-service"
+          "~@privileged"
+        ];
+        # SystemCallFilter = concatStringsSep " " [
+        #   "~"
+        #   "@clock"
+        #   "@cpu-emulation"
+        #   "@debug"
+        #   "@module"
+        #   "@mount"
+        #   "@obsolete"
+        #   "@privileged"
+        #   "@raw-io"
+        #   "@reboot"
+        #   "@resources"
+        #   "@swap"
+        # ];
+        UMask = "0077";
       };
     };
     
