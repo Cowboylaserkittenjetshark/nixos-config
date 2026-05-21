@@ -16,10 +16,12 @@ in
 
   services.pocket-id = {
     enable = true;
+    credentials = {
+      ENCRYPTION_KEY = config.age.secrets.pocket-id-encryption-key.path;
+      MAXMIND_LICENSE_KEY = config.age.secrets.maxmind-license-key.path;
+    };
     settings = {
       APP_URL = "https://${subdomain}.${domain}";
-      ENCRYPTION_KEY_FILE = config.age.secrets.pocket-id-encryption-key.path;
-      MAXMIND_LICENSE_KEY_FILE = config.age.secrets.maxmind-license-key.path;
       TRUST_PROXY = true;
       ANALYTICS_DISABLED = true;
       PORT = port;
