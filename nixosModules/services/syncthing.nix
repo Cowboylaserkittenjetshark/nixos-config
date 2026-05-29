@@ -13,7 +13,7 @@ let
     })
     // {
       # Non NixOS devices
-      Pixel.id = "56CEB2H-C65OL2E-DEQ7QNZ-TMA4G7J-L7DOXZS-AHHEDXF-S6POVBO-ULVVFQT";
+      Pixel.id = "Z65UYEJ-MQ7NVRL-6M7OF72-TCUHMRP-ETWSRNZ-VXM7SBX-FP5FLW5-S7DXGQE";
     };
   deviceNames = builtins.attrNames devices;
 in
