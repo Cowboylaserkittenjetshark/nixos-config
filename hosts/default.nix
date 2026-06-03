@@ -10,7 +10,11 @@ let
     genAttrs hosts (
       host:
       nixosSystem {
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          machine-name = host;
+        };
+        
         modules = [
           ./${host}
 
@@ -30,5 +34,6 @@ in
     "No2TypeL"
     "No2TypeT"
     "No3TypeL"
+    "No1TypeC"
   ];
 }
