@@ -19,7 +19,6 @@
 
   services.upower.enable = true;
   users.mutableUsers = false;
-  security.rtkit.enable = true;
   boot = {
     # Silent boot
     initrd.verbose = false;

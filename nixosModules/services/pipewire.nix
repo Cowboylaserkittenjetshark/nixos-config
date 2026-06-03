@@ -5,6 +5,7 @@
 }:
 {
   config = lib.mkIf (builtins.elem "audio" config.systemAttributes.capabilities) {
+    security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
       wireplumber.extraConfig."10-disable-camera" = {
