@@ -1,10 +1,4 @@
-{
-  inputs,
-  config,
-  lib,
-  ...
-}:
-{
+{ config, ... }: {
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
@@ -16,12 +10,12 @@
       laptop = true;
       server = true;
     };
-    capabilities = [
-      "audio"
-      "bluetooth"
-      "wireless-lan"
-      "wired-lan"
-    ];
+    audio = true;
+    bluetooth = true;
+    lan = {
+      wired = true;
+      wireless = true;
+    };
   };
 
   hardware.bluetooth.enable = true;

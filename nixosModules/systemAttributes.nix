@@ -24,6 +24,13 @@ let
         value = mkRole role;
       }) roles
     ));
+
+  mkBoolOption =
+    val:
+    (mkOption {
+      type = types.bool;
+      default = val;
+    });
 in
 {
   options.systemAttributes = {
@@ -34,30 +41,15 @@ in
       "server"
     ];
 
-    physicalAccess = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Whether of not there is physical access to the system";
+    physicalAccess = mkBoolOption false;
+    fingerprint = mkBoolOption false;
+    bluetooth = mkBoolOption false;
+    audio = mkBoolOption false;
+    lan = {
+      wired = mkBoolOption false;
+      wireless = mkBoolOption false;
     };
-    
-    capabilities = mkOption {
-      type = types.listOf (
-        types.enum [
-          "fingerprint"
-          "bluetooth"
-          "audio"
-          "wireless-lan"
-          "wired-lan"
-        ]
-      );
-      default = [ ];
-      description = "A list of the system's capabilities";
-    };
-
-    graphical = mkOption {
-      type = types.bool;
-      default = cfg.roles.laptop || cfg.roles.desktop;
-      description = "Whether the system has a graphical session";
-    };
+    headless = mkBoolOption true;
+    graphical = mkBoolOption false;
   };
 }

@@ -4,7 +4,7 @@
   ...
 }:
 {
-  config = lib.mkIf (builtins.elem "audio" config.systemAttributes.capabilities) {
+  config = lib.mkIf config.systemAttributes.audio {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

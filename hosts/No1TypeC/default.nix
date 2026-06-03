@@ -1,10 +1,8 @@
 { machine-name, ... }: {
-  imports = [];
-  boot = {
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    kernelParams = [ "net.ifnames=0" ];
-  };
+  imports = [
+    ./disk-config.nix
+  ];
+  boot.kernelParams = [ "net.ifnames=0" ];
   networking = {
     hostName = machine-name;
     defaultGateway = "10.0.0.1";
@@ -19,7 +17,7 @@
       ipv4.addresses = [
         {
           # Use IP address configured in the Oracle Cloud web interface
-          address = "10.0.0.90";
+          address = "10.0.0.75";
           prefixLength = 24;
         }
       ];

@@ -18,12 +18,10 @@ in
 
   systemAttributes = {
     roles.laptop = true;
-    capabilities = [
-      "audio"
-      "bluetooth"
-      "fingerprint"
-      "wireless-lan"
-    ];
+    audio = true;
+    bluetooth = true;
+    fingerprint = true;
+    lan.wireless = true;
   };
 
   hardware.acpilight.enable = true;

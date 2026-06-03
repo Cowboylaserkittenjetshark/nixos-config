@@ -18,6 +18,8 @@ in
       server = true;
       desktop = true;
     };
+    audio = true;
+    lan.wired = true;
     capabilities = [
       "audio"
       "wired-lan"
