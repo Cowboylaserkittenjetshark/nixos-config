@@ -1,7 +1,4 @@
-{ config, ... }:
+_:
 {
-  gtk = {
-    enable = true;
-    gtk4.theme = config.gtk.theme;
-  };
+  gtk.enable = true;
 }

@@ -10,11 +10,12 @@ let
 in
 {
   imports = [
-    ./hardware-configuration.nix
     ./disk-config.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ../../nixosModules/hardware/ft232h.nix
   ];
+
+  hardware.facter.reportPath = ./facter.json;
 
   systemAttributes = {
     roles.laptop = true;
