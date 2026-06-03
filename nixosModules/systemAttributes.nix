@@ -34,6 +34,12 @@ in
       "server"
     ];
 
+    physicalAccess = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether of not there is physical access to the system";
+    };
+    
     capabilities = mkOption {
       type = types.listOf (
         types.enum [

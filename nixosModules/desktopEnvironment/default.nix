@@ -5,6 +5,4 @@ _: {
     ./niri.nix
     ./noctalia.nix
   ];
-
-  security.polkit.enable = true;
 }

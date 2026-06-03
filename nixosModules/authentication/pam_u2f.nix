@@ -1,5 +1,6 @@
-_: {
-  security.pam = {
+{ lib, config, ... }: {
+  # Physical access is required for U2F security keys
+  security.pam = lib.mkIf config.systemAttributes.physicalAccess {
     u2f.settings.cue = true;
     services = {
       login.u2fAuth = true;
