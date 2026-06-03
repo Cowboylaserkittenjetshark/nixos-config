@@ -1,5 +1,6 @@
-{ lib, pkgs, ... }:
-{
+{ pkgs, config, ... }: let
+  inherit (config.systemAttributes) roles;
+in {
   imports = [
     ./authentication
     ./desktopEnvironment
@@ -15,18 +16,13 @@
     ./systemAttributes.nix
     ./users.nix
     ./shell
+    ./silent.nix
   ];
 
   services.upower.enable = true;
   users.mutableUsers = false;
   boot = {
-    # Silent boot
-    initrd.verbose = false;
-    consoleLogLevel = 0;
-    kernelParams = [
-      "quiet"
-      "udev.log_level=3"
-    ];
+    silent = roles.laptop || roles.desktop;
     # Use latest kernel
     kernelPackages = pkgs.linuxPackages_latest;
     # Enable systemd in phase 1. Used for unlocking root partition with FIDO2/TPM
