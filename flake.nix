@@ -54,8 +54,6 @@
 
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    waveforms.url = "github:liff/waveforms-flake";
-
     helix.url = "github:helix-editor/helix";
 
     nix-index-database = {

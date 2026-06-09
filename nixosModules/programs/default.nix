@@ -3,7 +3,6 @@
   imports = [
     ./chromium.nix
     ./cider.nix
-    ./waveforms.nix
     ./code_composer_studio.nix
   ];
   config.programs = lib.mkIf config.desktopEnvironment.enable {

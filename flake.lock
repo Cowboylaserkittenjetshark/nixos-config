@@ -718,20 +718,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_6": {
-      "locked": {
-        "lastModified": 1779877693,
-        "narHash": "sha256-NOF9NAREhxr50bbBfVcVOq+ArCMSoe8dP79Pk2uyARk=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4100e830e085863741bc69b156ec4ccd53ab5be0",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
-      }
-    },
     "noctalia": {
       "inputs": {
         "nixpkgs": [
@@ -863,8 +849,7 @@
         "nur": "nur",
         "rust-overlay": "rust-overlay_3",
         "ski": "ski",
-        "stylix": "stylix",
-        "waveforms": "waveforms"
+        "stylix": "stylix"
       }
     },
     "rust-overlay": {
@@ -1127,24 +1112,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "waveforms": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_6"
-      },
-      "locked": {
-        "lastModified": 1764782980,
-        "narHash": "sha256-5UfBaj37E2Bj5izLvXhUUjeetd3noGFfkTxuCdVql7k=",
-        "owner": "liff",
-        "repo": "waveforms-flake",
-        "rev": "53ec6ffb6f5abd228293c5ab960bec8ee9c4b96e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "liff",
-        "repo": "waveforms-flake",
         "type": "github"
       }
     }
