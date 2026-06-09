@@ -10,17 +10,6 @@
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t420
   ];
 
-  systemAttributes = {
-    roles.laptop = true;
-    capabilities = [
-      "audio"
-      "bluetooth"
-      "fingerprint"
-      "wireless-lan"
-      "wired-lan"
-    ];
-  };
-
   impermanence = {
     enable = true;
     persistPath =

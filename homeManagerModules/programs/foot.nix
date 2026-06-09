@@ -1,3 +1,3 @@
-_: {
-  programs.foot.enable = true;
+{ osConfig, ... }: {
+  programs.foot.enable = osConfig.desktopEnvironment.enable;
 }

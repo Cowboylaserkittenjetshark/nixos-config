@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ lib, pkgs, config, ... }:
 {
-  config = {
+  config = lib.mkIf config.desktopEnvironment.enable {
     services = {
       printing.enable = true; # enables printing support via the CUPS daemon
       avahi = {

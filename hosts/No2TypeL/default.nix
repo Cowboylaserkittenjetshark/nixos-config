@@ -11,24 +11,18 @@ in
 {
   imports = [
     ./disk-config.nix
-    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
     ../../nixosModules/hardware/ft232h.nix
+    inputs.nixos-hardware.nixosModules.framework-13-7040-amd
   ];
 
-  hardware.facter.reportPath = ./facter.json;
-
-  systemAttributes = {
-    roles.laptop = true;
-    audio = true;
-    bluetooth = true;
-    fingerprint = true;
-    lan.wireless = true;
+  hardware = {
+    facter.reportPath = ./facter.json;
+    acpilight.enable = true;
+    bluetooth.enable = true;
   };
 
-  hardware.acpilight.enable = true;
+  # For acpilight
   users.groups.video = { };
-
-  hardware.bluetooth.enable = true;
 
   services = {
     actkbd = {
@@ -47,7 +41,7 @@ in
       ];
     };
     fwupd.enable = true;
-    blueman.enable = true;
+    upower.enable = true;
   };
 
   boot = {
@@ -84,6 +78,8 @@ in
 
   time.timeZone = "America/New_York";
 
+  desktopEnvironment.enable = true;
+  
   gaming.enable = true;
 
   system.stateVersion = "23.11";

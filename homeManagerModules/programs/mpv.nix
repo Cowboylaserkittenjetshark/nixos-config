@@ -1,3 +1,3 @@
-_: {
-  programs.mpv.enable = true;
+{ osConfig, ... }: {
+  programs.mpv.enable = osConfig.desktopEnvironment.enable;
 }

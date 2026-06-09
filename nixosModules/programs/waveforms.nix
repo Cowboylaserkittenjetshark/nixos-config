@@ -1,7 +1,9 @@
-{ inputs, ... }:
+{ lib, pkgs, config, inputs, ... }:
 {
-  imports = [
-    inputs.waveforms.nixosModule
-  ];
-  users.groups.plugdev = { };
+  config = lib.mkIf config.desktopEnvironment.enable {
+    nixpkgs.overlays = [ inputs.waveforms.overlay ];
+    services.udev.packages = [ pkgs.adept2-runtime ];
+    environment.systemPackages = [ pkgs.waveforms ];
+    users.groups.plugdev = { };
+  };
 }

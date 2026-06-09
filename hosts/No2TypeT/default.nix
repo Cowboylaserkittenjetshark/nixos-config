@@ -7,16 +7,6 @@
     ./disk-config.nix
   ];
 
-  systemAttributes = {
-    roles.server = true;
-    capabilities = [
-      "audio"
-      "bluetooth"
-      "wireless-lan"
-      "wired-lan"
-    ];
-  };
-
   # For lanzaboote (later)
   # boot.loader.systemd-boot.enable = lib.mkForce false;
   # boot.lanzaboote = {

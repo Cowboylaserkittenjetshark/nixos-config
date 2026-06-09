@@ -4,5 +4,5 @@
     ./noctalia.nix
   ];
 
-  services.polkit-gnome.enable = osConfig.systemAttributes.graphical;
+  services.polkit-gnome.enable = osConfig.desktopEnvironment.enable;
 }

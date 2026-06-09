@@ -1,6 +1,4 @@
-{ lib, pkgs, config, ... }: let
-  inherit (config.systemAttributes) roles graphical;
-  isPC = roles.laptop || roles.desktop;
+{ pkgs, ... }: let
 in {
   imports = [
     ./authentication
@@ -14,16 +12,12 @@ in {
     ./services
     ./stylix
     ./home-manager.nix
-    ./systemAttributes.nix
     ./users.nix
     ./shell
     ./silent.nix
   ];
-
-  services.upower.enable = isPC;
   users.mutableUsers = false;
   boot = {
-    silent = isPC;
     # Use latest kernel
     kernelPackages = pkgs.linuxPackages_latest;
     # Enable systemd in phase 1. Used for unlocking root partition with FIDO2/TPM
@@ -39,16 +33,9 @@ in {
     };
   };
 
-  hardware.logitech.wireless.enable = isPC;
-
   environment.systemPackages = with pkgs; [
     vim
     git
     acpi
   ];
-
-  fonts = lib.mkIf graphical {
-    enableDefaultPackages = true;
-    packages = [ pkgs.sarasa-gothic ];
-  };
 }

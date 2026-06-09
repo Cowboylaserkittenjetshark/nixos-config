@@ -4,7 +4,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.systemAttributes.audio {
+  config = lib.mkIf config.desktopEnvironment.enable {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

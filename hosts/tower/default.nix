@@ -13,18 +13,7 @@ in
     ../../nixosModules/hardware/bonaire.nix
   ];
 
-  systemAttributes = {
-    roles = {
-      server = true;
-      desktop = true;
-    };
-    audio = true;
-    lan.wired = true;
-    capabilities = [
-      "audio"
-      "wired-lan"
-    ];
-  };
+  desktopEnvironment.enable = true;
 
   networking.hostName = "tower";
 
@@ -52,7 +41,10 @@ in
 
   services = {
     fstrim.enable = true;
-    openssh = { inherit vpnAccess; };
+    openssh = {
+      enable = true;
+      inherit vpnAccess;
+    };
     sunshine = {
       enable = true;
       inherit vpnAccess;

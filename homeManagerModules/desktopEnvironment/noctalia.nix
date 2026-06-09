@@ -1,14 +1,15 @@
 {
+  osConfig,
   config,
   inputs,
-  pkgs,
+  lib,
   ...
 }:
 {
   imports = [
     inputs.noctalia.homeModules.default
   ];
-  programs.noctalia-shell = {
+  programs.noctalia-shell = lib.mkIf osConfig.desktopEnvironment.enable {
     enable = true;
     settings = {
       audio = {

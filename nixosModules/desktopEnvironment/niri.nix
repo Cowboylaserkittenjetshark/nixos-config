@@ -5,7 +5,7 @@
   ...
 }:
 {
-  config = lib.mkIf config.systemAttributes.graphical {
+  config = lib.mkIf config.desktopEnvironment.enable {
     programs.niri.enable = true;
     environment = {
       systemPackages = [ pkgs.xwayland-satellite ];

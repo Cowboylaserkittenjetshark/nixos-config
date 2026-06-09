@@ -1,6 +1,6 @@
-{ inputs, pkgs, ... }:
+{ lib, osConfig, inputs, pkgs, ... }:
 {
-  programs.chromium = {
+  programs.chromium = lib.mkIf osConfig.desktopEnvironment.enable {
     enable = true;
     package = inputs.nur.legacyPackages.${pkgs.stdenv.hostPlatform.system}.repos.Ev357.helium;
     extensions = [

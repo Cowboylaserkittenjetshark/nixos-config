@@ -1,7 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, config, ... }:
 {
-  environment.systemPackages = [
-    pkgs.cider-2
-  ];
-
+  environment.systemPackages = lib.optional config.desktopEnvironment.enable pkgs.cider-2;
 }

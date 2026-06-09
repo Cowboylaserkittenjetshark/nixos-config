@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ lib, pkgs, config, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    # winboat
+  environment.systemPackages = lib.optionals config.desktopEnvironment.enable (with pkgs; [
+    winboat
     docker-compose
-  ];
+  ]);
 
   virtualisation.docker.enable = true;
 }

@@ -5,19 +5,6 @@
     ../../nixosModules/hardware/nvidia.nix
   ];
 
-  systemAttributes = {
-    roles = {
-      laptop = true;
-      server = true;
-    };
-    audio = true;
-    bluetooth = true;
-    lan = {
-      wired = true;
-      wireless = true;
-    };
-  };
-
   hardware.bluetooth.enable = true;
 
   hardware.nvidia.prime = {

@@ -3,9 +3,7 @@ _: {
     ./chromium.nix
     ./rbw.nix
     ./ssh-forward-agent.nix
-    ./spotify-player
     ./foot.nix
-    ./tofi.nix
     ./helix.nix
     ./jujutsu.nix
     ./bat.nix

@@ -13,9 +13,8 @@ let
     ;
 in
 {
-  config = mkIf config.systemAttributes.roles.server {
+  config = {
     services.openssh = {
-      enable = true;
       # require public key authentication for better security
       settings = {
         PasswordAuthentication = false;
