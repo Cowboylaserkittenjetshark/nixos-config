@@ -12,6 +12,7 @@
         "lp"
         "docker"
         "video"
+        "input" # For bongo cat
       ];
     };
   };

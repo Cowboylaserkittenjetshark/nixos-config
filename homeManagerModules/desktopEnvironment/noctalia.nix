@@ -1,159 +1,104 @@
 {
-  osConfig,
   config,
+  osConfig,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 {
   imports = [
     inputs.noctalia.homeModules.default
   ];
-  programs.noctalia-shell = lib.mkIf osConfig.desktopEnvironment.enable {
-    enable = true;
-    settings = {
-      audio = {
-        prefferedPlayer = "cider";
-        visualizerType = "mirrored";
-      };
-      desktopWidgets.enabled = false;
-      hooks.enabled = false;
-      idle = {
-        enabled = true;
-        fadeDuration = 5;
-        lockTimeout = 185;
-        screenOffTimeout = 180;
-      };
-      nightLight = {
-        enabled = true;
-        autoSchedule = false;
-        manualSunrise = "6:00";
-        manualSunset = "23:00";
-      };
-      sessionMenu = {
-        largeButtonsStyle = true;
-        largeButtonsLayout = "grid";
-      };
-      appLauncher = {
-        density = "comfortable";
-        position = "follow_bar";
-      };
-      bar = {
-        position = "top";
-        density = "mini";
-        showCapsule = false;
-        showOutline = false;
-        floating = false;
-        outerCorners = false;
-        widgets = {
-          left = [
-            {
-              id = "ControlCenter";
-              useDistroLogo = true;
-              enableColorization = true;
-              colorizeSystemIcon = "primary";
-            }
-            {
-              id = "Workspace";
-              showApplications = true;
-              labelMode = "none";
-              showBadge = false;
-            }
-          ];
-          center = [
-            {
-              id = "MediaMini";
-              hideMode = "hidden";
-              maxWidth = 145;
-              scrollingMode = "always";
-              showAlbumArt = true;
-              showVisualizer = true;
-              useFixedWidth = false;
-              visualizerType = "mirrored";
-            }
-          ];
-          right = [
-            { id = "Volume"; }
-            { id = "Bluetooth"; }
-            {
-              id = "Battery";
-              displayMode = "graphic";
-              hideIfIdle = true;
-              hideIfNotDetected = true;
-              showNoctaliaPerformance = true;
-              showPowerProfiles = true;
-            }
-            {
-              id = "Clock";
-              formatHorizontal = "h:mm AP";
-              formatVertical = "h:mm AP";
-            }
-          ];
+  config = lib.mkIf osConfig.desktopEnvironment.enable {
+    home.packages = [ pkgs.evtest ];
+    programs.noctalia = {
+      enable = true;
+      settings = {
+        bar.widgets = {
+          background_opacity = 0.9;
+          start = [ "workspaces" ];
+          center = [ "clock" "cat" ];
+          end = [ "media" "tray" "notifications" "bluetooth" "battery" "control-center" ];
+          margin_edge = 4;
+          margin_ends = 4;
         };
-      };
-      general = {
-        avatarImage = "${config.avatar}";
-        compactLockScreen = true;
-        showChangelogOnStartup = true;
-        telemetryEnabled = false;
-        lockScreenAnimations = true;
-        lockScreenBlur = 0.75;
-        lockScreenTint = 0.25;
-      };
-      ui.tooltipsEnabled = true;
-      location = {
-        analogClockInCalendar = true;
-        weatherEnabled = false;
-        use12hourFormat = true;
-      };
-      wallpaper.enabled = true;
-      appLauncher = {
-        enableClipboardHistory = true;
-        terminalCommand = "foot";
-      };
-      notifications = {
-        enabled = true;
-        clearDismissed = false;
-      };
-      controlCenter = {
-        shortcuts = {
-          left = [
-            { id = "Bluetooth"; }
-            { id = "ScreenRecorder"; }
-          ];
-          right = [
-            { id = "Notifications"; }
-            { id = "PowerProfile"; }
-            { id = "KeepAwake"; }
-            { id = "NightLight"; }
-          ];
-        };
-        cards = [
-          {
-            enabled = true;
-            id = "profile-card";
-          }
-          {
-            enabled = true;
-            id = "shortcuts-card";
-          }
-          {
-            enabled = true;
-            id = "audio-card";
-          }
-          {
-            enabled = true;
-            id = "weather-card";
-          }
-          {
-            enabled = true;
-            id = "media-sysmon-card";
-          }
+        control_center.shortcuts = [
+          { type = "caffeine"; }
+          { type = "nightlight"; }
+          { type = "nightlight"; }
+          { type = "power_profile"; }
         ];
+        desktop_widgets.enabled = false;
+        lockscreen_widgets.enabled = false;
+        lockscreen.blurred_desktop = true;
+        shell = {
+          app_icon_colorize = true;
+          avatar_path = config.avatar;
+          font_family = "Sarasa Gothic J";
+          niri_overview_type_to_launch_enabled = true;
+          password_style = "random";
+          panel = {
+            clipboard_placement = "attached";
+            launcher_categories = false;
+            launcher_placement = "attached";
+            launcher_session_search = true;
+            open_near_click_clipboard = true;
+            open_near_click_control_center = true;
+            open_near_click_launcher = true;
+            open_near_click_session = true;
+            open_near_click_wallpaper = true;
+            transparency_mode = "glass";
+          };
+        };
+        theme = {
+          source = "community";
+          community_palette = "Everforest";
+          templates = {
+            enable_builtin_templates = false;
+            enable_community_templates = false;
+          };
+        };
+        wallpaper.default.path = osConfig.stylix.image;
+        weather.enabled = false;
+        widget = {
+          cat = {
+            audio_spectrum = true;
+            input_device = "/dev/input/event1";
+            tappy_mode = true;
+            type = "noctalia/bongocat:cat";
+          };
+          control-center.glyph = "christmas-tree";
+          media = {
+            hide_when_no_media = true;
+            title_scroll = "always";
+          };
+          notifications.hide_when_no_unread = true;
+          tray.drawer = true;
+        };
+        idle = {
+          behavior_order = [ "lock" "screen-off" "lock-and-suspend" ];
+          behavior = {
+            lock = {
+              action = "lock";
+              enabled = true;
+              timeout = 600;
+            };
+            lock-and-suspend = {
+              action = "lock_and_suspend";
+              enabled = true;
+              timeout = 900;
+            };
+            screen-off = {
+              action = "screen_off";
+              enabled = true;
+              timeout = 660;
+            };
+          };
+        };
+        nightlight.enabled = true;
+        plugins.enabled = [ "noctalia/bongocat" ];
       };
-      dock.enabled = false;
-      network.wifiEnabled = false;
-      osd.location = "right";
     };
   };
 }

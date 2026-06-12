@@ -6,7 +6,7 @@
 }:
 let
   wallpaper = ./forest_kingdom_desktop.jpg;
-  theme = "catppuccin-mocha";
+  theme = "everforest-dark-hard";
 in
 {
   imports = [

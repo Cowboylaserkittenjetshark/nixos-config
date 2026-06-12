@@ -6,6 +6,7 @@
 }:
 let
   playerctl = lib.getExe pkgs.playerctl;
+  colors = osConfig.lib.stylix.colors.withHashtag;
 in
 {
   config = lib.mkIf osConfig.desktopEnvironment.enable {
@@ -31,13 +32,13 @@ in
         // Misc
         Mod+W       { close-window; }
         Mod+Shift+Q { quit; }
-        Mod+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
+        Mod+Alt+L { spawn "noctalia" "msg" "session" "lock"; }
         Mod+O       { toggle-overview; }
 
         // Spawns
         Mod+Return { spawn "foot"; }
-        Mod+D      { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
-        Mod+Shift+C { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
+        Mod+D      { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+        Mod+Shift+C { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
 
         // Media keys
         XF86AudioRaiseVolume allow-when-locked=true repeat=false { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
@@ -136,13 +137,6 @@ in
         match app-id="chromium-browser"
       }
 
-      // Floating clipboard manager
-      window-rule {
-        match title="cliphist"
-        open-floating true
-        open-focused true
-      }
-
       layout {
         background-color "transparent"
 
@@ -152,8 +146,8 @@ in
 
         border {
           width 2
-          active-gradient from="#b4befe" to="#a6e3a1" angle=45 relative-to="workspace-view"
-          inactive-gradient from="#585b70" to="#7f849c" angle=45 relative-to="workspace-view"
+          active-color "${colors.base0C}"
+          inactive-color "${colors.base03}"
         }
 
         gaps 5
@@ -168,19 +162,39 @@ in
           skip-at-startup
       }
 
-      // Set the regular wallpaper on the backdrop.
+      debug {
+        // Allows notification actions and window activation from Noctalia.
+        honor-xdg-activation-with-invalid-serial
+      }
+
+      // Place the regular wallpaper on the backdrop.
       layer-rule {
-        match namespace="^noctalia-wallpaper*"
+        match namespace="^noctalia-wallpaper"
         place-within-backdrop true
       }
 
+      // Optionally, disable workspace shadows in the overview.
       overview {
-          workspace-shadow {
-              off
-          }
+        workspace-shadow {
+          off
+        }
+      }
+      
+      window-rule {
+        background-effect {
+          blur true
+          xray false
+        }
       }
 
-      spawn-at-startup "noctalia-shell"
+      layer-rule {
+        match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+        background-effect {
+          xray false
+        }
+      }
+
+      spawn-at-startup "noctalia"      
     '';
 
     systemd.user = {
