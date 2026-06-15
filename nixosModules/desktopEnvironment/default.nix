@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }: {
   imports = [
-    ./greetd.nix
     ./niri.nix
+    ./noctalia-greeter.nix
   ];
 
   options.desktopEnvironment.enable = lib.mkEnableOption "a desktop environment and supporting apps";
