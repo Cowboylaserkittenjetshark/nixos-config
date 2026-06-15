@@ -2,7 +2,7 @@
 {
   programs.chromium = lib.mkIf osConfig.desktopEnvironment.enable {
     enable = true;
-    package = inputs.nur.legacyPackages.${pkgs.stdenv.hostPlatform.system}.repos.Ev357.helium;
+    package = inputs.nur.legacyPackages.${pkgs.stdenv.hostPlatform.system}.repos.lonerOrz.helium;
     extensions = [
       # Bitwarden
       { id = "nngceckbapebfimnlniiiahkandclblb"; }
