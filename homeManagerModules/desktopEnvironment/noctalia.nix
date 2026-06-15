@@ -26,7 +26,7 @@
         control_center.shortcuts = [
           { type = "caffeine"; }
           { type = "nightlight"; }
-          { type = "nightlight"; }
+          { type = "notification"; }
           { type = "power_profile"; }
         ];
         desktop_widgets.enabled = false;
