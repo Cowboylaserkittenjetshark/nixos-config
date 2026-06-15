@@ -38,6 +38,7 @@
           font_family = "Sarasa Gothic J";
           niri_overview_type_to_launch_enabled = true;
           password_style = "random";
+          polkit_agent = true;
           panel = {
             clipboard_placement = "attached";
             launcher_categories = false;
