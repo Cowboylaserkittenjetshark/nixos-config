@@ -21,7 +21,7 @@
           center = [ "clock" "cat" ];
           end = [ "media" "tray" "notifications" "bluetooth" "battery" "control-center" ];
           margin_edge = 4;
-          margin_ends = 4;
+          margin_ends = 20;
         };
         control_center.shortcuts = [
           { type = "caffeine"; }
