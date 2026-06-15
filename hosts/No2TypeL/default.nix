@@ -45,6 +45,7 @@ in
   };
 
   boot = {
+    silent = true;
     loader.systemd-boot.enable = lib.mkForce false;
     lanzaboote = {
       enable = true;
