@@ -2738,28 +2738,6 @@
         "driver_modules": [
           "r8169"
         ]
-      },
-      {
-        "index": 68,
-        "attached_to": 0,
-        "class_list": [
-          "network_interface"
-        ],
-        "base_class": {
-          "hex": "0107",
-          "name": "Network Interface",
-          "value": 263
-        },
-        "sub_class": {
-          "hex": "0080",
-          "name": "Network Interface",
-          "value": 128
-        },
-        "model": "Network Interface",
-        "sysfs_id": "/class/net/wg0",
-        "unix_device_names": [
-          "wg0"
-        ]
       }
     ],
     "pci": [
