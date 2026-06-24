@@ -48,7 +48,6 @@
   home.packages = with pkgs; [
     sioyek
     ripgrep
-    jellyfin-mpv-shim
     pwvucontrol
     p7zip
     obsidian
