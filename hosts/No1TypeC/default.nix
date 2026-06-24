@@ -1,10 +1,19 @@
-{ machine-name, ... }: {
+{ machineName, lib, ... }: {
   imports = [
     ./disk-config.nix
   ];
+  hardware.facter.reportPath = ./facter.json;
+  # Temporary
+  users.users.cblkjs = {
+    hashedPasswordFile = lib.mkForce null;
+    hashedPassword = "$y$j9T$VodlM3jSPu.dWU6i3TSBD/$uRQM5HT4nyKTn11TeduRZCdo8om5s/76bU/PELkmtj9";
+    openssh.authorizedKeys.keys = [ "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBmE5bXrxz9i6X6OaXG28ACvAj0qGVXwKICdhz953uRwAAAABHNzaDo= ssh:" ];
+  };
+  services.openssh.enable = true;
   boot.kernelParams = [ "net.ifnames=0" ];
   networking = {
-    hostName = machine-name;
+    defaultConfig = false;
+    hostName = machineName;
     defaultGateway = "10.0.0.1";
     # Use Quad9's DNS (or replace by your preferred DNS provider)
     nameservers = [
@@ -30,6 +39,7 @@
       # (both optional)
       logRefusedConnections = false;
       rejectPackets = true;
+      allowedTCPPorts = [ 22 ];
     };
   };
 }

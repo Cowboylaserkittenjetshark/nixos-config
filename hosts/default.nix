@@ -12,7 +12,7 @@ let
       nixosSystem {
         specialArgs = {
           inherit inputs;
-          machine-name = host;
+          machineName = host;
         };
         
         modules = [

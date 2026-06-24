@@ -1,49 +1,56 @@
-_: {
+{ lib, config, ... }: {
   imports = [
     ./vpns.nix
     ./tailscale.nix
     ./sshd.nix
   ];
 
-  networking = {
-    useNetworkd = true;
-    nftables.enable = true;
-    wireless.iwd = {
-      enable = true;
-      settings = {
-        IPv6.Enabled = true;
-        Settings.AutoConnect = true;
-      };
-    };
-    nameservers = [ "127.0.0.55" ];
+  options.networking.defaultConfig = lib.mkOption {
+    type = lib.types.bool;
+    default = true;
   };
 
-  systemd.network = {
-    enable = true;
-    networks."20-main" = {
-      networkConfig = {
-        DHCP = "yes";
-        IgnoreCarrierLoss = "3s";
+  config = lib.mkIf config.networking.defaultConfig {
+    networking = {
+      useNetworkd = true;
+      nftables.enable = true;
+      wireless.iwd = {
+        enable = true;
+        settings = {
+          IPv6.Enabled = true;
+          Settings.AutoConnect = true;
+        };
       };
-      dhcpV4Config.UseDNS = false;
-      dhcpV6Config.UseDNS = false;
-    };
-  };
-
-  services = {
-    resolved = {
-      enable = true;
-      settings.Resolve = {
-        DNSOverTLS = "false"; # Must be off for dnscrypt proxy
-        FallbackDNS = [ ];
-      };
+      nameservers = [ "127.0.0.55" ];
     };
 
-    dnscrypt-proxy = {
+    systemd.network = {
       enable = true;
-      settings = {
-        listen_addresses = [ "127.0.0.55:53" ];
-        log_level = 0;
+      networks."20-main" = {
+        networkConfig = {
+          DHCP = "yes";
+          IgnoreCarrierLoss = "3s";
+        };
+        dhcpV4Config.UseDNS = false;
+        dhcpV6Config.UseDNS = false;
+      };
+    };
+
+    services = {
+      resolved = {
+        enable = true;
+        settings.Resolve = {
+          DNSOverTLS = "false"; # Must be off for dnscrypt proxy
+          FallbackDNS = [ ];
+        };
+      };
+
+      dnscrypt-proxy = {
+        enable = true;
+        settings = {
+          listen_addresses = [ "127.0.0.55:53" ];
+          log_level = 0;
+        };
       };
     };
   };
