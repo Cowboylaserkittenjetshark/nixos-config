@@ -1,11 +1,11 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
-  inherit (lib) mkOption types;
+  inherit (lib) mkOption mkEnableOption types;
+  cfg = config.homelab;
 in
 {
   imports = [
-    ./caddy.nix
-    ./cloudflared.nix
+    ./caddy
     ./vaultwarden.nix
     ./nextcloud.nix
     ./backups.nix
@@ -18,32 +18,60 @@ in
   ];
 
   options.homelab = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Whether to enable the homelab module";
+    backend = {
+      enable = mkEnableOption "the backend services";
+      hostname = {
+        type = types.str;
+        default = null;
+        description = "Hostname of the backend server (used for tailscale)";
+      };
+      address = mkOption {
+        type = types.str;
+        default = null;
+        description = "IP address of the backend server (used for tailscale)";
+      };
+      vpnAccess = {
+        enable = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Whether to enable exposing private services over a VPN";
+        };
+        interface = mkOption {
+          type = types.str;
+          default = null;
+          description = "Name of the vpn interface";
+        };
+        address = mkOption {
+          type = types.str;
+          default = null;
+          description = "IP address (or domain like one from Tailscale MagicDNS) of the server on the vpn";
+        };
+      };
+    };
+    frontend = {
+      enable = mkEnableOption "the frontend services";
+      hostname = {
+        type = types.str;
+        default = null;
+        description = "Hostname of the frontend server (used for tailscale)";
+      };
+      address = mkOption {
+        type = types.str;
+        default = null;
+        description = "IP address of the frontend server (used for tailscale)";
+      };
     };
     domain = mkOption {
       type = types.str;
       default = "example.com";
       description = "Base domain";
     };
-    vpnAccess = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Whether to enable exposing private services over a VPN";
-      };
-      interface = mkOption {
-        type = types.str;
-        default = null;
-        description = "Name of the vpn interface";
-      };
-      address = mkOption {
-        type = types.str;
-        default = null;
-        description = "IP address (or domain like one from Tailscale MagicDNS) of the server on the vpn";
-      };
-    };
   };
+
+  config.assertions = [
+    {
+      assertion = !(cfg.backend.enable && cfg.frontend.enable);
+      message = "The frontend and backend componenets of the homelab module may not be enabled on the same server";
+    }
+  ];
 }

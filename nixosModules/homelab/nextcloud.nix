@@ -5,7 +5,8 @@
   ...
 }:
 let
-  inherit (config.homelab) domain enable;
+  inherit (config.homelab) domain backend;
+  inherit (backend) enable;
   ncCfg = config.services.nextcloud;
   caddyCfg = config.services.caddy;
 in

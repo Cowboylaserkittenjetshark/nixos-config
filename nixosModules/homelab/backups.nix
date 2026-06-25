@@ -10,7 +10,7 @@ let
   db_backup_dir = "/var/backup";
 in
 {
-  config = lib.mkIf config.homelab.enable {
+  config = lib.mkIf config.homelab.backend.enable {
     services.restic.backups.homelab = {
       initialize = true;
 

@@ -6,7 +6,8 @@
 }:
 let
   inherit (lib) mkIf mkAfter mkForce;
-  inherit (config.homelab) vpnAccess domain;
+  inherit (config.homelab) backend domain;
+  inherit (backend) vpnAccess;
   providers = {
     Quad9 = {
       DoH = [ "https://dns.quad9.net/dns-query" ];
@@ -33,7 +34,7 @@ let
   };
 in
 {
-  config = mkIf config.homelab.enable {
+  config = mkIf backend.enable {
     services = {
       adguardhome = {
         enable = true;

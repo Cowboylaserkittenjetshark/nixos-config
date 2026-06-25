@@ -5,7 +5,8 @@
   ...
 }:
 let
-  inherit (config.homelab) domain enable;
+  inherit (config.homelab) domain backend;
+  inherit (backend) enable;
   subdomain = "oidc";
   port = "1411";
   email = "no-reply@cblkjs.com";

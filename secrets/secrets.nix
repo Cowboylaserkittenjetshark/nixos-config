@@ -8,6 +8,7 @@ let
   No2TypeL = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEdFDjufx08HAlP1r3F8mBuO2wD96h5QVpeBGNwTOol8";
   No3TypeL = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/MRqDZRbMdLAnrCZohyQINsby07ipPgZnxOQW4Vth9";
   No2TypeT = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA/sqijQePv3VqxJI5wepjd7PELimM6NE9QtFx/oebV/";
+  No1TypeC = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrOl3f6ln9Ff4GBbrMFcfGr2picbIprznRNSEB+s8uz";
   systems = [
     tower
     lap
@@ -22,7 +23,7 @@ let
 in
 {
   # Homelab module
-  "caddy-cloudflare-dns.age".publicKeys = homelab;
+  "caddy-cloudflare-dns.age".publicKeys = [ cblkjs No1TypeC ];
   "vaultwarden-env.age".publicKeys = homelab;
   "nextcloud-admin-pass.age".publicKeys = homelab;
   "restic/env.age".publicKeys = homelab;

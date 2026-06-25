@@ -5,7 +5,8 @@
   ...
 }:
 let
-  inherit (config.homelab) domain enable;
+  inherit (config.homelab) domain backend;
+  inherit (backend) enable;
   inherit (lib)
     mkOption
     mkEnableOption

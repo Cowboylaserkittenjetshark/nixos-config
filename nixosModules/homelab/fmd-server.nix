@@ -5,7 +5,8 @@
   ...
 }:
 let
-  inherit (config.homelab) domain enable;
+  inherit (config.homelab) domain backend;
+  inherit (backend) enable;
   inherit (lib)
     mkOption
     mkPackageOption
@@ -13,7 +14,6 @@ let
     mkIf
     types
     getExe
-    concatStringsSep
     ;
   inherit (types) str path;
   cfg = config.homelab.fmd-server;

@@ -77,7 +77,7 @@ in
     };
   };
 
-  config = mkIf (cfg.enable && config.homelab.enable) {
+  config = mkIf (cfg.enable && config.homelab.backend.enable) {
     services = {
       prowlarr.enable = true;
       sonarr = {
@@ -136,8 +136,8 @@ in
     );
 
     networking.hosts."127.0.0.1" = map (app: "${app.name}.${config.homelab.domain}") apps;
-    networking.firewall.interfaces = mkIf config.homelab.vpnAccess.enable {
-      ${config.homelab.vpnAccess.interface}.allowedTCPPorts = map (app: toInt app.port) apps;
+    networking.firewall.interfaces = mkIf config.homelab.backend.vpnAccess.enable {
+      ${config.homelab.backend.vpnAccess.interface}.allowedTCPPorts = map (app: toInt app.port) apps;
     };
   };
 }

@@ -5,7 +5,8 @@
 }:
 let
   inherit (lib) mkIf;
-  inherit (config.homelab) domain enable;
+  inherit (config.homelab) domain backend;
+  inherit (backend) enable;
   opCfg = config.services.octoprint;
   opDomain = "octoprint.${domain}";
 in
