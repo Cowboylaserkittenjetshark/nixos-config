@@ -42,4 +42,5 @@
       allowedTCPPorts = [ 22 ];
     };
   };
+  homelab.frontend.enable = true;
 }

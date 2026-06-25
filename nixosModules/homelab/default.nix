@@ -22,12 +22,12 @@ in
       enable = mkEnableOption "the backend services";
       hostname = {
         type = types.str;
-        default = null;
+        default = "tower";
         description = "Hostname of the backend server (used for tailscale)";
       };
       address = mkOption {
         type = types.str;
-        default = null;
+        default = "100.109.116.3";
         description = "IP address of the backend server (used for tailscale)";
       };
       vpnAccess = {
@@ -52,18 +52,18 @@ in
       enable = mkEnableOption "the frontend services";
       hostname = {
         type = types.str;
-        default = null;
+        default = "No1TypeC";
         description = "Hostname of the frontend server (used for tailscale)";
       };
       address = mkOption {
         type = types.str;
-        default = null;
+        default = "100.71.159.53";
         description = "IP address of the frontend server (used for tailscale)";
       };
     };
     domain = mkOption {
       type = types.str;
-      default = "example.com";
+      default = "cblkjs.com";
       description = "Base domain";
     };
   };

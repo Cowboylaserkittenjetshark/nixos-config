@@ -34,9 +34,8 @@ in
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  homelab = {
+  homelab.backend = {
     enable = true;
-    domain = "cblkjs.com";
     inherit vpnAccess;
   };
 
