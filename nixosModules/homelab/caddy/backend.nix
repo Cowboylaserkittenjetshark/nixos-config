@@ -1,4 +1,4 @@
-{ lib, config }: let
+{ lib, config, ... }: let
   inherit (config.homelab) frontend domain;
 in {
   config = lib.mkIf frontend.enable {

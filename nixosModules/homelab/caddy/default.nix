@@ -11,7 +11,7 @@ let
     plugins = [
       "github.com/caddy-dns/cloudflare@v0.2.1"
     ];
-    hash = "sha256-3z6F52dUukdaqFFP3fzMqC/aCbDX8/r8b2tXJ8eW2q4=";
+    hash = "sha256-I0FjQOfFaGlOEJlQECmYNBKjIY4CIg5aCCQ/ORmnrSU=";
   };
 in
 {
@@ -33,7 +33,7 @@ in
       443
     ];
     age.secrets.caddy-cloudflare-dns = {
-      file = ../../secrets/caddy-cloudflare-dns.age;
+      file = ../../../secrets/caddy-cloudflare-dns.age;
       mode = "400";
       owner = "caddy";
       group = "caddy";

@@ -20,7 +20,7 @@ in
   options.homelab = {
     backend = {
       enable = mkEnableOption "the backend services";
-      hostname = {
+      hostname = mkOption {
         type = types.str;
         default = "tower";
         description = "Hostname of the backend server (used for tailscale)";
@@ -50,7 +50,7 @@ in
     };
     frontend = {
       enable = mkEnableOption "the frontend services";
-      hostname = {
+      hostname = mkOption {
         type = types.str;
         default = "No1TypeC";
         description = "Hostname of the frontend server (used for tailscale)";

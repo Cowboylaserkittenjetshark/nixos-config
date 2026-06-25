@@ -125,7 +125,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf (cfg.windscribe.wireguard.enable || cfg.windscribe.openvpn.enable) {
     services = {
       openvpn.servers = mkIf cfg.windscribe.openvpn.enable (
         listToAttrs (
