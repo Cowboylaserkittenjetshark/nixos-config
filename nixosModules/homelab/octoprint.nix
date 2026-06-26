@@ -6,7 +6,7 @@
 let
   inherit (lib) mkIf;
   inherit (config.homelab) domain backend;
-  inherit (backend) enable;
+  inherit (backend) enable vpnAccess;
   opCfg = config.services.octoprint;
   opDomain = "octoprint.${domain}";
 in
@@ -33,8 +33,8 @@ in
 
     networking = {
       hosts."${opCfg.host}" = [ "${opDomain}" ];
-      firewall.interfaces = mkIf config.homelab.vpnAccess.enable {
-        ${config.homelab.vpnAccess.interface}.allowedTCPPorts = [ opCfg.port ];
+      firewall.interfaces = mkIf vpnAccess.enable {
+        ${vpnAccess.interface}.allowedTCPPorts = [ opCfg.port ];
       };
     };
   };
