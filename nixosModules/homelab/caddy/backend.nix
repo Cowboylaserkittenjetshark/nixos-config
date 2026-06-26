@@ -1,7 +1,7 @@
 { lib, config, ... }: let
-  inherit (config.homelab) frontend domain;
+  inherit (config.homelab) frontend backend domain;
 in {
-  config = lib.mkIf frontend.enable {
+  config = lib.mkIf backend.enable {
     services.caddy = {
       globalConfig = ''
         servers {
