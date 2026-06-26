@@ -1,5 +1,6 @@
-{ lib, config, ... }: let
+{ lib, lib', config, ... }: let
   inherit (config.homelab) frontend backend domain;
+  inherit (lib'.caddy) site;
 in {
   config = lib.mkIf backend.enable {
     services.caddy = {
@@ -8,8 +9,6 @@ in {
           # Trust frontend caddy
           trusted_proxies static ${frontend.address}
         }
-        # Contains `acme_dns cloudflare <token>`
-        import ${config.age.secrets.caddy-cloudflare-dns.path}
       '';
       extraConfig = ''
         # Use https://caddyserver.com/docs/caddyfile/matchers#client-ip to block traffic from cloudflared
@@ -19,16 +18,12 @@ in {
           abort @notPrivate
         }
       '';
-      virtualHosts = {
-        "*.${domain}".extraConfig = ''
-          abort
-        '';
-        "${domain}".extraConfig = ''
+      virtualHosts = site "*.${domain}" "abort" // 
+        site "${domain}" ''
           root * /srv/caddy/
           encode zstd gzip
           file_server
         '';
-      };
     };
   };
 }

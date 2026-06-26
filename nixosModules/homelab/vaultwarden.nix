@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   config,
   ...
 }:
@@ -21,7 +22,7 @@ in
       };
     };
 
-    services.caddy.virtualHosts."vw.${domain}".extraConfig = ''
+    services.caddy.virtualHosts = lib'.caddy.site "vw.${domain}" ''
       # Adapted from https://github.com/dani-garcia/vaultwarden/wiki/Proxy-examples
 
       header / {

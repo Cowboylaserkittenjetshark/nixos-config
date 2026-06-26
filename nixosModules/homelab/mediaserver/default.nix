@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   config,
   ...
 }:
@@ -127,7 +128,7 @@ in
 
     services.caddy.virtualHosts = listToAttrs (
       map (app: {
-        name = "${app.name}.${config.homelab.domain}";
+        name = lib'.caddy.both "${app.name}.${config.homelab.domain}";
         value.extraConfig = ''
           import localOnly
           reverse_proxy 127.0.0.1:${app.port}

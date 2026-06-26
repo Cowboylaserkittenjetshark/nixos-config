@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  lib',
   pkgs,
   ...
 }:
@@ -57,7 +58,7 @@ in
   };
 
   config = mkIf enable {
-    services.caddy.virtualHosts."${cfg.subDomain}.${domain}".extraConfig = ''
+    services.caddy.virtualHosts = lib'.caddy.site "${cfg.subDomain}.${domain}" ''
       reverse_proxy 127.0.0.1:${toString cfg.port}
     '';
 

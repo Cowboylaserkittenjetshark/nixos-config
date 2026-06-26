@@ -13,6 +13,7 @@ let
         specialArgs = {
           inherit inputs;
           machineName = host;
+          lib' = import ../lib.nix;
         };
         
         modules = [

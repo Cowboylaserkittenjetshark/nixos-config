@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   pkgs,
   config,
   ...
@@ -20,7 +21,7 @@ in
         "listen.owner" = caddyCfg.user;
         "listen.group" = caddyCfg.group;
       };
-      caddy.virtualHosts.${ncCfg.hostName}.extraConfig = ''
+      caddy.virtualHosts = lib'.caddy.site ncCfg.hostName  ''
          # Adapted from https://caddy.community/t/caddy-v2-configuration-nextcloud-docker-php-fpm-with-rules-from-htaccess/20662
 
          # Nextcloud static files reside here

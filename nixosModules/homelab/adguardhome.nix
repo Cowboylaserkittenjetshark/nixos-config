@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   pkgs,
   config,
   ...
@@ -79,7 +80,7 @@ in
       };
     };
 
-    services.caddy.virtualHosts."dns.${domain}".extraConfig = ''
+    services.caddy.virtualHosts = lib'.caddy.site "dns.${domain}" ''
       import localOnly
       reverse_proxy 127.0.0.1:3000
     '';

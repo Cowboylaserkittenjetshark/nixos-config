@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   config,
   ...
 }:
@@ -25,7 +26,7 @@ in
           ];
       };
 
-      caddy.virtualHosts."${opDomain}".extraConfig = ''
+      caddy.virtualHosts = lib'.caddy.site "${opDomain}" ''
         import localOnly
         reverse_proxy ${opCfg.host}:${toString opCfg.port}
       '';
