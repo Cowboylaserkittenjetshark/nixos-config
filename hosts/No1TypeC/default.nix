@@ -7,7 +7,9 @@
   users.users.cblkjs = {
     hashedPasswordFile = lib.mkForce null;
     hashedPassword = "$y$j9T$VodlM3jSPu.dWU6i3TSBD/$uRQM5HT4nyKTn11TeduRZCdo8om5s/76bU/PELkmtj9";
-    openssh.authorizedKeys.keys = [ "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBmE5bXrxz9i6X6OaXG28ACvAj0qGVXwKICdhz953uRwAAAABHNzaDo= ssh:" ];
+    openssh.authorizedKeys.keys = [
+      "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBmE5bXrxz9i6X6OaXG28ACvAj0qGVXwKICdhz953uRwAAAABHNzaDo= ssh:"
+    ];
   };
   services.openssh.enable = true;
   boot.kernelParams = [ "net.ifnames=0" ];

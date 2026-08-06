@@ -23,7 +23,11 @@ let
 in
 {
   # Homelab module
-  "caddy-cloudflare-dns.age".publicKeys = [ cblkjs tower No1TypeC ];
+  "caddy-cloudflare-dns.age".publicKeys = [
+    cblkjs
+    tower
+    No1TypeC
+  ];
   "vaultwarden-env.age".publicKeys = homelab;
   "nextcloud-admin-pass.age".publicKeys = homelab;
   "restic/env.age".publicKeys = homelab;

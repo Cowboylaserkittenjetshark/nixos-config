@@ -75,8 +75,8 @@ in
     networking = {
       nameservers = mkForce [ "127.0.0.1" ];
       firewall.interfaces.${vpnAccess.interface} = mkIf vpnAccess.enable {
-        allowedTCPPorts =  [ 3000 ];
-        allowedUDPPorts =  [ 53 ];
+        allowedTCPPorts = [ 3000 ];
+        allowedUDPPorts = [ 53 ];
       };
     };
 

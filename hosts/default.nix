@@ -15,7 +15,7 @@ let
           machineName = host;
           lib' = import ../lib.nix;
         };
-        
+
         modules = [
           ./${host}
 

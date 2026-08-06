@@ -102,7 +102,7 @@ in
         Mod+Shift+J     { focus-monitor-down; }
         Mod+Shift+K     { focus-monitor-up; }
         Mod+Shift+L     { focus-monitor-right; }
-      
+
         Mod+Shift+WheelScrollDown  cooldown-ms=150 { focus-monitor-left; }
         Mod+Shift+WheelScrollUp    cooldown-ms=150 { focus-monitor-down; }
         Mod+Shift+WheelScrollRight cooldown-ms=150 { focus-monitor-up; }
@@ -179,7 +179,7 @@ in
           off
         }
       }
-      
+
       window-rule {
         background-effect {
           blur true

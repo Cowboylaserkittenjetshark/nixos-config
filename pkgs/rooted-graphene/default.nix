@@ -50,7 +50,9 @@ runCommand "${binName}"
   ''
     mkdir -p $out/bin
     install ${src}/rooted-ota.sh $out/bin/${binName}
-    ${lib.concatMapStringsSep "\n" (patchFile: "patch --no-backup-if-mismatch -u $out/bin/${binName} -i ${patchFile}") patches}
+    ${lib.concatMapStringsSep "\n" (
+      patchFile: "patch --no-backup-if-mismatch -u $out/bin/${binName} -i ${patchFile}"
+    ) patches}
 
     wrapProgram $out/bin/${binName} \
       --prefix PATH : ${lib.makeBinPath deps}

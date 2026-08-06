@@ -1,7 +1,14 @@
-{ lib, lib', config, ... }: let
+{
+  lib,
+  lib',
+  config,
+  ...
+}:
+let
   inherit (config.homelab) frontend backend domain;
   inherit (lib'.caddy) site;
-in {
+in
+{
   config = lib.mkIf backend.enable {
     services.caddy = {
       globalConfig = ''
@@ -18,12 +25,14 @@ in {
           abort @notPrivate
         }
       '';
-      virtualHosts = site "*.${domain}" "abort" // 
-        site "${domain}" ''
+      virtualHosts =
+        site "*.${domain}" "abort"
+        // site "${domain}" ''
           root * /srv/caddy/
           encode zstd gzip
           file_server
-        '';
+        ''
+        // site "ThirstingPursuantEndorphinSquiggly.${domain}" "reverse_proxy 127.0.0.1:8096";
     };
   };
 }

@@ -1,4 +1,10 @@
-{ pkgs, inputs, config, ... }:  {
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
+{
   imports = [
     inputs.noctalia-greeter.nixosModules.default
   ];
@@ -8,9 +14,13 @@
     package = inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
     greeter-args = "--session Niri --user cblkjs";
-    settings.cursor = let cfg = config.stylix.cursor; in {
-      theme = cfg.name;
-      inherit (cfg) size package;
-    };
+    settings.cursor =
+      let
+        cfg = config.stylix.cursor;
+      in
+      {
+        theme = cfg.name;
+        inherit (cfg) size package;
+      };
   };
 }

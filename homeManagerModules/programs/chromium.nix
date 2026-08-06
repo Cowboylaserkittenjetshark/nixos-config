@@ -1,4 +1,10 @@
-{ lib, osConfig, inputs, pkgs, ... }:
+{
+  lib,
+  osConfig,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   programs.chromium = lib.mkIf osConfig.desktopEnvironment.enable {
     enable = true;

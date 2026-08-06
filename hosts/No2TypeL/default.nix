@@ -80,7 +80,7 @@ in
   time.timeZone = "America/New_York";
 
   desktopEnvironment.enable = true;
-  
+
   gaming.enable = true;
 
   system.stateVersion = "23.11";

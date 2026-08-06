@@ -18,8 +18,18 @@
         bar.widgets = {
           background_opacity = 0.9;
           start = [ "workspaces" ];
-          center = [ "clock" "cat" ];
-          end = [ "media" "tray" "notifications" "bluetooth" "battery" "control-center" ];
+          center = [
+            "clock"
+            "cat"
+          ];
+          end = [
+            "media"
+            "tray"
+            "notifications"
+            "bluetooth"
+            "battery"
+            "control-center"
+          ];
           margin_edge = 4;
           margin_ends = 20;
         };
@@ -78,7 +88,11 @@
           tray.drawer = true;
         };
         idle = {
-          behavior_order = [ "lock" "screen-off" "lock-and-suspend" ];
+          behavior_order = [
+            "lock"
+            "screen-off"
+            "lock-and-suspend"
+          ];
           behavior = {
             lock = {
               action = "lock";
