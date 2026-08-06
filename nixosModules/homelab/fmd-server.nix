@@ -29,7 +29,7 @@ in
       type = types.port;
       default = 10210;
     };
-    
+
     subDomain = mkOption {
       type = str;
       default = "fmd";
@@ -39,22 +39,6 @@ in
       type = path;
       default = config.age.secrets.fmd-server-environment.path;
     };
-
-    dataDir = mkOption {
-      type = path;
-      default = "/var/lib/fmd-server";
-    };
-
-    user = mkOption {
-      type = str;
-      default = "fmd-server";
-    };
-
-    group = mkOption {
-      type = str;
-      default = "fmd-server";
-    };
-
   };
 
   config = mkIf enable {
@@ -69,73 +53,78 @@ in
       serviceConfig = {
         Type = "simple";
         ExecStart = "${getExe cfg.package} serve";
-        Restart = "always";
-        User = cfg.user;
-        Group = cfg.group;
+        Restart = "on-failure";
         DynamicUser = true;
+        StateDirectory = "fmd-server";
         Environment = [
           "FMD_PORTINSECURE=${toString cfg.port}"
-          "FMD_DATABASEDIR=${cfg.dataDir}"
+          "FMD_DATABASEDIR=/var/lib/fmd-server/db/"
         ];
         EnvironmentFile = cfg.environmentFile;
-
-        # Hardening
-        WorkingDirectory = cfg.dataDir;
-        AmbientCapabilities = "";
-        CapabilityBoundingSet = "";
-        DeviceAllow = "";
-        DevicePolicy = "closed";
-        LockPersonality = true;
-        MemoryDenyWriteExecute = true;
-        NoNewPrivileges = true;
+        UMask = "0077";
         PrivateDevices = true;
-        PrivateNetwork = false; # provides the service through network
-        PrivateTmp = true;
-        PrivateUsers = true;
-        ProcSubset = "pid";
-        ProtectClock = true;
-        ProtectControlGroups = true;
+        PrivateMounts = true;
         ProtectHome = true;
-        ProtectHostname = true;
-        ProtectKernelLogs = true;
-        ProtectKernelModules = true;
         ProtectKernelTunables = true;
-        ProtectProc = "noaccess";
-        ProtectSystem = "strict";
-        ReadWritePaths = [ cfg.dataDir ];
-        RemoveIPC = true;
+        ProtectKernelModules = true;
+        ProtectKernelLogs = true;
+        ProtectControlGroups = true;
+        LockPersonality = true;
+        RestrictRealtime = true;
+        ProtectClock = true;
+        MemoryDenyWriteExecute = true;
         RestrictAddressFamilies = [
-          "AF_UNIX"
           "AF_INET"
           "AF_INET6"
+          "AF_NETLINK"
+          "AF_UNIX"
         ];
-        RestrictNamespaces = true;
-        RestrictRealtime = true;
-        RestrictSUIDSGID = true;
-        SystemCallArchitectures = "native";
+        SocketBindDeny = ["ipv4:udp" "ipv6:udp"];
+        CapabilityBoundingSet = [
+          "~CAP_BLOCK_SUSPEND"
+          "CAP_BPF"
+          "CAP_CHOWN"
+          "CAP_IPC_LOCK"
+          "CAP_KILL"
+          "CAP_MKNOD"
+          "CAP_NET_RAW"
+          "CAP_PERFMON"
+          "CAP_SYS_BOOT"
+          "CAP_SYS_CHROOT"
+          "CAP_SYS_MODULE"
+          "CAP_SYS_NICE"
+          "CAP_SYS_PACCT"
+          "CAP_SYS_PTRACE"
+          "CAP_SYS_TIME"
+          "CAP_SYS_TTY_CONFIG"
+          "CAP_SYSLOG"
+          "CAP_WAKE_ALARM"
+        ];
         SystemCallFilter = [
-          "@system-service"
-          "~@privileged"
+          "~@aio:EPERM"
+          "@chown:EPERM"
+          "@clock:EPERM"
+          "@cpu-emulation:EPERM"
+          "@debug:EPERM"
+          "@ipc:EPERM"
+          "@keyring:EPERM"
+          "@memlock:EPERM"
+          "@module:EPERM"
+          "@mount:EPERM"
+          "@obsolete:EPERM"
+          "@pkey:EPERM"
+          "@privileged:EPERM"
+          "@raw-io:EPERM"
+          "@reboot:EPERM"
+          "@resources:EPERM"
+          "@sandbox:EPERM"
+          "@setuid:EPERM"
+          "@swap:EPERM"
         ];
-        # SystemCallFilter = concatStringsSep " " [
-        #   "~"
-        #   "@clock"
-        #   "@cpu-emulation"
-        #   "@debug"
-        #   "@module"
-        #   "@mount"
-        #   "@obsolete"
-        #   "@privileged"
-        #   "@raw-io"
-        #   "@reboot"
-        #   "@resources"
-        #   "@swap"
-        # ];
-        UMask = "0077";
       };
     };
-    
-    networking.hosts."127.0.0.1" = ["${cfg.subDomain}.${domain}"];
+
+    networking.hosts."127.0.0.1" = [ "${cfg.subDomain}.${domain}" ];
 
     age.secrets.fmd-server-environment = {
       file = ../../secrets/fmd-server-environment.age;
