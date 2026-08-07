@@ -1,5 +1,5 @@
 diff --git a/rooted-ota.sh b/rooted-ota.sh
-index 50ed14f..e69ae3a 100755
+index 10075aa..5cf0d97 100755
 --- a/rooted-ota.sh
 +++ b/rooted-ota.sh
 @@ -22,6 +22,7 @@ if [[ -n "${DEBUG}" ]]; then set -x; fi
@@ -10,16 +10,16 @@ index 50ed14f..e69ae3a 100755
  
  # Optional
  # If you want an OTA patched with magisk, set the preinit for your device
-@@ -350,7 +351,7 @@ function patchOTAs() {
+@@ -372,7 +373,7 @@ function patchOTAs() {
        # Python image is designed to run as root, so chown the files it creates back at the end
        # ... room for improvement 😐️
        # shellcheck disable=SC2046
--      docker run --rm -i $(tty &>/dev/null && echo '-t') -v "$PWD:/app"  -w /app \
-+      docker run --network=host --rm -i $(tty &>/dev/null && echo '-t') -v "$PWD:/app"  -w /app \
-         -e PATH='/bin:/usr/local/bin:/sbin:/usr/bin/:/app/.tmp' \
-         --env-file <(env) \
-         python:${PYTHON_VERSION} sh -c \
-@@ -492,7 +493,7 @@ function createOtaServerData() {
+-      docker run --rm -i $(tty &>/dev/null && echo '-t') \
++      docker run --network=host --rm -i $(tty &>/dev/null && echo '-t') \
+     -v "$PWD:/app" \
+     -w /app \
+     -e PATH='/bin:/usr/local/bin:/sbin:/usr/bin:/app/.tmp' \
+@@ -517,7 +518,7 @@ function createOtaServerData() {
      args+=("--file" ".tmp/${flavor}/${DEVICE_ID}.json")
      # e.g. https://github.com/schnatterer/rooted-graphene/releases/download/2023121200-v26.4-e54c67f/oriole-ota_update-2023121200.zip
      # Instead of constructing the location we could also parse it from the upload response
@@ -28,7 +28,7 @@ index 50ed14f..e69ae3a 100755
    
      .tmp/custota-tool gen-update-info "${args[@]}"
    done
-@@ -613,3 +614,14 @@ function printRed() {
+@@ -638,3 +639,14 @@ function printRed() {
        print "$@"
    fi
  }

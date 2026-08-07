@@ -18,12 +18,11 @@
 let
   src = fetchgit {
     url = "https://github.com/schnatterer/rooted-graphene.git";
-    hash = "sha256-A8VFyxxCjrBqbVwxhy9iSfrHG1J3/YLfJXYjJCGxeuE=";
+    hash = "sha256-psYjx+fY7a8u0tyJZaoV+AARYeUbj+xldYBeim1AxsU=";
   };
 
   patches = [
     ./install-assets.patch
-    ./pixincreate-magisk.patch
   ];
 
   binName = "rooted-ota";
