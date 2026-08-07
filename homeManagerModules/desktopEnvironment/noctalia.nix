@@ -45,7 +45,6 @@
         shell = {
           app_icon_colorize = true;
           avatar_path = config.avatar;
-          font_family = "Sarasa Gothic J";
           niri_overview_type_to_launch_enabled = true;
           password_style = "random";
           polkit_agent = true;
@@ -63,7 +62,7 @@
           };
         };
         theme = {
-          source = "community";
+          source = lib.mkForce "community";
           community_palette = "Everforest";
           templates = {
             enable_builtin_templates = false;
