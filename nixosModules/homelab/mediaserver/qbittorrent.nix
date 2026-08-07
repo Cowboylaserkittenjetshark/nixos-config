@@ -80,7 +80,6 @@ in
 
       serviceConfig = {
         Type = "simple";
-        PrivateTmp = false;
         User = cfg.user;
         Group = cfg.group;
         TimeoutStopSec = 1800;
@@ -102,6 +101,37 @@ in
           "!${preStartScript}";
 
         ExecStart = "${cfg.package}/bin/qbittorrent-nox";
+        # Copied from upstreamed service, should move to it eventually
+        PrivateTmp = false;
+
+        PrivateNetwork = false;
+        RemoveIPC = true;
+        NoNewPrivileges = true;
+        PrivateDevices = true;
+        PrivateUsers = true;
+        ProtectHome = "yes";
+        ProtectProc = "invisible";
+        ProcSubset = "pid";
+        ProtectSystem = "full";
+        ProtectClock = true;
+        ProtectHostname = true;
+        ProtectKernelLogs = true;
+        ProtectKernelModules = true;
+        ProtectKernelTunables = true;
+        ProtectControlGroups = true;
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+          "AF_NETLINK"
+        ];
+        RestrictNamespaces = true;
+        RestrictRealtime = true;
+        RestrictSUIDSGID = true;
+        LockPersonality = true;
+        MemoryDenyWriteExecute = true;
+        SystemCallArchitectures = "native";
+        CapabilityBoundingSet = "";
+        SystemCallFilter = [ "@system-service" ];
       };
 
       environment = {
