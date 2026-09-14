@@ -18,7 +18,7 @@
 let
   src = fetchgit {
     url = "https://github.com/schnatterer/rooted-graphene.git";
-    hash = "sha256-psYjx+fY7a8u0tyJZaoV+AARYeUbj+xldYBeim1AxsU=";
+    hash = "sha256-4LofgetjzuAf/d5XGTDiYAc1EXpMVJYXGP7MKlgtluA=";
   };
 
   patches = [
