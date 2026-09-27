@@ -70,7 +70,7 @@ in
           ];
         };
       };
-      resolved.fallbackDns = [ ];
+      resolved.settings.Resolve.FallbackDNS = [ ];
     };
     networking = {
       nameservers = mkForce [ "127.0.0.1" ];

@@ -9,7 +9,7 @@
     inputs.noctalia-greeter.nixosModules.default
   ];
 
-  programs.noctalia-greeter = {
+  services.displayManager.noctalia-greeter = {
     enable = config.desktopEnvironment.enable;
     package = inputs.noctalia-greeter.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
