@@ -6,7 +6,7 @@
   # Temporary
   users.users.cblkjs = {
     hashedPasswordFile = lib.mkForce null;
-    hashedPassword = "$y$j9T$VodlM3jSPu.dWU6i3TSBD/$uRQM5HT4nyKTn11TeduRZCdo8om5s/76bU/PELkmtj9";
+    hashedPassword = "$y$j9T$WpYkwqJhWWKZcG4cc1y3J.$bfQcDy32URYJCG30Hh5BTmdzUPh2l88740ptGz8Zb8C";
     openssh.authorizedKeys.keys = [
       "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBmE5bXrxz9i6X6OaXG28ACvAj0qGVXwKICdhz953uRwAAAABHNzaDo= ssh:"
     ];
