@@ -26,18 +26,18 @@ in
     };
     fonts = {
       serif = {
-        package = pkgs.sarasa-gothic;
-        name = "Sarasa Gothic J";
+        package = pkgs.atkinson-hyperlegible-next;
+        name = "Atkinson Hyperlegible Next";
       };
 
       sansSerif = {
-        package = pkgs.sarasa-gothic;
-        name = "Sarasa UI J";
+        package = pkgs.atkinson-hyperlegible-next;
+        name = "Atkinson Hyperlegible Next";
       };
 
       monospace = {
-        package = pkgs.sarasa-gothic;
-        name = "Sarasa Term J";
+        package = pkgs.atkinson-hyperlegible-mono;
+        name = "Atkinson Hyperlegible Mono";
       };
 
       emoji = {
