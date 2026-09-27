@@ -30,6 +30,7 @@
     ski = {
       url = "github:Cowboylaserkittenjetshark/ski";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-flake.inputs.rust-overlay.follows = "rust-overlay";
     };
 
     agenix = {
@@ -50,6 +51,7 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     nix-gaming.url = "github:fufexan/nix-gaming";
