@@ -6,7 +6,6 @@
 }:
 let
   vw_data_dir = config.services.vaultwarden.config.DATA_FOLDER;
-  nc_home_dir = config.services.nextcloud.home;
   db_backup_dir = "/var/backup";
 in
 {
@@ -26,8 +25,6 @@ in
         "${vw_data_dir}/rsa_key.der"
         "${vw_data_dir}/rsa_key.pem"
         "${vw_data_dir}/rsa_key.pub.der"
-        # Nextcloud
-        "${nc_home_dir}"
         # Backup DBs
         "${db_backup_dir}"
         # Media server
@@ -53,23 +50,10 @@ in
 
         mkdir --parents ${db_backup_dir}/vaultwarden
         ${pkgs.sqlite}/bin/sqlite3 "${vw_data_dir}"/db.sqlite3 "VACUUM INTO '${db_backup_dir}/vaultwarden/db.sqlite3'"
-
-        # Nextcloud
-        if [[ ! -f "${nc_home_dir}"/data/nextcloud.db ]]; then
-          echo "Could not find SQLite database file '${nc_home_dir}/data/nextcloud.db'" >&2
-          exit 1
-        fi
-
-        ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --on
-        mkdir --parents ${db_backup_dir}/nextcloud
-        ${pkgs.sqlite}/bin/sqlite3 "${nc_home_dir}"/data/nextcloud.db "VACUUM INTO '${db_backup_dir}/nextcloud/nextcloud.db'"
       '';
 
       backupCleanupCommand = ''
         ${pkgs.systemd}/bin/systemd-tmpfiles --remove
-
-        # Nextcloud
-        ${config.services.nextcloud.occ}/bin/nextcloud-occ maintenance:mode --off
       '';
 
       pruneOpts = [

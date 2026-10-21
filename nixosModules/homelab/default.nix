@@ -7,7 +7,6 @@ in
   imports = [
     ./caddy
     ./vaultwarden.nix
-    ./nextcloud.nix
     ./backups.nix
     ./mediaserver
     ./adguardhome.nix

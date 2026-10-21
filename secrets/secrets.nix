@@ -29,7 +29,6 @@ in
     No1TypeC
   ];
   "vaultwarden-env.age".publicKeys = homelab;
-  "nextcloud-admin-pass.age".publicKeys = homelab;
   "restic/env.age".publicKeys = homelab;
   "restic/repo.age".publicKeys = homelab;
   "restic/password.age".publicKeys = homelab;
