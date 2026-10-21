@@ -4,7 +4,8 @@
     enable = true;
     enableTransience = true;
     settings = {
-      format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$fill$nix_shell$line_break$python$character";
+      format = "$username$hostname$directory$jj_bookmark$jj_change$jj_metrics$jj_status$cmd_duration$fill$nix_shell$line_break$python$character";
+      
 
       directory.style = "bold lavender";
 
