@@ -12,7 +12,7 @@ let
   caddyCfg = config.services.caddy;
 in
 {
-  config = lib.mkIf enable {
+  config = lib.mkIf false {
     # The nextcloud module enables nginx as the reverse proxy automatically. We're using caddy, so disable
     # * Start nxginx disable *
     services = {
