@@ -8,7 +8,7 @@
   environment.systemPackages = lib.optionals config.desktopEnvironment.enable (
     with pkgs;
     [
-      # winboat
+      winboat
       docker-compose
     ]
   );
