@@ -55,6 +55,9 @@ in
     kernelModules = [ "pkcs8_key_parser" ];
   };
 
+  hardware.framework.enableKmod = false;
+  warnings = [ "No2TypeL/default.nix: framework kmod disabled, remove eventually" ];
+
   impermanence = {
     enable = true;
     persistPath =
